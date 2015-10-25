@@ -11,40 +11,41 @@ using System.Globalization;
 namespace Blodbanken.App_Code {
    public class AuthenticatonModule {
       private const int SaltValueSize = 4;
-      private const string HashingAlgorithm = "SHA256";
+      private const string privilegesDatabase = "../App_Data/Privileges.mdf";
 
       public void UpdatePassword(string userName, string passWord) {
          if (ValidateCredentialData(userName, passWord)) {
-            SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath("App_Data/Privileges.mdf"));
+            SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
+            conn.Open();
             SqlCommand cmd = new SqlCommand("UPDATE Users SET password=@passWord WHERE logonName=@userName", conn);
-            cmd.Parameters.Add("@userName", SqlDbType.VarChar, 25);
+            cmd.Parameters.Add("@userName", SqlDbType.VarChar, 35);
             cmd.Parameters["@userName"].Value = userName;
-
-            string hashedPassword = GetTheHashedValue(passWord);
-            cmd.Parameters.Add("@passWord", SqlDbType.VarChar, 25);
+            string hashedPassword = String.Empty;
+            using (MD5 md5Hash = MD5.Create()) {
+               hashedPassword = GetMd5Hash(md5Hash, passWord);
+            }
+            cmd.Parameters.Add("@passWord", SqlDbType.VarChar, 35);
             cmd.Parameters["@passWord"].Value = hashedPassword;
 
-            cmd.ExecuteNonQuery();
+            int result = cmd.ExecuteNonQuery();
 
             cmd.Dispose();
             conn.Dispose();
          }
       }
       public bool ValidateUser(string userName, string passWord) {
-         SqlConnection conn;
-         SqlCommand cmd;
-         string lookupPassword = null;
+         string lookupPasswordHash = null;
 
          if (ValidateCredentialData(userName, passWord)) {
             try {
-               conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath("App_Data/Privileges.mdf"));
+               SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
                conn.Open();
 
-               cmd = new SqlCommand("Select password from Users where logonName=@userName", conn);
-               cmd.Parameters.Add("@userName", SqlDbType.VarChar, 25);
+               SqlCommand cmd = new SqlCommand("Select password from Users where logonName=@userName", conn);
+               cmd.Parameters.Add("@userName", SqlDbType.VarChar, 35);
                cmd.Parameters["@userName"].Value = userName;
 
-               lookupPassword = (string)cmd.ExecuteScalar();
+               lookupPasswordHash = (string)cmd.ExecuteScalar();
 
                cmd.Dispose();
                conn.Dispose();
@@ -52,97 +53,20 @@ namespace Blodbanken.App_Code {
                System.Diagnostics.Trace.WriteLine("[ValidateUser] Exception " + ex.Message);
             }
 
-            if (null == lookupPassword) {
+            if (null == lookupPasswordHash) {
                // Could write failed login attempts here to event log for additional security.
                return false;
             }
 
             // Compare lookupPassword and input passWord, using a case-sensitive comparison.
-            string hashedPassword = GetTheHashedValue(passWord);
-            return lookupPassword.Equals(hashedPassword, StringComparison.Ordinal)
-         }
-         return false;
-      }
-      private static string GenerateSaltValue() {
-         UnicodeEncoding utf16 = new UnicodeEncoding();
-
-         if (utf16 != null) {
-            // Create a random number object seeded from the value
-            // of the last random seed value. This is done
-            // interlocked because it is a static value and we want
-            // it to roll forward safely.
-
-            Random random = new Random(unchecked((int)DateTime.Now.Ticks));
-
-            if (random != null) {
-               // Create an array of random values.
-
-               byte[] saltValue = new byte[SaltValueSize];
-
-               random.NextBytes(saltValue);
-
-               // Convert the salt value to a string. Note that the resulting string
-               // will still be an array of binary values and not a printable string. 
-               // Also it does not convert each byte to a double byte.
-
-               string saltValueString = utf16.GetString(saltValue);
-
-               // Return the salt value as a string.
-
-               return saltValueString;
+            string hashedPassword = String.Empty;
+            bool passwordsAreEqual = false;
+            using (MD5 md5Hash = MD5.Create()) {
+               passwordsAreEqual = VerifyMd5Hash(md5Hash, passWord, lookupPasswordHash);
             }
+            return passwordsAreEqual;
          }
-
-         return null;
-      }
-
-      private static string HashPassword(string clearData, string saltValue, HashAlgorithm hash) {
-         UnicodeEncoding encoding = new UnicodeEncoding();
-
-         if (clearData != null && hash != null && encoding != null) {
-            // If the salt string is null or the length is invalid then
-            // create a new valid salt value.
-
-            if (saltValue == null) {
-               // Generate a salt string.
-               saltValue = GenerateSaltValue();
-            }            
-
-            // Convert the salt string and the password string to a single
-            // array of bytes. Note that the password string is Unicode and
-            // therefore may or may not have a zero in every other byte.
-
-            byte[] binarySaltValue = new byte[SaltValueSize];
-
-            binarySaltValue[0] = byte.Parse(saltValue.Substring(0, 2), System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture.NumberFormat);
-            binarySaltValue[1] = byte.Parse(saltValue.Substring(2, 2), System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture.NumberFormat);
-            binarySaltValue[2] = byte.Parse(saltValue.Substring(4, 2), System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture.NumberFormat);
-            binarySaltValue[3] = byte.Parse(saltValue.Substring(6, 2), System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture.NumberFormat);
-
-            byte[] valueToHash = new byte[SaltValueSize + encoding.GetByteCount(clearData)];
-            byte[] binaryPassword = encoding.GetBytes(clearData);
-
-            // Copy the salt value and the password to the hash buffer.
-
-            binarySaltValue.CopyTo(valueToHash, 0);
-            binaryPassword.CopyTo(valueToHash, SaltValueSize);
-
-            byte[] hashValue = hash.ComputeHash(valueToHash);
-
-            // The hashed password is the salt plus the hash value (as a string).
-
-            string hashedPassword = saltValue;
-
-            foreach (byte hexdigit in hashValue) {
-               hashedPassword += hexdigit.ToString("X2", CultureInfo.InvariantCulture.NumberFormat);
-            }
-
-            // Return the hashed password as a string.
-
-            return hashedPassword;
-         }
-
-         return null;
+         return lookupPasswordHash == passWord;
       }
       private static bool ValidateCredentialData(string userName, string passWord) {
          if ((null == userName) || (0 == userName.Length) || (userName.Length > 15)) {
@@ -156,11 +80,35 @@ namespace Blodbanken.App_Code {
          }
          return true;
       }
-      private static string GetTheHashedValue(string passWord) {
-         HashAlgorithm hash = HashAlgorithm.Create(HashingAlgorithm);
-         int saltLength = SaltValueSize * UnicodeEncoding.CharSize;
-         string saltValue = passWord.Substring(0, saltLength);
-         return HashPassword(passWord, saltValue, hash);
+      private static string GetMd5Hash(MD5 md5Hash, string input) {
+         // Convert the input string to a byte array and compute the hash.
+         byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+         // Create a new Stringbuilder to collect the bytes
+         // and create a string.
+         StringBuilder sBuilder = new StringBuilder();
+
+         // Loop through each byte of the hashed data 
+         // and format each one as a hexadecimal string.
+         for (int i = 0; i < data.Length; i++) {
+            sBuilder.Append(data[i].ToString("x2"));
+         }
+
+         // Return the hexadecimal string.
+         return sBuilder.ToString();
+      }
+      private static bool VerifyMd5Hash(MD5 md5Hash, string input, string hash) {
+         // Hash the input.
+         string hashOfInput = GetMd5Hash(md5Hash, input);
+
+         // Create a StringComparer an compare the hashes.
+         StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+
+         if (0 == comparer.Compare(hashOfInput, hash)) {
+            return true;
+         } else {
+            return false;
+         }
       }
    }
 }

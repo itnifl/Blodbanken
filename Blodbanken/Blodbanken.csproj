@@ -71,6 +71,7 @@
     <Content Include="App_Data\Privileges_log.ldf">
       <DependentUpon>Privileges.mdf</DependentUpon>
     </Content>
+    <Content Include="Controls\LoggedInUserControl.ascx" />
     <Content Include="Controls\SystemEditorControl.ascx" />
     <Content Include="Controls\WorkFlowControl.ascx" />
     <Content Include="Public\About.aspx" />
@@ -80,6 +81,10 @@
     <Content Include="Public\Login.aspx" />
     <Content Include="Public\News.aspx" />
     <Content Include="packages.config" />
+    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\commonFunctions.js" />
+    <Content Include="Scripts\jquery-2.1.4.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="TODO.txt" />
     <Content Include="WorkflowItems\BookMedicalExamination.aspx" />
     <Content Include="WorkflowItems\BookParking.aspx" />
@@ -87,6 +92,7 @@
     <Content Include="WorkflowItems\PersInfoConsent.aspx" />
     <Content Include="WorkflowItems\UserDeclaration.aspx" />
     <Content Include="Master.Master" />
+    <Content Include="Scripts\jquery-2.1.4.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -101,8 +107,15 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\AuthenticatonModule.cs" />
+    <Compile Include="App_Code\AuthenticatonModule.cs" />
     <Content Include="App_Code\TimeBooker.cs" />
+    <Compile Include="Controls\LoggedInUserControl.ascx.cs">
+      <DependentUpon>LoggedInUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\LoggedInUserControl.ascx.designer.cs">
+      <DependentUpon>LoggedInUserControl.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SystemEditorControl.ascx.cs">
       <DependentUpon>SystemEditorControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

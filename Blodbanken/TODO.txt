@@ -1,2 +1,3 @@
-﻿*Teste auttentisering
-*Lage GUI for login
+﻿Fortsette gui opprettelse
+Fullfør LoggedInUserControl
+Fullfør avloggingsmulighet fra TopNavBar

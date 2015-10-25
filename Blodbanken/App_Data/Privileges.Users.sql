@@ -1,10 +1,12 @@
-﻿CREATE TABLE [dbo].[Users] (
-   [logonName] [varchar] (25) NOT NULL ,
-   [password] [varchar] (25) NOT NULL ,
-   [userRole] [varchar] (25) NOT NULL, 
+﻿DROP TABLE [dbo].[Users];
+DROP TABLE [dbo].[Roles];
+CREATE TABLE [dbo].[Users] (
+   [logonName] [varchar] (35) NOT NULL ,
+   [password] [varchar] (35) NOT NULL ,
+   [userRole] [varchar] (35) NOT NULL, 
 ) ON [PRIMARY];
 CREATE TABLE [dbo].[Roles] (
-   [userRole] [varchar] (25) NOT NULL,
+   [userRole] [varchar] (35) NOT NULL,
    [level] [int] NOT NULL, 
    
 ) ON [PRIMARY];

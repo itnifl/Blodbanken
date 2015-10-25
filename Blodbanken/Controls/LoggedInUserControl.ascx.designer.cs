@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Blodbanken {
+namespace Blodbanken.Controls {
     
     
-    public partial class WebUserControl1 {
+    public partial class LoggedInUserControl {
         
         /// <summary>
         /// lblLoggedInUsername control.
@@ -20,14 +20,5 @@ namespace Blodbanken {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblLoggedInUsername;
-        
-        /// <summary>
-        /// btnLogoff control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnLogoff;
     }
 }
