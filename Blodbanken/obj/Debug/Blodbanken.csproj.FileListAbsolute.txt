@@ -18,3 +18,5 @@ C:\Users\atlho\Documents\Visual Studio 2015\Projects\Blodbanken\Blodbanken\bin\M
 C:\Users\atlho\Documents\Visual Studio 2015\Projects\Blodbanken\Blodbanken\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\atlho\Documents\Visual Studio 2015\Projects\Blodbanken\Blodbanken\obj\Debug\Blodbanken.dll
 C:\Users\atlho\Documents\Visual Studio 2015\Projects\Blodbanken\Blodbanken\obj\Debug\Blodbanken.pdb
+C:\Users\atlho\Documents\Visual Studio 2015\Projects\Blodbanken\Blodbanken\bin\Newtonsoft.Json.dll
+C:\Users\atlho\Documents\Visual Studio 2015\Projects\Blodbanken\Blodbanken\bin\Newtonsoft.Json.xml

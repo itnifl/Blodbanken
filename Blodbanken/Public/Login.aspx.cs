@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
 using Blodbanken.App_Code;
+using Newtonsoft.Json;
+using System.Web.Services;
 
 namespace Blodbanken.Public {
    public partial class Login : System.Web.UI.Page {
@@ -13,9 +15,10 @@ namespace Blodbanken.Public {
       protected void Page_Load(object sender, EventArgs e) {
 
       }
-      public void LogOffUser() {
+      [WebMethod]
+      public static string LogOffUser() {
          FormsAuthentication.SignOut();
-         Response.Redirect("~/Public/Login.aspx", true);
+         return JsonConvert.SerializeObject(new { runStatus = true });
       }
 
       protected void btnLogon_Click(object sender, EventArgs e) {

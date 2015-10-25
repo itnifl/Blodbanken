@@ -13,6 +13,15 @@ namespace Blodbanken.Controls {
     public partial class LoggedInUserControl {
         
         /// <summary>
+        /// lstWelcome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lstWelcome;
+        
+        /// <summary>
         /// lblLoggedInUsername control.
         /// </summary>
         /// <remarks>
@@ -20,5 +29,14 @@ namespace Blodbanken.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblLoggedInUsername;
+        
+        /// <summary>
+        /// lstLogOff control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lstLogOff;
     }
 }

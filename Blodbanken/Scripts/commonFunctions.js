@@ -2,20 +2,18 @@
     e.preventDefault();
     $.ajax({
         type: "POST",
-        url: "~/Public/Login.aspx/LogoffUser",
-        data: '{}',
-        contentType: "application/json;",
+        url: "/Public/Login.aspx/LogOffUser",
+        data: "{}",
+        contentType: "application/json; charset=utf-8;",
         dataType: "json",
         success: function (response) {
-            if (response.state) {
-                //Handle state here
-            }
-            else {
-                //Handle non-state here
+            if ($.parseJSON(response.d).runStatus) {
+                location.reload();
             }
         },
-        failure: function (response) {
-           //Handle failure here
+        error: function (xhr, status, error) {
+            var err = xhr.responseText;
+            alert('Error: ' + err);
         }
     });
 }

@@ -8,10 +8,15 @@ using System.Web.Security;
 
 namespace Blodbanken {
    public partial class WebUserControl1 : System.Web.UI.UserControl {
-      public string UserName = "No one";
+      public string UserName = String.Empty;
       protected void Page_Load(object sender, EventArgs e) {
          if ((HttpContext.Current.User != null) && HttpContext.Current.User.Identity.IsAuthenticated) {
             UserName = HttpContext.Current.User.Identity.Name;
+            lstLogOff.Visible = true;
+            lstWelcome.Visible = true;
+         } else {
+            lstLogOff.Visible = false;
+            lstWelcome.Visible = false;
          }
          lblLoggedInUsername.Text = UserName;
       }
