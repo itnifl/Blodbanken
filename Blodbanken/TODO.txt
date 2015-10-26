@@ -1,1 +1,3 @@
 ﻿Fortsette gui opprettelse
+Implementer iprincipal
+Bruk HttpContext.Current.User.IsInRole()

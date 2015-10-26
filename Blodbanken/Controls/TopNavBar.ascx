@@ -25,7 +25,8 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li id="lstWelcome" runat="server"><a href="#">Velkommen <asp:label runat="server" ID="lblLoggedInUsername" />!</a></li>
-                <li id="lstLogOff" runat="server"><a href="#" id="btnLogoff">Log off</a></li>
+                <li id="lstAdminLink" runat="server"><a href="/Sections/AdminArea.aspx">Admin Page</a></li>
+                <li id="lstLogOff" runat="server"><a href="#" id="btnLogoff">Logg av</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div>

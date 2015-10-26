@@ -7,13 +7,57 @@ using System.Data;
 using System.Text;
 using System.Security.Cryptography;
 using System.Globalization;
+using System.Web;
+using System.Security.Principal;
 
 namespace Blodbanken.App_Code {
-   public class AuthenticatonModule {
+   public enum UserRole {
+      Admin,
+      Viewer,
+      Donor
+   }
+   public class AuthenticatonModule : RoleProvider{
       private const int SaltValueSize = 4;
       private const string privilegesDatabase = "../App_Data/Privileges.mdf";
 
-      public void UpdatePassword(string userName, string passWord) {
+      public override string ApplicationName {
+         get {
+            throw new NotImplementedException();
+         }
+
+         set {
+            throw new NotImplementedException();
+         }
+      }
+
+      public bool CreateUser(string userName, string passWord, UserRole role) {
+         int rowsUpdated = 0;
+         if (ValidateCredentialData(userName, passWord)) {
+            SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("INSERT INTO Users values(@userName,@passWord,@userRole)", conn);
+            cmd.Parameters.Add("@userName", SqlDbType.VarChar, 35);
+            cmd.Parameters["@userName"].Value = userName;
+
+            string hashedPassword = String.Empty;
+            using (MD5 md5Hash = MD5.Create()) {
+               hashedPassword = GetMd5Hash(md5Hash, passWord);
+            }
+            cmd.Parameters.Add("@passWord", SqlDbType.VarChar, 35);
+            cmd.Parameters["@passWord"].Value = hashedPassword;
+
+            cmd.Parameters.Add("@userRole", SqlDbType.VarChar, 35);
+            cmd.Parameters["@userRole"].Value = role.ToString();
+
+            rowsUpdated = cmd.ExecuteNonQuery();
+            
+            cmd.Dispose();
+            conn.Dispose();
+         }
+         return rowsUpdated == 0 ? false : true;
+      }
+      public bool UpdatePassword(string userName, string passWord) {
+         int rowsUpdated = 0;
          if (ValidateCredentialData(userName, passWord)) {
             SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
             conn.Open();
@@ -27,11 +71,12 @@ namespace Blodbanken.App_Code {
             cmd.Parameters.Add("@passWord", SqlDbType.VarChar, 35);
             cmd.Parameters["@passWord"].Value = hashedPassword;
 
-            int result = cmd.ExecuteNonQuery();
+            rowsUpdated = cmd.ExecuteNonQuery();
 
             cmd.Dispose();
             conn.Dispose();
          }
+         return rowsUpdated == 0 ? false : true;
       }
       public bool ValidateUser(string userName, string passWord) {
          string lookupPasswordHash = null;
@@ -109,6 +154,97 @@ namespace Blodbanken.App_Code {
          } else {
             return false;
          }
+      }
+
+      public override bool IsUserInRole(string username, string roleName) {
+         string role = String.Empty;
+         if (ValidateCredentialData(username, roleName)) {
+            SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("Select userRole from Users where logonName='@userName'", conn);
+            cmd.Parameters.Add("@userName", SqlDbType.VarChar, 35);
+            cmd.Parameters["@userName"].Value = username;
+
+            role = (String)cmd.ExecuteScalar();
+
+            cmd.Dispose();
+            conn.Dispose();
+         }
+         return role == roleName ? true : false;
+      }
+
+      public override string[] GetRolesForUser(string username) {
+         throw new NotImplementedException();
+      }
+
+      public override void CreateRole(string roleName) {
+         throw new NotImplementedException();
+      }
+
+      public override bool DeleteRole(string roleName, bool throwOnPopulatedRole) {
+         throw new NotImplementedException();
+      }
+
+      public override bool RoleExists(string roleName) {
+         throw new NotImplementedException();
+      }
+
+      public override void AddUsersToRoles(string[] usernames, string[] roleNames) {
+         throw new NotImplementedException();
+      }
+
+      public override void RemoveUsersFromRoles(string[] usernames, string[] roleNames) {
+         throw new NotImplementedException();
+      }
+
+      public override string[] GetUsersInRole(string roleName) {
+         throw new NotImplementedException();
+      }
+
+      public override string[] GetAllRoles() {
+         throw new NotImplementedException();
+      }
+
+      public override string[] FindUsersInRole(string roleName, string usernameToMatch) {
+         throw new NotImplementedException();
+      }
+   }
+   //http://www.codeproject.com/Articles/607392/Custom-Role-Providers
+   public class UserIdentity : IIdentity, IPrincipal {
+      private readonly FormsAuthenticationTicket _ticket;
+      private AuthenticatonModule _authMod;
+
+      public UserIdentity(FormsAuthenticationTicket ticket) {
+         _ticket = ticket;
+      }
+      public UserIdentity(FormsAuthenticationTicket ticket, AuthenticatonModule AuthMod) {
+         _ticket = ticket;
+         _authMod = AuthMod;
+      }
+
+
+      public string AuthenticationType {
+         get { return "User"; }
+      }
+
+      public bool IsAuthenticated {
+         get { return true; }
+      }
+
+      public string Name {
+         get { return _ticket.Name; }
+      }
+
+      public string UserId {
+         get { return _ticket.UserData; }
+      }
+
+      public bool IsInRole(string role) {
+         return _authMod.IsUserInRole(this.Name, role);
+      }
+
+      public IIdentity Identity {
+         get { return this; }
       }
    }
 }

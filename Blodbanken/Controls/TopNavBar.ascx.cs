@@ -19,6 +19,8 @@ namespace Blodbanken {
             lstWelcome.Visible = false;
          }
          lblLoggedInUsername.Text = UserName;
+         if (HttpContext.Current.User.IsInRole("Admin")) lstAdminLink.Visible = true;
+         else lstAdminLink.Visible = false;
       }
    }
 }
