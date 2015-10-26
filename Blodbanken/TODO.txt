@@ -1,3 +1,2 @@
 ﻿Fortsette gui opprettelse
-Implementer iprincipal
-Bruk HttpContext.Current.User.IsInRole()
+Håndter autentiseringsfeil med feilmeldng

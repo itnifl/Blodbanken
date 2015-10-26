@@ -19,6 +19,17 @@ namespace Blodbanken.Public {
       [WebMethod]
       public static string LogOffUser() {
          FormsAuthentication.SignOut();
+         GenericPrincipal myUser = (GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
+         System.Threading.Thread.CurrentPrincipal = null;
+
+         UserIdentity id = new UserIdentity();
+         var userRoles = new String[] { };
+         var prin = new GenericPrincipal(id, userRoles);
+
+         HttpContext.Current.User = prin;
+         HttpContext.Current.Cache.Remove("customPrincipal");
+         HttpContext.Current.Cache.Insert("customPrincipal", prin);
+         HttpContext.Current.Response.Cookies.Remove(FormsAuthentication.FormsCookieName);
          return JsonConvert.SerializeObject(new { runStatus = true });
       }
 
@@ -32,18 +43,19 @@ namespace Blodbanken.Public {
                authCookie.Expires = tkt.Expiration;
             authCookie.Path = FormsAuthentication.FormsCookiePath;
 
-            Response.Cookies.Add(authCookie);
-            FormsAuthentication.RedirectFromLoginPage(txtInputBrukernavn.Text, chkRememberMe.Checked);
-
-
             string encTicket = authCookie.Value;
             if (!String.IsNullOrEmpty(encTicket)) {
                var ticket = FormsAuthentication.Decrypt(encTicket);
                UserIdentity id = new UserIdentity(ticket, AuthMod);
-               var userRoles = Roles.GetRolesForUser(id.Name);
+               var userRoles = AuthMod.GetRolesForUser(id.Name);
                var prin = new GenericPrincipal(id, userRoles);
                HttpContext.Current.User = prin;
             }
+            System.Threading.Thread.CurrentPrincipal = HttpContext.Current.User;
+            HttpContext.Current.Cache.Insert("customPrincipal", HttpContext.Current.User);
+
+            Response.Cookies.Add(authCookie);
+            FormsAuthentication.RedirectFromLoginPage(txtInputBrukernavn.Text, chkRememberMe.Checked);
          } else {
             Response.Redirect("~/Public/Login.aspx", true);
          }

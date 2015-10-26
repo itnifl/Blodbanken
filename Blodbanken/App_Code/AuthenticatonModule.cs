@@ -16,7 +16,7 @@ namespace Blodbanken.App_Code {
       Viewer,
       Donor
    }
-   public class AuthenticatonModule : RoleProvider{
+   public class AuthenticatonModule : RoleProvider {
       private const int SaltValueSize = 4;
       private const string privilegesDatabase = "../App_Data/Privileges.mdf";
 
@@ -126,20 +126,13 @@ namespace Blodbanken.App_Code {
          return true;
       }
       private static string GetMd5Hash(MD5 md5Hash, string input) {
-         // Convert the input string to a byte array and compute the hash.
          byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
-
-         // Create a new Stringbuilder to collect the bytes
-         // and create a string.
          StringBuilder sBuilder = new StringBuilder();
 
-         // Loop through each byte of the hashed data 
-         // and format each one as a hexadecimal string.
          for (int i = 0; i < data.Length; i++) {
             sBuilder.Append(data[i].ToString("x2"));
          }
 
-         // Return the hexadecimal string.
          return sBuilder.ToString();
       }
       private static bool VerifyMd5Hash(MD5 md5Hash, string input, string hash) {
@@ -161,7 +154,7 @@ namespace Blodbanken.App_Code {
          if (ValidateCredentialData(username, roleName)) {
             SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
             conn.Open();
-            SqlCommand cmd = new SqlCommand("Select userRole from Users where logonName='@userName'", conn);
+            SqlCommand cmd = new SqlCommand("Select userRole from Users where logonName=@userName", conn);
             cmd.Parameters.Add("@userName", SqlDbType.VarChar, 35);
             cmd.Parameters["@userName"].Value = username;
 
@@ -174,7 +167,18 @@ namespace Blodbanken.App_Code {
       }
 
       public override string[] GetRolesForUser(string username) {
-         throw new NotImplementedException();
+         string role = String.Empty;
+         SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
+         conn.Open();
+         SqlCommand cmd = new SqlCommand("Select userRole from Users where logonName=@userName", conn);
+         cmd.Parameters.Add("@userName", SqlDbType.VarChar, 35);
+         cmd.Parameters["@userName"].Value = username;
+
+         role = (String)cmd.ExecuteScalar();
+
+         cmd.Dispose();
+         conn.Dispose();
+         return new string[] { role };
       }
 
       public override void CreateRole(string roleName) {
@@ -213,24 +217,29 @@ namespace Blodbanken.App_Code {
    public class UserIdentity : IIdentity, IPrincipal {
       private readonly FormsAuthenticationTicket _ticket;
       private AuthenticatonModule _authMod;
+      private bool _isAuthenticated;
 
       public UserIdentity(FormsAuthenticationTicket ticket) {
          _ticket = ticket;
+         _isAuthenticated = true;
       }
       public UserIdentity(FormsAuthenticationTicket ticket, AuthenticatonModule AuthMod) {
          _ticket = ticket;
          _authMod = AuthMod;
+         _isAuthenticated = true;
       }
-
-
+      public UserIdentity() {
+         _ticket = new FormsAuthenticationTicket(String.Empty, false, 1);
+         _authMod = null;
+         _isAuthenticated = false;
+      }
       public string AuthenticationType {
-         get { return "User"; }
+         get { return "Forms"; }
       }
-
       public bool IsAuthenticated {
-         get { return true; }
+         get { return _isAuthenticated; }
+         set { _isAuthenticated = value; }
       }
-
       public string Name {
          get { return _ticket.Name; }
       }
