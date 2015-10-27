@@ -40,6 +40,15 @@ namespace Blodbanken.Public {
         protected global::System.Web.UI.WebControls.TextBox txtInputPassord;
         
         /// <summary>
+        /// logonErrorSpan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl logonErrorSpan;
+        
+        /// <summary>
         /// chkRememberMe control.
         /// </summary>
         /// <remarks>

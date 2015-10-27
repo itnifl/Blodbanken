@@ -1,2 +1,1 @@
 ﻿Fortsette gui opprettelse
-Håndter autentiseringsfeil med feilmeldng

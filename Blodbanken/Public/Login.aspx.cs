@@ -14,7 +14,7 @@ namespace Blodbanken.Public {
    public partial class Login : System.Web.UI.Page {
       AuthenticatonModule AuthMod = new AuthenticatonModule();
       protected void Page_Load(object sender, EventArgs e) {
-
+         logonErrorSpan.Visible = false;
       }
       [WebMethod]
       public static string LogOffUser() {
@@ -57,7 +57,8 @@ namespace Blodbanken.Public {
             Response.Cookies.Add(authCookie);
             FormsAuthentication.RedirectFromLoginPage(txtInputBrukernavn.Text, chkRememberMe.Checked);
          } else {
-            Response.Redirect("~/Public/Login.aspx", true);
+            logonErrorSpan.Visible = true;
+            //Response.Redirect("~/Public/Login.aspx", true);
          }
       }
    }
