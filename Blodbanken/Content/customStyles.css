@@ -23,5 +23,10 @@
   padding: 5px;
 }
 .well-custom {
-    margin-bottom:0px;background-color:#F9FBFD;
+    margin-bottom: 0px;
+    background-color: #fff;
 }
+.list-group-item-header {
+    background-color:#F9FBFD !important;
+}
+
