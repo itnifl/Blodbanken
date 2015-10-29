@@ -13,6 +13,15 @@ namespace Blodbanken {
     public partial class WebUserControl1 {
         
         /// <summary>
+        /// lstAdminLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lstAdminLink;
+        
+        /// <summary>
         /// lstWelcome control.
         /// </summary>
         /// <remarks>
@@ -29,15 +38,6 @@ namespace Blodbanken {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblLoggedInUsername;
-        
-        /// <summary>
-        /// lstAdminLink control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lstAdminLink;
         
         /// <summary>
         /// lstLogOff control.

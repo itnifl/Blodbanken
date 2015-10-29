@@ -75,17 +75,30 @@
     <Content Include="App_Data\Privileges_log.ldf">
       <DependentUpon>Privileges.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\customStyles.css" />
     <Content Include="Controls\LoggedInUserControl.ascx" />
     <Content Include="Controls\SystemEditorControl.ascx" />
     <Content Include="Controls\WorkFlowControl.ascx" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Public\About.aspx" />
     <Content Include="Controls\TopNavBar.ascx" />
-    <Content Include="css\customStyles.css" />
     <Content Include="Index.aspx" />
     <Content Include="Public\Login.aspx" />
     <Content Include="Public\News.aspx" />
     <Content Include="packages.config" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\commonFunctions.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />

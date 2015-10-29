@@ -1,0 +1,27 @@
+﻿.topPlacement {
+    margin-top:65px;
+}
+.customErrorStyle {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-right: 15px;
+    padding-left: 4px;
+    margin-bottom: 5px;
+    margin-top: 2px;
+}
+#inlineContainer {
+  display: table;
+  width: 100%;
+}
+
+#inlineRow  {
+  display: table-row;
+}
+
+#inlineCell1, #inlineCell2, #inlineCell3 {
+  display: table-cell;
+  padding: 5px;
+}
+.well-custom {
+    margin-bottom:0px;background-color:#F9FBFD;
+}
