@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Blodbanken.App_Code {
+namespace Blodbanken.CodeEngines {
    public class TimeBooker {
    }
 }

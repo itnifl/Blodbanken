@@ -10,7 +10,7 @@ using System.Globalization;
 using System.Web;
 using System.Security.Principal;
 
-namespace Blodbanken.App_Code {
+namespace Blodbanken.CodeEngines {
    public enum UserRole {
       Admin,
       Viewer,
@@ -209,6 +209,31 @@ namespace Blodbanken.App_Code {
          conn.Dispose();
          return users;
       }
+      public SystemUser GetUser(string logonName) {
+         SystemUser user = new SystemUser();
+         SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
+         conn.Open();
+
+         SqlCommand cmd = new SqlCommand("Select logonName, password, userRole, firstName, lastName, phoneNumber, age, address, logonName=@logonName", conn);
+         cmd.Parameters.Add("@logonName", SqlDbType.VarChar, 35);
+         cmd.Parameters["@logonName"].Value = logonName;
+
+         var reader = cmd.ExecuteReader();
+
+         // write each record
+         while (reader.Read()) {
+            string readerRole = reader["userRole"].ToString();
+            UserRole role = readerRole == "Admin" ? UserRole.Admin : (readerRole == "Viewer" ? UserRole.Viewer : UserRole.Donor);
+            int age;
+            Int32.TryParse(reader["age"].ToString(), out age);
+            user = (new SystemUser(reader["logonName"].ToString(), reader["password"].ToString(), role, reader["firstName"].ToString(), reader["lastName"].ToString(), reader["poneNumber"].ToString(), age, reader["address"].ToString()));
+         }
+         cmd.Dispose();
+         reader.Close();
+
+         conn.Dispose();
+         return user;
+      }
 
       public override void CreateRole(string roleName) {
          throw new NotImplementedException();
@@ -293,6 +318,16 @@ namespace Blodbanken.App_Code {
       public string PhoneNumber { get; set; }
       public int Age { get; set; }
       public string Address { get; set; }
+      public SystemUser() {
+         this.LogonName = null;
+         this.Password = null;
+         this.UserRole = UserRole.Viewer;
+         this.FirstName = null;
+         this.LastName = null;
+         this.PhoneNumber = null;
+         this.Age = 0;
+         this.Address = null;
+      }
       public SystemUser(string logonName, string password, UserRole userRole, string firstName, string lastName, string phoneNumber, int age, string address) {
          this.LogonName = logonName;
          this.Password = password;
