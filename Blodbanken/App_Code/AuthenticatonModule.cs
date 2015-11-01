@@ -50,7 +50,7 @@ namespace Blodbanken.App_Code {
             cmd.Parameters["@userRole"].Value = role.ToString();
 
             rowsUpdated = cmd.ExecuteNonQuery();
-            
+
             cmd.Dispose();
             conn.Dispose();
          }
@@ -180,6 +180,35 @@ namespace Blodbanken.App_Code {
          conn.Dispose();
          return new string[] { role };
       }
+      public List<SystemUser> GetAllUsers() {
+         List<SystemUser> users = new List<SystemUser>();
+         SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
+         conn.Open();
+
+         SqlCommand cmd = new SqlCommand("Select logonName, userRole, firstName, lastName from Users where firstName IS NOT NULL", conn);
+         var reader = cmd.ExecuteReader();
+
+         // write each record
+         while (reader.Read()) {
+            string readerRole = reader["userRole"].ToString();
+            UserRole role = readerRole == "Admin" ? UserRole.Admin : (readerRole == "Viewer" ? UserRole.Viewer : UserRole.Donor);
+            users.Add(new SystemUser(reader["logonName"].ToString(), role, reader["firstName"].ToString(), reader["lastName"].ToString()));
+         }
+         cmd.Dispose();
+         reader.Close();
+
+         cmd = new SqlCommand("Select logonName, userRole from Users where firstName IS NULL", conn);
+         reader = cmd.ExecuteReader();
+         while (reader.Read()) {
+            string readerRole = reader["userRole"].ToString();
+            UserRole role = readerRole == "Admin" ? UserRole.Admin : (readerRole == "Viewer" ? UserRole.Viewer : UserRole.Donor);
+            users.Add(new SystemUser(reader["logonName"].ToString(), role));
+         }
+         cmd.Dispose();
+         reader.Close();
+         conn.Dispose();
+         return users;
+      }
 
       public override void CreateRole(string roleName) {
          throw new NotImplementedException();
@@ -213,7 +242,6 @@ namespace Blodbanken.App_Code {
          throw new NotImplementedException();
       }
    }
-   //http://www.codeproject.com/Articles/607392/Custom-Role-Providers
    public class UserIdentity : IIdentity, IPrincipal {
       private readonly FormsAuthenticationTicket _ticket;
       private AuthenticatonModule _authMod;
@@ -254,6 +282,36 @@ namespace Blodbanken.App_Code {
 
       public IIdentity Identity {
          get { return this; }
+      }
+   }
+   public class SystemUser {
+      public string LogonName { get; set; }
+      public string Password { get; set; }
+      public UserRole UserRole { get; set; }
+      public string FirstName { get; set; }
+      public string LastName { get; set; }
+      public string PhoneNumber { get; set; }
+      public int Age { get; set; }
+      public string Address { get; set; }
+      public SystemUser(string logonName, string password, UserRole userRole, string firstName, string lastName, string phoneNumber, int age, string address) {
+         this.LogonName = logonName;
+         this.Password = password;
+         this.UserRole = userRole;
+         this.FirstName = firstName;
+         this.LastName = lastName;
+         this.PhoneNumber = phoneNumber;
+         this.Age = age;
+         this.Address = address;
+      }
+      public SystemUser(string logonName, UserRole userRole, string firstName, string lastName) {
+         this.LogonName = logonName;
+         this.UserRole = userRole;
+         this.FirstName = firstName;
+         this.LastName = lastName;
+      }
+      public SystemUser(string logonName, UserRole userRole) {
+         this.LogonName = logonName;
+         this.UserRole = userRole;
       }
    }
 }

@@ -4,6 +4,11 @@ CREATE TABLE [dbo].[Users] (
    [logonName] [varchar] (35) NOT NULL ,
    [password] [varchar] (35) NOT NULL ,
    [userRole] [varchar] (35) NOT NULL, 
+   [firstName] [varchar] (35), 
+   [lastName] [varchar], 
+   [phoneNumber] [varchar], 
+   [age] [int], 
+   [address] [varchar]
 ) ON [PRIMARY];
 CREATE TABLE [dbo].[Roles] (
    [userRole] [varchar] (35) NOT NULL,

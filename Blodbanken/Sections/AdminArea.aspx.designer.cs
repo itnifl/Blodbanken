@@ -13,12 +13,102 @@ namespace Blodbanken.Sections {
     public partial class AdminArea {
         
         /// <summary>
-        /// TopNavBar control.
+        /// frmEditor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Blodbanken.Controls.SystemEditor TopNavBar;
+        protected global::System.Web.UI.HtmlControls.HtmlForm frmEditor;
+        
+        /// <summary>
+        /// UserCreatorForm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Blodbanken.Controls.UserCreatorFormControl UserCreatorForm;
+        
+        /// <summary>
+        /// selectChangeUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect selectChangeUser;
+        
+        /// <summary>
+        /// selectEditUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect selectEditUser;
+        
+        /// <summary>
+        /// ExaminationBooking control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Blodbanken.Controls.BookingControl1 ExaminationBooking;
+        
+        /// <summary>
+        /// BloodDonorBooking control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Blodbanken.Controls.BookingControl2 BloodDonorBooking;
+        
+        /// <summary>
+        /// ParkingBooking1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Blodbanken.Controls.ParkingBookingControl1 ParkingBooking1;
+        
+        /// <summary>
+        /// AutoBookerSettings control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Blodbanken.Controls.AutoBookerSettingsControl AutoBookerSettings;
+        
+        /// <summary>
+        /// selectUserForSchemaEdit1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect selectUserForSchemaEdit1;
+        
+        /// <summary>
+        /// selectUserForConsentEdit1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect selectUserForConsentEdit1;
+        
+        /// <summary>
+        /// selectUserForWorkflowEdit1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect selectUserForWorkflowEdit1;
     }
 }

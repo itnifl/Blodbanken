@@ -80,8 +80,12 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\customStyles.css" />
+    <Content Include="Controls\AutoBookerSettingsControl.ascx" />
+    <Content Include="Controls\ParkingBookingControl1.ascx" />
+    <Content Include="Controls\BookingControl2.ascx" />
+    <Content Include="Controls\BookingControl1.ascx" />
     <Content Include="Controls\LoggedInUserControl.ascx" />
-    <Content Include="Controls\SystemEditorControl.ascx" />
+    <Content Include="Controls\UserCreatorFormControl.ascx" />
     <Content Include="Controls\WorkFlowControl.ascx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Public\About.aspx" />
@@ -126,6 +130,34 @@
   <ItemGroup>
     <Compile Include="App_Code\AuthenticatonModule.cs" />
     <Content Include="App_Code\TimeBooker.cs" />
+    <Compile Include="Controls\AutoBookerSettingsControl.ascx.cs">
+      <DependentUpon>AutoBookerSettingsControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\AutoBookerSettingsControl.ascx.designer.cs">
+      <DependentUpon>AutoBookerSettingsControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ParkingBookingControl1.ascx.cs">
+      <DependentUpon>ParkingBookingControl1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ParkingBookingControl1.ascx.designer.cs">
+      <DependentUpon>ParkingBookingControl1.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BookingControl2.ascx.cs">
+      <DependentUpon>BookingControl2.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\BookingControl2.ascx.designer.cs">
+      <DependentUpon>BookingControl2.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BookingControl1.ascx.cs">
+      <DependentUpon>BookingControl1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\BookingControl1.ascx.designer.cs">
+      <DependentUpon>BookingControl1.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LoggedInUserControl.ascx.cs">
       <DependentUpon>LoggedInUserControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -133,12 +165,12 @@
     <Compile Include="Controls\LoggedInUserControl.ascx.designer.cs">
       <DependentUpon>LoggedInUserControl.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SystemEditorControl.ascx.cs">
-      <DependentUpon>SystemEditorControl.ascx</DependentUpon>
+    <Compile Include="Controls\UserCreatorFormControl.ascx.cs">
+      <DependentUpon>UserCreatorFormControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\SystemEditorControl.ascx.designer.cs">
-      <DependentUpon>SystemEditorControl.ascx</DependentUpon>
+    <Compile Include="Controls\UserCreatorFormControl.ascx.designer.cs">
+      <DependentUpon>UserCreatorFormControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\WorkFlowControl.ascx.cs">
       <DependentUpon>WorkFlowControl.ascx</DependentUpon>

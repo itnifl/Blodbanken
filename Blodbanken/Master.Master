@@ -15,8 +15,8 @@
 </head>
 <body runat="server" id="pageBody">
     <uc:TopNavBar id="TopNavBar" runat="server" />
-        <asp:ContentPlaceHolder ID="MainPage" runat="server">
+    <asp:ContentPlaceHolder ID="MainPage" runat="server">
         
-        </asp:ContentPlaceHolder>
+    </asp:ContentPlaceHolder>
 </body>
 </html>
