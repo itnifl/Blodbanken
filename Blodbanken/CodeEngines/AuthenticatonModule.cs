@@ -211,6 +211,7 @@ namespace Blodbanken.CodeEngines {
       }
       public SystemUser GetUser(string logonName) {
          SystemUser user = new SystemUser();
+         if (String.IsNullOrEmpty(logonName)) return user;
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
          conn.Open();
 
@@ -232,7 +233,7 @@ namespace Blodbanken.CodeEngines {
             string lastNameInput = reader["lastName"] != null ? reader["lastName"].ToString() : String.Empty;
             string phoneNumberInput = reader["phoneNumber"] != null ? reader["phoneNumber"].ToString() : String.Empty;
             string addressInput = reader["address"] != null ? reader["address"].ToString() : String.Empty;
-            user = (new SystemUser(logonNameInput, passwordImput, role, firstNameInput, lastNameInput, phoneNumberInput, age, addressInput));
+            user = new SystemUser(logonNameInput, passwordImput, role, firstNameInput, lastNameInput, phoneNumberInput, age, addressInput);
          }
          cmd.Dispose();
          reader.Close();
