@@ -214,9 +214,9 @@ namespace Blodbanken.CodeEngines {
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
          conn.Open();
 
-         SqlCommand cmd = new SqlCommand("Select logonName, password, userRole, firstName, lastName, phoneNumber, age, address, logonName=@logonName", conn);
-         cmd.Parameters.Add("@logonName", SqlDbType.VarChar, 35);
-         cmd.Parameters["@logonName"].Value = logonName;
+         SqlCommand cmd = new SqlCommand("Select logonName, password, userRole, firstName, lastName, phoneNumber, age, address from Users where logonName=@logonNameParam", conn);
+         cmd.Parameters.Add("@logonNameParam", SqlDbType.VarChar, 35);
+         cmd.Parameters["@logonNameParam"].Value = logonName;
 
          var reader = cmd.ExecuteReader();
 
@@ -226,7 +226,13 @@ namespace Blodbanken.CodeEngines {
             UserRole role = readerRole == "Admin" ? UserRole.Admin : (readerRole == "Viewer" ? UserRole.Viewer : UserRole.Donor);
             int age;
             Int32.TryParse(reader["age"].ToString(), out age);
-            user = (new SystemUser(reader["logonName"].ToString(), reader["password"].ToString(), role, reader["firstName"].ToString(), reader["lastName"].ToString(), reader["poneNumber"].ToString(), age, reader["address"].ToString()));
+            string logonNameInput = reader["logonName"] != null ? reader["logonName"].ToString() : String.Empty;
+            string passwordImput = reader["password"] != null ? reader["password"].ToString() : String.Empty;
+            string firstNameInput = reader["firstName"] != null ? reader["firstName"].ToString() : String.Empty;
+            string lastNameInput = reader["lastName"] != null ? reader["lastName"].ToString() : String.Empty;
+            string phoneNumberInput = reader["phoneNumber"] != null ? reader["phoneNumber"].ToString() : String.Empty;
+            string addressInput = reader["address"] != null ? reader["address"].ToString() : String.Empty;
+            user = (new SystemUser(logonNameInput, passwordImput, role, firstNameInput, lastNameInput, phoneNumberInput, age, addressInput));
          }
          cmd.Dispose();
          reader.Close();
