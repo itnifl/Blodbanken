@@ -11,8 +11,21 @@ namespace Blodbanken.Controls {
       AuthenticatonModule AuthMod = new AuthenticatonModule();
       public string CurrentUser { get; set; }
       protected void Page_Load(object sender, EventArgs e) {
-         //http://stackoverflow.com/questions/11753631/passing-parameter-to-web-user-control-by-a-data-storage-method-like-session-vie
          SystemUser usr = AuthMod.GetUser(CurrentUser);
+         workflowCreateUser.Attributes["class"] += (CheckIfUserOK(usr) ? " list-group-item-success" : " list-group-item-danger");
+      }
+      public bool CheckIfUserOK(SystemUser user) {
+         return String.IsNullOrEmpty(user.LogonName) && String.IsNullOrEmpty(user.Password) && String.IsNullOrEmpty(user.PhoneNumber) && String.IsNullOrEmpty(user.FirstName) && String.IsNullOrEmpty(user.LastName) && user.Age > 0;
       }
    }
 }
+
+/*--
+    Skal ha:
+    list-group-item-success
+    list-group-item-danger
+
+    kanskje
+
+    list-group-item-warning
+--*/
