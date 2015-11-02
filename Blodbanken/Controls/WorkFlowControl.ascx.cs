@@ -9,9 +9,10 @@ using Blodbanken.CodeEngines;
 namespace Blodbanken.Controls {
    public partial class WorkFlowControl : System.Web.UI.UserControl {
       AuthenticatonModule AuthMod = new AuthenticatonModule();
+      public string CurrentUser { get; set; }
       protected void Page_Load(object sender, EventArgs e) {
          //http://stackoverflow.com/questions/11753631/passing-parameter-to-web-user-control-by-a-data-storage-method-like-session-vie
-         // AuthMod.GetUser("");
+         SystemUser usr = AuthMod.GetUser(CurrentUser);
       }
    }
 }
