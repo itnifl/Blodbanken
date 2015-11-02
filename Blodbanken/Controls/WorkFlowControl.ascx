@@ -7,13 +7,5 @@
   <li class="list-group-item" runat="server" id="workflowBookAppointment">Booke ledig time</li>
   <li class="list-group-item" runat="server" id="workflowBookParking">Booke parkering</li>
 </ul>
-<!--
-    Skal ha:
-    list-group-item-success
-    list-group-item-danger
 
-    kanskje
-
-    list-group-item-warning
--->
 
