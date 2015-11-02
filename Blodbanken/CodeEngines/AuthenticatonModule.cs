@@ -215,7 +215,7 @@ namespace Blodbanken.CodeEngines {
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
          conn.Open();
 
-         SqlCommand cmd = new SqlCommand("Select logonName, password, userRole, firstName, lastName, phoneNumber, age, address from Users where logonName=@logonNameParam", conn);
+         SqlCommand cmd = new SqlCommand("Select logonName, password, userRole, firstName, lastName, phoneNumber, age, address, persInfoConsent from Users where logonName=@logonNameParam", conn);
          cmd.Parameters.Add("@logonNameParam", SqlDbType.VarChar, 35);
          cmd.Parameters["@logonNameParam"].Value = logonName;
 
@@ -225,15 +225,16 @@ namespace Blodbanken.CodeEngines {
          while (reader.Read()) {
             string readerRole = reader["userRole"].ToString();
             UserRole role = readerRole == "Admin" ? UserRole.Admin : (readerRole == "Viewer" ? UserRole.Viewer : UserRole.Donor);
-            int age;
+            int age, persInfoConsent;
             Int32.TryParse(reader["age"].ToString(), out age);
+            Int32.TryParse(reader["persInfoConsent"].ToString(), out persInfoConsent);
             string logonNameInput = reader["logonName"] != null ? reader["logonName"].ToString() : String.Empty;
             string passwordImput = reader["password"] != null ? reader["password"].ToString() : String.Empty;
             string firstNameInput = reader["firstName"] != null ? reader["firstName"].ToString() : String.Empty;
             string lastNameInput = reader["lastName"] != null ? reader["lastName"].ToString() : String.Empty;
             string phoneNumberInput = reader["phoneNumber"] != null ? reader["phoneNumber"].ToString() : String.Empty;
             string addressInput = reader["address"] != null ? reader["address"].ToString() : String.Empty;
-            user = new SystemUser(logonNameInput, passwordImput, role, firstNameInput, lastNameInput, phoneNumberInput, age, addressInput);
+            user = new SystemUser(logonNameInput, passwordImput, role, firstNameInput, lastNameInput, phoneNumberInput, age, addressInput, persInfoConsent != 0);
          }
          cmd.Dispose();
          reader.Close();
@@ -323,8 +324,9 @@ namespace Blodbanken.CodeEngines {
       public string FirstName { get; set; }
       public string LastName { get; set; }
       public string PhoneNumber { get; set; }
-      public int Age { get; set; }
+      public int Age { get; set; } = 0;
       public string Address { get; set; }
+      public bool PersInfoConsent { get; set; } = false;
       public SystemUser() {
          this.LogonName = null;
          this.Password = null;
@@ -334,8 +336,9 @@ namespace Blodbanken.CodeEngines {
          this.PhoneNumber = null;
          this.Age = 0;
          this.Address = null;
+         this.PersInfoConsent = false;
       }
-      public SystemUser(string logonName, string password, UserRole userRole, string firstName, string lastName, string phoneNumber, int age, string address) {
+      public SystemUser(string logonName, string password, UserRole userRole, string firstName, string lastName, string phoneNumber, int age, string address, bool persInfoConsent) {
          this.LogonName = logonName;
          this.Password = password;
          this.UserRole = userRole;
@@ -344,6 +347,7 @@ namespace Blodbanken.CodeEngines {
          this.PhoneNumber = phoneNumber;
          this.Age = age;
          this.Address = address;
+         this.PersInfoConsent = persInfoConsent;
       }
       public SystemUser(string logonName, UserRole userRole, string firstName, string lastName) {
          this.LogonName = logonName;
