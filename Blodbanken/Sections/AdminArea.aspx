@@ -147,6 +147,10 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12" id="workflowPlaceHolder" runat="server">
+                                        </div>
+                                    </div>
                                 </fieldset>
                               </div>
                             </div>
