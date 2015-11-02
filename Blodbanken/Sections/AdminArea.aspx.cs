@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Blodbanken.CodeEngines;
+using Blodbanken.Controls;
 
 namespace Blodbanken.Sections {
    public partial class AdminArea : System.Web.UI.Page {
@@ -16,7 +17,11 @@ namespace Blodbanken.Sections {
             select.Items.Clear();
             users.Where(usr => !String.IsNullOrEmpty(usr.FirstName) && !String.IsNullOrEmpty(usr.LastName)).ToList().ForEach(user => select.Items.Add(new ListItem(user.FirstName + " " + user.LastName, user.LogonName)));
             users.Where(usr => String.IsNullOrEmpty(usr.FirstName) && String.IsNullOrEmpty(usr.LastName)).ToList().ForEach(user => select.Items.Add(new ListItem(user.LogonName, user.LogonName)));
-         }        
+         }
+         WorkFlowControl workFlowCtrl = (WorkFlowControl)Page.LoadControl("~/Controls/WorkFlowControl.ascx");
+         //HttpContext.Current.User.Identity.Name
+         workFlowCtrl.CurrentUser = this.selectUserForWorkflowEdit1.Value;
+         this.workflowPlaceHolder.Controls.Add(workFlowCtrl);
       }
    }
 }

@@ -128,8 +128,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Code\AuthenticatonModule.cs" />
-    <Content Include="App_Code\TimeBooker.cs" />
+    <Compile Include="CodeEngines\AuthenticatonModule.cs" />
+    <Content Include="CodeEngines\TimeBooker.cs" />
     <Compile Include="Controls\AutoBookerSettingsControl.ascx.cs">
       <DependentUpon>AutoBookerSettingsControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
