@@ -129,7 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeEngines\AuthenticatonModule.cs" />
-    <Content Include="CodeEngines\TimeBooker.cs" />
+    <Compile Include="CodeEngines\TimeBooker.cs" />
     <Compile Include="Controls\AutoBookerSettingsControl.ascx.cs">
       <DependentUpon>AutoBookerSettingsControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
