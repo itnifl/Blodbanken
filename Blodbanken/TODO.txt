@@ -1,2 +1,5 @@
 ﻿Fortsette gui opprettelse
-Update
+Skriv ferdig workflow sjekken
+Link til workflow sidene fra workfloww lista
+Fullfør workflow sidene
+Ha med melding om hva som feiler i workflow sjekken
