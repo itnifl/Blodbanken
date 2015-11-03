@@ -22,6 +22,15 @@ namespace Blodbanken.Controls {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl workflowCreateUser;
         
         /// <summary>
+        /// errorInfo1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorInfo1;
+        
+        /// <summary>
         /// workflowConsent control.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,15 @@ namespace Blodbanken.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl workflowConsent;
+        
+        /// <summary>
+        /// errorInfo2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorInfo2;
         
         /// <summary>
         /// workflowExamintion control.
@@ -40,6 +58,15 @@ namespace Blodbanken.Controls {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl workflowExamintion;
         
         /// <summary>
+        /// errorInfo3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorInfo3;
+        
+        /// <summary>
         /// workflowSchema control.
         /// </summary>
         /// <remarks>
@@ -47,6 +74,15 @@ namespace Blodbanken.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl workflowSchema;
+        
+        /// <summary>
+        /// errorInfo4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorInfo4;
         
         /// <summary>
         /// workflowBookAppointment control.
@@ -58,6 +94,15 @@ namespace Blodbanken.Controls {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl workflowBookAppointment;
         
         /// <summary>
+        /// errorInfo5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorInfo5;
+        
+        /// <summary>
         /// workflowBookParking control.
         /// </summary>
         /// <remarks>
@@ -65,5 +110,14 @@ namespace Blodbanken.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl workflowBookParking;
+        
+        /// <summary>
+        /// errorInfo6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorInfo6;
     }
 }

@@ -215,7 +215,7 @@ namespace Blodbanken.CodeEngines {
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
          conn.Open();
 
-         SqlCommand cmd = new SqlCommand("Select logonName, password, userRole, firstName, lastName, phoneNumber, age, address, persInfoConsent from Users where logonName=@logonNameParam", conn);
+         SqlCommand cmd = new SqlCommand("Select logonName, password, userRole, firstName, lastName, phoneMobile, age, address, persInfoConsent from Users where logonName=@logonNameParam", conn);
          cmd.Parameters.Add("@logonNameParam", SqlDbType.VarChar, 35);
          cmd.Parameters["@logonNameParam"].Value = logonName;
 
@@ -232,9 +232,9 @@ namespace Blodbanken.CodeEngines {
             string passwordImput = reader["password"] != null ? reader["password"].ToString() : String.Empty;
             string firstNameInput = reader["firstName"] != null ? reader["firstName"].ToString() : String.Empty;
             string lastNameInput = reader["lastName"] != null ? reader["lastName"].ToString() : String.Empty;
-            string phoneNumberInput = reader["phoneNumber"] != null ? reader["phoneNumber"].ToString() : String.Empty;
+            string phoneMobileInput = reader["phoneMobile"] != null ? reader["phoneMobile"].ToString() : String.Empty;
             string addressInput = reader["address"] != null ? reader["address"].ToString() : String.Empty;
-            user = new SystemUser(logonNameInput, passwordImput, role, firstNameInput, lastNameInput, phoneNumberInput, age, addressInput, persInfoConsent != 0);
+            user = new SystemUser(logonNameInput, passwordImput, role, firstNameInput, lastNameInput, phoneMobileInput, age, addressInput, persInfoConsent != 0);
          }
          cmd.Dispose();
          reader.Close();
@@ -323,7 +323,7 @@ namespace Blodbanken.CodeEngines {
       public UserRole UserRole { get; set; }
       public string FirstName { get; set; }
       public string LastName { get; set; }
-      public string PhoneNumber { get; set; }
+      public string PhoneMobile { get; set; }
       public int Age { get; set; } = 0;
       public string Address { get; set; }
       public bool PersInfoConsent { get; set; } = false;
@@ -333,18 +333,18 @@ namespace Blodbanken.CodeEngines {
          this.UserRole = UserRole.Viewer;
          this.FirstName = null;
          this.LastName = null;
-         this.PhoneNumber = null;
+         this.PhoneMobile = null;
          this.Age = 0;
          this.Address = null;
          this.PersInfoConsent = false;
       }
-      public SystemUser(string logonName, string password, UserRole userRole, string firstName, string lastName, string phoneNumber, int age, string address, bool persInfoConsent) {
+      public SystemUser(string logonName, string password, UserRole userRole, string firstName, string lastName, string phoneMobile, int age, string address, bool persInfoConsent) {
          this.LogonName = logonName;
          this.Password = password;
          this.UserRole = userRole;
          this.FirstName = firstName;
          this.LastName = lastName;
-         this.PhoneNumber = phoneNumber;
+         this.PhoneMobile = phoneMobile;
          this.Age = age;
          this.Address = address;
          this.PersInfoConsent = persInfoConsent;
