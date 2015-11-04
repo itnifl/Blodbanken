@@ -10,17 +10,72 @@ using System.Text;
 using System.Security.Cryptography;
 using System.Globalization;
 using System.Security.Principal;
+using System.Reflection;
 
 namespace Blodbanken.CodeEngines {
    public class TimeBooker {
       private const string privilegesDatabase = "../App_Data/Privileges.mdf";
 
-      public List<ExaminationBooking> GetUseExaminationrBookings(string logonName) {
+      public bool GetUserParkingStatusForFutureDonorBookings(string logonName) {
+         List<DonorBooking> bookings = GetUserDonorBookings(logonName).Where(booking => DateTime.Compare(DateTime.Now, booking.BookingDate) <= 0).ToList();
+         SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
+         conn.Open();
+
+         foreach (DonorBooking booking in bookings) {
+            //Her skal vi se etter parkeringsbooking der det er en donorbooking -> lag heller to tabeller
+            SqlCommand cmd = new SqlCommand("SELECT bookingID, bookingDate, logonName from DonorBooking where logonName=@logonNameParam AND bookingDate=@bookingDateParam", conn);
+            cmd.Parameters.Add("@logonNameParam", SqlDbType.VarChar, 35);
+            cmd.Parameters["@logonNameParam"].Value = logonName;
+
+            cmd.Parameters.Add("@bookingDateParam", SqlDbType.VarChar, 35);
+            cmd.Parameters["@bookingDateParam"].Value = booking.BookingDate.ToString();
+            var reader = cmd.ExecuteReader();
+
+            while (reader.Read()) {
+               DateTime dtResult;
+               int bookingID;
+               Int32.TryParse(reader["BookingID"] != null ? reader["BookingID"].ToString() : String.Empty, out bookingID);
+               string readLogonName = reader["logonName"].ToString();
+               DateTime.TryParse(reader["bookingDate"] != null ? reader["bookingDate"].ToString() : String.Empty, out dtResult);
+               //if (dtResult != null) bookings.Add(new DonorBooking(bookingID, dtResult, readLogonName));
+            }
+            cmd.Dispose();
+            reader.Close();
+            conn.Dispose();
+         }
+
+         return false;
+      }
+      public List<DonorBooking> GetUserDonorBookings(string logonName) {
+         List<DonorBooking> bookings = new List<DonorBooking>();
+         SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
+         conn.Open();
+
+         SqlCommand cmd = new SqlCommand("SELECT bookingID, bookingDate, logonName from DonorBooking where logonName=@logonNameParam", conn);
+         cmd.Parameters.Add("@logonNameParam", SqlDbType.VarChar, 35);
+         cmd.Parameters["@logonNameParam"].Value = logonName;
+         var reader = cmd.ExecuteReader();
+
+         // write each record
+         while (reader.Read()) {
+            DateTime dtResult;
+            int bookingID;
+            Int32.TryParse(reader["BookingID"] != null ? reader["BookingID"].ToString() : String.Empty, out bookingID);
+            string readLogonName = reader["logonName"].ToString();
+            DateTime.TryParse(reader["bookingDate"] != null ? reader["bookingDate"].ToString() : String.Empty, out dtResult);
+            if (dtResult != null) bookings.Add(new DonorBooking(bookingID, dtResult, readLogonName));
+         }
+         cmd.Dispose();
+         reader.Close();
+         conn.Dispose();
+         return bookings;
+      }
+      public List<ExaminationBooking> GetUserExaminationBookings(string logonName) {
          List<ExaminationBooking> bookings = new List<ExaminationBooking>();
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
          conn.Open();
 
-         SqlCommand cmd = new SqlCommand("SELECT bookingID, logonName, logonName from ExaminationBooking where logonName=@logonNameParam", conn);
+         SqlCommand cmd = new SqlCommand("SELECT bookingID, bookingDate, logonName from ExaminationBooking where logonName=@logonNameParam", conn);
          cmd.Parameters.Add("@logonNameParam", SqlDbType.VarChar, 35);
          cmd.Parameters["@logonNameParam"].Value = logonName;
          var reader = cmd.ExecuteReader();
@@ -39,6 +94,33 @@ namespace Blodbanken.CodeEngines {
          conn.Dispose();
          return bookings;
       }
+      public List<Schema> GetUserInfoForm(string logonName) {
+         List<Schema> schemas = new List<Schema>();
+         SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
+         conn.Open();
+
+         SqlCommand cmd = new SqlCommand("SELECT * FROM Schema WHERE logonName=@logonNameParam", conn);
+         cmd.Parameters.Add("@logonNameParam", SqlDbType.VarChar, 35);
+         cmd.Parameters["@logonNameParam"].Value = logonName;
+         var reader = cmd.ExecuteReader();
+         List<string> columns = Enumerable.Range(0, reader.FieldCount).Select(reader.GetName).ToList();
+         columns.Sort();
+
+         // read each record
+         while (reader.Read()) {
+            Schema theSchema = new Schema();
+            foreach (string column in columns) {
+               Type myType = typeof(Schema);
+               PropertyInfo myPropInfo = myType.GetProperty(column);
+               myPropInfo.SetValue(this, reader[column].ToString(), null);
+            }
+            schemas.Add(theSchema);
+         }
+         cmd.Dispose();
+         reader.Close();
+         conn.Dispose();
+         return schemas;
+      }
    }
    public class ExaminationBooking {
       public int BookingID { get; set; }
@@ -50,8 +132,19 @@ namespace Blodbanken.CodeEngines {
          this.LogonName = logonName;
       }
    }
+   public class DonorBooking {
+      public int BookingID { get; set; }
+      public string LogonName { get; set; }
+      public DateTime BookingDate { get; set; }
+      public DonorBooking(int bookingID, DateTime bookingDate, string logonName) {
+         this.BookingID = bookingID;
+         this.BookingDate = bookingDate;
+         this.LogonName = logonName;
+      }
+   }
    public class Schema {
       public string logonName { get; set; }
+      public int schemaID { get; set; }
       public int spm1 { get; set; }
       public int spm2 { get; set; }
       public int spm3 { get; set; }

@@ -4,7 +4,8 @@ DROP TABLE [dbo].[Users];
 DROP TABLE [dbo].[Roles];
 
 CREATE TABLE [dbo].[Schema] (
-	[logonName] [varchar] (35) NOT NULL PRIMARY KEY,
+	[schemaID] [int] NOT NULL IDENTITY (1,1) PRIMARY KEY,
+	[logonName] [varchar] (35) NOT NULL,
 	[spm1] [int], /*Har du fått informasjon om blodgivning?*/
 	[spm2] [int], /*Føler du deg frisk nå?*/
 	[spm3] [int], /*Hvis du har gitt blod tidligere, har du vært frisk i*/
@@ -102,6 +103,20 @@ CONSTRAINT [FK_ExaminationBooking] FOREIGN KEY([logonName]) REFERENCES [dbo].[Us
 	[logonName]
 );
 GO
+
+CREATE TABLE [dbo].[DonorBooking] (
+   [bookingID] [int] NOT NULL IDENTITY (1,1) PRIMARY KEY,
+   [bookingDate] [date] NOT NULL,
+   [logonName] [varchar] (35) NOT NULL
+) ON [PRIMARY];
+GO
+ALTER TABLE [dbo].[DonorBooking] WITH NOCHECK ADD 
+CONSTRAINT [FK_DonorBooking] FOREIGN KEY([logonName]) REFERENCES [dbo].[Users]
+(
+	[logonName]
+);
+GO
+
 ALTER TABLE [dbo].[Schema] WITH NOCHECK ADD 
 CONSTRAINT [FK_Schema] FOREIGN KEY([logonName]) REFERENCES [dbo].[Users]
 (

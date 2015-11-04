@@ -49,13 +49,13 @@ namespace Blodbanken.Controls {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorInfo2;
         
         /// <summary>
-        /// workflowExamintion control.
+        /// workflowExamination control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl workflowExamintion;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl workflowExamination;
         
         /// <summary>
         /// errorInfo3 control.
