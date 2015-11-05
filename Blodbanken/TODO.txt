@@ -3,4 +3,4 @@ Skriv ferdig workflow sjekken
 Link til workflow sidene fra workfloww lista
 Fullfør workflow sidene
 Ha med melding om hva som feiler i workflow sjekken
-Et schema må kunne hetes i sin helhet og alle propties i klassen populeres
+Helseundersøkelsessjekken skal ta hensyn til om en allerede er utført.

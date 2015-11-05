@@ -16,35 +16,30 @@ namespace Blodbanken.CodeEngines {
    public class TimeBooker {
       private const string privilegesDatabase = "../App_Data/Privileges.mdf";
 
-      public bool GetUserParkingStatusForFutureDonorBookings(string logonName) {
-         List<DonorBooking> bookings = GetUserDonorBookings(logonName).Where(booking => DateTime.Compare(DateTime.Now, booking.BookingDate) <= 0).ToList();
+      public List<ParkspaceBooking> GetFutureParkspaceBookingsForDonors(string logonName) {
+         List<ParkspaceBooking> bookings = new List<ParkspaceBooking>();
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
          conn.Open();
+          
+         SqlCommand cmd = new SqlCommand("SELECT PB.bookingID AS bookingID, PB.bookingDate AS bookingDate, PB.parkingSpace AS parkingSpace, DB.logonName AS logonName FROM DonorBooking AS DB JOIN ParkspaceBooking AS PB ON (DB.parkingID=PB.parkingSpace) WHERE DB.logonName=@logonNameParam", conn);
+         cmd.Parameters.Add("@logonNameParam", SqlDbType.VarChar, 35);
+         cmd.Parameters["@logonNameParam"].Value = logonName;
 
-         foreach (DonorBooking booking in bookings) {
-            //Her skal vi se etter parkeringsbooking der det er en donorbooking -> lag heller to tabeller
-            SqlCommand cmd = new SqlCommand("SELECT bookingID, bookingDate, logonName from DonorBooking where logonName=@logonNameParam AND bookingDate=@bookingDateParam", conn);
-            cmd.Parameters.Add("@logonNameParam", SqlDbType.VarChar, 35);
-            cmd.Parameters["@logonNameParam"].Value = logonName;
+         var reader = cmd.ExecuteReader();
 
-            cmd.Parameters.Add("@bookingDateParam", SqlDbType.VarChar, 35);
-            cmd.Parameters["@bookingDateParam"].Value = booking.BookingDate.ToString();
-            var reader = cmd.ExecuteReader();
-
-            while (reader.Read()) {
-               DateTime dtResult;
-               int bookingID;
-               Int32.TryParse(reader["BookingID"] != null ? reader["BookingID"].ToString() : String.Empty, out bookingID);
-               string readLogonName = reader["logonName"].ToString();
-               DateTime.TryParse(reader["bookingDate"] != null ? reader["bookingDate"].ToString() : String.Empty, out dtResult);
-               //if (dtResult != null) bookings.Add(new DonorBooking(bookingID, dtResult, readLogonName));
-            }
-            cmd.Dispose();
-            reader.Close();
-            conn.Dispose();
+         while (reader.Read()) {
+            DateTime dtResult;
+            int bookingID, parkingSpace = 0;
+            Int32.TryParse(reader["bookingID"] != null ? reader["bookingID"].ToString() : String.Empty, out bookingID);
+            Int32.TryParse(reader["parkingSpace"] != null ? reader["parkingSpace"].ToString() : String.Empty, out parkingSpace);
+            DateTime.TryParse(reader["bookingDate"] != null ? reader["bookingDate"].ToString() : String.Empty, out dtResult);
+            if (dtResult != null && parkingSpace != 0) bookings.Add(new ParkspaceBooking(bookingID, dtResult, parkingSpace));
          }
-
-         return false;
+         cmd.Dispose();
+         reader.Close();
+         conn.Dispose();
+         
+         return bookings;
       }
       public List<DonorBooking> GetUserDonorBookings(string logonName) {
          List<DonorBooking> bookings = new List<DonorBooking>();
@@ -60,7 +55,7 @@ namespace Blodbanken.CodeEngines {
          while (reader.Read()) {
             DateTime dtResult;
             int bookingID;
-            Int32.TryParse(reader["BookingID"] != null ? reader["BookingID"].ToString() : String.Empty, out bookingID);
+            Int32.TryParse(reader["bookingID"] != null ? reader["bookingID"].ToString() : String.Empty, out bookingID);
             string readLogonName = reader["logonName"].ToString();
             DateTime.TryParse(reader["bookingDate"] != null ? reader["bookingDate"].ToString() : String.Empty, out dtResult);
             if (dtResult != null) bookings.Add(new DonorBooking(bookingID, dtResult, readLogonName));
@@ -84,7 +79,7 @@ namespace Blodbanken.CodeEngines {
          while (reader.Read()) {
             DateTime dtResult;
             int bookingID;
-            Int32.TryParse(reader["BookingID"] != null ? reader["BookingID"].ToString() : String.Empty, out bookingID);
+            Int32.TryParse(reader["bookingID"] != null ? reader["bookingID"].ToString() : String.Empty, out bookingID);
             string readLogonName = reader["logonName"].ToString();
             DateTime.TryParse(reader["bookingDate"] != null ? reader["bookingDate"].ToString() : String.Empty, out dtResult); 
             if(dtResult != null) bookings.Add(new ExaminationBooking(bookingID, dtResult, readLogonName));
@@ -99,7 +94,7 @@ namespace Blodbanken.CodeEngines {
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
          conn.Open();
 
-         SqlCommand cmd = new SqlCommand("SELECT * FROM Schema WHERE logonName=@logonNameParam", conn);
+         SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.[Schema] WHERE logonName=@logonNameParam", conn);
          cmd.Parameters.Add("@logonNameParam", SqlDbType.VarChar, 35);
          cmd.Parameters["@logonNameParam"].Value = logonName;
          var reader = cmd.ExecuteReader();
@@ -140,6 +135,16 @@ namespace Blodbanken.CodeEngines {
          this.BookingID = bookingID;
          this.BookingDate = bookingDate;
          this.LogonName = logonName;
+      }
+   }
+   public class ParkspaceBooking {
+      public int BookingID { get; set; }
+      public int ParkingSpace { get; set; }
+      public DateTime BookingDate { get; set; }
+      public ParkspaceBooking(int bookingID, DateTime bookingDate, int parkingSpace) {
+         this.BookingID = bookingID;
+         this.BookingDate = bookingDate;
+         this.ParkingSpace = parkingSpace;
       }
    }
    public class Schema {

@@ -1,8 +1,37 @@
 ﻿DROP TABLE [dbo].[Schema];
 DROP TABLE [dbo].[ExaminationBooking];
+DROP TABLE [dbo].[DonorBooking];
+DROP TABLE [dbo].[ParkspaceBooking];
 DROP TABLE [dbo].[Users];
 DROP TABLE [dbo].[Roles];
 
+/**NEW TABLE HERE**/
+CREATE TABLE [dbo].[Roles] (
+   [userRole] [varchar] (35) NOT NULL PRIMARY KEY,
+   [level] [int] NOT NULL, 
+   
+) ON [PRIMARY];
+
+/**NEW TABLE HERE**/
+CREATE TABLE [dbo].[Users] (
+   [logonName] [varchar] (35) NOT NULL PRIMARY KEY,
+   [password] [varchar] (35) NOT NULL,
+   [userRole] [varchar] (35) NOT NULL, 
+   [firstName] [varchar] (35), 
+   [lastName] [varchar], 
+   [phoneMobile] [varchar], 
+   [phoneWork] [varchar], 
+   [phonePrivate] [varchar], 
+   [eMail] [varchar],
+   [age] [int], 
+   [address] [varchar],
+   [nationalIdentity] [int],
+   [persInfoConsent] [int],
+   [eMailConsent] [int],
+   [phoneConsent] [int]
+) ON [PRIMARY];
+
+/**NEW TABLE HERE**/
 CREATE TABLE [dbo].[Schema] (
 	[schemaID] [int] NOT NULL IDENTITY (1,1) PRIMARY KEY,
 	[logonName] [varchar] (35) NOT NULL,
@@ -69,54 +98,6 @@ CREATE TABLE [dbo].[Schema] (
 
 ) ON [PRIMARY];
 
-CREATE TABLE [dbo].[Users] (
-   [logonName] [varchar] (35) NOT NULL PRIMARY KEY,
-   [password] [varchar] (35) NOT NULL,
-   [userRole] [varchar] (35) NOT NULL, 
-   [firstName] [varchar] (35), 
-   [lastName] [varchar], 
-   [phoneMobile] [varchar], 
-   [phoneWork] [varchar], 
-   [phonePrivate] [varchar], 
-   [eMail] [varchar],
-   [age] [int], 
-   [address] [varchar],
-   [nationalIdentity] [int],
-   [persInfoConsent] [int],
-   [eMailConsent] [int],
-   [phoneConsent] [int]
-) ON [PRIMARY];
-CREATE TABLE [dbo].[Roles] (
-   [userRole] [varchar] (35) NOT NULL PRIMARY KEY,
-   [level] [int] NOT NULL, 
-   
-) ON [PRIMARY];
-CREATE TABLE [dbo].[ExaminationBooking] (
-   [bookingID] [int] NOT NULL IDENTITY (1,1) PRIMARY KEY,
-   [bookingDate] [date] NOT NULL,
-   [logonName] [varchar] (35) NOT NULL
-) ON [PRIMARY];
-GO
-ALTER TABLE [dbo].[ExaminationBooking] WITH NOCHECK ADD 
-CONSTRAINT [FK_ExaminationBooking] FOREIGN KEY([logonName]) REFERENCES [dbo].[Users]
-(
-	[logonName]
-);
-GO
-
-CREATE TABLE [dbo].[DonorBooking] (
-   [bookingID] [int] NOT NULL IDENTITY (1,1) PRIMARY KEY,
-   [bookingDate] [date] NOT NULL,
-   [logonName] [varchar] (35) NOT NULL
-) ON [PRIMARY];
-GO
-ALTER TABLE [dbo].[DonorBooking] WITH NOCHECK ADD 
-CONSTRAINT [FK_DonorBooking] FOREIGN KEY([logonName]) REFERENCES [dbo].[Users]
-(
-	[logonName]
-);
-GO
-
 ALTER TABLE [dbo].[Schema] WITH NOCHECK ADD 
 CONSTRAINT [FK_Schema] FOREIGN KEY([logonName]) REFERENCES [dbo].[Users]
 (
@@ -125,9 +106,62 @@ CONSTRAINT [FK_Schema] FOREIGN KEY([logonName]) REFERENCES [dbo].[Users]
 GO
 
 ALTER TABLE [dbo].[Users] WITH NOCHECK ADD 
-CONSTRAINT [FK_Users] FOREIGN KEY([userRole]) REFERENCES [dbo].[Roles]
+CONSTRAINT [FK_Users_Roles] FOREIGN KEY([userRole]) REFERENCES [dbo].[Roles]
 (
 	[userRole]
+);
+GO
+
+/**NEW TABLE HERE**/
+CREATE TABLE [dbo].[ParkspaceBooking] (
+   [bookingID] [int] NOT NULL IDENTITY (1,1) PRIMARY KEY,
+   [bookingDate] [date] NOT NULL,
+   [parkingSpace] [int] check(parkingSpace >= 1 and parkingSpace <= 10)
+) ON [PRIMARY];
+GO
+/*
+SELECT PB.bookingID, PB.bookingDate, PB.parkingSpace, DB.logonName FROM DonorBooking AS DB JOIN ParkspaceBooking AS PB ON (DB.parkingID=PB.parkingSpace) WHERE DB.logonName=@logonNameParam AND PB.bookingDate=@bookingDateParam
+*/
+/**NEW TABLE HERE**/
+CREATE TABLE [dbo].[ExaminationBooking] (
+   [bookingID] [int] NOT NULL IDENTITY (1,1) PRIMARY KEY,
+   [bookingDate] [date] NOT NULL,
+   [logonName] [varchar] (35) NOT NULL,
+   [parkingID] [int]
+) ON [PRIMARY];
+GO
+ALTER TABLE [dbo].[ExaminationBooking] WITH NOCHECK ADD 
+CONSTRAINT [FK_ToUsers_ExaminatonBooking] FOREIGN KEY([logonName]) REFERENCES [dbo].[Users]
+(
+	[logonName]
+);
+GO
+
+ALTER TABLE [dbo].[ExaminationBooking] WITH NOCHECK ADD 
+CONSTRAINT [FK_ToParkingBooking_ExaminationBooking] FOREIGN KEY([parkingID]) REFERENCES [dbo].[ParkspaceBooking]
+(
+	[bookingID]
+);
+GO
+
+/**NEW TABLE HERE**/
+CREATE TABLE [dbo].[DonorBooking] (
+   [bookingID] [int] NOT NULL IDENTITY (1,1) PRIMARY KEY,
+   [bookingDate] [date] NOT NULL,
+   [logonName] [varchar] (35) NOT NULL,
+   [parkingID] [int]
+) ON [PRIMARY];
+GO
+ALTER TABLE [dbo].[DonorBooking] WITH NOCHECK ADD 
+CONSTRAINT [FK_ToUsers] FOREIGN KEY([logonName]) REFERENCES [dbo].[Users]
+(
+	[logonName]
+);
+GO
+ALTER TABLE [dbo].[DonorBooking] WITH NOCHECK ADD 
+CONSTRAINT [FK_ToParkingBooking_DonorBooking] FOREIGN KEY([parkingID]) REFERENCES [dbo].[ParkspaceBooking]
+(
+	[bookingID]
 );
 GO
 
@@ -136,6 +170,7 @@ INSERT INTO Roles values('Donor', 2);
 INSERT INTO Roles values('Viewer', 3)
 INSERT INTO Users (logonName,password,userRole) values('Admin','2ac9cb7dc02b3c0083eb70898e549b63','Admin');
 GO
+
 /*Hele skjema her:*/
 /*
 Har du fått informasjon om blodgivning?
