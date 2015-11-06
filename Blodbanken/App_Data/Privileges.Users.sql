@@ -127,6 +127,7 @@ CREATE TABLE [dbo].[ExaminationBooking] (
    [bookingID] [int] NOT NULL IDENTITY (1,1) PRIMARY KEY,
    [bookingDate] [date] NOT NULL,
    [logonName] [varchar] (35) NOT NULL,
+   [examinationApproved] [int],
    [parkingID] [int]
 ) ON [PRIMARY];
 GO

@@ -15,22 +15,27 @@ namespace Blodbanken.Controls {
          SystemUser usr = AuthMod.GetUser(CurrentUser);
          bool checkStatus = CheckIfUserOK(usr);
          workflowCreateUser.Attributes["class"] += (checkStatus ? " list-group-item-success" : " list-group-item-danger");
+         if (!checkStatus) errorInfo1.InnerText = "Mangler personopplysninger";
 
          checkStatus = CheckIfPersInfoConsentOK(usr);
          workflowConsent.Attributes["class"] += (checkStatus ? " list-group-item-success" : " list-group-item-danger");
-         errorInfo1.InnerText = "Du har ikke samtykket i lagring av personopplysninger";
+         if(!checkStatus) errorInfo2.InnerText = "Mangler samtykke i lagring av personopplysninger";
 
-         checkStatus = CheckIfUserHasFutureExamnationBookings(usr);
+         checkStatus = CheckIfUserHasFutureExaminationBookings(usr); //Her må det også sjekks om en allerede er utført - sjekk regler
          workflowExamination.Attributes["class"] += (checkStatus ? " list-group-item-success" : " list-group-item-warning");
+         if (!checkStatus) errorInfo3.InnerText = "Helseundersøkelse mangler";
 
          checkStatus = CheckIfUserHasSubmittedSchema(usr);
          workflowSchema.Attributes["class"] += (checkStatus ? " list-group-item-success" : " list-group-item-warning");
+         if (!checkStatus) errorInfo4.InnerText = "Spørreskjema mangler";
 
          checkStatus = CheckIfUserHasBookedkDonorAppointment(usr);
          workflowBookAppointment.Attributes["class"] += (checkStatus ? " list-group-item-success" : " list-group-item-warning");
+         if (!checkStatus) errorInfo5.InnerText = "Donortime mangler";
 
          checkStatus = CheckIfUserHasBookedkParkingAtDonotAppointment(usr);
          workflowBookParking.Attributes["class"] += (checkStatus ? " list-group-item-success" : " list-group-item-warning");
+         if (!checkStatus) errorInfo6.InnerText = "Parkering mangler";
       }
       public bool CheckIfUserOK(SystemUser user) {
          return String.IsNullOrEmpty(user.LogonName) && String.IsNullOrEmpty(user.Password) && String.IsNullOrEmpty(user.PhoneMobile) && String.IsNullOrEmpty(user.FirstName) && String.IsNullOrEmpty(user.LastName) && user.Age > 0;
@@ -38,8 +43,11 @@ namespace Blodbanken.Controls {
       public bool CheckIfPersInfoConsentOK(SystemUser user) {
          return user.PersInfoConsent;
       }
-      public bool CheckIfUserHasFutureExamnationBookings(SystemUser user) {
-         return TimeBookings.GetUserExaminationBookings(user.LogonName).Where(booking => DateTime.Compare(DateTime.Now, booking.BookingDate) <= 0).Count() > 0;
+      public bool CheckIfUserHasFutureExaminationBookings(SystemUser user) {
+         List<ExaminationBooking> exBookings = TimeBookings.GetUserExaminationBookings(user.LogonName);
+         bool hasFutureBookings = exBookings.Where(booking => DateTime.Compare(DateTime.Today, booking.BookingDate) <= 0).Count() > 0;
+         bool hasRecentApprovedExaminations = exBookings.Where(booking => DateTime.Compare(DateTime.Today, booking.BookingDate) <= 0 && booking.ExaminationApproved > 0).Count() > 0;
+         return hasFutureBookings || hasRecentApprovedExaminations;
       }
       public bool CheckIfUserHasSubmittedSchema(SystemUser user) {
          return TimeBookings.GetUserInfoForm(user.LogonName).Count() > 0;

@@ -13,7 +13,7 @@
   <div class="checkbox">
     <label for="chkActiveBookers-1">
       <input type="checkbox" name="chkActiveBookers" id="chkActiveBookers-1" value="2">
-      Undersølelsesbooker
+      Undersøkelsesbooker
     </label>
 	</div>
   <div class="checkbox">

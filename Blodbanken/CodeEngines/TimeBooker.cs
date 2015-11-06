@@ -78,11 +78,12 @@ namespace Blodbanken.CodeEngines {
          // write each record
          while (reader.Read()) {
             DateTime dtResult;
-            int bookingID;
+            int bookingID, examinationApproved = 0;
             Int32.TryParse(reader["bookingID"] != null ? reader["bookingID"].ToString() : String.Empty, out bookingID);
+            Int32.TryParse(reader["examinationApproved"] != null ? reader["examinationApproved"].ToString() : String.Empty, out examinationApproved);
             string readLogonName = reader["logonName"].ToString();
             DateTime.TryParse(reader["bookingDate"] != null ? reader["bookingDate"].ToString() : String.Empty, out dtResult); 
-            if(dtResult != null) bookings.Add(new ExaminationBooking(bookingID, dtResult, readLogonName));
+            if(dtResult != null) bookings.Add(new ExaminationBooking(bookingID, dtResult, readLogonName, examinationApproved));
          }
          cmd.Dispose();
          reader.Close();
@@ -119,12 +120,14 @@ namespace Blodbanken.CodeEngines {
    }
    public class ExaminationBooking {
       public int BookingID { get; set; }
+      public int ExaminationApproved { get; set; }
       public string LogonName { get; set; }
       public DateTime BookingDate { get; set; }
-      public ExaminationBooking(int bookingID, DateTime bookingDate, string logonName) {
+      public ExaminationBooking(int bookingID, DateTime bookingDate, string logonName, int examinationApproved) {
          this.BookingID = bookingID;
          this.BookingDate = bookingDate;
          this.LogonName = logonName;
+         this.ExaminationApproved = examinationApproved;
       }
    }
    public class DonorBooking {

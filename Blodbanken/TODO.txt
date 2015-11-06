@@ -1,6 +1,7 @@
 ﻿Fortsette gui opprettelse
-Skriv ferdig workflow sjekken
-Link til workflow sidene fra workfloww lista
 Fullfør workflow sidene
-Ha med melding om hva som feiler i workflow sjekken
+	Man må ha godkjent laging av personopplysninger for å kunne lagre personopplysninger
+	Man må fylle inn skjema før man kan booke helseundersøkelse.
+	Man må ha en godkjent helseundersøkelse innen de siste 30 dagene for å kunne booke donor time
 Helseundersøkelsessjekken skal ta hensyn til om en allerede er utført.
+examinationApproved må kunne fylles inn via gui

@@ -111,7 +111,8 @@
     <Content Include="WorkflowItems\BookParking.aspx" />
     <Content Include="WorkflowItems\BookTime.aspx" />
     <Content Include="WorkflowItems\PersInfoConsent.aspx" />
-    <Content Include="WorkflowItems\UserDeclaration.aspx" />
+    <Content Include="WorkflowItems\PersInfoPage.aspx" />
+    <Content Include="WorkflowItems\QuestionForm.aspx" />
     <Content Include="Master.Master" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <None Include="Web.Debug.config">
@@ -271,12 +272,19 @@
     <Compile Include="WorkflowItems\PersInfoConsent.aspx.designer.cs">
       <DependentUpon>PersInfoConsent.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WorkflowItems\UserDeclaration.aspx.cs">
-      <DependentUpon>UserDeclaration.aspx</DependentUpon>
+    <Compile Include="WorkflowItems\PersInfoPage.aspx.cs">
+      <DependentUpon>PersInfoPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WorkflowItems\UserDeclaration.aspx.designer.cs">
-      <DependentUpon>UserDeclaration.aspx</DependentUpon>
+    <Compile Include="WorkflowItems\PersInfoPage.aspx.designer.cs">
+      <DependentUpon>PersInfoPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WorkflowItems\QuestionForm.aspx.cs">
+      <DependentUpon>QuestionForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WorkflowItems\QuestionForm.aspx.designer.cs">
+      <DependentUpon>QuestionForm.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup />
