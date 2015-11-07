@@ -72,7 +72,7 @@ namespace Blodbanken.CodeEngines {
 
          SqlCommand cmd = new SqlCommand("SELECT bookingID, bookingDate, logonName from ExaminationBooking where logonName=@logonNameParam", conn);
          cmd.Parameters.Add("@logonNameParam", SqlDbType.VarChar, 35);
-         cmd.Parameters["@logonNameParam"].Value = logonName;
+         cmd.Parameters["@logonNameParam"].Value = String.IsNullOrEmpty(logonName) ? "UNKNOWN" : logonName;
          var reader = cmd.ExecuteReader();
 
          // write each record
@@ -97,7 +97,7 @@ namespace Blodbanken.CodeEngines {
 
          SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.[Schema] WHERE logonName=@logonNameParam", conn);
          cmd.Parameters.Add("@logonNameParam", SqlDbType.VarChar, 35);
-         cmd.Parameters["@logonNameParam"].Value = logonName;
+         cmd.Parameters["@logonNameParam"].Value = String.IsNullOrEmpty(logonName) ? "UNKNOWN" : logonName;
          var reader = cmd.ExecuteReader();
          List<string> columns = Enumerable.Range(0, reader.FieldCount).Select(reader.GetName).ToList();
          columns.Sort();

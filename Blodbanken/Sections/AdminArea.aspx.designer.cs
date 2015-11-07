@@ -31,22 +31,40 @@ namespace Blodbanken.Sections {
         protected global::Blodbanken.Controls.UserCreatorFormControl UserCreatorForm;
         
         /// <summary>
-        /// selectChangeUser control.
+        /// selectChangeUser1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect selectChangeUser;
+        protected global::System.Web.UI.WebControls.DropDownList selectChangeUser1;
         
         /// <summary>
-        /// selectEditUser control.
+        /// changeUserPlaceHolder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect selectEditUser;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl changeUserPlaceHolder;
+        
+        /// <summary>
+        /// selectEditUser1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList selectEditUser1;
+        
+        /// <summary>
+        /// editUserPlaceHolder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl editUserPlaceHolder;
         
         /// <summary>
         /// ExaminationBooking control.
@@ -85,31 +103,49 @@ namespace Blodbanken.Sections {
         protected global::Blodbanken.Controls.AutoBookerSettingsControl AutoBookerSettings;
         
         /// <summary>
-        /// selectUserForSchemaEdit1 control.
+        /// selectUserForSchemaEdit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect selectUserForSchemaEdit1;
+        protected global::System.Web.UI.WebControls.DropDownList selectUserForSchemaEdit;
         
         /// <summary>
-        /// selectUserForConsentEdit1 control.
+        /// SchemaEditPlaceHolder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect selectUserForConsentEdit1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl SchemaEditPlaceHolder;
         
         /// <summary>
-        /// selectUserForWorkflowEdit1 control.
+        /// selectUserForConsentEdit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect selectUserForWorkflowEdit1;
+        protected global::System.Web.UI.WebControls.DropDownList selectUserForConsentEdit;
+        
+        /// <summary>
+        /// consentEditPlaceHolder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl consentEditPlaceHolder;
+        
+        /// <summary>
+        /// selectUserForWorkflowEdit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList selectUserForWorkflowEdit;
         
         /// <summary>
         /// workflowPlaceHolder control.
@@ -119,5 +155,23 @@ namespace Blodbanken.Sections {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl workflowPlaceHolder;
+        
+        /// <summary>
+        /// selectUserForExminationAccept control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList selectUserForExminationAccept;
+        
+        /// <summary>
+        /// workflowExaminationAcceptPlaceHolder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl workflowExaminationAcceptPlaceHolder;
     }
 }

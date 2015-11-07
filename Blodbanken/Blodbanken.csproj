@@ -81,6 +81,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\customStyles.css" />
     <Content Include="Controls\AutoBookerSettingsControl.ascx" />
+    <Content Include="Controls\ConsentEditControl.ascx" />
+    <Content Include="Controls\ExaminationAcceptControl.ascx" />
     <Content Include="Controls\ParkingBookingControl1.ascx" />
     <Content Include="Controls\BookingControl2.ascx" />
     <Content Include="Controls\BookingControl1.ascx" />
@@ -137,6 +139,20 @@
     </Compile>
     <Compile Include="Controls\AutoBookerSettingsControl.ascx.designer.cs">
       <DependentUpon>AutoBookerSettingsControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ConsentEditControl.ascx.cs">
+      <DependentUpon>ConsentEditControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ConsentEditControl.ascx.designer.cs">
+      <DependentUpon>ConsentEditControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ExaminationAcceptControl.ascx.cs">
+      <DependentUpon>ExaminationAcceptControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ExaminationAcceptControl.ascx.designer.cs">
+      <DependentUpon>ExaminationAcceptControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\ParkingBookingControl1.ascx.cs">
       <DependentUpon>ParkingBookingControl1.ascx</DependentUpon>

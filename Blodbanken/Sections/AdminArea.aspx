@@ -33,12 +33,16 @@
                                 <fieldset>
                                     <!-- Select Basic -->
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label" for="selectChangeUser">Velg bruker</label>
+                                        <label class="col-md-4 control-label" for="selectChangeUser1">Velg bruker</label>
                                         <div class="col-md-4">
-                                            <select id="selectChangeUser" name="selectChangeUser" class="form-control" runat="server">
-                                                <option value="1">Option one</option>
-                                                <option value="2">Option two</option>
-                                            </select>
+                                            <asp:DropDownList id="selectChangeUser1" name="selectChangeUser1" class="form-control" runat="server" AutoPostBack="True">
+
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12" id="changeUserPlaceHolder" runat="server">
+                                            <!-- mangler -->
                                         </div>
                                     </div>
                                 </fieldset>
@@ -50,12 +54,16 @@
                                 <fieldset>
                                     <!-- Select Basic -->
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label" for="selectEditUser">Velg bruker</label>
+                                        <label class="col-md-4 control-label" for="selectEditUser1">Velg bruker</label>
                                         <div class="col-md-4">
-                                            <select id="selectEditUser" name="select" class="form-control" runat="server">
-                                                <option value="1">Option one</option>
-                                                <option value="2">Option two</option>
-                                            </select>
+                                            <asp:DropDownList id="selectEditUser1" name="select" class="form-control" runat="server" AutoPostBack="True">
+
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12" id="editUserPlaceHolder" runat="server">
+                                            <!-- mangler -->
                                         </div>
                                     </div>
                                 </fieldset>
@@ -105,12 +113,16 @@
                                  <fieldset>
                                     <!-- Select Basic -->
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label" for="selectUserForSchemaEdit1">Velg bruker</label>
+                                        <label class="col-md-4 control-label" for="selectUserForSchemaEdit">Velg bruker</label>
                                         <div class="col-md-4">
-                                            <select id="selectUserForSchemaEdit1" name="selectUserForSchemaEdit1" class="form-control" runat="server">
-                                                <option value="1">Option one</option>
-                                                <option value="2">Option two</option>
-                                            </select>
+                                            <asp:DropDownList id="selectUserForSchemaEdit" name="selectUserForSchemaEdit" class="form-control" runat="server" AutoPostBack="True">
+
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12" id="SchemaEditPlaceHolder" runat="server">
+                                            <!-- mangler -->
                                         </div>
                                     </div>
                                 </fieldset>
@@ -122,12 +134,16 @@
                                 <fieldset>
                                     <!-- Select Basic -->
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label" for="selectUserForConsentEdit1">Velg bruker</label>
+                                        <label class="col-md-4 control-label" for="selectUserForConsentEdit">Velg bruker</label>
                                         <div class="col-md-4">
-                                            <select id="selectUserForConsentEdit1" name="selectUserForConsentEdit1" class="form-control" runat="server">
-                                                <option value="1">Option one</option>
-                                                <option value="2">Option two</option>
-                                            </select>
+                                            <asp:DropDownList id="selectUserForConsentEdit" name="selectUserForConsentEdit" class="form-control" runat="server" AutoPostBack="True">
+          
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12" id="consentEditPlaceHolder" runat="server">
+
                                         </div>
                                     </div>
                                 </fieldset>
@@ -139,16 +155,36 @@
                                 <fieldset>
                                     <!-- Select Basic -->
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label" for="selectUserForWorkflowEdit1">Velg bruker</label>
+                                        <label class="col-md-4 control-label" for="selectUserForWorkflowEdit">Velg bruker</label>
                                         <div class="col-md-4">
-                                            <select id="selectUserForWorkflowEdit1" name="selectUserForWorkflowEdit1" class="form-control" runat="server">
-                                                <option value="1">Option one</option>
-                                                <option value="2">Option two</option>
-                                            </select>
+                                            <asp:DropDownList id="selectUserForWorkflowEdit" name="selectUserForWorkflowEdit" class="form-control" runat="server"  AutoPostBack="True">
+
+                                            </asp:DropDownList>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-12" id="workflowPlaceHolder" runat="server">
+
+                                        </div>
+                                    </div>
+                                </fieldset>
+                              </div>
+                            </div>
+                            <a href="#itemExminationAccept" id="headingExminationAccept" class="list-group-item collapsed list-group-item-header" data-toggle="collapse" data-parent="#lstgrpDiverseEditor" aria-expanded="false" aria-controls="itemWorkflowEdit">Helseundersøkelser</a>
+                            <div id="itemExminationAccept" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingExminationAccept">
+                              <div class="well well-sm well-custom">
+                                <fieldset>
+                                    <!-- Select Basic -->
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="selectUserForExminationAccept1">Velg bruker</label>
+                                        <div class="col-md-4">
+                                            <asp:DropDownList ID="selectUserForExminationAccept" class="form-control" runat="server" AutoPostBack="True">
+
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12" id="workflowExaminationAcceptPlaceHolder" runat="server">
                                         </div>
                                     </div>
                                 </fieldset>

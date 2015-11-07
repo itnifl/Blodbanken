@@ -46,7 +46,7 @@ namespace Blodbanken.Controls {
       public bool CheckIfUserHasFutureExaminationBookings(SystemUser user) {
          List<ExaminationBooking> exBookings = TimeBookings.GetUserExaminationBookings(user.LogonName);
          bool hasFutureBookings = exBookings.Where(booking => DateTime.Compare(DateTime.Today, booking.BookingDate) <= 0).Count() > 0;
-         bool hasRecentApprovedExaminations = exBookings.Where(booking => DateTime.Compare(DateTime.Today, booking.BookingDate) <= 0 && booking.ExaminationApproved > 0).Count() > 0;
+         bool hasRecentApprovedExaminations = exBookings.Where(booking => DateTime.Compare(DateTime.Today.AddDays(-30), booking.BookingDate) <= 0 && booking.ExaminationApproved > 0).Count() > 0;
          return hasFutureBookings || hasRecentApprovedExaminations;
       }
       public bool CheckIfUserHasSubmittedSchema(SystemUser user) {

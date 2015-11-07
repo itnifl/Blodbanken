@@ -12,16 +12,29 @@ namespace Blodbanken.Sections {
       AuthenticatonModule AuthMod = new AuthenticatonModule();
       protected void Page_Load(object sender, EventArgs e) {
          List<SystemUser> users = AuthMod.GetAllUsers();
-         System.Web.UI.HtmlControls.HtmlSelect[] selectArray = { selectChangeUser , selectEditUser, selectUserForSchemaEdit1, selectUserForConsentEdit1, selectUserForWorkflowEdit1 };
-         foreach (System.Web.UI.HtmlControls.HtmlSelect select in selectArray) {
+
+         DropDownList[] selectArray = { selectChangeUser1 , selectEditUser1, selectUserForSchemaEdit, selectUserForConsentEdit, selectUserForWorkflowEdit, selectUserForExminationAccept };
+         foreach (DropDownList select in selectArray) {
             select.Items.Clear();
             users.Where(usr => !String.IsNullOrEmpty(usr.FirstName) && !String.IsNullOrEmpty(usr.LastName)).ToList().ForEach(user => select.Items.Add(new ListItem(user.FirstName + " " + user.LastName, user.LogonName)));
             users.Where(usr => String.IsNullOrEmpty(usr.FirstName) && String.IsNullOrEmpty(usr.LastName)).ToList().ForEach(user => select.Items.Add(new ListItem(user.LogonName, user.LogonName)));
          }
+
+         //Dynamically add UserControls to page where needed:
          WorkFlowControl workFlowCtrl = (WorkFlowControl)Page.LoadControl("~/Controls/WorkFlowControl.ascx");
-         //HttpContext.Current.User.Identity.Name
-         workFlowCtrl.CurrentUser = this.selectUserForWorkflowEdit1.Value;
+         workFlowCtrl.CurrentUser = this.selectUserForWorkflowEdit.SelectedValue;
          this.workflowPlaceHolder.Controls.Add(workFlowCtrl);
+
+         if (selectUserForExminationAccept.SelectedItem != null) {
+            ExaminationAcceptControl selectUserForExminationAcceptCtrl = (ExaminationAcceptControl)Page.LoadControl("~/Controls/ExaminationAcceptControl.ascx");
+            selectUserForExminationAcceptCtrl.CurrentUser = this.selectUserForWorkflowEdit.SelectedValue;
+            this.workflowExaminationAcceptPlaceHolder.Controls.Add(selectUserForExminationAcceptCtrl);
+         }
+         if (selectUserForConsentEdit.SelectedItem != null) {
+            ConsentEditControl selectUserForConsentEditCtrl = (ConsentEditControl)Page.LoadControl("~/Controls/ConsentEditControl.ascx");
+            selectUserForConsentEditCtrl.CurrentUser = this.selectUserForConsentEdit.SelectedValue;
+            this.consentEditPlaceHolder.Controls.Add(selectUserForConsentEditCtrl);
+         }
       }
    }
 }

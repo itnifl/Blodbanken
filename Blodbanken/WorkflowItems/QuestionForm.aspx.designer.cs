@@ -11,5 +11,23 @@ namespace Blodbanken.WorkflowItems {
     
     
     public partial class QuestionForm {
+        
+        /// <summary>
+        /// frmHealthDeclaration control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm frmHealthDeclaration;
+        
+        /// <summary>
+        /// btnSubmitForm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSubmitForm;
     }
 }

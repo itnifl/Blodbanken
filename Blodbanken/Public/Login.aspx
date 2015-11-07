@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Blodbanken.Public.Login" MasterPageFile="~/Master.master" Title="Blodbanken"%>
 <asp:Content ID="MainPage" ContentPlaceHolderID="MainPage" Runat="Server">
-      <div class="well topPlacement" style="margin-left:100px;margin-right:100px;padding-top:0px;padding-bottom:0px;">
+    <div class="well topPlacement" style="margin-left:100px;margin-right:100px;padding-top:0px;padding-bottom:0px;">
       <h1 style="margin-top:10px;">Login</h1>
     </div>
     <div class="jumbotron" style="margin-left:auto;margin-right:auto;width:400px;padding:20px;">
