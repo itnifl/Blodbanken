@@ -13,7 +13,7 @@ namespace Blodbanken.Sections {
       protected void Page_Load(object sender, EventArgs e) {
          List<SystemUser> users = AuthMod.GetAllUsers();
 
-         DropDownList[] selectArray = { selectChangeUser1 , selectEditUser1, selectUserForSchemaEdit, selectUserForConsentEdit, selectUserForWorkflowEdit, selectUserForExminationAccept };
+         DropDownList[] selectArray = { selectChangeUser1 , selectDeleteUser1, selectUserForSchemaEdit, selectUserForConsentEdit, selectUserForWorkflowEdit, selectUserForExminationAccept };
          foreach (DropDownList select in selectArray) {
             select.Items.Clear();
             users.Where(usr => !String.IsNullOrEmpty(usr.FirstName) && !String.IsNullOrEmpty(usr.LastName)).ToList().ForEach(user => select.Items.Add(new ListItem(user.FirstName + " " + user.LastName, user.LogonName)));
@@ -35,6 +35,22 @@ namespace Blodbanken.Sections {
             selectUserForConsentEditCtrl.CurrentUser = this.selectUserForConsentEdit.SelectedValue;
             this.consentEditPlaceHolder.Controls.Add(selectUserForConsentEditCtrl);
          }
+         if (selectUserForSchemaEdit.SelectedItem != null) {
+            UserEditControl selectChangeUser1Ctrl = (UserEditControl)Page.LoadControl("~/Controls/UserEditControl.ascx");
+            selectChangeUser1Ctrl.CurrentUser = this.selectChangeUser1.SelectedValue;
+            changeUserPlaceHolder.Controls.Add(selectChangeUser1Ctrl);
+         }
+         if (selectDeleteUser1.SelectedItem != null) {
+            UserDeleteControl selectDeleteUser1Ctrl = (UserDeleteControl)Page.LoadControl("~/Controls/UserDeleteControl.ascx");
+            selectDeleteUser1Ctrl.CurrentUser = this.selectDeleteUser1.SelectedValue;
+            deleteUserPlaceHolder.Controls.Add(selectDeleteUser1Ctrl);
+         }
+         if (selectUserForSchemaEdit.SelectedItem != null) {
+            UserSchemaControl selectUserForSchemaEditCtrl = (UserSchemaControl)Page.LoadControl("~/Controls/UserSchemaControl.ascx");
+            selectUserForSchemaEditCtrl.CurrentUser = this.selectDeleteUser1.SelectedValue;
+            SchemaEditPlaceHolder.Controls.Add(selectUserForSchemaEditCtrl);
+         }
+
       }
    }
 }

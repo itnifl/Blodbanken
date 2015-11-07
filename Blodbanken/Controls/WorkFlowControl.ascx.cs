@@ -10,6 +10,7 @@ namespace Blodbanken.Controls {
    public partial class WorkFlowControl : System.Web.UI.UserControl {
       AuthenticatonModule AuthMod = new AuthenticatonModule();
       TimeBooker TimeBookings = new TimeBooker();
+      FormModule FormMaster = new FormModule();
       public string CurrentUser { get; set; }
       protected void Page_Load(object sender, EventArgs e) {
          SystemUser usr = AuthMod.GetUser(CurrentUser);
@@ -50,7 +51,7 @@ namespace Blodbanken.Controls {
          return hasFutureBookings || hasRecentApprovedExaminations;
       }
       public bool CheckIfUserHasSubmittedSchema(SystemUser user) {
-         return TimeBookings.GetUserInfoForm(user.LogonName).Count() > 0;
+         return FormMaster.GetUserInfoForm(user.LogonName).Count() > 0;
       }
       public bool CheckIfUserHasBookedkDonorAppointment(SystemUser user) {
          return TimeBookings.GetUserDonorBookings(user.LogonName).Where(booking => DateTime.Compare(DateTime.Now, booking.BookingDate) <= 0).Count() > 0;

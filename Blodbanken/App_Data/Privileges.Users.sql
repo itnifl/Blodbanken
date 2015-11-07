@@ -28,7 +28,7 @@ CREATE TABLE [dbo].[Users] (
    [eMail] [varchar],
    [age] [int], 
    [address] [varchar],
-   [nationalIdentity] [int],
+   [nationalIdentity] [int], /* Her har vi fødselsnummeret */
    [persInfoConsent] [int],
    [eMailConsent] [int],
    [phoneConsent] [int]

@@ -49,22 +49,22 @@ namespace Blodbanken.Sections {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl changeUserPlaceHolder;
         
         /// <summary>
-        /// selectEditUser1 control.
+        /// selectDeleteUser1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList selectEditUser1;
+        protected global::System.Web.UI.WebControls.DropDownList selectDeleteUser1;
         
         /// <summary>
-        /// editUserPlaceHolder control.
+        /// deleteUserPlaceHolder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl editUserPlaceHolder;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl deleteUserPlaceHolder;
         
         /// <summary>
         /// ExaminationBooking control.

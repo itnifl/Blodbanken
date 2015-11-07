@@ -42,7 +42,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-12" id="changeUserPlaceHolder" runat="server">
-                                            <!-- mangler -->
+
                                         </div>
                                     </div>
                                 </fieldset>
@@ -54,16 +54,16 @@
                                 <fieldset>
                                     <!-- Select Basic -->
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label" for="selectEditUser1">Velg bruker</label>
+                                        <label class="col-md-4 control-label" for="selectDeleteUser1">Velg bruker</label>
                                         <div class="col-md-4">
-                                            <asp:DropDownList id="selectEditUser1" name="select" class="form-control" runat="server" AutoPostBack="True">
+                                            <asp:DropDownList id="selectDeleteUser1" name="select" class="form-control" runat="server" AutoPostBack="True">
 
                                             </asp:DropDownList>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-md-12" id="editUserPlaceHolder" runat="server">
-                                            <!-- mangler -->
+                                        <div class="col-md-12" id="deleteUserPlaceHolder" runat="server">
+
                                         </div>
                                     </div>
                                 </fieldset>

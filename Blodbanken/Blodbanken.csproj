@@ -88,6 +88,9 @@
     <Content Include="Controls\BookingControl1.ascx" />
     <Content Include="Controls\LoggedInUserControl.ascx" />
     <Content Include="Controls\UserCreatorFormControl.ascx" />
+    <Content Include="Controls\UserDeleteControl.ascx" />
+    <Content Include="Controls\UserEditControl.ascx" />
+    <Content Include="Controls\UserSchemaControl.ascx" />
     <Content Include="Controls\WorkFlowControl.ascx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Public\About.aspx" />
@@ -132,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeEngines\AuthenticatonModule.cs" />
+    <Compile Include="CodeEngines\FormModule.cs" />
     <Compile Include="CodeEngines\TimeBooker.cs" />
     <Compile Include="Controls\AutoBookerSettingsControl.ascx.cs">
       <DependentUpon>AutoBookerSettingsControl.ascx</DependentUpon>
@@ -188,6 +192,27 @@
     </Compile>
     <Compile Include="Controls\UserCreatorFormControl.ascx.designer.cs">
       <DependentUpon>UserCreatorFormControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UserDeleteControl.ascx.cs">
+      <DependentUpon>UserDeleteControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\UserDeleteControl.ascx.designer.cs">
+      <DependentUpon>UserDeleteControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UserEditControl.ascx.cs">
+      <DependentUpon>UserEditControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\UserEditControl.ascx.designer.cs">
+      <DependentUpon>UserEditControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UserSchemaControl.ascx.cs">
+      <DependentUpon>UserSchemaControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\UserSchemaControl.ascx.designer.cs">
+      <DependentUpon>UserSchemaControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\WorkFlowControl.ascx.cs">
       <DependentUpon>WorkFlowControl.ascx</DependentUpon>

@@ -7,8 +7,9 @@ using System.Web.UI.WebControls;
 
 namespace Blodbanken.Controls {
    public partial class UserCreatorFormControl : System.Web.UI.UserControl {
+      public string CurrentUser { get; set; }
       protected void Page_Load(object sender, EventArgs e) {
-
+         
       }
    }
 }
