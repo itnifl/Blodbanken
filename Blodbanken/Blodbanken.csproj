@@ -130,7 +130,7 @@
   <ItemGroup>
     <Content Include="Sections\AdminArea.aspx" />
     <Content Include="Sections\UserArea.aspx" />
-    <Content Include="Sections\UserCreator.aspx" />
+    <Content Include="Public\UserCreator.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -278,11 +278,11 @@
     <Compile Include="Sections\UserArea.aspx.designer.cs">
       <DependentUpon>UserArea.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Sections\UserCreator.aspx.cs">
+    <Compile Include="Public\UserCreator.aspx.cs">
       <DependentUpon>UserCreator.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Sections\UserCreator.aspx.designer.cs">
+    <Compile Include="Public\UserCreator.aspx.designer.cs">
       <DependentUpon>UserCreator.aspx</DependentUpon>
     </Compile>
     <Compile Include="WorkflowItems\BookMedicalExamination.aspx.cs">

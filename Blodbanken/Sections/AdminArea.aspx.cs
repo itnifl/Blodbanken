@@ -35,7 +35,7 @@ namespace Blodbanken.Sections {
             selectUserForConsentEditCtrl.CurrentUser = this.selectUserForConsentEdit.SelectedValue;
             this.consentEditPlaceHolder.Controls.Add(selectUserForConsentEditCtrl);
          }
-         if (selectUserForSchemaEdit.SelectedItem != null) {
+         if (selectChangeUser1.SelectedItem != null) {
             UserEditControl selectChangeUser1Ctrl = (UserEditControl)Page.LoadControl("~/Controls/UserEditControl.ascx");
             selectChangeUser1Ctrl.CurrentUser = this.selectChangeUser1.SelectedValue;
             changeUserPlaceHolder.Controls.Add(selectChangeUser1Ctrl);
@@ -50,7 +50,6 @@ namespace Blodbanken.Sections {
             selectUserForSchemaEditCtrl.CurrentUser = this.selectDeleteUser1.SelectedValue;
             SchemaEditPlaceHolder.Controls.Add(selectUserForSchemaEditCtrl);
          }
-
       }
    }
 }

@@ -18,7 +18,8 @@
                 <asp:checkbox type="checkbox" value="remember-me" runat="server" ID="chkRememberMe"/> Husk meg
               </label>
             </div>        
-            <asp:button class="btn btn-lg btn-primary btn-block" type="submit" id="btnLogon" runat="server" Text="Logg På" OnClick="btnLogon_Click"/>        
+            <asp:button class="btn btn-lg btn-primary btn-block" type="submit" id="btnLogon" runat="server" Text="Logg På" OnClick="btnLogon_Click"/> 
+            <a href="/Public/UserCreator.aspx">Har du ikke bruker?</a>   
         </form>               
     </div>
 </asp:Content>

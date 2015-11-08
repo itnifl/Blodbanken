@@ -25,7 +25,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li id="lstAdminLink" runat="server"><a href="/Sections/AdminArea.aspx">Kontroll Panel</a></li>
-                <li id="lstWelcome" runat="server"><a href="#">Velkommen <asp:label runat="server" ID="lblLoggedInUsername" />!</a></li>
+                <li id="lstWelcome" runat="server"><a href="/Sections/UserArea.aspx">Velkommen <asp:label runat="server" ID="lblLoggedInUsername" />!</a></li>
                 <li id="lstLogOff" runat="server"><a href="#" id="btnLogoff">Logg av</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
@@ -34,7 +34,7 @@
 <script type="text/javascript">
     var pathname = window.location.pathname;
     if (pathname == "/Public/Index.aspx") {
-        $('#HomeLink').addClass('/Public/active');
+        $('#HomeLink').addClass('active');
     } else if (pathname == "/Public/About.aspx") {
         $('#AboutLink').addClass('active');
     } else if (pathname == "/Public/News.aspx") {
