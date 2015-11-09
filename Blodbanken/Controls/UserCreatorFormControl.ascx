@@ -22,7 +22,7 @@
     <div class="form-group">
         <label class="col-md-4 control-label" for="selectRole">Role</label>
         <div class="col-md-4">
-        <select id="selectRole" name="selectRole" class="form-control">
+        <select id="selectRole" name="selectRole" class="form-control" runat="server">
             <option value="1">Admin</option>
             <option value="2">Donor</option>
             <option value="3">Viewer</option>

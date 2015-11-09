@@ -11,5 +11,23 @@ namespace Blodbanken.WorkflowItems {
     
     
     public partial class BookMedicalExamination {
+        
+        /// <summary>
+        /// frmBookMedicalExamination control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm frmBookMedicalExamination;
+        
+        /// <summary>
+        /// ExaminationBookingForm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Blodbanken.Controls.BookingControl1 ExaminationBookingForm;
     }
 }

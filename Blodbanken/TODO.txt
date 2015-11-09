@@ -1,9 +1,12 @@
-﻿Fortsette gui opprettelse
-Fullfør workflow sidene
-	Man må ha godkjent laging av personopplysninger for å kunne lagre personopplysninger
+﻿Fullfør workflow sidene
+	Man må ha godkjent lagring av personopplysninger for å kunne lagre personopplysninger
 	Man må fylle inn skjema før man kan booke helseundersøkelse.
 	Man må ha en godkjent helseundersøkelse innen de siste 30 dagene for å kunne booke donor time
+	Workflow sidene må linke til neste steg i kjeden.
 Helseundesøkeelses skjema må kunne disable radio knapper som ikke berører brukers kjønn
-I ~/Controls/UserCreatorFormControl.ascx skal man ikke kunne velge å lage admin bruker med mindre man er admin
-Legg til input sjekk der det skal være
 
+Legg til input sjekk der det skal være
+last ned jquery ui lokalt og bytt ut alle eksterne referanser til intern.
+
+BookingControl1 og BookingControl2, bytt CurrentUser ved endring av select
+ParkBookingControl må ta i bruk CurrentUser

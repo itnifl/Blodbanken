@@ -11,5 +11,23 @@ namespace Blodbanken.WorkflowItems {
     
     
     public partial class PersInfoConsent {
+        
+        /// <summary>
+        /// frmPersinfoConsent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm frmPersinfoConsent;
+        
+        /// <summary>
+        /// ConsentEditForm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Blodbanken.Controls.ConsentEditControl ConsentEditForm;
     }
 }

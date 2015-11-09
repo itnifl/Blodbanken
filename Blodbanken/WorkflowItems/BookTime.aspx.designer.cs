@@ -11,5 +11,23 @@ namespace Blodbanken.WorkflowItems {
     
     
     public partial class BookTime {
+        
+        /// <summary>
+        /// frmBookDonorTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm frmBookDonorTime;
+        
+        /// <summary>
+        /// BloodDonorForm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Blodbanken.Controls.BookingControl2 BloodDonorForm;
     }
 }
