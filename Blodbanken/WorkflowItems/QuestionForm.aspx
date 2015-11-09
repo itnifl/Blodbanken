@@ -3,6 +3,7 @@
     <div class="well topPlacement" style="margin-left:100px;margin-right:100px;padding-top:0px;padding-bottom:0px;">
       <h1 style="margin-top:10px;">Login</h1>
     </div>
+    <a href="/WorkflowItems/BookTime.aspx" class="pull-right" style="padding-top:5px;padding-right:110px;">Next -></a>
     <div class="jumbotron" style="margin-left:auto;margin-right:auto;width:950px;padding:20px;">  
         <h2 style="margin-left:150px;margin-right:auto;margin-top:10px;">Spørreskjema for helseundersøkelse</h2>    
         <br/>  
@@ -657,11 +658,11 @@
                 <label class="col-md-10 control-label" for="radios">Besvares av kvinner - Er du gravid?</label>
                 <div class="col-md-2"> 
                 <label class="radio-inline" for="radios-47a">
-                    <input type="radio" name="radios" id="radios-47a" value="1" />
+                    <input type="radio" name="radios" id="radios47a" value="1" runat="server"/>
                     Ja
                 </label> 
                 <label class="radio-inline" for="radios-47b">
-                    <input type="radio" name="radios" id="radios-47b" value="0" />
+                    <input type="radio" name="radios" id="radios47b" value="0" runat="server"/>
                     Nei
                 </label>
                 </div>
@@ -671,11 +672,11 @@
                 <label class="col-md-10 control-label" for="radios">Besvares av kvinner - Har du vært gravid i løpet av de siste tolv måneder, eller ammer du nå?</label>
                 <div class="col-md-2"> 
                 <label class="radio-inline" for="radios-48a">
-                    <input type="radio" name="radios" id="radios-48a" value="1" />
+                    <input type="radio" name="radios" id="radios48a" value="1" runat="server"/>
                     Ja
                 </label> 
                 <label class="radio-inline" for="radios-48b">
-                    <input type="radio" name="radios" id="radios-48b" value="0" />
+                    <input type="radio" name="radios" id="radios48b" value="0" runat="server"/>
                     Nei
                 </label>
                 </div>
@@ -685,11 +686,11 @@
                 <label class="col-md-10 control-label" for="radios">Besvares av kvinner - Hvis du har gitt blod tidligere, har du vært gravid siden forrige blodgivning?</label>
                 <div class="col-md-2"> 
                 <label class="radio-inline" for="radios-49a">
-                    <input type="radio" name="radios" id="radios-49a" value="1" />
+                    <input type="radio" name="radios" id="radios49a" value="1" runat="server"/>
                     Ja
                 </label> 
                 <label class="radio-inline" for="radios-49b">
-                    <input type="radio" name="radios" id="radios-49b" value="0" />
+                    <input type="radio" name="radios" id="radios49b" value="0" runat="server"/>
                     Nei
                 </label>              
                 </div>
@@ -699,11 +700,11 @@
                 <label class="col-md-10 control-label" for="radios">Besvares av kvinner - Har du i løpet av de siste seks måneder hatt seksuell kontakt med en mann som du vet har hatt seksuell kontakt med andre menn?</label>
                 <div class="col-md-2"> 
                 <label class="radio-inline" for="radios-50a">
-                    <input type="radio" name="radios" id="radios-50a" value="1" />
+                    <input type="radio" name="radios" id="radios50a" value="1" runat="server"/>
                     Ja
                 </label> 
                 <label class="radio-inline" for="radios-50b">
-                    <input type="radio" name="radios" id="radios-50b" value="0" />
+                    <input type="radio" name="radios" id="radios50b" value="0" runat="server"/>
                     Nei
                 </label>
                 </div>
@@ -712,12 +713,12 @@
             <div class="form-group">
                 <label class="col-md-10 control-label" for="radios">Besvares av menn - Har eller har du hatt seksuell kontakt med andre menn?</label>
                 <div class="col-md-2"> 
-                <label class="radio-inline" for="radios-51a">
-                    <input type="radio" name="radios" id="radios-51a" value="1" />
+                <label class="radio-inline" for="radios51a">
+                    <input type="radio" name="radios" id="radios51a" value="1" runat="server"/>
                     Ja
                 </label> 
                 <label class="radio-inline" for="radios-51b">
-                    <input type="radio" name="radios" id="radios-51b" value="0" />
+                    <input type="radio" name="radios" id="radios51b" value="0" runat="server"/>
                     Nei
                 </label>             
                 </div>

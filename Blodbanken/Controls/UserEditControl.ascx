@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UserEditControl.ascx.cs" Inherits="Blodbanken.Controls.UserEditControl" %>
 <div class="panel panel-default panel-nested">
-    <div class="panel-heading" id="infoPanelEditUserHeader" style="font-weight:bold;" runat="server">Endre brukeropplysninger for </div>
+    <div class="panel-heading" id="infoPanelEditUserHeader" style="font-weight:bold;" runat="server">Endre brukeropplysninger for</div>
     <div class="panel-body">
         <form class="form-horizontal">
             <fieldset>
@@ -9,6 +9,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="txtFirstname">Fornavn</label>  
               <div class="col-md-4">
+              <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtFirstname" style="color:red;" ErrorMessage="<b>* Feltet må fylles inn</b>" />
               <input runat="server" id="txtFirstname" name="txtFirstname" type="text" placeholder="Fornavn" class="form-control input-md">
     
               </div>
@@ -18,6 +19,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="txtLastName">Etternavn</label>  
               <div class="col-md-4">
+              <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtLastName" style="color:red;" ErrorMessage="<b>* Feltet må fylles inn</b>" />
               <input runat="server"  id="txtLastName" name="txtLastName" type="text" placeholder="Etternavn" class="form-control input-md">
     
               </div>
@@ -27,6 +29,8 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="txtPassword">Passord</label>
               <div class="col-md-4">
+                <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtPassword" style="color:red;" ErrorMessage="<b>* Feltet må fylles inn</b>" />
+                <asp:RegularExpressionValidator Display="Dynamic" runat="server" ControlToValidate="txtPassword" style="color:red;" ValidationExpression="(^(?:(?=.*[a-z])(?:(?=.*[A-Z])(?=.*[\d\W])|(?=.*\W)(?=.*\d))|(?=.*\W)(?=.*[A-Z])(?=.*\d)).{8,}$)" ErrorMessage="<b>* Feil passordkompleksitet.</b>"/>
                 <input runat="server"  id="txtPassword" name="txtPassword" type="password" placeholder="Passord" class="form-control input-md">
     
               </div>
@@ -59,6 +63,8 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="txtTlfMobil">Mobil</label>  
               <div class="col-md-4">
+              <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtTlfMobil" style="color:red;" ErrorMessage="<b>* Feltet må fylles inn</b>" />
+              <asp:RegularExpressionValidator Display="Dynamic" runat="server" ControlToValidate="txtTlfMobil" style="color:red;" ValidationExpression="(\d{8})" ErrorMessage="<b>* Må ha 8 sifre.</b>"/>
               <input runat="server" id="txtTlfMobil" name="txtTlfMobil" type="text" placeholder="Mobil" class="form-control input-md">
     
               </div>
@@ -86,6 +92,8 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="txtEPost">E-post</label>  
               <div class="col-md-4">
+              <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtEPost" style="color:red;" ErrorMessage="<b>* Feltet må fylles inn</b>" />
+              <asp:RegularExpressionValidator Display="Dynamic" runat="server" ControlToValidate="txtEPost" style="color:red;" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorMessage="<b>* Må ha 8 sifre.</b>"/>
               <input runat="server" id="txtEPost" name="txtEPost" type="text" placeholder="E-post" class="form-control input-md">
     
               </div>
@@ -205,20 +213,26 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="txtAddress">Adresse</label>  
               <div class="col-md-4">
+              <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtAddress" style="color:red;" ErrorMessage="<b>* Feltet må fylles inn</b>" />
               <input runat="server" id="txtAddress" name="txtAddress" type="text" placeholder="Adresse" class="form-control input-md">
     
               </div>
             </div>
 
-            <!-- Text input-->
+            <!-- Text input -->
             <div class="form-group">
               <label class="col-md-4 control-label" for="txtSocialSecurityNumber">Fødselsnummer</label>  
               <div class="col-md-4">
-              <input runat="server" id="txtSocialSecurityNumber" name="txtSocialSecurityNumber" type="text" placeholder="Fødselsnummer" class="form-control input-md">
-    
+                  <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtSocialSecurityNumber" style="color:red;" ErrorMessage="<b>* Feltet må fylles inn</b>" />
+                  <asp:RegularExpressionValidator Display="Dynamic" runat="server" ControlToValidate="txtSocialSecurityNumber" style="color:red;" ValidationExpression="(\d{11})" ErrorMessage="<b>* Må ha 11 sifre.</b>"/>
+                  <input runat="server" id="txtSocialSecurityNumber" name="txtSocialSecurityNumber" type="text" placeholder="Fødselsnummer" class="form-control input-md">    
               </div>
             </div>
 
+             <!-- Error label if persInfConsent is not approved -->
+            <div class="form-group">
+              <label class="col-md-10 control-label" id="lblPersInfConsent" runat="server" style="color:red;">* <a href="/WorkflowItems/PersInfoConsent.aspx" style="color:inherit;">For å kunne fylle inn personopplysninger, må lagring av personopplysinger være godkjent av deg først.</a></label>              
+            </div>
             </fieldset>
             </form>
     </div>

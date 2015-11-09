@@ -8,12 +8,11 @@
 <fieldset>
     <!-- Select Basic -->
     <div class="form-group">
-        <label class="col-md-1 control-label" for="selectUserForBooking2">Bruker</label>
+        <label class="col-md-1 control-label" for="selectUserForBooking_2" id="labelfor_selectUserForBooking_2" runat="server">Bruker</label>
         <div class="col-md-2">
-            <select id="selectUserForBooking2" name="selectUserForBooking2" style="margin-bottom: 8px;" class="form-control" runat="server">
-                <option value="1">Option one</option>
-                <option value="2">Option two</option>
-            </select>
+            <asp:DropdownList AutoPastBack="True"  id="selectUserForBooking_2" name="selectUserForBooking2" style="margin-bottom: 8px;" class="form-control" runat="server">
+
+            </asp:DropdownList>
         </div>
         <div class="col-md-6">
             <div style="width:172px; margin: 0 auto;">

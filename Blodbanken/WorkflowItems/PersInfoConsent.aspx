@@ -9,6 +9,7 @@
                         <div class="topPlacement">
                             <div class="topPlacement">
                                 <uc:ConsentEditControl id="ConsentEditForm" runat="server" />
+                                <a href="/WorkflowItems/BookMedicalExamination.aspx" class="pull-right" style="padding-top:0px;padding-right:40px;">Next -></a>
                             </div>
                         </div>
                     </div>

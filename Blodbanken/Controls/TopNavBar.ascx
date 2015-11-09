@@ -19,7 +19,7 @@
 
         <div class="collapse navbar-collapse" id="mainNav">
             <ul class="nav navbar-nav">
-                <li id="HomeLink"><a href="/Public/Login.aspx">Login</a></li>
+                <li id="LoginLink"><a href="/Public/Login.aspx">Login</a></li>
                 <li id="AboutLink"><a href="/Public/About.aspx">Om Blodbanken</a></li>
                 <li id="NewsLink"><a href="/Public/News.aspx">Nyheter</a></li>
             </ul>
@@ -33,8 +33,8 @@
 </nav>
 <script type="text/javascript">
     var pathname = window.location.pathname;
-    if (pathname == "/Public/Index.aspx") {
-        $('#HomeLink').addClass('active');
+    if (pathname == "/Public/Login.aspx") {
+        $('#LoginLink').addClass('active');
     } else if (pathname == "/Public/About.aspx") {
         $('#AboutLink').addClass('active');
     } else if (pathname == "/Public/News.aspx") {

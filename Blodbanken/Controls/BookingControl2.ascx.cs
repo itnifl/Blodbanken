@@ -16,14 +16,18 @@ namespace Blodbanken.Controls {
             HttpContext.Current.User = myUser;
          if ((HttpContext.Current.User != null) && HttpContext.Current.User.IsInRole(UserRole.Admin.ToString())) {
             List<SystemUser> users = AuthMod.GetAllUsers();
-            System.Web.UI.HtmlControls.HtmlSelect[] selectArray = { selectUserForBooking2 };
-            foreach (System.Web.UI.HtmlControls.HtmlSelect select in selectArray) {
+            DropDownList[] selectArray = { selectUserForBooking_2 };
+            if (selectUserForBooking_2.SelectedItem != null) {
+               CurrentUser = selectUserForBooking_2.Text;
+            }
+            foreach (DropDownList select in selectArray) {
                select.Items.Clear();
                users.Where(usr => !String.IsNullOrEmpty(usr.FirstName) && !String.IsNullOrEmpty(usr.LastName)).ToList().ForEach(user => select.Items.Add(new ListItem(user.FirstName + " " + user.LastName, user.LogonName)));
                users.Where(usr => String.IsNullOrEmpty(usr.FirstName) && String.IsNullOrEmpty(usr.LastName)).ToList().ForEach(user => select.Items.Add(new ListItem(user.LogonName, user.LogonName)));
             }
          } else {
-            selectUserForBooking2.Visible = false;
+            selectUserForBooking_2.Visible = false;
+            labelfor_selectUserForBooking_2.Visible = false;
          }
       }
    }

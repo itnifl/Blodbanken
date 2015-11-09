@@ -6,8 +6,8 @@
 <%@ Register TagPrefix="uc" TagName="AutoBookerSettings" Src="~/Controls/AutoBookerSettingsControl.ascx" %>
 
 <asp:Content ID="MainPage" ContentPlaceHolderID="MainPage" Runat="Server">
-    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/themes/redmond/jquery-ui.css" />
-    <link rel="stylesheet" href="/Content/jquery.ptTimeSelect.css"/>
+    <link rel="stylesheet" type="text/css" href="/Content/themes/base/all.css" />
+    <link rel="stylesheet" href="/Content/jquery.ptTimeSelect.css" />
     <script src="/Scripts/jquery.ptTimeSelect.js" type="text/javascript"></script>
     <div class="well topPlacement" style="margin-left:100px;margin-right:100px;padding-top:0px;padding-bottom:0px;">
       <h1 style="margin-top:10px;">Kontroll panel</h1>

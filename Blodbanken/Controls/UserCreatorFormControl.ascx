@@ -3,17 +3,32 @@
     <!-- Text input-->
     <div class="form-group">
         <label class="col-md-4 control-label" for="txtUsername">Brukernavn</label>  
+        <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtUsername" style="color:red;" ErrorMessage="<b>* Brukernavn må fylles inn</b>" />
         <div class="col-md-4">
-        <input id="txtUsername" name="txtUsername" type="text" placeholder="Brukernavn" class="form-control input-md" required="">
+        <input id="txtUsername" name="txtUsername" type="text" placeholder="Brukernavn" class="form-control input-md" required="" runat="server" />
     
         </div>
     </div>
 
-    <!-- Password input-->
+    <!-- Password input 1 -->
     <div class="form-group">
-        <label class="col-md-4 control-label" for="txtPassword">Passord</label>
+        <label class="col-md-4 control-label" for="txtPassword1">Passord</label>
+        <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtPassword1" style="color:red;" ErrorMessage="<b>* Passord må fylles inn</b>" />
+        <asp:RegularExpressionValidator Display="Dynamic" runat="server" ControlToValidate="txtPassword1" style="color:red;" ValidationExpression="(^(?:(?=.*[a-z])(?:(?=.*[A-Z])(?=.*[\d\W])|(?=.*\W)(?=.*\d))|(?=.*\W)(?=.*[A-Z])(?=.*\d)).{8,}$)" ErrorMessage="<b>* Feil passordkompleksitet.</b>"/>
+        <asp:CompareValidator Display="Dynamic" runat="server" id="cmpNumbers" controltovalidate="txtPassword1" style="color:red;" controltocompare="txtPassword2" operator="Equal" type="String" errormessage="<br/><b>* Begge passord må være like.</b>" />
         <div class="col-md-4">
-        <input id="txtPassword" name="txtPassword" type="password" placeholder="Passord" class="form-control input-md" required="">
+        <input id="txtPassword1" name="txtPassword1" type="password" placeholder="Passord" class="form-control input-md" required="" runat="server" />
+    
+        </div>
+    </div>
+
+    <!-- Password input 2 -->
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="txtPassword3">Verifiser Passord</label>
+        <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtPassword2" style="color:red;" ErrorMessage="<b>* Passord må fylles inn</b>" />
+        <asp:RegularExpressionValidator Display="Dynamic" runat="server" ControlToValidate="txtPassword2" style="color:red;" ValidationExpression="(^(?:(?=.*[a-z])(?:(?=.*[A-Z])(?=.*[\d\W])|(?=.*\W)(?=.*\d))|(?=.*\W)(?=.*[A-Z])(?=.*\d)).{8,}$)" ErrorMessage="<b>* Feil passordkompleksitet.</b>"/>
+        <div class="col-md-4">
+        <input id="txtPassword2" name="txtPassword2" type="password" placeholder="Passord" class="form-control input-md" required="" runat="server" />
     
         </div>
     </div>
@@ -30,7 +45,7 @@
         </div>
     </div>
 
-    <!-- Text input-->
+    <!-- Text input
     <div class="form-group">
         <label class="col-md-4 control-label" for="txtFornavn">Fornavn</label>  
         <div class="col-md-4">
@@ -39,7 +54,7 @@
         </div>
     </div>
 
-    <!-- Text input-->
+    <!-- Text input
     <div class="form-group">
         <label class="col-md-4 control-label" for="txtEtternavn">Etternavn</label>  
         <div class="col-md-4">
@@ -47,7 +62,7 @@
     
         </div>
     </div>
-    <!-- Select Basic -->
+    <!-- Select Basic
     <div class="form-group">
         <label class="col-md-4 control-label" for="selectAge">Alder</label>
         <div class="col-md-2">
@@ -156,7 +171,7 @@
         </div>
     </div>
 
-    <!-- Textarea -->
+    <!-- Textarea
     <div class="form-group">
         <label class="col-md-4 control-label" for="txtAdresse">Adresse</label>
         <div class="col-md-4">                     

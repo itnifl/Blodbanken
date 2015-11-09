@@ -13,13 +13,22 @@ namespace Blodbanken.Controls {
     public partial class BookingControl2 {
         
         /// <summary>
-        /// selectUserForBooking2 control.
+        /// labelfor_selectUserForBooking_2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect selectUserForBooking2;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl labelfor_selectUserForBooking_2;
+        
+        /// <summary>
+        /// selectUserForBooking_2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList selectUserForBooking_2;
         
         /// <summary>
         /// calAvailableDate2 control.

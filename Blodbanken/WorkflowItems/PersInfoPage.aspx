@@ -22,10 +22,11 @@
                                 </fieldset>
                               </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
+                            <a href="/WorkflowItems/PersInfoConsent.aspx" class="pull-right" style="padding-top:5px;padding-right:10px;">Next -></a>
+                        </div>                        
+                    </div>                    
+                </div>                
+            </div>            
+        </form>        
     </div>
 </asp:Content>

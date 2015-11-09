@@ -9,6 +9,7 @@ using Blodbanken.CodeEngines;
 namespace Blodbanken.Controls {
    public partial class BookingControl1 : System.Web.UI.UserControl {
       AuthenticatonModule AuthMod = new AuthenticatonModule();
+      FormModule Forms = new FormModule();
       public string CurrentUser { get; set; }
       protected void Page_Load(object sender, EventArgs e) {
          System.Security.Principal.GenericPrincipal myUser = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
@@ -16,17 +17,20 @@ namespace Blodbanken.Controls {
             HttpContext.Current.User = myUser;
          if ((HttpContext.Current.User != null) && HttpContext.Current.User.IsInRole(UserRole.Admin.ToString())) {
             List<SystemUser> users = AuthMod.GetAllUsers();
-            System.Web.UI.HtmlControls.HtmlSelect[] selectArray = { selectUserForExamnationBooking1 };
-            /*if (selectUserForExamnationBooking1.Items. != null) {
-
-            }*/
-            foreach (System.Web.UI.HtmlControls.HtmlSelect select in selectArray) {
+            DropDownList[] selectArray = { selectUserForExamnationBooking_1 };
+            if (selectUserForExamnationBooking_1.SelectedItem != null && !String.IsNullOrEmpty(CurrentUser)) {
+               CurrentUser = selectUserForExamnationBooking_1.Text;
+            }
+            foreach (DropDownList select in selectArray) {
                select.Items.Clear();
                users.Where(usr => !String.IsNullOrEmpty(usr.FirstName) && !String.IsNullOrEmpty(usr.LastName)).ToList().ForEach(user => select.Items.Add(new ListItem(user.FirstName + " " + user.LastName, user.LogonName)));
                users.Where(usr => String.IsNullOrEmpty(usr.FirstName) && String.IsNullOrEmpty(usr.LastName)).ToList().ForEach(user => select.Items.Add(new ListItem(user.LogonName, user.LogonName)));
             }
+            Forms.GetUserInfoForm(CurrentUser).
          } else {
-            selectUserForExamnationBooking1.Visible = false;
+            selectUserForExamnationBooking_1.Visible = false;
+            labelSelectUserForBooking_1.Visible = false;
+            btnBookExamination1.Disabled = true;
          }
       }
    }
