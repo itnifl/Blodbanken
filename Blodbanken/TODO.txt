@@ -1,3 +1,11 @@
-﻿Fullfør workflow sidene
-	Man må fylle inn skjema før man kan booke helseundersøkelse.
-	Man må ha en godkjent helseundersøkelse innen de siste 30 dagene for å kunne booke donor time
+﻿Trial License er snart ferdig
+Lag en finere lenkeliste i workflowitems
+Lag funksjonalitet mot database og knytt opp mot GUI:
+	Opprett bruker
+	Endre bruker 
+	Slett bruker - knapp aktivert bare hvis man er Admin
+	Book donortime, timebooking + parkeringsbooking - gui må ha info om ledige timer ved valg av dato, og deretter mulighet for valg av time
+	Lag den automatiske bookeren, og la den kunne konfigureres
+	Skjemaer og Helseundersøkelser - disse kan slås sammen i admin sidene - database funksjonalitet for begge må opprettes
+		Eventuelt må forskjellen gjøres klart
+		Den ene gir mulighet til sletting av skjemaer og den andre gir mulighet til å godkjenne de.

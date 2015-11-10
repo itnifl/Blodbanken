@@ -8,6 +8,7 @@ using Blodbanken.CodeEngines;
 
 namespace Blodbanken.Controls {
    public partial class UserCreatorFormControl : System.Web.UI.UserControl {
+      AuthenticatonModule AuthMod = new AuthenticatonModule();
       public string CurrentUser { get; set; }
       protected void Page_Load(object sender, EventArgs e) {
          System.Security.Principal.GenericPrincipal myUser = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
@@ -19,6 +20,14 @@ namespace Blodbanken.Controls {
                selectRole.Items.Remove(new ListItem(UserRole.Admin.ToString(), "1"));
             }
          }
+      }
+      protected void CreateUser(object sender, EventArgs e) {
+         string username = txtUsername.Value;
+         string password = String.Empty;
+         if (txtPassword1.Value == txtPassword2.Value) {
+            password = txtPassword1.Value;
+         }
+         //AuthMod.CreateUser();
       }
    }
 }

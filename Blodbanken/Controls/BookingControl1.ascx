@@ -10,7 +10,7 @@
     <div class="form-group">
         <label class="col-md-1 control-label" for="selectUserForBooking_1" id="labelSelectUserForBooking_1" runat="server">Bruker</label>
         <div class="col-md-2">
-            <asp:DropdownList AutoPastBack="True" id="selectUserForExamnationBooking_1" name="selectUserForBooking_1" style="margin-bottom: 8px;" class="form-control" runat="server">
+            <asp:DropdownList AutoPostBack="True" id="selectUserForExamnationBooking_1" name="selectUserForBooking_1" style="margin-bottom: 8px;" class="form-control" runat="server">
 
             </asp:DropdownList>
         </div>
@@ -20,10 +20,10 @@
                 <input id="txtTimePicker1" name="txtTimePicker1" placeholder="Velg tidspunkt" type="text" style="margin-top: 8px;" class="form-control input-md" required="" />              
                 <button id="btnBookExamination1" name="btnBookExamination1" class="btn btn-success" style="margin-left: 16px;margin-top: 8px;" runat="server">Book</button>
                 <button id="btnCancelExaminaton1" name="btnCancelExaminaton1" class="btn btn-danger" style="margin-top: 8px;">Avbryt</button>
-            </div>
+            </div>            
         </div>
         <div class="col-md-3 control-label" id="BookingInfoArea1">
-
+            <label class="control-label" id="lblPersonQuestionForm" runat="server" style="color:red;">* <a href="/WorkflowItems/QuestionForm.aspx" style="color:inherit;">For å kunne booke, må du fylle inn egenerklæring først.</a></label>
         </div>
     </div>
 </fieldset>

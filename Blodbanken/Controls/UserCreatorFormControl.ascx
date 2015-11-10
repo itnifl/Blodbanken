@@ -24,7 +24,7 @@
 
     <!-- Password input 2 -->
     <div class="form-group">
-        <label class="col-md-4 control-label" for="txtPassword3">Verifiser Passord</label>
+        <label class="col-md-4 control-label" for="txtPassword2">Verifiser Passord</label>
         <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtPassword2" style="color:red;" ErrorMessage="<b>* Passord må fylles inn</b>" />
         <asp:RegularExpressionValidator Display="Dynamic" runat="server" ControlToValidate="txtPassword2" style="color:red;" ValidationExpression="(^(?:(?=.*[a-z])(?:(?=.*[A-Z])(?=.*[\d\W])|(?=.*\W)(?=.*\d))|(?=.*\W)(?=.*[A-Z])(?=.*\d)).{8,}$)" ErrorMessage="<b>* Feil passordkompleksitet.</b>"/>
         <div class="col-md-4">
@@ -182,7 +182,7 @@
     <div class="form-group">
         <label class="col-md-4 control-label" for="btnCreate"></label>
         <div class="col-md-8">
-            <button id="btnCreate" name="btnCreate" class="btn btn-success">Opprett</button>
+            <asp:button id="btnCreate" name="btnCreate" class="btn btn-success" runat="server" Text="Opprett" OnClick="CreateUser"/>
             <button id="btnCancel" name="btnCancel" class="btn btn-danger">Avbryt</button>
         </div>
     </div>

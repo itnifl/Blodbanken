@@ -34,7 +34,17 @@ namespace Blodbanken.CodeEngines {
             foreach (string column in columns) {
                Type myType = typeof(Schema);
                PropertyInfo myPropInfo = myType.GetProperty(column);
-               myPropInfo.SetValue(this, reader[column].ToString(), null);
+               if (column == "approved") {
+                  DateTime dtResult;
+                  DateTime.TryParse(reader[column] != null ? reader[column].ToString() : String.Empty, out dtResult);
+                  myPropInfo.SetValue(this, dtResult, null);
+               } else if (column.ToLower() == "logonname") {
+                  myPropInfo.SetValue(this, reader[column] != null ? reader[column].ToString() : String.Empty, null);
+               } else {
+                  int intResult;
+                  Int32.TryParse(reader[column] != null ? reader[column].ToString() : "0", out intResult);
+                  myPropInfo.SetValue(this, intResult, null);
+               }
             }
             schemas.Add(theSchema);
          }
@@ -49,6 +59,7 @@ namespace Blodbanken.CodeEngines {
    }
    public class Schema {
       public string logonName { get; set; }
+      public DateTime approved { get; set; }
       public int schemaID { get; set; }
       public int spm1 { get; set; }
       public int spm2 { get; set; }
