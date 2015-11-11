@@ -14,6 +14,9 @@ namespace Blodbanken.Controls {
          infoPanelEditUserHeader.InnerText = "Endre brukeropplysninger for " + CurrentUser;
          this.PopulateHTMLForm(CurrentUser);
       }
+      public void UpdateUser(object sender, EventArgs e) {
+
+      }
       public void PopulateHTMLForm(string logonName) {
          SystemUser usr = AuthModule.GetUser(logonName);
          bool persInfoCosent = usr.PersInfoConsent;

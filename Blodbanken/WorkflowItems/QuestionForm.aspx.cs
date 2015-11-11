@@ -35,7 +35,8 @@ namespace Blodbanken.WorkflowItems {
                radios50b.Disabled = true;
             }
          }
-         
+         BottomNavBar.CurrentLink = "/WorkflowItems/BookTime.aspx";
+         BottomNavBar.CurrentLinkText = "<ul><li><b>Book donortime</b></li></ul>";
       }
    }
 }

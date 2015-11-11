@@ -13,7 +13,7 @@ namespace Blodbanken.Sections {
       protected void Page_Load(object sender, EventArgs e) {
          List<SystemUser> users = AuthMod.GetAllUsers();
 
-         DropDownList[] selectArray = { selectChangeUser1 , selectDeleteUser1, selectUserForSchemaEdit, selectUserForConsentEdit, selectUserForWorkflowEdit, selectUserForExminationAccept };
+         DropDownList[] selectArray = { selectChangeUser1 , selectDeleteUser1, selectUserForSchemaEdit, selectUserForConsentEdit, selectUserForWorkflowEdit, selectUserForExaminationAccept };
          foreach (DropDownList select in selectArray) {
             select.Items.Clear();
             users.Where(usr => !String.IsNullOrEmpty(usr.FirstName) && !String.IsNullOrEmpty(usr.LastName)).ToList().ForEach(user => select.Items.Add(new ListItem(user.FirstName + " " + user.LastName, user.LogonName)));
@@ -25,7 +25,7 @@ namespace Blodbanken.Sections {
          workFlowCtrl.CurrentUser = this.selectUserForWorkflowEdit.SelectedValue;
          this.workflowPlaceHolder.Controls.Add(workFlowCtrl);
 
-         if (selectUserForExminationAccept.SelectedItem != null) {
+         if (selectUserForExaminationAccept.SelectedItem != null) {
             ExaminationAcceptControl selectUserForExminationAcceptCtrl = (ExaminationAcceptControl)Page.LoadControl("~/Controls/ExaminationAcceptControl.ascx");
             selectUserForExminationAcceptCtrl.CurrentUser = this.selectUserForWorkflowEdit.SelectedValue;
             this.workflowExaminationAcceptPlaceHolder.Controls.Add(selectUserForExminationAcceptCtrl);
@@ -50,6 +50,9 @@ namespace Blodbanken.Sections {
             selectUserForSchemaEditCtrl.CurrentUser = this.selectDeleteUser1.SelectedValue;
             SchemaEditPlaceHolder.Controls.Add(selectUserForSchemaEditCtrl);
          }
+      }
+      public void CreateUser(object sender, EventArgs e) {
+         //For test
       }
    }
 }

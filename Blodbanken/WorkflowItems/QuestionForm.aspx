@@ -1,9 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="QuestionForm.aspx.cs" Inherits="Blodbanken.WorkflowItems.QuestionForm"  MasterPageFile="~/Master.master" Title="Blodbanken"%>
+<%@ Register TagPrefix="uc" TagName="BottomNavBar" Src="~/Controls/BottomNavBar.ascx" %>
 <asp:Content ID="MainPage" ContentPlaceHolderID="MainPage" Runat="Server">
     <div class="well topPlacement" style="margin-left:100px;margin-right:100px;padding-top:0px;padding-bottom:0px;">
       <h1 style="margin-top:10px;">Login</h1>
     </div>
-    <a href="/WorkflowItems/BookTime.aspx" class="pull-right" style="padding-top:5px;padding-right:110px;">Next -></a>
     <div class="jumbotron" style="margin-left:auto;margin-right:auto;width:950px;padding:20px;">  
         <h2 style="margin-left:150px;margin-right:auto;margin-top:10px;">Spørreskjema for helseundersøkelse</h2>    
         <br/>  
@@ -853,6 +853,6 @@
             </fieldset>
             <asp:button class="btn btn-lg btn-primary btn-block" type="submit" id="btnSubmitForm" runat="server" Text="Send skjema" />        
         </form>
-
     </div>
+    <uc:BottomNavBar runat="server" ID="BottomNavBar" />
 </asp:Content>

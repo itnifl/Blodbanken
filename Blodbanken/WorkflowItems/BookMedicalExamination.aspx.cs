@@ -14,6 +14,8 @@ namespace Blodbanken.WorkflowItems {
          if ((HttpContext.Current.User != null) && HttpContext.Current.User.Identity.IsAuthenticated) {
             ExaminationBookingForm.CurrentUser = HttpContext.Current.User.Identity.Name;
          }
+         BottomNavBar.CurrentLink = "/WorkflowItems/QuestionForm.aspx";
+         BottomNavBar.CurrentLinkText = "<ul><li><b>Egenerklæring</b></li></ul>";
       }
    }
 }

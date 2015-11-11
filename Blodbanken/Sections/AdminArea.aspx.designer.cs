@@ -13,13 +13,13 @@ namespace Blodbanken.Sections {
     public partial class AdminArea {
         
         /// <summary>
-        /// frmEditor control.
+        /// frmAdministratorEditor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm frmEditor;
+        protected global::System.Web.UI.HtmlControls.HtmlForm frmAdministratorEditor;
         
         /// <summary>
         /// UserCreatorForm control.
@@ -157,13 +157,13 @@ namespace Blodbanken.Sections {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl workflowPlaceHolder;
         
         /// <summary>
-        /// selectUserForExminationAccept control.
+        /// selectUserForExaminationAccept control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList selectUserForExminationAccept;
+        protected global::System.Web.UI.WebControls.DropDownList selectUserForExaminationAccept;
         
         /// <summary>
         /// workflowExaminationAcceptPlaceHolder control.

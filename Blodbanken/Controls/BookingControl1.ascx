@@ -7,7 +7,7 @@
  -->
 <fieldset>
     <!-- Select Basic -->
-    <div class="form-group">
+    <div class="form-group form-group-custom">
         <label class="col-md-1 control-label" for="selectUserForBooking_1" id="labelSelectUserForBooking_1" runat="server">Bruker</label>
         <div class="col-md-2">
             <asp:DropdownList AutoPostBack="True" id="selectUserForExamnationBooking_1" name="selectUserForBooking_1" style="margin-bottom: 8px;" class="form-control" runat="server">

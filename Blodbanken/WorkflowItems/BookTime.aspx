@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BookTime.aspx.cs" Inherits="Blodbanken.WorkflowItems.BookTime" MasterPageFile="~/Master.master" Title="Blodbanken"%>
 <%@ Register TagPrefix="uc" TagName="BloodDonorBooking" Src="~/Controls/BookingControl2.ascx" %>
+<%@ Register TagPrefix="uc" TagName="BottomNavBar" Src="~/Controls/BottomNavBar.ascx" %>
 <asp:Content ID="MainPage" ContentPlaceHolderID="MainPage" Runat="Server">
     <link rel="stylesheet" type="text/css" href="/Content/themes/base/all.css" />
     <link rel="stylesheet" href="/Content/jquery.ptTimeSelect.css"/>
@@ -11,11 +12,11 @@
 		            <div id="inlineCell1">
                         <div class="topPlacement">                            
                             <uc:BloodDonorBooking runat="server" ID="BloodDonorForm" />
-                            <a href="/WorkflowItems/BookParking.aspx" class="pull-right" style="padding-top:5px;padding-right:20px;">Next -></a>
                         </div>
                     </div>
                 </div>
             </div>
         </form>
     </div>
+    <uc:BottomNavBar runat="server" ID="BottomNavBar" />
 </asp:Content>

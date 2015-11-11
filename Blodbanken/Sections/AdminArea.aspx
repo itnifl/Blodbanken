@@ -13,7 +13,7 @@
       <h1 style="margin-top:10px;">Kontroll panel</h1>
     </div>
     <div class="jumbotron" style="margin-left:100px;margin-right:100px;padding:20px;">
-        <form id="frmEditor" runat="server" class="form-horizontal">
+        <form id="frmAdministratorEditor" runat="server" class="form-horizontal">
             <div id="inlineContainer">
 	            <div id="inlineRow">
 		            <div id="inlineCell1">
@@ -176,9 +176,9 @@
                                 <fieldset>
                                     <!-- Select Basic -->
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label" for="selectUserForExminationAccept1">Velg bruker</label>
+                                        <label class="col-md-4 control-label" for="selectUserForExaminationAccept1">Velg bruker</label>
                                         <div class="col-md-4">
-                                            <asp:DropDownList ID="selectUserForExminationAccept" class="form-control" runat="server" AutoPostBack="True">
+                                            <asp:DropDownList ID="selectUserForExaminationAccept" class="form-control" runat="server" AutoPostBack="True">
 
                                             </asp:DropDownList>
                                         </div>

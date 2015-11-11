@@ -14,6 +14,8 @@ namespace Blodbanken.WorkflowItems {
          if ((HttpContext.Current.User != null) && HttpContext.Current.User.Identity.IsAuthenticated) {
             ConsentEditForm.CurrentUser = HttpContext.Current.User.Identity.Name;
          }
+         BottomNavBar.CurrentLink = "/WorkflowItems/BookMedicalExamination.aspx";
+         BottomNavBar.CurrentLinkText = "<ul><li><b>Book helseundersøkelse</b></li></ul>";
       }
    }
 }

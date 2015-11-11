@@ -114,6 +114,7 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Controls\AutoBookerSettingsControl.ascx" />
+    <Content Include="Controls\BottomNavBar.ascx" />
     <Content Include="Controls\ConsentEditControl.ascx" />
     <Content Include="Controls\ExaminationAcceptControl.ascx" />
     <Content Include="Controls\ParkingBookingControl1.ascx" />
@@ -178,6 +179,13 @@
     </Compile>
     <Compile Include="Controls\AutoBookerSettingsControl.ascx.designer.cs">
       <DependentUpon>AutoBookerSettingsControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BottomNavBar.ascx.cs">
+      <DependentUpon>BottomNavBar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\BottomNavBar.ascx.designer.cs">
+      <DependentUpon>BottomNavBar.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\ConsentEditControl.ascx.cs">
       <DependentUpon>ConsentEditControl.ascx</DependentUpon>

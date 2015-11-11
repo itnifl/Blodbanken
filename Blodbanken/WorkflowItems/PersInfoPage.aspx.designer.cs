@@ -38,5 +38,14 @@ namespace Blodbanken.WorkflowItems {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Blodbanken.Controls.UserEditControl UserEditForm;
+        
+        /// <summary>
+        /// BottomNavBar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Blodbanken.Controls.BottomNavBar BottomNavBar;
     }
 }

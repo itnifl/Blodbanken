@@ -21,13 +21,25 @@ namespace Blodbanken.Controls {
             }
          }
       }
-      protected void CreateUser(object sender, EventArgs e) {
+      public void CreateUser(object sender, EventArgs e) {
          string username = txtUsername.Value;
          string password = String.Empty;
          if (txtPassword1.Value == txtPassword2.Value) {
             password = txtPassword1.Value;
          }
-         //AuthMod.CreateUser();
+         UserRole usrRole = UserRole.Viewer;
+         switch (selectRole.Value.ToString().ToLower()) {
+            case "admin":
+               usrRole = UserRole.Admin;
+               break;
+            case "donor":
+               usrRole = UserRole.Donor;
+               break;
+            case "viewer":
+               usrRole = UserRole.Viewer;
+               break;
+         }
+         AuthMod.CreateUser(username, password, usrRole);
       }
    }
 }

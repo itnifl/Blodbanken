@@ -38,7 +38,7 @@ namespace Blodbanken.CodeEngines {
          if (ValidateCredentialData(userName, passWord)) {
             SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
             conn.Open();
-            SqlCommand cmd = new SqlCommand("INSERT INTO Users values(@userName,@passWord,@userRole)", conn);
+            SqlCommand cmd = new SqlCommand("INSERT INTO Users (logonName,password,userRole) values(@userName,@passWord,@userRole)", conn);
             cmd.Parameters.Add("@userName", SqlDbType.VarChar, 35);
             cmd.Parameters["@userName"].Value = userName;
 
@@ -57,6 +57,71 @@ namespace Blodbanken.CodeEngines {
             cmd.Dispose();
             conn.Dispose();
          }
+         return rowsUpdated == 0 ? false : true;
+      }
+      public bool UpdateUser(string logonName, UserRole userRole, string firstName = "",
+            string lastName = "", string phoneMobile = "", int age = 0,
+            string address = "", bool persInfoConsent = false, int nationalIdentity = 0, 
+            bool eMailConsent = false, bool phoneConsent = false, string gender = "male", 
+            string phoneWork = "", string phonePrivate = "", string eMail = "") {
+         if (gender.ToLower() != "male" && gender.ToLower() != "female") {
+            throw new NotSupportedException("Gender must be male or female, '" + gender + "' is not allowed");
+         }
+         int rowsUpdated = 0;
+         
+         SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
+         conn.Open();
+         SqlCommand cmd = new SqlCommand("UPDATE Users SET logonName=@logonName, password=@password, userRole=@userRole, firstName=@firstName, lastName=@lastName, phoneMobile=@phoneMobile, age=@age, address=@address, persInfoConsent=@persInfoConsent, nationalIdentity=@nationalIdentity, eMailConsent=@eMailConsent, phoneConsent=@phoneConsent, gender=@gender, phoneWork=@phoneWork, phonePrivate=@phonePrivate, eMail=@eMail WHERE logonName=@logonName", conn);
+         cmd.Parameters.Add("@logonName", SqlDbType.VarChar, 35);
+         cmd.Parameters["@logonName"].Value = logonName;
+
+         cmd.Parameters.Add("@userRole", SqlDbType.VarChar, 35);
+         cmd.Parameters["@userRole"].Value = userRole.ToString();
+
+         cmd.Parameters.Add("@firstName", SqlDbType.VarChar, 35);
+         cmd.Parameters["@firstName"].Value = firstName;
+
+         cmd.Parameters.Add("@lastName", SqlDbType.VarChar);
+         cmd.Parameters["@lastName"].Value = lastName;
+
+         cmd.Parameters.Add("@phoneMobile", SqlDbType.VarChar);
+         cmd.Parameters["@phoneMobile"].Value = phoneMobile;
+
+         cmd.Parameters.Add("@age", SqlDbType.Int);
+         cmd.Parameters["@age"].Value = age;
+
+         cmd.Parameters.Add("@address", SqlDbType.VarChar, 35);
+         cmd.Parameters["@address"].Value = address;
+
+         cmd.Parameters.Add("@persInfoConsent", SqlDbType.Int);
+         cmd.Parameters["@persInfoConsent"].Value = persInfoConsent ? 1 : 0;
+
+         cmd.Parameters.Add("@nationalIdentity", SqlDbType.Int);
+         cmd.Parameters["@nationalIdentity"].Value = nationalIdentity;
+
+         cmd.Parameters.Add("@eMailConsent", SqlDbType.Int);
+         cmd.Parameters["@eMailConsent"].Value = eMailConsent ? 1 : 0;
+
+         cmd.Parameters.Add("@phoneConsent", SqlDbType.Int);
+         cmd.Parameters["@phoneConsent"].Value = phoneConsent ? 1 : 0;
+
+         cmd.Parameters.Add("@gender", SqlDbType.VarChar);
+         cmd.Parameters["@gender"].Value = gender.ToLower();
+
+         cmd.Parameters.Add("@phoneWork", SqlDbType.VarChar);
+         cmd.Parameters["@phoneWork"].Value = phoneWork;
+
+         cmd.Parameters.Add("@phonePrivate", SqlDbType.VarChar);
+         cmd.Parameters["@phonePrivate"].Value = phonePrivate;
+
+         cmd.Parameters.Add("@eMail", SqlDbType.VarChar);
+         cmd.Parameters["@eMail"].Value = eMail;
+
+         rowsUpdated = cmd.ExecuteNonQuery();
+
+         cmd.Dispose();
+         conn.Dispose();
+         
          return rowsUpdated == 0 ? false : true;
       }
       public bool UpdatePassword(string userName, string passWord) {
