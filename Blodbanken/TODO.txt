@@ -4,8 +4,8 @@ Booking kontrollerne (helseundersøkelse, donortime og parkering) må alle kunne
 Lag funksjonalitet mot database og knytt opp mot GUI 
 	+ vis feedback etter bruk a knapp 
 	+ legg på funksjonalitet av cancel knapp:
-		?Opprett bruker - ok - feedback angler på knapper + sjekk at bruker ikke finnes fra før
-		Endre bruker 
+		?Opprett bruker - ok - feedback mangler på knapper + sjekk at bruker ikke finnes fra før
+		Endre bruker - ok - feedback mangler på knapper
 		Slett bruker - knapp aktivert bare hvis man er Admin
 		Book donortime, timebooking + parkeringsbooking - gui må ha info om ledige timer ved valg av dato, og deretter mulighet for valg av time
 		Lag den automatiske bookeren, og la den kunne konfigureres

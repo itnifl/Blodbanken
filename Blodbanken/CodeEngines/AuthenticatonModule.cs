@@ -61,8 +61,7 @@ namespace Blodbanken.CodeEngines {
       }
       public bool UpdateUser(string logonName, UserRole userRole, string firstName = "",
             string lastName = "", string phoneMobile = "", int age = 0,
-            string address = "", bool persInfoConsent = false, int nationalIdentity = 0, 
-            bool eMailConsent = false, bool phoneConsent = false, string gender = "male", 
+            string address = "", int nationalIdentity = 0, string gender = "male", 
             string phoneWork = "", string phonePrivate = "", string eMail = "") {
          if (gender.ToLower() != "male" && gender.ToLower() != "female") {
             throw new NotSupportedException("Gender must be male or female, '" + gender + "' is not allowed");
@@ -93,7 +92,7 @@ namespace Blodbanken.CodeEngines {
          cmd.Parameters.Add("@address", SqlDbType.VarChar, 35);
          cmd.Parameters["@address"].Value = address;
 
-         cmd.Parameters.Add("@persInfoConsent", SqlDbType.Int);
+         /*cmd.Parameters.Add("@persInfoConsent", SqlDbType.Int);
          cmd.Parameters["@persInfoConsent"].Value = persInfoConsent ? 1 : 0;
 
          cmd.Parameters.Add("@nationalIdentity", SqlDbType.Int);
@@ -103,7 +102,7 @@ namespace Blodbanken.CodeEngines {
          cmd.Parameters["@eMailConsent"].Value = eMailConsent ? 1 : 0;
 
          cmd.Parameters.Add("@phoneConsent", SqlDbType.Int);
-         cmd.Parameters["@phoneConsent"].Value = phoneConsent ? 1 : 0;
+         cmd.Parameters["@phoneConsent"].Value = phoneConsent ? 1 : 0;*/
 
          cmd.Parameters.Add("@gender", SqlDbType.VarChar);
          cmd.Parameters["@gender"].Value = gender.ToLower();

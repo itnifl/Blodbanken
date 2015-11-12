@@ -15,7 +15,22 @@ namespace Blodbanken.Controls {
          this.PopulateHTMLForm(CurrentUser);
       }
       public void UpdateUser(object sender, EventArgs e) {
-
+         UserRole role = UserRole.Admin;
+         switch (selectRole.SelectedValue.ToLower()) {
+            case "admin":
+               role = UserRole.Admin;
+               break;
+            case "donor":
+               role = UserRole.Donor;
+               break;
+            case "viewer":
+               role = UserRole.Viewer;
+               break;
+         }
+         AuthModule.UpdateUser(CurrentUser, role, txtFirstname.Value, txtLastName.Value,
+            txtTlfMobil.Value, Int32.Parse(selectAge.SelectedValue), txtAddress.Value,
+            Int32.Parse(txtSocialSecurityNumber.Value), selectGender.SelectedValue.ToLower() == "mann" ? "male" : "female",
+            txtTlfArbeid.Value, txtTlfPrivat.Value, txtEPost.Value);
       }
       public void PopulateHTMLForm(string logonName) {
          SystemUser usr = AuthModule.GetUser(logonName);
