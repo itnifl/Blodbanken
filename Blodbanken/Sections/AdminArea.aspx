@@ -6,6 +6,9 @@
 <%@ Register TagPrefix="uc" TagName="AutoBookerSettings" Src="~/Controls/AutoBookerSettingsControl.ascx" %>
 
 <asp:Content ID="MainPage" ContentPlaceHolderID="MainPage" Runat="Server">
+    <div runat="server" id="responsebox" style="visibility:hidden">
+
+    </div>
     <link rel="stylesheet" type="text/css" href="/Content/themes/base/all.css" />
     <link rel="stylesheet" href="/Content/jquery.ptTimeSelect.css" />
     <script src="/Scripts/jquery.ptTimeSelect.js" type="text/javascript"></script>
@@ -170,13 +173,13 @@
                                 </fieldset>
                               </div>
                             </div>
-                            <a href="#itemExminationAccept" id="headingExminationAccept" class="list-group-item collapsed list-group-item-header" data-toggle="collapse" data-parent="#lstgrpDiverseEditor" aria-expanded="false" aria-controls="itemWorkflowEdit">Helseundersøkelser</a>
-                            <div id="itemExminationAccept" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingExminationAccept">
+                            <a href="#itemExaminationAccept" id="headingExaminationAccept" class="list-group-item collapsed list-group-item-header" data-toggle="collapse" data-parent="#lstgrpDiverseEditor" aria-expanded="false" aria-controls="itemWorkflowEdit">Helseundersøkelser</a>
+                            <div id="itemExaminationAccept" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingExminationAccept">
                               <div class="well well-sm well-custom">
                                 <fieldset>
                                     <!-- Select Basic -->
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label" for="selectUserForExaminationAccept1">Velg bruker</label>
+                                        <label class="col-md-4 control-label" for="selectUserForExaminationAccept">Velg bruker</label>
                                         <div class="col-md-4">
                                             <asp:DropDownList ID="selectUserForExaminationAccept" class="form-control" runat="server" AutoPostBack="True">
 
@@ -195,5 +198,40 @@
                 </div>
             </div>
         </form>
+    </div>
+    <script type="text/javascript">
+        var replyObject;
+        $(document).ready(function () {
+            var jsonReply = $('#MainPage_responsebox').text();
+            if(jsonReply) {
+                replyObject = JSON.parse(jsonReply);
+            }
+            if (replyObject && replyObject.hasOwnProperty("RequestStatus")) {
+                //Show status here
+                //Set Focus
+                if (replyObject.hasOwnProperty("FocusID")) {
+                    $('#' + replyObject.FocusID).addClass('in');
+                }
+            }
+            if (replyObject && replyObject.hasOwnProperty("CustomMessage")) {
+                $('#messageModalBody').text(replyObject.CustomMessage);
+                if (replyObject.CustomMessage) $('#buttonFeedbackModal').modal({ show: true })
+            }
+        });
+    </script>
+    <div class="modal fade" id="buttonFeedbackModal" tabindex="-1" role="dialog" aria-labelledby="buttonFeedbackModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="buttonFeedbackModalLabel">Message</h4>
+          </div>
+          <div class="modal-body" id="messageModalBody">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Lukk</button>
+          </div>
+        </div>
+      </div>
     </div>
 </asp:Content>

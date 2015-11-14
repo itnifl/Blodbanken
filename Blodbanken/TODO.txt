@@ -1,15 +1,13 @@
-﻿AdminArea - her må i ha valiationgroups eller noe liknende slik at bare det som er aktuelt valideres for en submit knapp
-Ordne pekeren finere i lenkelisten mellom workflowitems
+﻿(hjemme)Ordne pekeren finere i lenkelisten mellom workflowitems
 Booking kontrollerne (helseundersøkelse, donortime og parkering) må alle kunne vise hva som kan bookes og deretter kunne booke det.
 Lag funksjonalitet mot database og knytt opp mot GUI 
-	+ vis feedback etter bruk a knapp 
-	+ legg på funksjonalitet av cancel knapp:
-		?Opprett bruker - ok - feedback mangler på knapper + sjekk at bruker ikke finnes fra før
-		Endre bruker - ok - feedback mangler på knapper
-		Slett bruker - knapp aktivert bare hvis man er Admin
-		Book donortime, timebooking + parkeringsbooking - gui må ha info om ledige timer ved valg av dato, og deretter mulighet for valg av time
-		Lag den automatiske bookeren, og la den kunne konfigureres
-		Skjemaer og Helseundersøkelser - disse kan slås sammen i admin sidene - database funksjonalitet for begge må opprettes
-			Eventuelt må forskjellen gjøres klart
-			Den ene gir mulighet til sletting av skjemaer og den andre gir mulighet til å godkjenne de.
-		Bruk UpdatePassword for passord, bruk UpdateUser for all annen data
+	(tog)Opprett bruker - ok - feedback mangler på knapper i UxerCreator.aspx
+	(tog)Endre bruker - ok - feedback mangler på knapper UserArea.aspx
+		
+	Slett bruker - mangler
+	Book donortime, timebooking + parkeringsbooking - gui må ha info om ledige timer ved valg av dato, og deretter mulighet for valg av time
+	Lag den automatiske bookeren, og la den kunne konfigureres
+	Skjemaer og Helseundersøkelser - disse kan slås sammen i admin sidene - database funksjonalitet for begge må opprettes
+		Eventuelt må forskjellen gjøres klart
+		Den ene gir mulighet til sletting av skjemaer og den andre gir mulighet til å godkjenne de.
+	Bruk UpdatePassword for passord, bruk UpdateUser for all annen data

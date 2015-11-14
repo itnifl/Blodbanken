@@ -171,7 +171,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeEngines\AuthenticatonModule.cs" />
+    <Compile Include="CodeEngines\ExtensionMetods.cs" />
     <Compile Include="CodeEngines\FormModule.cs" />
+    <Compile Include="CodeEngines\HelperClasses.cs" />
     <Compile Include="CodeEngines\TimeBooker.cs" />
     <Compile Include="Controls\AutoBookerSettingsControl.ascx.cs">
       <DependentUpon>AutoBookerSettingsControl.ascx</DependentUpon>

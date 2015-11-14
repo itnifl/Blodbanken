@@ -17,7 +17,7 @@
         <div class="col-md-6">
             <div style="width:172px; margin: 0 auto;">
                 <asp:Calendar ID="calAvailableParkingDate1" runat="server" Width="172" Height="172" ></asp:Calendar>              
-                <input id="txtParkTimePicker1" name="txtParkTimePicker1" placeholder="Velg tidspunkt" type="text" style="margin-top: 8px;" class="form-control input-md" required=""/>              
+                <input id="txtParkTimePicker1" name="txtParkTimePicker1" placeholder="Velg tidspunkt" type="text" style="margin-top: 8px;" class="form-control input-md"/>              
                 <button id="btnBookParking1" name="btnBookParking1" class="btn btn-success" style="margin-left: 16px;margin-top: 8px;">Book</button>
                 <button id="btnCancelParking2" name="btnCancelParking2" class="btn btn-danger" style="margin-top: 8px;">Avbryt</button>
             </div>

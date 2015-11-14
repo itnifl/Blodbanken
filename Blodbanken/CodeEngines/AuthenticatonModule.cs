@@ -38,23 +38,36 @@ namespace Blodbanken.CodeEngines {
          if (ValidateCredentialData(userName, passWord)) {
             SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
             conn.Open();
-            SqlCommand cmd = new SqlCommand("INSERT INTO Users (logonName,password,userRole) values(@userName,@passWord,@userRole)", conn);
-            cmd.Parameters.Add("@userName", SqlDbType.VarChar, 35);
-            cmd.Parameters["@userName"].Value = userName;
 
-            string hashedPassword = String.Empty;
-            using (MD5 md5Hash = MD5.Create()) {
-               hashedPassword = GetMd5Hash(md5Hash, passWord);
+            SqlCommand checkExistance = new SqlCommand("SELECT * FROM Users WHERE logonName=@userName", conn);
+            checkExistance.Parameters.Add("@userName", SqlDbType.VarChar, 35);
+            checkExistance.Parameters["@userName"].Value = userName;
+
+            var reader = checkExistance.ExecuteReader();
+            if (!reader.HasRows) {
+               reader.Close();
+               checkExistance.Dispose();
+               SqlCommand cmd = new SqlCommand("INSERT INTO Users (logonName,password,userRole) values(@userName,@passWord,@userRole)", conn);
+               cmd.Parameters.Add("@userName", SqlDbType.VarChar, 35);
+               cmd.Parameters["@userName"].Value = userName;
+
+               string hashedPassword = String.Empty;
+               using (MD5 md5Hash = MD5.Create()) {
+                  hashedPassword = GetMd5Hash(md5Hash, passWord);
+               }
+               cmd.Parameters.Add("@passWord", SqlDbType.VarChar, 35);
+               cmd.Parameters["@passWord"].Value = hashedPassword;
+
+               cmd.Parameters.Add("@userRole", SqlDbType.VarChar, 35);
+               cmd.Parameters["@userRole"].Value = role.ToString();
+
+               rowsUpdated = cmd.ExecuteNonQuery();
+               cmd.Dispose();
             }
-            cmd.Parameters.Add("@passWord", SqlDbType.VarChar, 35);
-            cmd.Parameters["@passWord"].Value = hashedPassword;
-
-            cmd.Parameters.Add("@userRole", SqlDbType.VarChar, 35);
-            cmd.Parameters["@userRole"].Value = role.ToString();
-
-            rowsUpdated = cmd.ExecuteNonQuery();
-
-            cmd.Dispose();
+            else {
+               reader.Close();
+               checkExistance.Dispose();
+            }            
             conn.Dispose();
          }
          return rowsUpdated == 0 ? false : true;

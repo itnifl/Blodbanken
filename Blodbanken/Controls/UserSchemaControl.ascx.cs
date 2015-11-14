@@ -13,8 +13,10 @@ namespace Blodbanken.Controls {
       protected void Page_Load(object sender, EventArgs e) {
 
       }
-      public void DeleteForm(object sender, EventArgs e) {
-         FormMaster.DeleteForm(CurrentUser, 0);
+      public void DeleteForm(object sender, CommandEventArgs e) {
+         if (e.CommandName == btnDeleteUserForm.CommandName) {
+            FormMaster.DeleteForm(CurrentUser, 0);
+         }         
       }
    }
 }

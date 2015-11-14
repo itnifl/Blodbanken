@@ -5,10 +5,12 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Blodbanken.CodeEngines;
+using Newtonsoft.Json;
 
 namespace Blodbanken.Controls {
    public partial class UserCreatorFormControl : System.Web.UI.UserControl {
       AuthenticatonModule AuthMod = new AuthenticatonModule();
+      public event Action<string> MessageReporter;
       public string CurrentUser { get; set; }
       protected void Page_Load(object sender, EventArgs e) {
          System.Security.Principal.GenericPrincipal myUser = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
@@ -21,25 +23,30 @@ namespace Blodbanken.Controls {
             }
          }
       }
-      public void CreateUser(object sender, EventArgs e) {
-         string username = txtUsername.Value;
-         string password = String.Empty;
-         if (txtPassword1.Value == txtPassword2.Value) {
-            password = txtPassword1.Value;
+      public void CreateUser(object sender, CommandEventArgs e) {
+         if (e.CommandName == btnCreate.CommandName) {
+            string username = txtUsername.Value;
+            string password = String.Empty;
+            if (txtPassword1.Value == txtPassword2.Value) {
+               password = txtPassword1.Value;
+            }
+            UserRole usrRole = UserRole.Viewer;
+            switch (selectRole.Value.ToString().ToLower()) {
+               case "admin":
+                  usrRole = UserRole.Admin;
+                  break;
+               case "donor":
+                  usrRole = UserRole.Donor;
+                  break;
+               case "viewer":
+                  usrRole = UserRole.Viewer;
+                  break;
+            }
+            bool status = AuthMod.CreateUser(username, password, usrRole);
+            if (MessageReporter != null) {
+               MessageReporter(status ? "Creation of user '"+ username + "' succeeded" : "Creation of user '" + username + "' failed");
+            }
          }
-         UserRole usrRole = UserRole.Viewer;
-         switch (selectRole.Value.ToString().ToLower()) {
-            case "admin":
-               usrRole = UserRole.Admin;
-               break;
-            case "donor":
-               usrRole = UserRole.Donor;
-               break;
-            case "viewer":
-               usrRole = UserRole.Viewer;
-               break;
-         }
-         AuthMod.CreateUser(username, password, usrRole);
       }
    }
 }
