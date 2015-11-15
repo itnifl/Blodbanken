@@ -6,7 +6,7 @@
         <label class="col-md-4 control-label" for="txtUsername">Brukernavn</label>  
         <asp:RequiredFieldValidator Validationgroup="UserCreatorForm" Display="Dynamic" runat="server" ControlToValidate="txtUsername" style="color:red;" ErrorMessage="<b>* Brukernavn må fylles inn</b>" />
         <div class="col-md-4">
-        <input id="txtUsername" name="txtUsername" type="text" placeholder="Brukernavn" class="form-control input-md" required="" runat="server" />
+        <input id="txtUsername" name="txtUsername" type="text" placeholder="Brukernavn" class="form-control input-md" runat="server" />
     
         </div>
     </div>
@@ -18,7 +18,7 @@
         <asp:RegularExpressionValidator Validationgroup="UserCreatorForm" Display="Dynamic" runat="server" ControlToValidate="txtPassword1" style="color:red;" ValidationExpression="(^(?:(?=.*[a-z])(?:(?=.*[A-Z])(?=.*[\d\W])|(?=.*\W)(?=.*\d))|(?=.*\W)(?=.*[A-Z])(?=.*\d)).{8,}$)" ErrorMessage="<b>* Feil passordkompleksitet.</b>"/>
         <asp:CompareValidator Validationgroup="UserCreatorForm" Display="Dynamic" runat="server" id="cmpNumbers" controltovalidate="txtPassword1" style="color:red;" controltocompare="txtPassword2" operator="Equal" type="String" errormessage="<br/><b>* Begge passord må være like.</b>" />
         <div class="col-md-4">
-        <input id="txtPassword1" name="txtPassword1" type="password" placeholder="Passord" class="form-control input-md" required="" runat="server" />
+        <input id="txtPassword1" name="txtPassword1" type="password" placeholder="Passord" class="form-control input-md" runat="server" />
     
         </div>
     </div>
@@ -29,7 +29,7 @@
         <asp:RequiredFieldValidator Validationgroup="UserCreatorForm" Display="Dynamic" runat="server" ControlToValidate="txtPassword2" style="color:red;" ErrorMessage="<b>* Passord må fylles inn</b>" />
         <asp:RegularExpressionValidator Validationgroup="UserCreatorForm" Display="Dynamic" runat="server" ControlToValidate="txtPassword2" style="color:red;" ValidationExpression="(^(?:(?=.*[a-z])(?:(?=.*[A-Z])(?=.*[\d\W])|(?=.*\W)(?=.*\d))|(?=.*\W)(?=.*[A-Z])(?=.*\d)).{8,}$)" ErrorMessage="<b>* Feil passordkompleksitet.</b>"/>
         <div class="col-md-4">
-        <input id="txtPassword2" name="txtPassword2" type="password" placeholder="Passord" class="form-control input-md" required="" runat="server" />
+        <input id="txtPassword2" name="txtPassword2" type="password" placeholder="Passord" class="form-control input-md" runat="server" />
     
         </div>
     </div>

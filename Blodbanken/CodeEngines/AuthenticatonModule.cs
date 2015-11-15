@@ -31,7 +31,16 @@ namespace Blodbanken.CodeEngines {
       }
 
       public bool DeleteUser(string userName) {
-         throw new NotImplementedException();
+         int rowsUpdated = 0;
+         SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
+         conn.Open();
+         SqlCommand cmd = new SqlCommand("DELETE FROM Users WHERE logonName=@userName", conn);
+         cmd.Parameters.Add("@userName", SqlDbType.VarChar, 35);
+         cmd.Parameters["@userName"].Value = userName;
+         rowsUpdated = cmd.ExecuteNonQuery();
+         cmd.Dispose();
+         conn.Dispose();
+         return rowsUpdated == 0 ? false : true;
       }
       public bool CreateUser(string userName, string passWord, UserRole role) {
          int rowsUpdated = 0;

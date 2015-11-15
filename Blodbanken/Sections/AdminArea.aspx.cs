@@ -26,6 +26,7 @@ namespace Blodbanken.Sections {
       }
       private String GetFocusSection(Button button) {
          if (button.ID == "btnCreate") return "itemUserEditor";
+         if (button.ID == "btnDeleteUser") return "itemUserDeletor";
          return "";
       }
       private T CastToType<T>(object input) {
@@ -36,14 +37,17 @@ namespace Blodbanken.Sections {
 
          if (IsPostBack) {
             Control selectedControl = Page.GetPostBackControlId();
-            if (selectedControl.GetType() == typeof(DropDownList)) {
-               var control = CastToType<DropDownList>(selectedControl);
-               CurrentUser = control.SelectedItem.Text;
-               __activeFocus = this.GetFocusSection(control);
-            } else if (selectedControl.GetType() == typeof(Button)) {
-               var control = CastToType<Button>(selectedControl);
-               __activeFocus = this.GetFocusSection(control);
-            }            
+            if (selectedControl != null) {
+               if (selectedControl.GetType() == typeof(DropDownList)) {
+                  var control = CastToType<DropDownList>(selectedControl);
+                  CurrentUser = control.SelectedItem.Text;
+                  __activeFocus = this.GetFocusSection(control);
+               }
+               else if (selectedControl.GetType() == typeof(Button)) {
+                  var control = CastToType<Button>(selectedControl);
+                  __activeFocus = this.GetFocusSection(control);
+               }
+            }                     
          }
 
          DropDownList[] selectArray = { selectChangeUser1 , selectDeleteUser1, selectUserForSchemaEdit, selectUserForConsentEdit, selectUserForWorkflowEdit, selectUserForExaminationAccept };
@@ -81,6 +85,7 @@ namespace Blodbanken.Sections {
          if (selectDeleteUser1.SelectedItem != null) {
             UserDeleteControl selectDeleteUser1Ctrl = (UserDeleteControl)Page.LoadControl("~/Controls/UserDeleteControl.ascx");
             selectDeleteUser1Ctrl.CurrentUser = this.selectDeleteUser1.SelectedValue;
+            selectDeleteUser1Ctrl.MessageReporter += SelectDeleteUser1Ctrl_MessageReporter;
             deleteUserPlaceHolder.Controls.Add(selectDeleteUser1Ctrl);
          }
          if (selectUserForSchemaEdit.SelectedItem != null) {
@@ -88,6 +93,11 @@ namespace Blodbanken.Sections {
             selectUserForSchemaEditCtrl.CurrentUser = this.selectDeleteUser1.SelectedValue;
             SchemaEditPlaceHolder.Controls.Add(selectUserForSchemaEditCtrl);
          }
+         responsebox.InnerText = JsonConvert.SerializeObject(new ReplyObject(true, __activeFocus, CustomMessage));
+      }
+
+      private void SelectDeleteUser1Ctrl_MessageReporter(string message) {
+         this.CustomMessage = message;
          responsebox.InnerText = JsonConvert.SerializeObject(new ReplyObject(true, __activeFocus, CustomMessage));
       }
 

@@ -44,7 +44,7 @@ namespace Blodbanken.Controls {
             }
             bool status = AuthMod.CreateUser(username, password, usrRole);
             if (MessageReporter != null) {
-               MessageReporter(status ? "Creation of user '"+ username + "' succeeded" : "Creation of user '" + username + "' failed");
+               MessageReporter(status ? "Oppretting av bruker '"+ username + "' fullført" : "Oppretting av bruker '" + username + "' feilet");
             }
          }
       }

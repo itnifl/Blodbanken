@@ -10,6 +10,7 @@ namespace Blodbanken.Controls {
    public partial class UserDeleteControl : System.Web.UI.UserControl {
       public string CurrentUser { get; set; }
       AuthenticatonModule AuthMod = new AuthenticatonModule();
+      public event Action<string> MessageReporter;
       protected void Page_Load(object sender, EventArgs e) {
          System.Security.Principal.GenericPrincipal myUser = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
          if (myUser != null)
@@ -19,9 +20,13 @@ namespace Blodbanken.Controls {
          else btnDeleteUser.Visible = false;
       }
       public void DeleteUser(object sender, CommandEventArgs e) {
+         bool status = false;
          if (e.CommandName == btnDeleteUser.CommandName) {
-            AuthMod.DeleteUser(CurrentUser);
-         }         
+            status = AuthMod.DeleteUser(CurrentUser);
+         }
+         if (MessageReporter != null) {
+            MessageReporter(status ? "Bruker '" + CurrentUser + "' ble slettet": "Sletting a bruker '" + CurrentUser + "' feilet");
+         }
       }
    }
 }
