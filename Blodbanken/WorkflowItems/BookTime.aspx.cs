@@ -14,8 +14,8 @@ namespace Blodbanken.WorkflowItems {
          if ((HttpContext.Current.User != null) && HttpContext.Current.User.Identity.IsAuthenticated) {
             BloodDonorForm.CurrentUser = HttpContext.Current.User.Identity.Name;
          }
-         BottomNavBar.CurrentLink = "/WorkflowItems/BookParking.aspx";
-         BottomNavBar.CurrentLinkText = "<ul><li><b>Book Parkering</b></li></ul>";
+         BottomNavBar.PrevLink = "/WorkflowItems/BookMedicalExamination.aspx";
+         BottomNavBar.NextLink = "/WorkflowItems/BookParking.aspx";
       }
    }
 }

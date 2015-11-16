@@ -74,6 +74,7 @@ namespace Blodbanken.Sections {
          if (selectUserForConsentEdit.SelectedItem != null) {
             ConsentEditControl selectUserForConsentEditCtrl = (ConsentEditControl)Page.LoadControl("~/Controls/ConsentEditControl.ascx");
             selectUserForConsentEditCtrl.CurrentUser = this.selectUserForConsentEdit.SelectedValue;
+            selectUserForConsentEditCtrl.RadiosEnabled = false;
             this.consentEditPlaceHolder.Controls.Add(selectUserForConsentEditCtrl);
          }
          if (selectChangeUser1.SelectedItem != null) {

@@ -1,8 +1,6 @@
-﻿(tog)Ordne pekeren finere i lenkelisten mellom workflowitems - pagination
-Lag funksjonalitet mot database og knytt opp mot GUI 
-	(tog)Opprett bruker - ok - feedback mangler på knapper i UserCreator.aspx
-	(tog)Flytt beskjed modalen inn i en egen kontroll
-		
+﻿<asp:HyperLink peker ret på mappa og ikke på sida, hvordan fikse dette?
+ConsentEditControl - her skal hvert ja-nei par være ett valg, i dag er alle par ett valg.
+Lag funksjonalitet mot database og knytt opp mot GUI 			
 	Book donortime, timebooking + parkeringsbooking - gui må ha info om ledige timer ved valg av dato, og deretter mulighet for valg av time
 	Booking kontrollerne (helseundersøkelse, donortime og parkering) må alle kunne vise hva som kan bookes og deretter kunne booke det.
 
@@ -12,6 +10,3 @@ Lag funksjonalitet mot database og knytt opp mot GUI
 		Den ene gir mulighet til sletting av skjemaer og den andre gir mulighet til å godkjenne de.
 
 	Bruk UpdatePassword for passord, bruk UpdateUser for all annen data
-
-Utført:
-	(tog)Endre bruker - ok - feedback mangler på knapper UserArea.aspx

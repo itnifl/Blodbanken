@@ -20,6 +20,7 @@ namespace Blodbanken.Public {
       public static string LogOffUser() {
          FormsAuthentication.SignOut();
          GenericPrincipal myUser = (GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
+         myUser = null;
          System.Threading.Thread.CurrentPrincipal = null;
 
          UserIdentity id = new UserIdentity();

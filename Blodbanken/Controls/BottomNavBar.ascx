@@ -4,13 +4,14 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="/Index.aspx"><asp:label ID="bottomNavBarBrand" runat="server"></asp:label></a>
-        </div>
-
+        </div>        
         <div class="collapse navbar-collapse" id="mainBottomNav">
             <ul class="nav navbar-nav navbar-right">
-                <li id="lssNextLink" runat="server">
-                   <asp:HyperLink runat="server" id="aNextLink" href=""></asp:HyperLink>
-
+                <li id="lssNextLink" runat="server">                   
+                    <ul class = "pagination">
+                        <li><asp:HyperLink runat="server" id="aPrevLink" href="" Text="&laquo;">&laquo;</asp:HyperLink></li>
+                        <li><asp:HyperLink runat="server" id="aNextLink" href="" Text="&raquo;">&raquo;</asp:HyperLink></li>
+                    </ul>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->

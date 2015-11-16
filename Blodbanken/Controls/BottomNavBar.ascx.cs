@@ -7,11 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace Blodbanken.Controls {
    public partial class BottomNavBar : System.Web.UI.UserControl {
-      public string CurrentLink { get; set; }
-      public string CurrentLinkText { get; set; }
+      public string NextLink { get; set; }
+      public string PrevLink { get; set; }
       protected void Page_Load(object sender, EventArgs e) {
-         aNextLink.NavigateUrl = CurrentLink;
-         aNextLink.Text = CurrentLinkText;
+         aNextLink.NavigateUrl = NextLink;
+         aPrevLink.NavigateUrl = PrevLink;
       }
    }
 }

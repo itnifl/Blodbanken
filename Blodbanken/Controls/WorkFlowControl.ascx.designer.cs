@@ -13,24 +13,6 @@ namespace Blodbanken.Controls {
     public partial class WorkFlowControl {
         
         /// <summary>
-        /// workflowCreateUser control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl workflowCreateUser;
-        
-        /// <summary>
-        /// errorInfo1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorInfo1;
-        
-        /// <summary>
         /// workflowConsent control.
         /// </summary>
         /// <remarks>
@@ -49,22 +31,22 @@ namespace Blodbanken.Controls {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorInfo2;
         
         /// <summary>
-        /// workflowExamination control.
+        /// workflowCreateUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl workflowExamination;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl workflowCreateUser;
         
         /// <summary>
-        /// errorInfo3 control.
+        /// errorInfo1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorInfo3;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorInfo1;
         
         /// <summary>
         /// workflowSchema control.
@@ -83,6 +65,24 @@ namespace Blodbanken.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorInfo4;
+        
+        /// <summary>
+        /// workflowExamination control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl workflowExamination;
+        
+        /// <summary>
+        /// errorInfo3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorInfo3;
         
         /// <summary>
         /// workflowBookAppointment control.

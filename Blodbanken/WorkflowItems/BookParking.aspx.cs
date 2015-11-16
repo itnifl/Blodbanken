@@ -14,8 +14,8 @@ namespace Blodbanken.WorkflowItems {
          if ((HttpContext.Current.User != null) && HttpContext.Current.User.Identity.IsAuthenticated) {
             ParkBookingForm.CurrentUser = HttpContext.Current.User.Identity.Name;
          }
-         BottomNavBar.CurrentLink = "/WorkflowItems/PersInfoPage.aspx";
-         BottomNavBar.CurrentLinkText = "<ul><li><b>Oppgi personalia</b></li></ul>";
+         BottomNavBar.PrevLink = "/WorkflowItems/BookTime.aspx";
+         BottomNavBar.NextLink = "/WorkflowItems/PersInfoConsent.aspx";
       }
    }
 }

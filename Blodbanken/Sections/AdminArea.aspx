@@ -108,29 +108,8 @@
                          <div class="list-group" id="lstgrpDiverseEditor">
                             <a href="#" class="list-group-item active">
                                Annet
-                            </a>
-                            <a href="#itemSchemaEdit" id="headingSchemaEdit" class="list-group-item collapsed list-group-item-header" data-toggle="collapse" data-parent="#lstgrpDiverseEditor" aria-expanded="false" aria-controls="itemSchemaEdit">Skjemaer</a>
-                            <div id="itemSchemaEdit" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSchemaEdit">
-                              <div class="well well-sm well-custom">
-                                 <fieldset>
-                                    <!-- Select Basic -->
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" for="selectUserForSchemaEdit">Velg bruker</label>
-                                        <div class="col-md-4">
-                                            <asp:DropDownList id="selectUserForSchemaEdit" name="selectUserForSchemaEdit" class="form-control" runat="server" AutoPostBack="True">
-
-                                            </asp:DropDownList>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-md-12" id="SchemaEditPlaceHolder" runat="server">
-                                            <!-- mangler -->
-                                        </div>
-                                    </div>
-                                </fieldset>
-                              </div>
-                            </div>
-                            <a href="#itemConsentEdit" id="headingConsentEdit" class="list-group-item collapsed list-group-item-header" data-toggle="collapse" data-parent="#lstgrpDiverseEditor" aria-expanded="false" aria-controls="itemConsentEdit">Samtykker</a>
+                            </a>                            
+                            <a href="#itemConsentEdit" id="headingConsentEdit" class="list-group-item collapsed list-group-item-header" data-toggle="collapse" data-parent="#lstgrpDiverseEditor" aria-expanded="false" aria-controls="itemConsentEdit">Samtykke personopplysninger</a>
                             <div id="itemConsentEdit" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingConsentEdit">
                               <div class="well well-sm well-custom">
                                 <fieldset>
@@ -151,7 +130,7 @@
                                 </fieldset>
                               </div>
                             </div>
-                            <a href="#itemWorkflowEdit" id="headingWorkflowEdit" class="list-group-item collapsed list-group-item-header" data-toggle="collapse" data-parent="#lstgrpDiverseEditor" aria-expanded="false" aria-controls="itemWorkflowEdit">Handlinger</a>
+                            <a href="#itemWorkflowEdit" id="headingWorkflowEdit" class="list-group-item collapsed list-group-item-header" data-toggle="collapse" data-parent="#lstgrpDiverseEditor" aria-expanded="false" aria-controls="itemWorkflowEdit">Bruker Registreringer</a>
                             <div id="itemWorkflowEdit" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingWorkflowEdit">
                               <div class="well well-sm well-custom">
                                 <fieldset>
@@ -172,7 +151,7 @@
                                 </fieldset>
                               </div>
                             </div>
-                            <a href="#itemExaminationAccept" id="headingExaminationAccept" class="list-group-item collapsed list-group-item-header" data-toggle="collapse" data-parent="#lstgrpDiverseEditor" aria-expanded="false" aria-controls="itemWorkflowEdit">Helseundersøkelser</a>
+                            <a href="#itemExaminationAccept" id="headingExaminationAccept" class="list-group-item collapsed list-group-item-header" data-toggle="collapse" data-parent="#lstgrpDiverseEditor" aria-expanded="false" aria-controls="itemWorkflowEdit">Helseundersøkelser - Godkjennelse</a>
                             <div id="itemExaminationAccept" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingExminationAccept">
                               <div class="well well-sm well-custom">
                                 <fieldset>
@@ -187,6 +166,27 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-12" id="workflowExaminationAcceptPlaceHolder" runat="server">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                              </div>
+                            </div>
+                            <a href="#itemSchemaEdit" id="headingSchemaEdit" class="list-group-item collapsed list-group-item-header" data-toggle="collapse" data-parent="#lstgrpDiverseEditor" aria-expanded="false" aria-controls="itemSchemaEdit">Helseundersøkelser - Sletting</a>
+                            <div id="itemSchemaEdit" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSchemaEdit">
+                              <div class="well well-sm well-custom">
+                                 <fieldset>
+                                    <!-- Select Basic -->
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="selectUserForSchemaEdit">Velg bruker</label>
+                                        <div class="col-md-4">
+                                            <asp:DropDownList id="selectUserForSchemaEdit" name="selectUserForSchemaEdit" class="form-control" runat="server" AutoPostBack="True">
+
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12" id="SchemaEditPlaceHolder" runat="server">
+                                            <!-- mangler -->
                                         </div>
                                     </div>
                                 </fieldset>

@@ -112,24 +112,6 @@ namespace Blodbanken.Sections {
         protected global::Blodbanken.Controls.AutoBookerSettingsControl AutoBookerSettings;
         
         /// <summary>
-        /// selectUserForSchemaEdit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList selectUserForSchemaEdit;
-        
-        /// <summary>
-        /// SchemaEditPlaceHolder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl SchemaEditPlaceHolder;
-        
-        /// <summary>
         /// selectUserForConsentEdit control.
         /// </summary>
         /// <remarks>
@@ -182,6 +164,24 @@ namespace Blodbanken.Sections {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl workflowExaminationAcceptPlaceHolder;
+        
+        /// <summary>
+        /// selectUserForSchemaEdit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList selectUserForSchemaEdit;
+        
+        /// <summary>
+        /// SchemaEditPlaceHolder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl SchemaEditPlaceHolder;
         
         /// <summary>
         /// MessageModuleControl control.
