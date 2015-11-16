@@ -1,14 +1,17 @@
-﻿(hjemme)Ordne pekeren finere i lenkelisten mellom workflowitems
-Booking kontrollerne (helseundersøkelse, donortime og parkering) må alle kunne vise hva som kan bookes og deretter kunne booke det.
+﻿(tog)Ordne pekeren finere i lenkelisten mellom workflowitems - pagination
 Lag funksjonalitet mot database og knytt opp mot GUI 
 	(tog)Opprett bruker - ok - feedback mangler på knapper i UserCreator.aspx
-	(tog)Endre bruker - ok - feedback mangler på knapper UserArea.aspx
+	(tog)Flytt beskjed modalen inn i en egen kontroll
 		
 	Book donortime, timebooking + parkeringsbooking - gui må ha info om ledige timer ved valg av dato, og deretter mulighet for valg av time
+	Booking kontrollerne (helseundersøkelse, donortime og parkering) må alle kunne vise hva som kan bookes og deretter kunne booke det.
+
 	Lag den automatiske bookeren, og la den kunne konfigureres
 	Skjemaer og Helseundersøkelser - disse kan slås sammen i admin sidene - database funksjonalitet for begge må opprettes
 		Eventuelt må forskjellen gjøres klart
 		Den ene gir mulighet til sletting av skjemaer og den andre gir mulighet til å godkjenne de.
+
 	Bruk UpdatePassword for passord, bruk UpdateUser for all annen data
 
-	La til: sletting av bruker
+Utført:
+	(tog)Endre bruker - ok - feedback mangler på knapper UserArea.aspx

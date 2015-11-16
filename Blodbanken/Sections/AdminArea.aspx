@@ -4,11 +4,10 @@
 <%@ Register TagPrefix="uc" TagName="BloodDonorBooking" Src="~/Controls/BookingControl2.ascx" %>
 <%@ Register TagPrefix="uc" TagName="ParkingBooking" Src="~/Controls/ParkingBookingControl1.ascx" %>
 <%@ Register TagPrefix="uc" TagName="AutoBookerSettings" Src="~/Controls/AutoBookerSettingsControl.ascx" %>
+<%@ Register TagPrefix="uc" TagName="MessageModuleControl" Src="~/Controls/MessageModuleControl.ascx" %>
 
 <asp:Content ID="MainPage" ContentPlaceHolderID="MainPage" Runat="Server">
-    <div runat="server" id="responsebox" style="visibility:hidden">
-
-    </div>
+    <div runat="server" id="responsebox" style="visibility:hidden"></div>
     <link rel="stylesheet" type="text/css" href="/Content/themes/base/all.css" />
     <link rel="stylesheet" href="/Content/jquery.ptTimeSelect.css" />
     <script src="/Scripts/jquery.ptTimeSelect.js" type="text/javascript"></script>
@@ -199,39 +198,5 @@
             </div>
         </form>
     </div>
-    <script type="text/javascript">
-        var replyObject;
-        $(document).ready(function () {
-            var jsonReply = $('#MainPage_responsebox').text();
-            if(jsonReply) {
-                replyObject = JSON.parse(jsonReply);
-            }
-            if (replyObject && replyObject.hasOwnProperty("RequestStatus")) {
-                //Show status here
-                //Set Focus
-                if (replyObject.hasOwnProperty("FocusID")) {
-                    $('#' + replyObject.FocusID).addClass('in');
-                }
-            }
-            if (replyObject && replyObject.hasOwnProperty("CustomMessage")) {
-                $('#messageModalBody').text(replyObject.CustomMessage);
-                if (replyObject.CustomMessage) $('#buttonFeedbackModal').modal({ show: true })
-            }
-        });
-    </script>
-    <div class="modal fade" id="buttonFeedbackModal" tabindex="-1" role="dialog" aria-labelledby="buttonFeedbackModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title" id="buttonFeedbackModalLabel">Message</h4>
-          </div>
-          <div class="modal-body" id="messageModalBody">
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Lukk</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <uc:MessageModuleControl id="MessageModuleControl" runat="server"/>
 </asp:Content>

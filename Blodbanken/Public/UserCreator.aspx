@@ -1,6 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UserCreator.aspx.cs" Inherits="Blodbanken.Sections.UserCreator" MasterPageFile="~/Master.master" Title="Blodbanken"%>
 <%@ Register TagPrefix="uc" TagName="UserCreatorForm" Src="~/Controls/UserCreatorFormControl.ascx" %>
+<%@ Register TagPrefix="uc" TagName="MessageModuleControl" Src="~/Controls/MessageModuleControl.ascx" %>
 <asp:Content ID="MainPage" ContentPlaceHolderID="MainPage" Runat="Server">
+    <div runat="server" id="responsebox" style="visibility:hidden"></div>
     <div class="jumbotron topPlacement" style="margin-left:100px;margin-right:100px;padding:20px;">
         <form id="frmCreateUser" runat="server" class="form-horizontal">
             <div id="inlineContainer">
@@ -22,5 +24,6 @@
             </div>
         </form>
     </div>
+    <uc:MessageModuleControl id="MessageModuleControl" runat="server"/>
 </asp:Content>
 

@@ -6,12 +6,15 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Blodbanken.CodeEngines;
 using Blodbanken.Controls;
+using Newtonsoft.Json;
 
 namespace Blodbanken.Sections {
    public partial class UserArea : System.Web.UI.Page {
       AuthenticatonModule AuthMod = new AuthenticatonModule();
       public string CurrentUser { get; set; }
       private string fullName;
+      public string CustomMessage { get; set; }
+      private string __activeFocus { get; set; }
       protected void Page_Load(object sender, EventArgs e) {
          System.Security.Principal.GenericPrincipal myUser = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
          if (myUser != null)
@@ -41,11 +44,17 @@ namespace Blodbanken.Sections {
             if (!String.IsNullOrEmpty(CurrentUser)) {
                UserEditControl selectChangeUser1Ctrl = (UserEditControl)Page.LoadControl("~/Controls/UserEditControl.ascx");
                selectChangeUser1Ctrl.CurrentUser = CurrentUser;
+               selectChangeUser1Ctrl.MessageReporter += SelectChangeUser1Ctrl_MessageReporter;
                changeUserPlaceHolder.Controls.Add(selectChangeUser1Ctrl);
             }
          } else {
             Response.Redirect("/Public/Login.aspx");
          }
+      }
+
+      private void SelectChangeUser1Ctrl_MessageReporter(string message) {
+         this.CustomMessage = message;
+         responsebox.InnerText = JsonConvert.SerializeObject(new ReplyObject(true, __activeFocus, CustomMessage));
       }
    }
 }

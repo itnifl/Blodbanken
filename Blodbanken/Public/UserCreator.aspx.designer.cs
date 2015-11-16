@@ -13,6 +13,15 @@ namespace Blodbanken.Sections {
     public partial class UserCreator {
         
         /// <summary>
+        /// responsebox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl responsebox;
+        
+        /// <summary>
         /// frmCreateUser control.
         /// </summary>
         /// <remarks>
@@ -29,5 +38,14 @@ namespace Blodbanken.Sections {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Blodbanken.Controls.UserCreatorFormControl UserCreatorForm;
+        
+        /// <summary>
+        /// MessageModuleControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Blodbanken.Controls.MessageModuleControl MessageModuleControl;
     }
 }

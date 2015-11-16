@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UserArea.aspx.cs" Inherits="Blodbanken.Sections.UserArea" MasterPageFile="~/Master.master" Title="Blodbanken"%>
+<%@ Register TagPrefix="uc" TagName="MessageModuleControl" Src="~/Controls/MessageModuleControl.ascx" %>
 <asp:Content ID="MainPage" ContentPlaceHolderID="MainPage" Runat="Server">
+    <div runat="server" id="responsebox" style="visibility:hidden"></div>
     <div class="well topPlacement" style="margin-left:100px;margin-right:100px;padding-top:0px;padding-bottom:0px;">
       <h1 style="margin-top:10px;"><asp:label runat="server" ID="lblLoggedInFullName" /> </h1>
     </div>
@@ -54,4 +56,5 @@
             </div>
         </form>
     </div>
+    <uc:MessageModuleControl id="MessageModuleControl" runat="server"/>
 </asp:Content>

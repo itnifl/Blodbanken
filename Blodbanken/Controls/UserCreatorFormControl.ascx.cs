@@ -21,6 +21,8 @@ namespace Blodbanken.Controls {
             if (!HttpContext.Current.User.IsInRole(UserRole.Admin.ToString())) {
                selectRole.Items.Remove(new ListItem(UserRole.Admin.ToString(), "1"));
             }
+         } else {
+            selectRole.Items.Remove(new ListItem(UserRole.Admin.ToString(), "1"));
          }
       }
       public void CreateUser(object sender, CommandEventArgs e) {
@@ -44,7 +46,7 @@ namespace Blodbanken.Controls {
             }
             bool status = AuthMod.CreateUser(username, password, usrRole);
             if (MessageReporter != null) {
-               MessageReporter(status ? "Oppretting av bruker '"+ username + "' fullført" : "Oppretting av bruker '" + username + "' feilet");
+               MessageReporter(status ? "Oppretting av bruker '"+ username + "' er fullført. Du kan nå logge inn med denne brukeren." : "Oppretting av bruker '" + username + "' feilet");
             }
          }
       }
