@@ -19,12 +19,12 @@
                 </div>
                 <label class="col-md-4 control-label" for="radios">Aksepteres helseundersøkelsen?</label>
                 <div class="col-md-4"> 
-                    <label class="radio-inline" for="radiosAccept-1a">
-                        <input type="radio" name="radios" id="radiosAccept-1a" value="1" />
+                    <label class="radio-inline" for="radiosExaminationAccept1a">
+                        <input type="radio" name="radiosExaminationAccept" id="radiosExaminationAccept1a" runat="server" value="1" />
                         Ja
                     </label> 
-                    <label class="radio-inline" for="radiosAccept-1b">
-                        <input type="radio" name="radios" id="radiosAccept-1b" value="0" />
+                    <label class="radio-inline" for="radiosExaminationAccept1b">
+                        <input type="radio" name="radiosExaminationAccept" id="radiosExaminationAccept1b" runat="server" value="0" />
                         Nei
                     </label>
                 </div>

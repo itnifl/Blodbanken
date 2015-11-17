@@ -16,7 +16,71 @@ namespace Blodbanken.CodeEngines {
    public class FormModule {
       private const string privilegesDatabase = "../App_Data/Privileges.mdf";
 
-      public List<Schema> GetUserInfoForm(string logonName) {
+      public bool DeleteForm(int schemaID) {
+         int rowsUpdated = 0;
+         SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
+         conn.Open();
+         SqlCommand cmd = new SqlCommand("DELETE FROM Schema WHERE schemaID=@schemaID", conn);
+         cmd.Parameters.Add("@schemaID", SqlDbType.Int);
+         cmd.Parameters["@schemaID"].Value = schemaID;
+
+         rowsUpdated = cmd.ExecuteNonQuery();
+
+         cmd.Dispose();
+         conn.Dispose();
+         return rowsUpdated == 0 ? false : true;
+      }
+      public bool SetSMSAccept(string logonName, bool phoneConsent) {
+         int rowsUpdated = 0;
+         SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
+         conn.Open();
+         SqlCommand cmd = new SqlCommand("UPDATE Users SET phoneConsent=@phoneConsent WHERE logonName=@logonName", conn);
+         cmd.Parameters.Add("@logonName", SqlDbType.VarChar, 35);
+         cmd.Parameters["@logonName"].Value = logonName;
+         cmd.Parameters.Add("@phoneConsent", SqlDbType.Int);
+         cmd.Parameters["@phoneConsent"].Value = phoneConsent ? 1 : 0;
+
+         rowsUpdated = cmd.ExecuteNonQuery();
+
+         cmd.Dispose();
+         conn.Dispose();
+         return rowsUpdated == 0 ? false : true;
+      }
+      public bool SetPersInfoAccept(string logonName, bool persInfoConsent) {
+         int rowsUpdated = 0;
+         SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
+         conn.Open();
+         SqlCommand cmd = new SqlCommand("UPDATE Users SET persInfoConsent=@persInfoConsent WHERE logonName=@logonName", conn);
+         cmd.Parameters.Add("@logonName", SqlDbType.VarChar, 35);
+         cmd.Parameters["@logonName"].Value = logonName;
+         cmd.Parameters.Add("@persInfoConsent", SqlDbType.Int);
+         cmd.Parameters["@persInfoConsent"].Value = persInfoConsent ? 1 : 0;
+
+         rowsUpdated = cmd.ExecuteNonQuery();
+
+         cmd.Dispose();
+         conn.Dispose();
+
+         return rowsUpdated == 0 ? false : true;
+      }
+      public bool SetMailAccept(string logonName, bool eMailConsent) {
+         int rowsUpdated = 0;
+         SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
+         conn.Open();
+         SqlCommand cmd = new SqlCommand("UPDATE Users SET eMailConsent=@eMailConsent WHERE logonName=@logonName", conn);
+         cmd.Parameters.Add("@logonName", SqlDbType.VarChar, 35);
+         cmd.Parameters["@logonName"].Value = logonName;
+         cmd.Parameters.Add("@eMailConsent", SqlDbType.Int);
+         cmd.Parameters["@eMailConsent"].Value = eMailConsent ? 1 : 0;
+
+         rowsUpdated = cmd.ExecuteNonQuery();
+
+         cmd.Dispose();
+         conn.Dispose();
+
+         return rowsUpdated == 0 ? false : true;
+      }
+      public List<Schema> GetUserSchemaForm(string logonName) {
          List<Schema> schemas = new List<Schema>();
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
          conn.Open();
@@ -52,9 +116,6 @@ namespace Blodbanken.CodeEngines {
          reader.Close();
          conn.Dispose();
          return schemas;
-      }
-      public bool DeleteForm(string logoName, int schemaID) {
-         throw new NotImplementedException();
       }
    }
    public class Schema {

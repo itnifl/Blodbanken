@@ -16,6 +16,31 @@ namespace Blodbanken.CodeEngines {
    public class TimeBooker {
       private const string privilegesDatabase = "../App_Data/Privileges.mdf";
 
+      public bool SetExaminationBooking(ExaminationBooking booking) {
+         int rowsUpdated = 0;
+         List<ExaminationBooking> bookings = new List<ExaminationBooking>();
+         SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
+         conn.Open();
+         SqlCommand cmd = new SqlCommand("UPDATE ExaminationBooking SET bookingDate=@bookingDate, examinationApproved=@examinationApproved, parkingID=@parkingID WHERE bookingID=@bookingID", conn);
+         cmd.Parameters.Add("@bookingDate", SqlDbType.DateTime);
+         cmd.Parameters["@bookingDate"].Value = booking.BookingDate;
+
+         cmd.Parameters.Add("@examinationApproved", SqlDbType.Int);
+         cmd.Parameters["@examinationApproved"].Value = booking.ExaminationApproved;
+
+         cmd.Parameters.Add("@bookingID", SqlDbType.Int);
+         cmd.Parameters["@bookingID"].Value = booking.BookingID;
+
+         cmd.Parameters.Add("@oarkingID", SqlDbType.Int);
+         cmd.Parameters["@parkingID"].Value = booking.ParkingID;
+
+         rowsUpdated = cmd.ExecuteNonQuery();
+
+         cmd.Dispose();
+         conn.Dispose();
+
+         return rowsUpdated == 0 ? false : true;
+      }
       public List<ParkspaceBooking> GetFutureParkspaceBookingsForDonors(string logonName) {
          List<ParkspaceBooking> bookings = new List<ParkspaceBooking>();
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
@@ -96,6 +121,7 @@ namespace Blodbanken.CodeEngines {
       public int ExaminationApproved { get; set; }
       public string LogonName { get; set; }
       public DateTime BookingDate { get; set; }
+      public int ParkingID { get; set; }
       public ExaminationBooking(int bookingID, DateTime bookingDate, string logonName, int examinationApproved) {
          this.BookingID = bookingID;
          this.BookingDate = bookingDate;

@@ -1,12 +1,13 @@
-﻿<asp:HyperLink peker ret på mappa og ikke på sida, hvordan fikse dette?
-ConsentEditControl - her skal hvert ja-nei par være ett valg, i dag er alle par ett valg.
+﻿<asp:HyperLink peker rett på mappa og ikke på sida, hvordan fikse dette?
+Ta  bruk setSMSAccept og de andre javascript funksjonene for å sette consentaccept
+	+setUserExaminationBookings
+Implementer Ajax for henting av verdier etter valg i lista healthExaminationList i ExaminationAcceptControl
+
 Lag funksjonalitet mot database og knytt opp mot GUI 			
 	Book donortime, timebooking + parkeringsbooking - gui må ha info om ledige timer ved valg av dato, og deretter mulighet for valg av time
 	Booking kontrollerne (helseundersøkelse, donortime og parkering) må alle kunne vise hva som kan bookes og deretter kunne booke det.
 
 	Lag den automatiske bookeren, og la den kunne konfigureres
-	Skjemaer og Helseundersøkelser - disse kan slås sammen i admin sidene - database funksjonalitet for begge må opprettes
-		Eventuelt må forskjellen gjøres klart
-		Den ene gir mulighet til sletting av skjemaer og den andre gir mulighet til å godkjenne de.
+	Fullfør sletting av form.
 
 	Bruk UpdatePassword for passord, bruk UpdateUser for all annen data

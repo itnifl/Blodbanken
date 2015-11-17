@@ -11,11 +11,11 @@ namespace Blodbanken.Controls {
       public string CurrentUser { get; set; }
       FormModule FormMaster = new FormModule();
       protected void Page_Load(object sender, EventArgs e) {
-
+         //FormMaster.GetUserSchemaForm();
       }
       public void DeleteForm(object sender, CommandEventArgs e) {
          if (e.CommandName == btnDeleteUserForm.CommandName) {
-            FormMaster.DeleteForm(CurrentUser, 0);
+            //FormMaster.DeleteForm(sele);
          }         
       }
    }

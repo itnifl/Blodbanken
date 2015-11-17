@@ -26,7 +26,7 @@ namespace Blodbanken.Controls {
                users.Where(usr => !String.IsNullOrEmpty(usr.FirstName) && !String.IsNullOrEmpty(usr.LastName)).ToList().ForEach(user => select.Items.Add(new ListItem(user.FirstName + " " + user.LastName, user.LogonName)));
                users.Where(usr => String.IsNullOrEmpty(usr.FirstName) && String.IsNullOrEmpty(usr.LastName)).ToList().ForEach(user => select.Items.Add(new ListItem(user.LogonName, user.LogonName)));
             }
-            bool userHasFilledInForm = !(Forms.GetUserInfoForm(CurrentUser).Count > 0);
+            bool userHasFilledInForm = !(Forms.GetUserSchemaForm(CurrentUser).Count > 0);
             btnBookExamination1.Disabled = userHasFilledInForm;
             lblPersonQuestionForm.Visible = userHasFilledInForm;
          } else {

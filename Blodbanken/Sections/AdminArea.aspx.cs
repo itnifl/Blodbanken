@@ -7,11 +7,14 @@ using System.Web.UI.WebControls;
 using Blodbanken.CodeEngines;
 using Blodbanken.Controls;
 using Newtonsoft.Json;
+using System.Web.Services;
 
 namespace Blodbanken.Sections {
    public partial class AdminArea : System.Web.UI.Page {
       AuthenticatonModule AuthMod = new AuthenticatonModule();
-      public string CurrentUser { get; set;  }
+      internal static FormModule FormModule = new FormModule();
+      internal static TimeBooker TimeModule = new TimeBooker();
+      public string CurrentUser { get; set; }
       public string CustomMessage { get; set; }
       private string __activeFocus { get; set; }
 
@@ -47,10 +50,10 @@ namespace Blodbanken.Sections {
                   var control = CastToType<Button>(selectedControl);
                   __activeFocus = this.GetFocusSection(control);
                }
-            }                     
+            }
          }
 
-         DropDownList[] selectArray = { selectChangeUser1 , selectDeleteUser1, selectUserForSchemaEdit, selectUserForConsentEdit, selectUserForWorkflowEdit, selectUserForExaminationAccept };
+         DropDownList[] selectArray = { selectChangeUser1, selectDeleteUser1, selectUserForSchemaEdit, selectUserForConsentEdit, selectUserForWorkflowEdit, selectUserForExaminationAccept };
          foreach (DropDownList select in selectArray) {
             select.Items.Clear();
             users.Where(usr => !String.IsNullOrEmpty(usr.FirstName) && !String.IsNullOrEmpty(usr.LastName)).ToList().ForEach(user => select.Items.Add(new ListItem(user.FirstName + " " + user.LastName, user.LogonName)));
@@ -69,6 +72,7 @@ namespace Blodbanken.Sections {
          if (selectUserForExaminationAccept.SelectedItem != null) {
             ExaminationAcceptControl selectUserForExminationAcceptCtrl = (ExaminationAcceptControl)Page.LoadControl("~/Controls/ExaminationAcceptControl.ascx");
             selectUserForExminationAcceptCtrl.CurrentUser = this.selectUserForWorkflowEdit.SelectedValue;
+            selectUserForExminationAcceptCtrl.RadiosEnabled = true;
             this.workflowExaminationAcceptPlaceHolder.Controls.Add(selectUserForExminationAcceptCtrl);
          }
          if (selectUserForConsentEdit.SelectedItem != null) {
@@ -110,6 +114,54 @@ namespace Blodbanken.Sections {
       private void SelectChangeUser1Ctrl_MessageReporter(string message) {
          this.CustomMessage = message;
          responsebox.InnerText = JsonConvert.SerializeObject(new ReplyObject(true, __activeFocus, CustomMessage));
+      }
+      [WebMethod]
+      public static string SetEmailAccept(string logonName, bool accept) {
+         bool runStatus = false;
+         HttpContext.Current.User = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
+         if ((HttpContext.Current.User != null) && (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Vewer") || HttpContext.Current.User.IsInRole("Donor"))) {
+            runStatus = FormModule.SetMailAccept(logonName, accept);
+         }
+         return JsonConvert.SerializeObject(new { runStatus = runStatus });
+      }
+      [WebMethod]
+      public static string SetPersInfoAccept(string logonName, bool accept) {
+         bool runStatus = false;
+         HttpContext.Current.User = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
+         if ((HttpContext.Current.User != null) && (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Vewer") || HttpContext.Current.User.IsInRole("Donor"))) {
+            runStatus = FormModule.SetPersInfoAccept(logonName, accept);
+         }
+         return JsonConvert.SerializeObject(new { runStatus = runStatus });
+      }
+      [WebMethod]
+      public static string SetSMSAccept(string logonName, bool accept) {
+         bool runStatus = false;
+         HttpContext.Current.User = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
+         if ((HttpContext.Current.User != null) && (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Vewer") || HttpContext.Current.User.IsInRole("Donor"))) {
+            runStatus = FormModule.SetSMSAccept(logonName, accept);
+         }
+         return JsonConvert.SerializeObject(new { runStatus = runStatus });
+      }
+      [WebMethod]
+      public static string SetUserExaminationBooking(int bookingID, string bookingDateTime, string logonName, int examinationApproveddtTime, int parkingID) {
+         bool runStatus = false;
+         HttpContext.Current.User = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
+         if ((HttpContext.Current.User != null) && (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Vewer") || HttpContext.Current.User.IsInRole("Donor"))) {
+            DateTime dtTime = DateTime.Parse(bookingDateTime);
+            ExaminationBooking exBooking = new ExaminationBooking(bookingID, dtTime, logonName, examinationApproveddtTime);
+            exBooking.ParkingID = parkingID;
+            runStatus = TimeModule.SetExaminationBooking(exBooking);
+         }
+         return JsonConvert.SerializeObject(new { runStatus = runStatus });
+      }
+      [WebMethod]
+      public static string DeleteHealthExaminatonSchema(int schemaID) {
+         bool runStatus = false;
+         HttpContext.Current.User = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
+         if ((HttpContext.Current.User != null) && (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Vewer") || HttpContext.Current.User.IsInRole("Donor"))) {
+            FormModule.DeleteForm(schemaID);
+         }
+         return JsonConvert.SerializeObject(new { runStatus = runStatus });
       }
    }
 }

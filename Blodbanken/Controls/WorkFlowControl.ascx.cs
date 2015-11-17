@@ -51,7 +51,7 @@ namespace Blodbanken.Controls {
          return hasFutureBookings || hasRecentApprovedExaminations;
       }
       public bool CheckIfUserHasSubmittedSchema(SystemUser user) {
-         return FormMaster.GetUserInfoForm(user.LogonName).Count() > 0;
+         return FormMaster.GetUserSchemaForm(user.LogonName).Count() > 0;
       }
       public bool CheckIfUserHasBookedkDonorAppointment(SystemUser user) {
          return TimeBookings.GetUserDonorBookings(user.LogonName).Where(booking => DateTime.Compare(DateTime.Now, booking.BookingDate) <= 0).Count() > 0;
