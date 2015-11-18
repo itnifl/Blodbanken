@@ -6,8 +6,5 @@ Implementer Ajax for henting av verdier etter valg i lista healthExaminationList
 Lag funksjonalitet mot database og knytt opp mot GUI 			
 	Book donortime, timebooking + parkeringsbooking - gui må ha info om ledige timer ved valg av dato, og deretter mulighet for valg av time
 	Booking kontrollerne (helseundersøkelse, donortime og parkering) må alle kunne vise hva som kan bookes og deretter kunne booke det.
-
-	Lag den automatiske bookeren, og la den kunne konfigureres
-	Fullfør sletting av form.
-
+	Lag den automatiske bookeren, og la den kunne konfigureres	
 	Bruk UpdatePassword for passord, bruk UpdateUser for all annen data

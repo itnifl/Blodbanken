@@ -22,13 +22,13 @@ namespace Blodbanken.Controls {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl infoPanelHeader;
         
         /// <summary>
-        /// userFormList control.
+        /// selectUserFormList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList userFormList;
+        protected global::System.Web.UI.WebControls.DropDownList selectUserFormList;
         
         /// <summary>
         /// btnDeleteUserForm control.

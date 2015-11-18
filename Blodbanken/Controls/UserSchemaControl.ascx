@@ -7,7 +7,7 @@
                 <div class="col-md-4">
                 </div>
                 <div class="col-md-4">
-                    <asp:DropdownList runat="server" class="form-control" ID="userFormList">
+                    <asp:DropdownList runat="server" class="form-control" ID="selectUserFormList">
 
                     </asp:DropdownList>
                 </div>
@@ -17,7 +17,7 @@
             <div class="form-group">
                 <div class="col-md-3">
                 </div>
-                <label class="col-md-4 control-label" for="radios">Ønsker du å slette valgt form?</label>
+                <label class="col-md-4 control-label" for="btnDeleteUserForm">Ønsker du å slette valgt form?</label>
                 <div class="col-md-4"> 
                     <asp:button id="btnDeleteUserForm" CommandName="DeleteUser" type="button" class="btn btn-danger" runat="server" Text="Delete" OnCommand="DeleteForm"></asp:button>
 
