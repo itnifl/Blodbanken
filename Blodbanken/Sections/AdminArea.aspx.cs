@@ -119,7 +119,7 @@ namespace Blodbanken.Sections {
       public static string SetEmailAccept(string logonName, bool accept) {
          bool runStatus = false;
          HttpContext.Current.User = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
-         if ((HttpContext.Current.User != null) && (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Vewer") || HttpContext.Current.User.IsInRole("Donor"))) {
+         if ((HttpContext.Current.User != null) && (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Viewer") || HttpContext.Current.User.IsInRole("Donor"))) {
             runStatus = FormModule.SetMailAccept(logonName, accept);
          }
          return JsonConvert.SerializeObject(new { runStatus = runStatus });
@@ -128,7 +128,7 @@ namespace Blodbanken.Sections {
       public static string SetPersInfoAccept(string logonName, bool accept) {
          bool runStatus = false;
          HttpContext.Current.User = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
-         if ((HttpContext.Current.User != null) && (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Vewer") || HttpContext.Current.User.IsInRole("Donor"))) {
+         if ((HttpContext.Current.User != null) && (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Viewer") || HttpContext.Current.User.IsInRole("Donor"))) {
             runStatus = FormModule.SetPersInfoAccept(logonName, accept);
          }
          return JsonConvert.SerializeObject(new { runStatus = runStatus });
@@ -137,28 +137,37 @@ namespace Blodbanken.Sections {
       public static string SetSMSAccept(string logonName, bool accept) {
          bool runStatus = false;
          HttpContext.Current.User = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
-         if ((HttpContext.Current.User != null) && (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Vewer") || HttpContext.Current.User.IsInRole("Donor"))) {
+         if ((HttpContext.Current.User != null) && (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Viewer") || HttpContext.Current.User.IsInRole("Donor"))) {
             runStatus = FormModule.SetSMSAccept(logonName, accept);
          }
          return JsonConvert.SerializeObject(new { runStatus = runStatus });
       }
       [WebMethod]
-      public static string SetUserExaminationBooking(int bookingID, string bookingDateTime, string logonName, int examinationApproveddtTime, int parkingID) {
+      public static string SetUserExaminationBooking(int bookingID, string bookingDateTime, string logonName, int examinationApproved, int parkingID) {
          bool runStatus = false;
          HttpContext.Current.User = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
-         if ((HttpContext.Current.User != null) && (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Vewer") || HttpContext.Current.User.IsInRole("Donor"))) {
+         if ((HttpContext.Current.User != null) && (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Viewer") || HttpContext.Current.User.IsInRole("Donor"))) {
             DateTime dtTime = DateTime.Parse(bookingDateTime);
-            ExaminationBooking exBooking = new ExaminationBooking(bookingID, dtTime, logonName, examinationApproveddtTime);
+            ExaminationBooking exBooking = new ExaminationBooking(bookingID, dtTime, logonName, examinationApproved);
             exBooking.ParkingID = parkingID;
             runStatus = TimeModule.SetExaminationBooking(exBooking);
          }
          return JsonConvert.SerializeObject(new { runStatus = runStatus });
       }
       [WebMethod]
+      public static string GetUserExaminationBooking(string logonName, int bookingID) {
+         ExaminationBooking exBooking = null;
+         HttpContext.Current.User = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
+         if ((HttpContext.Current.User != null) && (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Viewer") || HttpContext.Current.User.IsInRole("Donor"))) {
+            exBooking = TimeModule.GetUserExaminationBookings(logonName).SingleOrDefault(booking => booking.BookingID == bookingID);
+         }
+         return JsonConvert.SerializeObject(new { ExaminationBooking = exBooking });
+      }
+      [WebMethod]
       public static string DeleteHealthExaminatonSchema(int schemaID) {
          bool runStatus = false;
          HttpContext.Current.User = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
-         if ((HttpContext.Current.User != null) && (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Vewer") || HttpContext.Current.User.IsInRole("Donor"))) {
+         if ((HttpContext.Current.User != null) && (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Viewer") || HttpContext.Current.User.IsInRole("Donor"))) {
             FormModule.DeleteForm(schemaID);
          }
          return JsonConvert.SerializeObject(new { runStatus = runStatus });

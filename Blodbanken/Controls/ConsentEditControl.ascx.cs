@@ -17,6 +17,7 @@ namespace Blodbanken.Controls {
       public bool RadiosEnabled { get; set; } = true;
       protected void Page_Load(object sender, EventArgs e) {
          infoPanelHeaderConsentEdit.InnerHtml = "Samtykker for " + CurrentUser;
+         infoPanelHeaderConsentEdit.Attributes.Add("data-currentUser", CurrentUser);
          radiosEMailAccept1a.Checked = RadiosEMailAccept;
          radiosEMailAccept1a.Disabled = !RadiosEnabled;
 

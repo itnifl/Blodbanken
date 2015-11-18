@@ -1,9 +1,4 @@
-﻿<asp:HyperLink peker rett på mappa og ikke på sida, hvordan fikse dette?
-Ta  bruk setSMSAccept og de andre javascript funksjonene for å sette consentaccept
-	+setUserExaminationBookings
-Implementer Ajax for henting av verdier etter valg i lista healthExaminationList i ExaminationAcceptControl
-
-Lag funksjonalitet mot database og knytt opp mot GUI 			
+﻿Lag funksjonalitet mot database og knytt opp mot GUI 			
 	Book donortime, timebooking + parkeringsbooking - gui må ha info om ledige timer ved valg av dato, og deretter mulighet for valg av time
 	Booking kontrollerne (helseundersøkelse, donortime og parkering) må alle kunne vise hva som kan bookes og deretter kunne booke det.
 	Lag den automatiske bookeren, og la den kunne konfigureres	

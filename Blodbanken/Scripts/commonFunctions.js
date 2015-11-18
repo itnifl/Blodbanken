@@ -17,12 +17,11 @@
         }
     });
 }
-function setEmailAccept(e) {
-    e.preventDefault();
+function setEmailAccept(logonName, accept) {
     $.ajax({
         type: "POST",
         url: "/Sections/AdminArea.aspx/SetEmailAccept",
-        data: "{logonName: '', accept: false}",
+        data: "{logonName: " + logonName + ", accept: " + accept + "}",
         contentType: "application/json; charset=utf-8;",
         dataType: "json",
         success: function (response) {
@@ -36,12 +35,11 @@ function setEmailAccept(e) {
         }
     });
 }
-function setPersInfoAccept(e) {
-    e.preventDefault();
+function setPersInfoAccept(logonName, accept) {
     $.ajax({
         type: "POST",
         url: "/Sections/AdminArea.aspx/SetPersInfoAccept",
-        data: "{logonName: '', accept: false}",
+        data: "{logonName: "+logonName+", accept: "+accept+"}",
         contentType: "application/json; charset=utf-8;",
         dataType: "json",
         success: function (response) {
@@ -55,12 +53,11 @@ function setPersInfoAccept(e) {
         }
     });
 }
-function setSMSAccept(e) {
-    e.preventDefault();
+function setSMSAccept(logonName, accept) {
     $.ajax({
         type: "POST",
         url: "/Sections/AdminArea.aspx/SetSMSAccept",
-        data: "{logonName: '', accept: false}",
+        data: "{logonName: " + logonName + ", accept: " + accept + "}",
         contentType: "application/json; charset=utf-8;",
         dataType: "json",
         success: function (response) {
@@ -74,12 +71,11 @@ function setSMSAccept(e) {
         }
     });
 }
-function setUserExaminationBookings(e) {
-    e.preventDefault();
+function setUserExaminationBookings(bookingID, bookingDateTime, logonName, examinationApproved, parkingID) {
     $.ajax({
         type: "POST",
-        url: "/Sections/AdminArea.aspx/SetUserExaminationBookings",
-        data: "{bookingID: bookingD, bookingDateTime: bookingDateTime, logonName: logonName, examinationApproveddtTime: examinationApproveddtTime, parkingID: parkingID}",
+        url: "/Sections/AdminArea.aspx/SetUserExaminationBooking",
+        data: "{bookingID: " + bookingID + ", bookingDateTime: " + bookingDateTime + ", logonName: " + logonName + ", examinationApproved: " + examinationApproved + ", parkingID: " + parkingID + "}",
         contentType: "application/json; charset=utf-8;",
         dataType: "json",
         success: function (response) {

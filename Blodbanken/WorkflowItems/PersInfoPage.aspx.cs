@@ -14,8 +14,8 @@ namespace Blodbanken.WorkflowItems {
          if ((HttpContext.Current.User != null) && HttpContext.Current.User.Identity.IsAuthenticated) {
             UserEditForm.CurrentUser = HttpContext.Current.User.Identity.Name;
          }
-         BottomNavBar.NextLink = "/WorkflowItems/PersInfoConsent.aspx";
-         BottomNavBar.PrevLink = "/WorkflowItems/QuestionForm.aspx";
+         BottomNavBar.NextLink = "/WorkflowItems/QuestionForm.aspx";
+         BottomNavBar.PrevLink = "/WorkflowItems/PersInfoConsent.aspx";
       }
    }
 }

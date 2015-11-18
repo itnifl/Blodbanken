@@ -35,7 +35,7 @@ namespace Blodbanken.WorkflowItems {
                radios50b.Disabled = true;
             }
          }
-         BottomNavBar.PrevLink = "/WorkflowItems/PerInfoPage.aspx";
+         BottomNavBar.PrevLink = "/WorkflowItems/PersInfoPage.aspx";
          BottomNavBar.NextLink = "/WorkflowItems/BookMedicalExamination.aspx";
       }
    }

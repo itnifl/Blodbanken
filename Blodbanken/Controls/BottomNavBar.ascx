@@ -9,8 +9,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li id="lssNextLink" runat="server">                   
                     <ul class = "pagination">
-                        <li><asp:HyperLink runat="server" id="aPrevLink" href="" Text="&laquo;">&laquo;</asp:HyperLink></li>
-                        <li><asp:HyperLink runat="server" id="aNextLink" href="" Text="&raquo;">&raquo;</asp:HyperLink></li>
+                        <li><asp:HyperLink runat="server" id="aPrevLink" Text="&laquo;">&laquo;</asp:HyperLink></li>
+                        <li><asp:HyperLink runat="server" id="aNextLink" Text="&raquo;">&raquo;</asp:HyperLink></li>
                     </ul>
                 </li>
             </ul>
