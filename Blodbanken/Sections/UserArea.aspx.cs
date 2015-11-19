@@ -32,6 +32,16 @@ namespace Blodbanken.Sections {
             lblLoggedInFullName.Text = fullName;
 
             if (!String.IsNullOrEmpty(CurrentUser)) {
+               PasswordChangerControl passwordChangerCrl = (PasswordChangerControl)Page.LoadControl("~/Controls/PasswordChangerControl.ascx");
+               passwordChangerCrl.CurrentUser = CurrentUser;
+               passwordChangerCrl.MessageReporter += (string message) => {
+                  this.CustomMessage = message;
+                  responsebox.InnerText = JsonConvert.SerializeObject(new ReplyObject(true, __activeFocus, CustomMessage));
+               };
+               this.changePasswordPlaceHolder.Controls.Add(passwordChangerCrl);
+            }
+
+            if (!String.IsNullOrEmpty(CurrentUser)) {
                WorkFlowControl workFlowCtrl = (WorkFlowControl)Page.LoadControl("~/Controls/WorkFlowControl.ascx");
                workFlowCtrl.CurrentUser = CurrentUser;
                this.workflowPlaceHolder.Controls.Add(workFlowCtrl);
@@ -44,17 +54,15 @@ namespace Blodbanken.Sections {
             if (!String.IsNullOrEmpty(CurrentUser)) {
                UserEditControl selectChangeUser1Ctrl = (UserEditControl)Page.LoadControl("~/Controls/UserEditControl.ascx");
                selectChangeUser1Ctrl.CurrentUser = CurrentUser;
-               selectChangeUser1Ctrl.MessageReporter += SelectChangeUser1Ctrl_MessageReporter;
+               selectChangeUser1Ctrl.MessageReporter += (string message) => {
+                  this.CustomMessage = message;
+                  responsebox.InnerText = JsonConvert.SerializeObject(new ReplyObject(true, __activeFocus, CustomMessage));
+               };
                changeUserPlaceHolder.Controls.Add(selectChangeUser1Ctrl);
             }
          } else {
             Response.Redirect("/Public/Login.aspx");
          }
-      }
-
-      private void SelectChangeUser1Ctrl_MessageReporter(string message) {
-         this.CustomMessage = message;
-         responsebox.InnerText = JsonConvert.SerializeObject(new ReplyObject(true, __activeFocus, CustomMessage));
       }
    }
 }

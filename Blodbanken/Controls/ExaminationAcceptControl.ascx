@@ -36,9 +36,9 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#healthExaminationList').change(function () {
-            var logonName = $('#infoPanelHeader').data('currentUser');
-            var bookingID = $('#healthExaminationList').val();;
+        $('#MainPage_ctl01_healthExaminationList').change(function () {
+            var logonName = $('#MainPage_ctl01_infoPanelHeader').data('currentUser');
+            var bookingID = $('#MainPage_ctl01_healthExaminationList').val();;
             $.ajax({
                 type: "GET",
                 url: "/Sections/AdminArea.aspx/GetUserExaminationBooking",
@@ -47,11 +47,11 @@
                 dataType: "json",
                 success: function (response) {
                     if ($.parseJSON(response.d).ExaminationApproved) {
-                        $('#radiosExaminationAccept1a').prop('checked', true);
-                        $('#radiosExaminationAccept1b').prop('checked', !true);
+                        $('#MainPage_ctl01_radiosExaminationAccept1a').prop('checked', true);
+                        $('#MainPage_ctl01_radiosExaminationAccept1b').prop('checked', !true);
                     } else {
-                        $('#radiosExaminationAccept1a').prop('checked', !true);
-                        $('#radiosExaminationAccept1b').prop('checked', true);
+                        $('#MainPage_ctl01_radiosExaminationAccept1a').prop('checked', !true);
+                        $('#MainPage_ctl01_radiosExaminationAccept1b').prop('checked', true);
                     }
                 },
                 error: function (xhr, status, error) {
@@ -60,23 +60,25 @@
                 }
             });        
         });
-        $('#radiosExaminationAccept1a').click(function (e) {
+        $('#MainPage_ctl01_radiosExaminationAccept1a').click(function (e) {
             e.preventDefault();
-            var bookingID = $('#healthExaminationList').val();            
-            var logonName = $('#infoPanelHeader').data('currentUser');
+            var bookingID = $('#MainPage_ctl01_healthExaminationList').val();
+            var logonName = $('#MainPage_ctl01_infoPanelHeader').data('currentUser');
             var examinationApproved = 1;
-            var parkingID = $('#healthExaminationList :selected').data('parkingID');
-            var bookingDateTime = JSON.parse($('#healthExaminationList :selected').data('bookingDateTime'));
+            var parkingID = $('#MainPage_ctl01_healthExaminationList :selected').data('parkingID');
+            var bookingDateJson = $('#MainPage_ctl01_healthExaminationList :selected').data('bookingDateTime')
+            var bookingDateTime = bookingDateJson != undefined ? JSON.parse(bookingDateJson) : undefined;
 
             setUserExaminationBookings(bookingID, bookingDateTime, logonName, examinationApproved, parkingID);
         });
-        $('#radiosExaminationAccept1b').click(function (e) {
+        $('#MainPage_ctl01_radiosExaminationAccept1b').click(function (e) {
             e.preventDefault();
-            var bookingID = $('#healthExaminationList').val();
-            var logonName = $('#infoPanelHeader').data('currentUser');
+            var bookingID = $('#MainPage_ctl01_healthExaminationList').val();
+            var logonName = $('#MainPage_ctl01_infoPanelHeader').data('currentUser');
             var examinationApproved = 0;
-            var parkingID = $('#healthExaminationList :selected').data('parkingID');
-            var bookingDateTime = JSON.parse($('#healthExaminationList :selected').data('bookingDateTime'));
+            var parkingID = $('#MainPage_ctl01_healthExaminationList :selected').data('parkingID');
+            var bookingDateJson = $('#MainPage_ctl01_healthExaminationList :selected').data('bookingDateTime')
+            var bookingDateTime = bookingDateJson != undefined ? JSON.parse(bookingDateJson) : undefined;
 
             setUserExaminationBookings(bookingID, bookingDateTime, logonName, examinationApproved, parkingID);
         });

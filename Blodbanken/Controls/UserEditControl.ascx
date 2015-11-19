@@ -24,17 +24,6 @@
             </div>
         </div>
 
-        <!-- Password input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="txtPassword">Passord</label>
-            <div class="col-md-4">
-            <asp:RequiredFieldValidator Validationgroup="UserEditValidatorGroup" Display="Dynamic" runat="server" ControlToValidate="txtPassword" style="color:red;" ErrorMessage="<b>* Feltet må fylles inn</b>" />
-            <asp:RegularExpressionValidator Validationgroup="UserEditValidatorGroup" Display="Dynamic" runat="server" ControlToValidate="txtPassword" style="color:red;" ValidationExpression="(^(?:(?=.*[a-z])(?:(?=.*[A-Z])(?=.*[\d\W])|(?=.*\W)(?=.*\d))|(?=.*\W)(?=.*[A-Z])(?=.*\d)).{8,}$)" ErrorMessage="<b>* Feil passordkompleksitet.</b>"/>
-            <input runat="server"  id="txtPassword" name="txtPassword" type="password" placeholder="Passord" class="form-control input-md">
-    
-            </div>
-        </div>
-
         <!-- Select Basic -->
         <div class="form-group">
             <label class="col-md-4 control-label" for="selectRole">System rolle</label>
@@ -230,7 +219,7 @@
 
             <!-- Error label if persInfConsent is not approved -->
         <div class="form-group">
-            <label class="col-md-10 control-label" id="lblPersInfConsent" runat="server" style="color:red;">* <a href="/WorkflowItems/PersInfoConsent.aspx" style="color:inherit;">For å kunne fylle inn personopplysninger, må lagring av personopplysinger være godkjent av deg først.</a></label>              
+            <label class="col-md-10 control-label" id="lblPersInfConsent" runat="server" style="color:red;">* <a href="/WorkflowItems/PersInfoConsent.aspx" style="color:inherit;">For å kunne fylle inn personopplysninger, må lagring av personopplysinger være godkjent først.</a></label>              
         </div>
 
         <!-- Buttons -->

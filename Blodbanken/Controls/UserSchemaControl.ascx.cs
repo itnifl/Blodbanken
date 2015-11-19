@@ -18,6 +18,9 @@ namespace Blodbanken.Controls {
          list.ForEach(item => selectUserFormList.Items.Add(
             new ListItem(usr.FirstName + " " + usr.LastName + " - " + item.schemaID.ToString(), item.schemaID.ToString()
          )));
+         if (selectUserFormList.Items.Count == 0) {
+            btnDeleteUserForm.Enabled = false;
+         }
       }
       public void DeleteForm(object sender, CommandEventArgs e) {
          bool status = true;

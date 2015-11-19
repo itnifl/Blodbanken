@@ -31,6 +31,10 @@ namespace Blodbanken.Controls {
             radiosExaminationAccept1a.Checked = selectedBooking.ExaminationApproved > 0 ? true : false;
             radiosExaminationAccept1b.Checked = selectedBooking.ExaminationApproved == 0 ? true : false;
          }
+         if (healthExaminationList.Items.Count == 0) {
+            radiosExaminationAccept1a.Disabled = true;
+            radiosExaminationAccept1b.Disabled = true;
+         }
       }
    }
 }

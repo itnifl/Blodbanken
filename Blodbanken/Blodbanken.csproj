@@ -122,6 +122,7 @@
     <Content Include="Controls\BookingControl2.ascx" />
     <Content Include="Controls\BookingControl1.ascx" />
     <Content Include="Controls\LoggedInUserControl.ascx" />
+    <Content Include="Controls\PasswordChangerControl.ascx" />
     <Content Include="Controls\UserCreatorFormControl.ascx" />
     <Content Include="Controls\UserDeleteControl.ascx" />
     <Content Include="Controls\UserEditControl.ascx" />
@@ -238,6 +239,13 @@
     </Compile>
     <Compile Include="Controls\LoggedInUserControl.ascx.designer.cs">
       <DependentUpon>LoggedInUserControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PasswordChangerControl.ascx.cs">
+      <DependentUpon>PasswordChangerControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\PasswordChangerControl.ascx.designer.cs">
+      <DependentUpon>PasswordChangerControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\UserCreatorFormControl.ascx.cs">
       <DependentUpon>UserCreatorFormControl.ascx</DependentUpon>

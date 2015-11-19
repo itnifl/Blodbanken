@@ -67,35 +67,41 @@ namespace Blodbanken.Sections {
          //Dynamically add UserControls to page where needed:
          WorkFlowControl workFlowCtrl = (WorkFlowControl)Page.LoadControl("~/Controls/WorkFlowControl.ascx");
          workFlowCtrl.CurrentUser = this.selectUserForWorkflowEdit.SelectedValue;
+         workFlowCtrl.ID = "WorkFlowControl";
          this.workflowPlaceHolder.Controls.Add(workFlowCtrl);
 
          if (selectUserForExaminationAccept.SelectedItem != null) {
             ExaminationAcceptControl selectUserForExminationAcceptCtrl = (ExaminationAcceptControl)Page.LoadControl("~/Controls/ExaminationAcceptControl.ascx");
             selectUserForExminationAcceptCtrl.CurrentUser = this.selectUserForWorkflowEdit.SelectedValue;
             selectUserForExminationAcceptCtrl.RadiosEnabled = true;
+            selectUserForExminationAcceptCtrl.ID = "ExaminationAcceptControl";
             this.workflowExaminationAcceptPlaceHolder.Controls.Add(selectUserForExminationAcceptCtrl);
          }
          if (selectUserForConsentEdit.SelectedItem != null) {
             ConsentEditControl selectUserForConsentEditCtrl = (ConsentEditControl)Page.LoadControl("~/Controls/ConsentEditControl.ascx");
             selectUserForConsentEditCtrl.CurrentUser = this.selectUserForConsentEdit.SelectedValue;
             selectUserForConsentEditCtrl.RadiosEnabled = false;
+            selectUserForConsentEditCtrl.ID = "ConsentEditControl";
             this.consentEditPlaceHolder.Controls.Add(selectUserForConsentEditCtrl);
          }
          if (selectChangeUser1.SelectedItem != null) {
             UserEditControl selectChangeUser1Ctrl = (UserEditControl)Page.LoadControl("~/Controls/UserEditControl.ascx");
             selectChangeUser1Ctrl.CurrentUser = this.selectChangeUser1.SelectedValue;
             selectChangeUser1Ctrl.MessageReporter += SelectChangeUser1Ctrl_MessageReporter;
+            selectChangeUser1Ctrl.ID = "UserEditControl";
             changeUserPlaceHolder.Controls.Add(selectChangeUser1Ctrl);
          }
          if (selectDeleteUser1.SelectedItem != null) {
             UserDeleteControl selectDeleteUser1Ctrl = (UserDeleteControl)Page.LoadControl("~/Controls/UserDeleteControl.ascx");
             selectDeleteUser1Ctrl.CurrentUser = this.selectDeleteUser1.SelectedValue;
             selectDeleteUser1Ctrl.MessageReporter += SelectDeleteUser1Ctrl_MessageReporter;
+            selectDeleteUser1Ctrl.ID = "UserDeleteControl";
             deleteUserPlaceHolder.Controls.Add(selectDeleteUser1Ctrl);
          }
          if (selectUserForSchemaEdit.SelectedItem != null) {
             UserSchemaControl selectUserForSchemaEditCtrl = (UserSchemaControl)Page.LoadControl("~/Controls/UserSchemaControl.ascx");
             selectUserForSchemaEditCtrl.CurrentUser = this.selectDeleteUser1.SelectedValue;
+            selectUserForSchemaEditCtrl.ID = "UserSchemaControl";
             SchemaEditPlaceHolder.Controls.Add(selectUserForSchemaEditCtrl);
          }
          responsebox.InnerText = JsonConvert.SerializeObject(new ReplyObject(true, __activeFocus, CustomMessage));

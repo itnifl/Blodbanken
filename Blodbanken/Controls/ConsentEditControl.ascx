@@ -60,34 +60,34 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var logonName = $('#infoPanelHeaderConsentEdit').data('currentUser');
-        $('#radiosSMSAccept1a').click(function (e) {
+        $('#MainPage_ctl02_radiosSMSAccept1a').click(function (e) {
             e.preventDefault();            
             var accept = true;
             setSMSAccept(logonName, accept);
         });
-        $('#radiosSMSAccept1b').click(function (e) {
+        $('#MainPage_ctl02_radiosSMSAccept1b').click(function (e) {
             e.preventDefault();
             var accept = false;
             setSMSAccept(logonName, accept);
         });
 
-        $('#radiosEMailAccept1a').click(function (e) {
+        $('#MainPage_ctl02_radiosEMailAccept1a').click(function (e) {
             e.preventDefault();
             var accept = true;
             setPersInfoAccept(logonName, accept);
         });
-        $('#radiosEMailAccept1b').click(function (e) {
+        $('#MainPage_ctl02_radiosEMailAccept1b').click(function (e) {
             e.preventDefault();
             var accept = false;
             setPersInfoAccept(logonName, accept);
         });
 
-        $('#radiosPersInfoAccept1a').click(function (e) {
+        $('#MainPage_ctl02_radiosPersInfoAccept1a').click(function (e) {
             e.preventDefault();
             var accept = true;
             setEmailAccept(logonName, accept);
         });
-        $('#radiosPersInfoAccept1b').click(function (e) {
+        $('#MainPage_ctl02_radiosPersInfoAccept1b').click(function (e) {
             e.preventDefault();
             var accept = false;
             setEmailAccept(logonName, accept);

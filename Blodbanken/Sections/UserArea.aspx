@@ -14,6 +14,18 @@
                             <a href="#" class="list-group-item active">
                                Arbeidspanel
                             </a>
+                            <a href="#itemPasswordChanger" id="headingPasswordChanger" class="list-group-item collapsed list-group-item-header" data-toggle="collapse" data-parent="#lstgrpUserEditor" aria-expanded="false" aria-controls="itemUserEditor">Endre Passord</a>
+                            <div id="itemPasswordChanger" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingUserEditor">
+                              <div class="well well-sm well-custom">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <div class="col-md-12" id="changePasswordPlaceHolder" runat="server">
+
+                                        </div>
+                                    </div>
+                                </fieldset>
+                              </div>
+                            </div>
                             <a href="#itemUserChanger" id="headingUserChanger" class="list-group-item collapsed list-group-item-header" data-toggle="collapse" data-parent="#lstgrpUserEditor" aria-expanded="false" aria-controls="itemUserEditor">Endre bruker</a>
                             <div id="itemUserChanger" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingUserEditor">
                               <div class="well well-sm well-custom">

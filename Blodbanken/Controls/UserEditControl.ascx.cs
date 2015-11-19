@@ -50,7 +50,6 @@ namespace Blodbanken.Controls {
          txtFirstname.Disabled = !persInfoCosent;
          txtLastName.Value = usr.LastName;
          txtLastName.Disabled = !persInfoCosent;
-         txtPassword.Value = usr.Password;
 
          txtSocialSecurityNumber.Value = usr.NationalIdentity.ToString();
          txtSocialSecurityNumber.Disabled = !persInfoCosent;
