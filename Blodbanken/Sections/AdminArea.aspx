@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminArea.aspx.cs" Inherits="Blodbanken.Sections.AdminArea"  MasterPageFile="~/Master.master" Title="Blodbanken"%>
 <%@ Register TagPrefix="uc" TagName="UserCreatorForm" Src="~/Controls/UserCreatorFormControl.ascx" %>
-<%@ Register TagPrefix="uc" TagName="ExaminationBooking" Src="~/Controls/BookingControl1.ascx" %>
-<%@ Register TagPrefix="uc" TagName="BloodDonorBooking" Src="~/Controls/BookingControl2.ascx" %>
+<%@ Register TagPrefix="uc" TagName="ExaminationBooking" Src="~/Controls/BookHealthExaminationControl.ascx" %>
+<%@ Register TagPrefix="uc" TagName="BloodDonorBooking" Src="~/Controls/BookDonorAppointmentControl.ascx" %>
 <%@ Register TagPrefix="uc" TagName="ParkingBooking" Src="~/Controls/ParkingBookingControl1.ascx" %>
 <%@ Register TagPrefix="uc" TagName="AutoBookerSettings" Src="~/Controls/AutoBookerSettingsControl.ascx" %>
 <%@ Register TagPrefix="uc" TagName="MessageModuleControl" Src="~/Controls/MessageModuleControl.ascx" %>
@@ -10,6 +10,7 @@
     <div runat="server" id="responsebox" style="visibility:hidden"></div>
     <link rel="stylesheet" type="text/css" href="/Content/themes/base/all.css" />
     <link rel="stylesheet" href="/Content/jquery.ptTimeSelect.css" />
+    <script src="/Scripts/jquery-ui-1.11.4.min.js" type="text/javascript"></script>
     <script src="/Scripts/jquery.ptTimeSelect.js" type="text/javascript"></script>
     <div class="well topPlacement" style="margin-left:100px;margin-right:100px;padding-top:0px;padding-bottom:0px;">
       <h1 style="margin-top:10px;">Kontroll panel</h1>
@@ -37,7 +38,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label" for="selectChangeUser1">Velg bruker</label>
                                         <div class="col-md-4">
-                                            <asp:DropDownList id="selectChangeUser1" name="selectChangeUser1" class="form-control" runat="server" AutoPostBack="True">
+                                            <asp:DropDownList id="selectChangeUser1" name="selectChangeUser1" cssclass="form-control" runat="server" AutoPostBack="True">
 
                                             </asp:DropDownList>
                                         </div>
@@ -58,7 +59,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label" for="selectDeleteUser1">Velg bruker</label>
                                         <div class="col-md-4">
-                                            <asp:DropDownList id="selectDeleteUser1" name="select" class="form-control" runat="server" AutoPostBack="True">
+                                            <asp:DropDownList id="selectDeleteUser1" name="select" cssclass="form-control" runat="server" AutoPostBack="True">
 
                                             </asp:DropDownList>
                                         </div>
@@ -84,7 +85,7 @@
                                 <uc:ExaminationBooking id="ExaminationBooking" runat="server"/>
                               </div>
                             </div>
-                            <a href="#itemTimeBooker" id="headingTimeBooker" class="list-group-item collapsed list-group-item-header" data-toggle="collapse" data-parent="#lstgrpBookingEditor" aria-expanded="false" aria-controls="itemTimeBooker">Timebooking</a>
+                            <a href="#itemTimeBooker" id="headingTimeBooker" class="list-group-item collapsed list-group-item-header" data-toggle="collapse" data-parent="#lstgrpBookingEditor" aria-expanded="false" aria-controls="itemTimeBooker">Booking - Donortime</a>
                             <div id="itemTimeBooker" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTimeBooker">
                               <div class="well well-sm well-custom">
                                 <uc:BloodDonorBooking id="BloodDonorBooking" runat="server"/>
@@ -117,7 +118,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label" for="selectUserForConsentEdit">Velg bruker</label>
                                         <div class="col-md-4">
-                                            <asp:DropDownList id="selectUserForConsentEdit" name="selectUserForConsentEdit" class="form-control" runat="server" AutoPostBack="True">
+                                            <asp:DropDownList id="selectUserForConsentEdit" name="selectUserForConsentEdit" cssclass="form-control" runat="server" AutoPostBack="True">
           
                                             </asp:DropDownList>
                                         </div>
@@ -138,7 +139,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label" for="selectUserForWorkflowEdit">Velg bruker</label>
                                         <div class="col-md-4">
-                                            <asp:DropDownList id="selectUserForWorkflowEdit" name="selectUserForWorkflowEdit" class="form-control" runat="server"  AutoPostBack="True">
+                                            <asp:DropDownList id="selectUserForWorkflowEdit" name="selectUserForWorkflowEdit" cssclass="form-control" runat="server"  AutoPostBack="True">
 
                                             </asp:DropDownList>
                                         </div>
@@ -159,7 +160,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label" for="selectUserForExaminationAccept">Velg bruker</label>
                                         <div class="col-md-4">
-                                            <asp:DropDownList ID="selectUserForExaminationAccept" class="form-control" runat="server" AutoPostBack="True">
+                                            <asp:DropDownList ID="selectUserForExaminationAccept" cssclass="form-control" runat="server" AutoPostBack="True">
 
                                             </asp:DropDownList>
                                         </div>
@@ -179,7 +180,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label" for="selectUserForSchemaEdit">Velg bruker</label>
                                         <div class="col-md-4">
-                                            <asp:DropDownList id="selectUserForSchemaEdit" name="selectUserForSchemaEdit" class="form-control" runat="server" AutoPostBack="True">
+                                            <asp:DropDownList id="selectUserForSchemaEdit" name="selectUserForSchemaEdit" cssclass="form-control" runat="server" AutoPostBack="True">
 
                                             </asp:DropDownList>
                                         </div>

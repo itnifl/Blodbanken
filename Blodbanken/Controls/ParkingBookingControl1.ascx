@@ -10,7 +10,7 @@
     <div class="form-group">
         <label class="col-md-1 control-label" for="selectUserForParkingBooking_1" id="labelfor_selectUserForParkingBooking_1" runat="server">Bruker</label>
         <div class="col-md-2">
-            <asp:DropdownList AutoPostback="True" id="selectUserForParkingBooking_1" name="selectUserForParkingBooking_1" style="margin-bottom: 8px;" class="form-control" runat="server">
+            <asp:DropdownList AutoPostback="True" id="selectUserForParkingBooking_1" name="selectUserForParkingBooking_1" style="margin-bottom: 8px;" cssclass="form-control" runat="server">
 
             </asp:DropdownList>
         </div>

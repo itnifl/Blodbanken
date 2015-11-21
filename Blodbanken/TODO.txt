@@ -1,7 +1,19 @@
 ﻿Lag funksjonalitet mot database og knytt opp mot GUI 			
-	Book donortime, timebooking + parkeringsbooking - gui må ha info om ledige timer ved valg av dato, og deretter mulighet for valg av time
-	Booking kontrollerne (helseundersøkelse, donortime og parkering) må alle kunne vise hva som kan bookes og deretter kunne booke det.
-	Lag den automatiske bookeren, og la den kunne konfigureres	
-
-	Passe på at alle kontrollere referer sine jQuery spørriner mot valide id tags
-	label for taggene peker feil hvis input runat server 
+	+Book donortime
+		Ved valg av bruker skal jquery/siden oppdatere hvilken bruker er aktuell
+		GUI skal populeres med info fra database
+		GUI skal kunne oppdatere i database
+		Bookeren må testes for brukers egen booking og for booking for andre
+	+timebooking 
+		Ved valg av bruker skal jquery/siden oppdatere hvilken bruker er aktuell
+		GUI skal populeres med info fra database
+		GUI skal kunne oppdatere i database
+		Bookeren må testes for brukers egen booking og for booking for andre
+	+ parkeringsbooking - 
+		gui må ha info om ledige timer ved valg av dato, og deretter mulighet for valg av time
+		Lag tabell man skal kunne velge fra
+		tabell kan bare velges fra hvis man har valgt en time å booke parkering for
+		hvis man velger en time med en parkeringsbooking, skal dette vises
+		gui skal kunne lagre parkering til database knyttet opp mot en booking
+	+Lag den automatiske bookeren, og la den kunne konfigureres
+	+BottomNavbar overlapper siden, dette må fikses

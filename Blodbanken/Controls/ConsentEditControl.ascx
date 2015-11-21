@@ -59,35 +59,35 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        var logonName = $('#infoPanelHeaderConsentEdit').data('currentUser');
-        $('#MainPage_ctl02_radiosSMSAccept1a').click(function (e) {
+        var logonName = $('#<%= infoPanelHeaderConsentEdit.ClientID %>').data('currentUser');
+        $('#<%= radiosSMSAccept1a.ClientID %>').click(function (e) {
             e.preventDefault();            
             var accept = true;
             setSMSAccept(logonName, accept);
         });
-        $('#MainPage_ctl02_radiosSMSAccept1b').click(function (e) {
+        $('#<%= radiosSMSAccept1b.ClientID %>').click(function (e) {
             e.preventDefault();
             var accept = false;
             setSMSAccept(logonName, accept);
         });
 
-        $('#MainPage_ctl02_radiosEMailAccept1a').click(function (e) {
+        $('#<%= radiosEMailAccept1a.ClientID %>').click(function (e) {
             e.preventDefault();
             var accept = true;
             setPersInfoAccept(logonName, accept);
         });
-        $('#MainPage_ctl02_radiosEMailAccept1b').click(function (e) {
+        $('#<%= radiosEMailAccept1b.ClientID %>').click(function (e) {
             e.preventDefault();
             var accept = false;
             setPersInfoAccept(logonName, accept);
         });
 
-        $('#MainPage_ctl02_radiosPersInfoAccept1a').click(function (e) {
+        $('#<%= radiosPersInfoAccept1a.ClientID %>').click(function (e) {
             e.preventDefault();
             var accept = true;
             setEmailAccept(logonName, accept);
         });
-        $('#MainPage_ctl02_radiosPersInfoAccept1b').click(function (e) {
+        $('#<%= radiosPersInfoAccept1b.ClientID %>').click(function (e) {
             e.preventDefault();
             var accept = false;
             setEmailAccept(logonName, accept);

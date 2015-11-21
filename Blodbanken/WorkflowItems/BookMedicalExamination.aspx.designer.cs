@@ -28,7 +28,7 @@ namespace Blodbanken.WorkflowItems {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Blodbanken.Controls.BookingControl1 ExaminationBookingForm;
+        protected global::Blodbanken.Controls.BookHealthExaminationControl ExaminationBookingForm;
         
         /// <summary>
         /// BottomNavBar control.

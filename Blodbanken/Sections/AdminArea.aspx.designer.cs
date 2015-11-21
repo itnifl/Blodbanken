@@ -82,7 +82,7 @@ namespace Blodbanken.Sections {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Blodbanken.Controls.BookingControl1 ExaminationBooking;
+        protected global::Blodbanken.Controls.BookHealthExaminationControl ExaminationBooking;
         
         /// <summary>
         /// BloodDonorBooking control.
@@ -91,7 +91,7 @@ namespace Blodbanken.Sections {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Blodbanken.Controls.BookingControl2 BloodDonorBooking;
+        protected global::Blodbanken.Controls.BookDonorAppointmentControl BloodDonorBooking;
         
         /// <summary>
         /// ParkingBooking1 control.

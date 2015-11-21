@@ -64,6 +64,9 @@ namespace Blodbanken.Sections {
          }
          UserCreatorForm.MessageReporter += UserCreatorForm_MessageReporter;
 
+         ExaminationBooking.ShowUserDropDown = true;
+         BloodDonorBooking.ShowUserDropDown = true;
+
          //Dynamically add UserControls to page where needed:
          WorkFlowControl workFlowCtrl = (WorkFlowControl)Page.LoadControl("~/Controls/WorkFlowControl.ascx");
          workFlowCtrl.CurrentUser = this.selectUserForWorkflowEdit.SelectedValue;

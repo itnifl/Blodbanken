@@ -7,7 +7,7 @@
                 <div class="col-md-4">
                 </div>
                 <div class="col-md-4">
-                    <asp:DropdownList runat="server" class="form-control" ID="healthExaminationList">
+                    <asp:DropdownList runat="server" cssclass="form-control" ID="healthExaminationList">
 
                     </asp:DropdownList>
                 </div>
@@ -36,9 +36,9 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#MainPage_ctl01_healthExaminationList').change(function () {
-            var logonName = $('#MainPage_ctl01_infoPanelHeader').data('currentUser');
-            var bookingID = $('#MainPage_ctl01_healthExaminationList').val();;
+        $('#<%= healthExaminationList.ClientID %>').change(function () {
+            var logonName = $('#<%= infoPanelHeader.ClientID %>').data('currentUser');
+            var bookingID = $('#<%= healthExaminationList.ClientID %>').val();;
             $.ajax({
                 type: "GET",
                 url: "/Sections/AdminArea.aspx/GetUserExaminationBooking",
@@ -47,11 +47,11 @@
                 dataType: "json",
                 success: function (response) {
                     if ($.parseJSON(response.d).ExaminationApproved) {
-                        $('#MainPage_ctl01_radiosExaminationAccept1a').prop('checked', true);
-                        $('#MainPage_ctl01_radiosExaminationAccept1b').prop('checked', !true);
+                        $('#<%= radiosExaminationAccept1a.ClientID %>').prop('checked', true);
+                        $('#<%= radiosExaminationAccept1b.ClientID %>').prop('checked', !true);
                     } else {
-                        $('#MainPage_ctl01_radiosExaminationAccept1a').prop('checked', !true);
-                        $('#MainPage_ctl01_radiosExaminationAccept1b').prop('checked', true);
+                        $('#<%= radiosExaminationAccept1a.ClientID %>').prop('checked', !true);
+                        $('#<%= radiosExaminationAccept1b.ClientID %>').prop('checked', true);
                     }
                 },
                 error: function (xhr, status, error) {
@@ -60,24 +60,24 @@
                 }
             });        
         });
-        $('#MainPage_ctl01_radiosExaminationAccept1a').click(function (e) {
+        $('#<%= radiosExaminationAccept1a.ClientID %>').click(function (e) {
             e.preventDefault();
-            var bookingID = $('#MainPage_ctl01_healthExaminationList').val();
-            var logonName = $('#MainPage_ctl01_infoPanelHeader').data('currentUser');
+            var bookingID = $('#<%= healthExaminationList.ClientID %>').val();
+            var logonName = $('#<%= infoPanelHeader.ClientID %>').data('currentUser');
             var examinationApproved = 1;
-            var parkingID = $('#MainPage_ctl01_healthExaminationList :selected').data('parkingID');
-            var bookingDateJson = $('#MainPage_ctl01_healthExaminationList :selected').data('bookingDateTime')
+            var parkingID = $('#<%= healthExaminationList.ClientID %> :selected').data('parkingID');
+            var bookingDateJson = $('#<%= healthExaminationList.ClientID %> :selected').data('bookingDateTime')
             var bookingDateTime = bookingDateJson != undefined ? JSON.parse(bookingDateJson) : undefined;
 
             setUserExaminationBookings(bookingID, bookingDateTime, logonName, examinationApproved, parkingID);
         });
-        $('#MainPage_ctl01_radiosExaminationAccept1b').click(function (e) {
+        $('#<%= radiosExaminationAccept1b.ClientID %>').click(function (e) {
             e.preventDefault();
-            var bookingID = $('#MainPage_ctl01_healthExaminationList').val();
-            var logonName = $('#MainPage_ctl01_infoPanelHeader').data('currentUser');
+            var bookingID = $('#<%= healthExaminationList.ClientID %>').val();
+            var logonName = $('#<%= infoPanelHeader.ClientID %>').data('currentUser');
             var examinationApproved = 0;
-            var parkingID = $('#MainPage_ctl01_healthExaminationList :selected').data('parkingID');
-            var bookingDateJson = $('#MainPage_ctl01_healthExaminationList :selected').data('bookingDateTime')
+            var parkingID = $('#<%= healthExaminationList.ClientID %> :selected').data('parkingID');
+            var bookingDateJson = $('#<%= healthExaminationList.ClientID %> :selected').data('bookingDateTime')
             var bookingDateTime = bookingDateJson != undefined ? JSON.parse(bookingDateJson) : undefined;
 
             setUserExaminationBookings(bookingID, bookingDateTime, logonName, examinationApproved, parkingID);

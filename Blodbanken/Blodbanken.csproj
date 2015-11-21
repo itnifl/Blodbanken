@@ -79,6 +79,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fullcalendar.css" />
+    <Content Include="Content\fullcalendar.print.css" />
     <Content Include="Content\customStyles.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -114,13 +116,13 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Controls\AutoBookerSettingsControl.ascx" />
+    <Content Include="Controls\BookDonorAppointmentControl.ascx" />
+    <Content Include="Controls\BookHealthExaminationControl.ascx" />
     <Content Include="Controls\BottomNavBar.ascx" />
     <Content Include="Controls\ConsentEditControl.ascx" />
     <Content Include="Controls\ExaminationAcceptControl.ascx" />
     <Content Include="Controls\MessageModuleControl.ascx" />
     <Content Include="Controls\ParkingBookingControl1.ascx" />
-    <Content Include="Controls\BookingControl2.ascx" />
-    <Content Include="Controls\BookingControl1.ascx" />
     <Content Include="Controls\LoggedInUserControl.ascx" />
     <Content Include="Controls\PasswordChangerControl.ascx" />
     <Content Include="Controls\UserCreatorFormControl.ascx" />
@@ -134,6 +136,11 @@
     <Content Include="Index.aspx" />
     <Content Include="Public\Login.aspx" />
     <Content Include="Public\News.aspx" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\commonFunctions.js" />
+    <Content Include="Scripts\fullcalendar.js" />
+    <Content Include="Scripts\gcal.js" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -142,9 +149,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\commonFunctions.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.js" />
@@ -184,6 +188,20 @@
     <Compile Include="Controls\AutoBookerSettingsControl.ascx.designer.cs">
       <DependentUpon>AutoBookerSettingsControl.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BookDonorAppointmentControl.ascx.cs">
+      <DependentUpon>BookDonorAppointmentControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\BookDonorAppointmentControl.ascx.designer.cs">
+      <DependentUpon>BookDonorAppointmentControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BookHealthExaminationControl.ascx.cs">
+      <DependentUpon>BookHealthExaminationControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\BookHealthExaminationControl.ascx.designer.cs">
+      <DependentUpon>BookHealthExaminationControl.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BottomNavBar.ascx.cs">
       <DependentUpon>BottomNavBar.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -218,20 +236,6 @@
     </Compile>
     <Compile Include="Controls\ParkingBookingControl1.ascx.designer.cs">
       <DependentUpon>ParkingBookingControl1.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\BookingControl2.ascx.cs">
-      <DependentUpon>BookingControl2.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Controls\BookingControl2.ascx.designer.cs">
-      <DependentUpon>BookingControl2.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\BookingControl1.ascx.cs">
-      <DependentUpon>BookingControl1.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Controls\BookingControl1.ascx.designer.cs">
-      <DependentUpon>BookingControl1.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\LoggedInUserControl.ascx.cs">
       <DependentUpon>LoggedInUserControl.ascx</DependentUpon>

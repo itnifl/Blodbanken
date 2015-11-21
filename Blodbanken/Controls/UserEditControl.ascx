@@ -28,7 +28,7 @@
         <div class="form-group">
             <label class="col-md-4 control-label" for="selectRole">System rolle</label>
             <div class="col-md-4">
-            <asp:DropdownList runat="server" id="selectRole" name="selectRole" class="form-control">
+            <asp:DropdownList runat="server" id="selectRole" name="selectRole" cssclass="form-control">
                 <asp:ListItem value="1">Admin</asp:ListItem>
                 <asp:ListItem value="2">Donor</asp:ListItem>
                 <asp:ListItem value="3">Leser</asp:ListItem>
@@ -40,7 +40,7 @@
         <div class="form-group">
             <label class="col-md-4 control-label" for="selectGender">Kjønn</label>
             <div class="col-md-4">
-            <asp:DropdownList runat="server" id="selectGender" name="selectGender" class="form-control">
+            <asp:DropdownList runat="server" id="selectGender" name="selectGender" cssclass="form-control">
                 <asp:ListItem value="1">Mann</asp:ListItem>
                 <asp:ListItem value="2">Kvinne</asp:ListItem>
             </asp:DropdownList>

@@ -23,16 +23,16 @@
 </script>
 <div class="modal fade" id="buttonFeedbackModal" tabindex="-1" role="dialog" aria-labelledby="buttonFeedbackModalLabel">
     <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-        <h4 class="modal-title" id="buttonFeedbackModalLabel">Brukerbeskjed</h4>
-        </div>
-        <div class="modal-body" id="messageModalBody">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="buttonFeedbackModalLabel">Brukerbeskjed</h4>
+            </div>
+            <div class="modal-body" id="messageModalBody">
 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Lukk</button>
+            </div>
         </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Lukk</button>
-        </div>
-    </div>
     </div>
 </div>
