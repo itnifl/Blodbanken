@@ -22,13 +22,31 @@ namespace Blodbanken.Controls {
         protected global::System.Web.UI.WebControls.DropDownList selectUserForDonorBooking;
         
         /// <summary>
-        /// lblBookDonorAppointmentError control.
+        /// lblBookDonorAppointmentError1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblBookDonorAppointmentError;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblBookDonorAppointmentError1;
+        
+        /// <summary>
+        /// patientName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText patientName;
+        
+        /// <summary>
+        /// lblBookDonorAppointmentError2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblBookDonorAppointmentError2;
         
         /// <summary>
         /// submitButton control.

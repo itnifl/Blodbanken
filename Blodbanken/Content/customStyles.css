@@ -1,5 +1,6 @@
 ﻿.topPlacement {
     margin-top:65px;
+    margin-bottom:65px;
 }
 .customErrorStyle {
     padding-top: 6px;
@@ -37,4 +38,15 @@
     margin-left:0px !important;
     margin-right:0px !important;
 }
+.parkingTable td {
+  width:40px;
+  height:90px;
+  text-align:center;
+  vertical-align:middle;
+  background-color:#ccc;
+  border:1px solid #fff;
+}
 
+.parkingTable td.highlighted {
+  background-color:#999;
+}

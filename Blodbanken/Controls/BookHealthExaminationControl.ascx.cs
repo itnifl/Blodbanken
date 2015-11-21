@@ -20,6 +20,9 @@ namespace Blodbanken.Controls {
             if (selectUserForExaminationBooking.SelectedItem != null && !String.IsNullOrEmpty(CurrentUser)) {
                CurrentUser = selectUserForExaminationBooking.Text;
             }
+            else if (String.IsNullOrEmpty(CurrentUser)) {
+               CurrentUser = HttpContext.Current.User.Identity.Name;
+            }
             foreach (DropDownList select in selectArray) {
                select.Items.Clear();
                users.Where(usr => !String.IsNullOrEmpty(usr.FirstName) && !String.IsNullOrEmpty(usr.LastName)).ToList().ForEach(user => select.Items.Add(new ListItem(user.FirstName + " " + user.LastName, user.LogonName)));
@@ -27,7 +30,9 @@ namespace Blodbanken.Controls {
             }
             bool userHasFilledInForm = !(Forms.GetUserSchemaForm(CurrentUser).Count > 0);
             submitHEButton.Disabled = userHasFilledInForm;
-            lblPersonQuestionForm.Visible = userHasFilledInForm;
+            lblPersonQuestionForm1.Visible = lblPersonQuestionForm2.Visible = userHasFilledInForm;
+            patientHEName.Value = CurrentUser;
+            patientHEName.Disabled = true;
          }
          else {
             selectUserForExaminationBooking.Visible = false;

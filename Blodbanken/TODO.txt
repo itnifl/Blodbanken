@@ -5,15 +5,15 @@
 		GUI skal kunne oppdatere i database
 		Bookeren må testes for brukers egen booking og for booking for andre
 	+timebooking 
-		Ved valg av bruker skal jquery/siden oppdatere hvilken bruker er aktuell
+		Ved valg av bruker skal jquery/siden oppdatere hvilken bruker er aktuell		
 		GUI skal populeres med info fra database
 		GUI skal kunne oppdatere i database
 		Bookeren må testes for brukers egen booking og for booking for andre
 	+ parkeringsbooking - 
-		gui må ha info om ledige timer ved valg av dato, og deretter mulighet for valg av time
-		Lag tabell man skal kunne velge fra
-		tabell kan bare velges fra hvis man har valgt en time å booke parkering for
-		hvis man velger en time med en parkeringsbooking, skal dette vises
-		gui skal kunne lagre parkering til database knyttet opp mot en booking
+		(tog)Det må legges til en dropdownliste som viser hvilke timer man skal kunne booke parkering for.
+		(tog)Ved valg av bruker skal jquery/siden oppdatere hvilken bruker er aktuell
+		GUI må ha info om ledige timer ved valg av dato, og deretter mulighet for valg av time
+		Tabell kan bare velges fra, hvis man har valgt en time å booke parkering for
+		Hvis man velger en time med en parkeringsbooking, skal denne parkeringsbookignen vises og kunne endres
+		GUI skal kunne lagre parkering til database knyttet opp mot en booking
 	+Lag den automatiske bookeren, og la den kunne konfigureres
-	+BottomNavbar overlapper siden, dette må fikses

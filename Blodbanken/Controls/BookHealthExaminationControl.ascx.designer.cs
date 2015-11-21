@@ -22,13 +22,31 @@ namespace Blodbanken.Controls {
         protected global::System.Web.UI.WebControls.DropDownList selectUserForExaminationBooking;
         
         /// <summary>
-        /// lblPersonQuestionForm control.
+        /// lblPersonQuestionForm1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblPersonQuestionForm;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblPersonQuestionForm1;
+        
+        /// <summary>
+        /// patientHEName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText patientHEName;
+        
+        /// <summary>
+        /// lblPersonQuestionForm2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblPersonQuestionForm2;
         
         /// <summary>
         /// submitHEButton control.

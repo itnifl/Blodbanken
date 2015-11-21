@@ -20,6 +20,9 @@ namespace Blodbanken.Controls {
             if (selectUserForParkingBooking_1.SelectedItem != null) {
                CurrentUser = selectUserForParkingBooking_1.Text;
             }
+            else if(String.IsNullOrEmpty(CurrentUser)) {
+               CurrentUser = HttpContext.Current.User.Identity.Name;
+            }
             foreach (DropDownList select in selectArray) {
                select.Items.Clear();
                users.Where(usr => !String.IsNullOrEmpty(usr.FirstName) && !String.IsNullOrEmpty(usr.LastName)).ToList().ForEach(user => select.Items.Add(new ListItem(user.FirstName + " " + user.LastName, user.LogonName)));
@@ -29,6 +32,8 @@ namespace Blodbanken.Controls {
             selectUserForParkingBooking_1.Visible = false;
             labelfor_selectUserForParkingBooking_1.Visible = false;
          }
+         parkPanelHeader.InnerText = "Reserver parkering for " + CurrentUser;
+         parkPanelHeader.Attributes.Add("data-currentUser", CurrentUser);
       }
    }
 }

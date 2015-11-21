@@ -22,6 +22,9 @@ namespace Blodbanken.Controls {
             if (selectUserForDonorBooking.SelectedItem != null && String.IsNullOrEmpty(CurrentUser)) {
                CurrentUser = selectUserForDonorBooking.Text;
             }
+            else if (String.IsNullOrEmpty(CurrentUser)) {
+               CurrentUser = HttpContext.Current.User.Identity.Name;
+            }
             foreach (DropDownList select in selectArray) {
                select.Items.Clear();
                users.Where(usr => !String.IsNullOrEmpty(usr.FirstName) && !String.IsNullOrEmpty(usr.LastName)).ToList().ForEach(user => select.Items.Add(new ListItem(user.FirstName + " " + user.LastName, user.LogonName)));
@@ -29,7 +32,9 @@ namespace Blodbanken.Controls {
             }
             bool hasApprovedForms = (Forms.GetUserSchemaForm(CurrentUser).Where(form => DateTime.Compare(DateTime.Now.AddDays(-30), form.approved) <= 0)).Count() > 0;
             submitButton.Disabled = !hasApprovedForms;
-            lblBookDonorAppointmentError.Visible = !hasApprovedForms;
+            lblBookDonorAppointmentError1.Visible = lblBookDonorAppointmentError2.Visible = !hasApprovedForms;
+            patientName.Value = CurrentUser;
+            patientName.Disabled = true;
          }
          else {
             selectUserForDonorBooking.Visible = false;

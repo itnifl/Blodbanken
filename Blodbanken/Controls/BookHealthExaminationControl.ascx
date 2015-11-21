@@ -7,7 +7,7 @@
 <fieldset>
     <div class="form-group form-group-custom">
         <div class="col-md-3 control-label" id="BookingInfoArea1">
-            <label class="control-label" id="lblPersonQuestionForm" runat="server" style="color:red;">* <a href="/WorkflowItems/QuestionForm.aspx" style="color:inherit;">For å kunne booke, må du fylle inn egenerklæring først.</a></label>
+            <label class="control-label" id="lblPersonQuestionForm1" runat="server" style="color:red;">* <a href="/WorkflowItems/QuestionForm.aspx" style="color:inherit;">For å kunne booke, må du fylle inn egenerklæring først.</a></label>
         </div>
     </div>
 </fieldset>
@@ -23,7 +23,7 @@
                     <div class="control-group">
                         <label class="control-label" for="inputHEPatient">Navn:</label>
                         <div class="controls">
-                            <input type="text" name="patienHEtName" id="patientHEName" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;Value 1&quot;,&quot;Value 2&quot;,&quot;Value 3&quot;]">
+                            <input type="text" name="patienHEtName" id="patientHEName" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;Value 1&quot;,&quot;Value 2&quot;,&quot;Value 3&quot;]" runat="server">
                                 <input type="hidden" id="apptHEStartTime"/>
                                 <input type="hidden" id="apptHEEndTime"/>
                                 <input type="hidden" id="apptHEAllDay" />
@@ -35,6 +35,7 @@
                         </div>
                     </div>
                 </form>
+                <label class="control-label" id="lblPersonQuestionForm2" runat="server" style="color:red;">* <a href="/WorkflowItems/QuestionForm.aspx" style="color:inherit;">For å kunne booke, må du fylle inn egenerklæring først.</a></label>
             </div>
             <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true">Avbryt</button>
