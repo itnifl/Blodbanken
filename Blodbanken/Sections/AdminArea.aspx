@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminArea.aspx.cs" Inherits="Blodbanken.Sections.AdminArea"  MasterPageFile="~/Master.master" Title="Blodbanken"%>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminArea.aspx.cs" Inherits="Blodbanken.Sections.AdminArea"  MasterPageFile="~/Master.master" Title="Blodbanken" EnableEventValidation="false" %>
 <%@ Register TagPrefix="uc" TagName="UserCreatorForm" Src="~/Controls/UserCreatorFormControl.ascx" %>
 <%@ Register TagPrefix="uc" TagName="ExaminationBooking" Src="~/Controls/BookHealthExaminationControl.ascx" %>
 <%@ Register TagPrefix="uc" TagName="BloodDonorBooking" Src="~/Controls/BookDonorAppointmentControl.ascx" %>
@@ -94,7 +94,7 @@
                             <a href="#itemParkingBooker" id="headingParkingBooker" class="list-group-item collapsed list-group-item-header" data-toggle="collapse" data-parent="#lstgrpBookingEditor" aria-expanded="false" aria-controls="itemParkingBooker">Parkeringsbooking</a>
                             <div id="itemParkingBooker" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingParkingBooker">
                               <div class="well well-sm well-custom">
-                                <uc:ParkingBooking id="ParkingBooking1" runat="server"/>
+                                <uc:ParkingBooking id="ParkingBooking" runat="server"/>
                               </div>
                             </div>
                             <a href="#itemAutoBooker" id="headingAutoBooker" class="list-group-item collapsed list-group-item-header" data-toggle="collapse" data-parent="#lstgrpBookingEditor" aria-expanded="false" aria-controls="itemAutoBooker">Automatisk booker</a>

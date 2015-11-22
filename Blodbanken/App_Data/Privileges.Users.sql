@@ -129,6 +129,7 @@ SELECT PB.bookingID, PB.bookingDate, PB.parkingSpace, DB.logonName FROM DonorBoo
 CREATE TABLE [dbo].[ExaminationBooking] (
    [bookingID] [int] NOT NULL IDENTITY (1,1) PRIMARY KEY,
    [bookingDate] [date] NOT NULL,
+   [durationHours] [int] NOT NULL,
    [logonName] [varchar] (35) NOT NULL,
    [examinationApproved] [int],
    [parkingID] [int]
@@ -152,6 +153,7 @@ GO
 CREATE TABLE [dbo].[DonorBooking] (
    [bookingID] [int] NOT NULL IDENTITY (1,1) PRIMARY KEY,
    [bookingDate] [date] NOT NULL,
+   [durationHours] [int] NOT NULL,
    [logonName] [varchar] (35) NOT NULL,
    [parkingID] [int]
 ) ON [PRIMARY];

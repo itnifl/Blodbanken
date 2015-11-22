@@ -94,13 +94,13 @@ namespace Blodbanken.Sections {
         protected global::Blodbanken.Controls.BookDonorAppointmentControl BloodDonorBooking;
         
         /// <summary>
-        /// ParkingBooking1 control.
+        /// ParkingBooking control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Blodbanken.Controls.ParkingBookingControl1 ParkingBooking1;
+        protected global::Blodbanken.Controls.ParkingBookingControl1 ParkingBooking;
         
         /// <summary>
         /// AutoBookerSettings control.

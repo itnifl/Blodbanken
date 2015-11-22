@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="/Content/jquery.ptTimeSelect.css"/>
     <script src="/Scripts/jquery.ptTimeSelect.js" type="text/javascript"></script>
  -->
+<div runat="server" id="__parkingBeholder" visible="false" hidden="hidden"></div>
 <fieldset>
     <div class="panel-heading" id="parkPanelHeader" style="font-weight:bold;" runat="server">Reserver parkering for </div>
     <div class="form-group">        
@@ -45,6 +46,11 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var logonName = $('#<%= parkPanelHeader.ClientID %>').data('currentUser');
+        var allParkingAppointments = $('#<%= __parkingBeholder.ClientID %>').text();
+        var allParkingAppointmentsObject = undefined;
+        if (allParkingAppointments) {
+            allParkingAppointmentsObject = JSON.parse(allParkingAppointments);
+        }
 
         // find the input fields and apply the time select to them.
         $('#txtParkTimePicker1').ptTimeSelect();

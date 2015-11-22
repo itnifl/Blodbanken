@@ -13,6 +13,15 @@ namespace Blodbanken.Controls {
     public partial class BookDonorAppointmentControl {
         
         /// <summary>
+        /// __appointmentBeholder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl @__appointmentBeholder;
+        
+        /// <summary>
         /// selectUserForDonorBooking control.
         /// </summary>
         /// <remarks>

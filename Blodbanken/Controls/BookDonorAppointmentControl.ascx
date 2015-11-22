@@ -1,6 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="BookDonorAppointmentControl.ascx.cs" Inherits="Blodbanken.Controls.BookDonorAppointmentControl" %>
 <!-- Requires jquery ui  -->
-<asp:DropdownList id="selectUserForDonorBooking" name="selectUserForDonorBooking" style="margin-bottom: 8px;" cssclass="form-control" runat="server">
+<div runat="server" id="__appointmentBeholder" visible="false" hidden="hidden"></div>
+<asp:DropdownList AutoPostback="true" id="selectUserForDonorBooking" name="selectUserForDonorBooking" style="margin-bottom: 8px;" cssclass="form-control" runat="server">
 
 </asp:DropdownList>
 <div id="calendar"></div>
@@ -46,7 +47,11 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-
+        var allAppointmentBookings = $('#<%= __appointmentBeholder.ClientID %>').text();
+        var allAppointmentBookingsObject = undefined;
+        if (allAppointmentBookings) {
+            allAppointmentBookingsObject = JSON.parse(allAppointmentBookings);
+        }
         var calendar = $('#calendar').fullCalendar({
             defaultView: 'agendaWeek',
             editable: true,
@@ -76,7 +81,7 @@
             console.log($('#apptStartTime').val());
             console.log($('#apptEndTime').val());
             console.log($('#apptAllDay').val());
-            alert("form submitted");
+            //alert("form submitted");
 
             $("#calendar").fullCalendar('renderEvent',
                 {
@@ -86,6 +91,13 @@
                     allDay: ($('#apptAllDay').val() == "true"),
                 },
                 true);
+            /* Følgende må sendes til AdminArea.aspx hvor det må opprettes mtode til å ta imot:
+               //[bookingID] [int] NOT NULL IDENTITY (1,1) PRIMARY KEY,
+               [bookingDate] [date] NOT NULL,
+               [durationHours] [int] NOT NULL,
+               [logonName] [varchar] (35) NOT NULL,
+               //[parkingID] [int]
+            */
         }
     });
 </script>

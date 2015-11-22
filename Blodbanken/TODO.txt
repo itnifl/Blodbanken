@@ -1,18 +1,19 @@
 ﻿Lag funksjonalitet mot database og knytt opp mot GUI 			
 	+Book donortime
-		Ved valg av bruker skal jquery/siden oppdatere hvilken bruker er aktuell
 		GUI skal populeres med info fra database
+			data fra database legges nå som json på sida,
+			må kunne legge inn data i database for at denne skal kunne vises og brukes
 		GUI skal kunne oppdatere i database
 		Bookeren må testes for brukers egen booking og for booking for andre
-	+timebooking 
-		Ved valg av bruker skal jquery/siden oppdatere hvilken bruker er aktuell		
+	+timebooking 	
 		GUI skal populeres med info fra database
+			data fra database legges nå som json på sida,
+			må kunne legge inn data i database for at denne skal kunne vises og brukes
 		GUI skal kunne oppdatere i database
 		Bookeren må testes for brukers egen booking og for booking for andre
 	+ parkeringsbooking - 
 		(tog)Det må legges til en dropdownliste som viser hvilke timer man skal kunne booke parkering for.
-		(tog)Ved valg av bruker skal jquery/siden oppdatere hvilken bruker er aktuell
-		GUI må ha info om ledige timer ved valg av dato, og deretter mulighet for valg av time
+		GUI må ha info om ledig parkering ved valg av dato, og deretter mulighet for valg av time
 		Tabell kan bare velges fra, hvis man har valgt en time å booke parkering for
 		Hvis man velger en time med en parkeringsbooking, skal denne parkeringsbookignen vises og kunne endres
 		GUI skal kunne lagre parkering til database knyttet opp mot en booking

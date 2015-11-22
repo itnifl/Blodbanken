@@ -66,6 +66,11 @@ namespace Blodbanken.Sections {
 
          ExaminationBooking.ShowUserDropDown = true;
          BloodDonorBooking.ShowUserDropDown = true;
+         if (!String.IsNullOrEmpty(CurrentUser)) {
+            ExaminationBooking.CurrentUser = this.CurrentUser;
+            BloodDonorBooking.CurrentUser = this.CurrentUser;
+            ParkingBooking.CurrentUser = this.CurrentUser;
+         }
 
          //Dynamically add UserControls to page where needed:
          WorkFlowControl workFlowCtrl = (WorkFlowControl)Page.LoadControl("~/Controls/WorkFlowControl.ascx");
@@ -152,12 +157,12 @@ namespace Blodbanken.Sections {
          return JsonConvert.SerializeObject(new { runStatus = runStatus });
       }
       [WebMethod]
-      public static string SetUserExaminationBooking(int bookingID, string bookingDateTime, string logonName, int examinationApproved, int parkingID) {
+      public static string SetUserExaminationBooking(int bookingID, string bookingDateTime, string logonName, int examinationApproved, int parkingID, int durationHours) {
          bool runStatus = false;
          HttpContext.Current.User = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
          if ((HttpContext.Current.User != null) && (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Viewer") || HttpContext.Current.User.IsInRole("Donor"))) {
             DateTime dtTime = DateTime.Parse(bookingDateTime);
-            ExaminationBooking exBooking = new ExaminationBooking(bookingID, dtTime, logonName, examinationApproved);
+            ExaminationBooking exBooking = new ExaminationBooking(bookingID, dtTime, logonName, examinationApproved, durationHours);
             exBooking.ParkingID = parkingID;
             runStatus = TimeModule.SetExaminationBooking(exBooking);
          }

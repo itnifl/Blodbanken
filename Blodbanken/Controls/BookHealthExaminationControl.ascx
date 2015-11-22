@@ -1,6 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="BookHealthExaminationControl.ascx.cs" Inherits="Blodbanken.Controls.BookHealthExaminationControl" %>
 <!-- Requires jquery ui  -->
-<asp:DropdownList id="selectUserForExaminationBooking" name="selectUserForExaminationBooking" style="margin-bottom: 8px;" cssclass="form-control" runat="server">
+<div runat="server" id="__examinationBeholder" visible="false" hidden="hidden"></div>
+<asp:DropdownList AutoPostback="true" id="selectUserForExaminationBooking" name="selectUserForExaminationBooking" style="margin-bottom: 8px;" cssclass="form-control" runat="server">
 
 </asp:DropdownList>
 <div id="healthCalendar"></div>
@@ -46,7 +47,11 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-
+        var allExaminationBookings = $('#<%= __examinationBeholder.ClientID %>').text();
+        var allExaminationBookingsObject = undefined;
+        if (allExaminationBookings) {
+            allExaminationBookingsObject = JSON.parse(allExaminationBookings);
+        }
         var calendar = $('#healthCalendar').fullCalendar({
             defaultView: 'agendaWeek',
             editable: true,
@@ -76,7 +81,7 @@
             console.log($('#apptHEStartTime').val());
             console.log($('#apptHEEndTime').val());
             console.log($('#apptHEAllDay').val());
-            alert("form submitted");
+            //alert("form submitted");
 
             $("#healthCalendar").fullCalendar('renderEvent',
                 {
@@ -86,6 +91,14 @@
                     allDay: ($('#apptHEAllDay').val() == "true"),
                 },
                 true);
+            /* Følgende må sendes til AdminArea.aspx hvor det må opprettes mtode til å ta imot:
+               //[bookingID] [int] NOT NULL IDENTITY (1,1) PRIMARY KEY,
+               [bookingDate] [date] NOT NULL,
+               [durationHours] [int] NOT NULL,
+               [logonName] [varchar] (35) NOT NULL,
+               //[examinationApproved] [int],
+               //[parkingID] [int]
+            */
         }
     });
 </script>
