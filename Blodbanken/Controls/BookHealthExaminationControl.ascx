@@ -91,14 +91,11 @@
                     allDay: ($('#apptHEAllDay').val() == "true"),
                 },
                 true);
-            /* Følgende må sendes til AdminArea.aspx hvor det må opprettes mtode til å ta imot:
-               //[bookingID] [int] NOT NULL IDENTITY (1,1) PRIMARY KEY,
-               [bookingDate] [date] NOT NULL,
-               [durationHours] [int] NOT NULL,
-               [logonName] [varchar] (35) NOT NULL,
-               //[examinationApproved] [int],
-               //[parkingID] [int]
-            */
+            
+            addHealthExamination($('#patientHEName').val(),
+                new Date($('#apptHEStartTime').val()),
+                new Date($('#apptHEEndTime').val()),
+                ($('#apptHEAllDay').val() == "true"));
         }
     });
 </script>

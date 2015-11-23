@@ -13,7 +13,7 @@ namespace Blodbanken.Sections {
    public partial class AdminArea : System.Web.UI.Page {
       AuthenticatonModule AuthMod = new AuthenticatonModule();
       internal static FormModule FormModule = new FormModule();
-      internal static TimeBooker TimeModule = new TimeBooker();
+      internal static TimeBooker Booker = new TimeBooker();
       public string CurrentUser { get; set; }
       public string CustomMessage { get; set; }
       private string __activeFocus { get; set; }
@@ -164,7 +164,7 @@ namespace Blodbanken.Sections {
             DateTime dtTime = DateTime.Parse(bookingDateTime);
             ExaminationBooking exBooking = new ExaminationBooking(bookingID, dtTime, logonName, examinationApproved, durationHours);
             exBooking.ParkingID = parkingID;
-            runStatus = TimeModule.SetExaminationBooking(exBooking);
+            runStatus = Booker.SetExaminationBooking(exBooking);
          }
          return JsonConvert.SerializeObject(new { runStatus = runStatus });
       }
@@ -173,7 +173,7 @@ namespace Blodbanken.Sections {
          ExaminationBooking exBooking = null;
          HttpContext.Current.User = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
          if ((HttpContext.Current.User != null) && (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Viewer") || HttpContext.Current.User.IsInRole("Donor"))) {
-            exBooking = TimeModule.GetUserExaminationBookings(logonName).SingleOrDefault(booking => booking.BookingID == bookingID);
+            exBooking = Booker.GetUserExaminationBookings(logonName).SingleOrDefault(booking => booking.BookingID == bookingID);
          }
          return JsonConvert.SerializeObject(new { ExaminationBooking = exBooking });
       }
@@ -183,6 +183,24 @@ namespace Blodbanken.Sections {
          HttpContext.Current.User = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
          if ((HttpContext.Current.User != null) && (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Viewer") || HttpContext.Current.User.IsInRole("Donor"))) {
             FormModule.DeleteForm(schemaID);
+         }
+         return JsonConvert.SerializeObject(new { runStatus = runStatus });
+      }
+      [WebMethod]
+      public static string BookHealthExamination(DateTime bookingDate, int durationHours, string logonName) {
+         bool runStatus = false;
+         HttpContext.Current.User = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
+         if ((HttpContext.Current.User != null) && (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Viewer") || HttpContext.Current.User.IsInRole("Donor"))) {
+            runStatus = Booker.BookHealthExamination(bookingDate, durationHours, logonName);
+         }
+         return JsonConvert.SerializeObject(new { runStatus = runStatus });
+      }
+      [WebMethod]
+      public static string BookDonorAppointment(DateTime bookingDate, int durationHours, string logonName) {
+         bool runStatus = false;
+         HttpContext.Current.User = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
+         if ((HttpContext.Current.User != null) && (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Viewer") || HttpContext.Current.User.IsInRole("Donor"))) {
+            runStatus = Booker.BookDonorAppointment(bookingDate, durationHours, logonName);
          }
          return JsonConvert.SerializeObject(new { runStatus = runStatus });
       }

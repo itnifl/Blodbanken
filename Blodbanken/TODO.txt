@@ -4,12 +4,14 @@
 			data fra database legges nå som json på sida,
 			må kunne legge inn data i database for at denne skal kunne vises og brukes
 		GUI skal kunne oppdatere i database
+			Må testes
 		Bookeren må testes for brukers egen booking og for booking for andre
 	+timebooking 	
 		GUI skal populeres med info fra database
 			data fra database legges nå som json på sida,
 			må kunne legge inn data i database for at denne skal kunne vises og brukes
 		GUI skal kunne oppdatere i database
+			Må testes
 		Bookeren må testes for brukers egen booking og for booking for andre
 	+ parkeringsbooking - 
 		(tog)Det må legges til en dropdownliste som viser hvilke timer man skal kunne booke parkering for.
@@ -18,3 +20,6 @@
 		Hvis man velger en time med en parkeringsbooking, skal denne parkeringsbookignen vises og kunne endres
 		GUI skal kunne lagre parkering til database knyttet opp mot en booking
 	+Lag den automatiske bookeren, og la den kunne konfigureres
+
+*Sjekk og test håndtering av DateTime mellom JavaSript, C# of database
+*I commonFunctions.js=>addHealthExamination + addDonorAppointment må startTime-endTime resultere i durationHours.
