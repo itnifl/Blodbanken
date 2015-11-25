@@ -11,14 +11,14 @@
             <fieldset>          
             <!-- Question 1 -->
             <div class="form-group">
-                <label class="col-md-10 control-label" for="radios">Har du fått informasjon om blodgivning?</label>
+                <label class="col-md-10 control-label" for="radios1a">Har du fått informasjon om blodgivning?</label>
                 <div class="col-md-2"> 
-                    <label class="radio-inline" for="radios-1a">
-                        <input type="radio" name="radios" id="radios-1a" value="1" />
+                    <label class="radio-inline" for="radios1a">
+                        <input type="radio" name="radios1" id="radio-1a" value="1" />
                         Ja
                     </label> 
-                    <label class="radio-inline" for="radios-1b">
-                        <input type="radio" name="radios" id="radios-1b" value="0" />
+                    <label class="radio-inline" for="radios1b">
+                        <input type="radio" name="radios1" id="radios1b" value="0" />
                         Nei
                     </label>
                 </div>
@@ -27,12 +27,12 @@
             <div class="form-group">
                 <label class="col-md-10 control-label" for="radios">Føler du deg frisk nå?</label>
                 <div class="col-md-2"> 
-                <label class="radio-inline" for="radios-2a">
-                    <input type="radio" name="radios" id="radios-2a" value="1" />
+                <label class="radio-inline" for="radios2a">
+                    <input type="radio" name="radios2" id="radios2a" value="1" />
                     Ja
                 </label> 
-                <label class="radio-inline" for="radios-2b">
-                    <input type="radio" name="radios" id="radios-2b" value="0" />
+                <label class="radio-inline" for="radios2b">
+                    <input type="radio" name="radios2" id="radios2b" value="0" />
                     Nei
                 </label>
                 </div>
@@ -41,12 +41,12 @@
             <div class="form-group">
                 <label class="col-md-10 control-label" for="radios">Ha du gitt blod tidligere?</label>
                 <div class="col-md-2"> 
-                <label class="radio-inline" for="radios-3a">
-                    <input type="radio" name="radios" id="radios-3a" value="1" />
+                <label class="radio-inline" for="radios3a">
+                    <input type="radio" name="radios3" id="radios3a" value="1" />
                     Ja
                 </label> 
-                <label class="radio-inline" for="radios-3b">
-                    <input type="radio" name="radios" id="radios-3b" value="0" />
+                <label class="radio-inline" for="radios3b">
+                    <input type="radio" name="radios3" id="radios3b" value="0" />
                     Nei
                 </label>
                 </div>
@@ -55,12 +55,12 @@
             <div class="form-group">
                 <label class="col-md-10 control-label" for="radios">Hvis du har gitt blod tidligere, har du vært frisk i perioden fra forrige blodgivning og til nå?</label>
                 <div class="col-md-2"> 
-                <label class="radio-inline" for="radios-4a">
-                    <input type="radio" name="radios" id="radios-4a" value="1" />
+                <label class="radio-inline" for="radios4a">
+                    <input type="radio" name="radios4" id="radios4a" value="1" />
                     Ja
                 </label> 
-                <label class="radio-inline" for="radios-4b">
-                    <input type="radio" name="radios" id="radios-4b" value="0" />
+                <label class="radio-inline" for="radios4b">
+                    <input type="radio" name="radios4" id="radios4b" value="0" />
                     Nei
                 </label>
                 </div>
@@ -69,12 +69,12 @@
             <div class="form-group">
                 <label class="col-md-10 control-label" for="radios">Veier du 50 kg eller mer?</label>
                 <div class="col-md-2"> 
-                <label class="radio-inline" for="radios-5a">
-                    <input type="radio" name="radios" id="radios-5a" value="1" />
+                <label class="radio-inline" for="radios5a">
+                    <input type="radio" name="radio5s" id="radios5a" value="1" />
                     Ja
                 </label> 
-                <label class="radio-inline" for="radios-5b">
-                    <input type="radio" name="radios" id="radios-5b" value="0" />
+                <label class="radio-inline" for="radios5b">
+                    <input type="radio" name="radios5" id="radios5b" value="0" />
                     Nei
                 </label>
                 </div>
@@ -83,12 +83,12 @@
             <div class="form-group">
                 <label class="col-md-10 control-label" for="radios">Har du åpne sår, eksem eller hudsykdom?</label>
                 <div class="col-md-2"> 
-                <label class="radio-inline" for="radios-6a">
-                    <input type="radio" name="radios" id="radios-6a" value="1" />
+                <label class="radio-inline" for="radios6a">
+                    <input type="radio" name="radios6" id="radios6a" value="1" />
                     Ja
                 </label> 
-                <label class="radio-inline" for="radios-6b">
-                    <input type="radio" name="radios" id="radios-6b" value="0" />
+                <label class="radio-inline" for="radios6b">
+                    <input type="radio" name="radios6" id="radios6b" value="0" />
                     Nei
                 </label>
                 </div>
@@ -97,12 +97,12 @@
             <div class="form-group">
                 <label class="col-md-10 control-label" for="radios">Har du piercing i slimhinne?</label>
                 <div class="col-md-2"> 
-                <label class="radio-inline" for="radios-7a">
-                    <input type="radio" name="radios" id="radios-7a" value="1" />
+                <label class="radio-inline" for="radios7a">
+                    <input type="radio" name="radios7" id="radios7a" value="1" />
                     Ja
                 </label> 
-                <label class="radio-inline" for="radios-7b">
-                    <input type="radio" name="radios" id="radios-7b" value="0" />
+                <label class="radio-inline" for="radios7b">
+                    <input type="radio" name="radios7" id="radios7b" value="0" />
                     Nei
                 </label>
                 </div>
@@ -111,12 +111,12 @@
             <div class="form-group">
                 <label class="col-md-10 control-label" for="radios">Har du i løpet av de siste fire uker - brukt medisiner?</label>
                 <div class="col-md-2"> 
-                <label class="radio-inline" for="radios-8a">
-                    <input type="radio" name="radios" id="radios-8a" value="1" />
+                <label class="radio-inline" for="radios8a">
+                    <input type="radio" name="radios8" id="radios8a" value="1" />
                     Ja
                 </label> 
-                <label class="radio-inline" for="radios-8b">
-                    <input type="radio" name="radios" id="radios-8b" value="0" />
+                <label class="radio-inline" for="radios8b">
+                    <input type="radio" name="radios8" id="radios8b" value="0" />
                     Nei
                 </label>
                 </div>
@@ -125,12 +125,12 @@
             <div class="form-group">
                 <label class="col-md-10 control-label" for="radios">Har du i løpet av de siste fire uker - vært syk eller hatt feber?</label>
                 <div class="col-md-2"> 
-                <label class="radio-inline" for="radios-9a">
-                    <input type="radio" name="radios" id="radios-9a" value="1" />
+                <label class="radio-inline" for="radios9a">
+                    <input type="radio" name="radios9" id="radios9a" value="1" />
                     Ja
                 </label> 
-                <label class="radio-inline" for="radios-9b">
-                    <input type="radio" name="radios" id="radios-9b" value="0" />
+                <label class="radio-inline" for="radios9b">
+                    <input type="radio" name="radios9" id="radios9b" value="0" />
                     Nei
                 </label>
                 </div>
@@ -139,12 +139,12 @@
             <div class="form-group">
                 <label class="col-md-10 control-label" for="radios">Har du i løpet av de siste fire uker - hatt løs avføring?</label>
                 <div class="col-md-2"> 
-                <label class="radio-inline" for="radios-10a">
-                    <input type="radio" name="radios" id="radios-10a" value="1" />
+                <label class="radio-inline" for="radios10a">
+                    <input type="radio" name="radios10" id="radios10a" value="1" />
                     Ja
                 </label> 
-                <label class="radio-inline" for="radios-10b">
-                    <input type="radio" name="radios" id="radios-10b" value="0" />
+                <label class="radio-inline" for="radios10b">
+                    <input type="radio" name="radios10" id="radios10b" value="0" />
                     Nei
                 </label>
                 </div>
@@ -153,12 +153,12 @@
             <div class="form-group">
                 <label class="col-md-10 control-label" for="radios">Har du i løpet av de siste fire uker - fått vaksine?</label>
                 <div class="col-md-2"> 
-                <label class="radio-inline" for="radios-11a">
-                    <input type="radio" name="radios" id="radios-11a" value="1" />
+                <label class="radio-inline" for="radios11a">
+                    <input type="radio" name="radios11" id="radios11a" value="1" />
                     Ja
                 </label> 
-                <label class="radio-inline" for="radios-11b">
-                    <input type="radio" name="radios" id="radios-11b" value="0" />
+                <label class="radio-inline" for="radios11b">
+                    <input type="radio" name="radios11" id="radios11b" value="0" />
                     Nei
                 </label>
                 </div>
@@ -167,12 +167,12 @@
             <div class="form-group">
                 <label class="col-md-10 control-label" for="radios">Har du i løpet av de siste fire uker - vært hos tannlege eller tannpleier?</label>
                 <div class="col-md-2"> 
-                <label class="radio-inline" for="radios-12a">
-                    <input type="radio" name="radios" id="radios-12a" value="1" />
+                <label class="radio-inline" for="radios12a">
+                    <input type="radio" name="radios12a" id="radios12a" value="1" />
                     Ja
                 </label> 
-                <label class="radio-inline" for="radios-12b">
-                    <input type="radio" name="radios" id="radios-12b" value="0" />
+                <label class="radio-inline" for="radios12b">
+                    <input type="radio" name="radios12" id="radios12b" value="0" />
                     Nei
                 </label>
                 </div>
@@ -181,12 +181,12 @@
             <div class="form-group">
                 <label class="col-md-10 control-label" for="radios">Har du i løpet av de siste seks måneder - vært til legeundersøkelse eller på sykehus?</label>
                 <div class="col-md-2"> 
-                <label class="radio-inline" for="radios-13a">
-                    <input type="radio" name="radios" id="radios-13a" value="1" />
+                <label class="radio-inline" for="radios13a">
+                    <input type="radio" name="radios13" id="radios13a" value="1" />
                     Ja
                 </label> 
-                <label class="radio-inline" for="radios-13b">
-                    <input type="radio" name="radios" id="radios-13b" value="0" />
+                <label class="radio-inline" for="radios13b">
+                    <input type="radio" name="radios13" id="radios13b" value="0" />
                     Nei
                 </label>
                 </div>
@@ -195,12 +195,12 @@
             <div class="form-group">
                 <label class="col-md-10 control-label" for="radios">Har du i løpet av de siste seks måneder - fått behandling for noen sykdom?</label>
                 <div class="col-md-2"> 
-                <label class="radio-inline" for="radios-14a">
-                    <input type="radio" name="radios" id="radios-14a" value="1" />
+                <label class="radio-inline" for="radios14a">
+                    <input type="radio" name="radios14" id="radios14a" value="1" />
                     Ja
                 </label> 
-                <label class="radio-inline" for="radios-14b">
-                    <input type="radio" name="radios" id="radios-14b" value="0" />
+                <label class="radio-inline" for="radios14b">
+                    <input type="radio" name="radios14" id="radios14b" value="0" />
                     Nei
                 </label>
                 </div>
@@ -209,12 +209,12 @@
             <div class="form-group">
                 <label class="col-md-10 control-label" for="radios">Har du i løpet av de siste seks måneder - fått behandling med sprøyter?</label>
                 <div class="col-md-2"> 
-                <label class="radio-inline" for="radios-15a">
-                    <input type="radio" name="radios" id="radios-15a" value="1" />
+                <label class="radio-inline" for="radios15a">
+                    <input type="radio" name="radios15" id="radios15a" value="1" />
                     Ja
                 </label> 
-                <label class="radio-inline" for="radios-15b">
-                    <input type="radio" name="radios" id="radios-15b" value="0" />
+                <label class="radio-inline" for="radios15b">
+                    <input type="radio" name="radios15" id="radios15b" value="0" />
                     Nei
                 </label>
                 </div>
@@ -223,26 +223,26 @@
             <div class="form-group">
                 <label class="col-md-10 control-label" for="radios">Har du i løpet av de siste seks måneder - hatt kjønnssykdom, eller fått behandling for kjønnssykdom?</label>
                 <div class="col-md-2"> 
-                <label class="radio-inline" for="radios-6b">
-                    <input type="radio" name="radios" id="radios-16a" value="1" />
+                <label class="radio-inline" for="radios16b">
+                    <input type="radio" name="radios16" id="radios16a" value="1" />
                     Ja
                 </label> 
-                <label class="radio-inline" for="radios-16b">
-                    <input type="radio" name="radios" id="radios-16b" value="0" />
+                <label class="radio-inline" for="radios16b">
+                    <input type="radio" name="radios16" id="radios16b" value="0" />
                     Nei
                 </label>
                 </div>
             </div>
                 <!-- Question 17 -->
             <div class="form-group">
-                <label class="col-md-10 control-label" for="radios">Har du i løpet av de siste seks måneder - hatt seksuell kontakt med person med HIVinfeksjon eller hepatitt B eller hepatitt C, eller med person som har hatt positiv test for en av disse sykdommene?</label>
+                <label class="col-md-10 control-label" for="radios17a">Har du i løpet av de siste seks måneder - hatt seksuell kontakt med person med HIVinfeksjon eller hepatitt B eller hepatitt C, eller med person som har hatt positiv test for en av disse sykdommene?</label>
                 <div class="col-md-2"> 
-                <label class="radio-inline" for="radios-17a">
-                    <input type="radio" name="radios" id="radios-17a" value="1" />
+                <label class="radio-inline" for="radios17a">
+                    <input type="radio" name="radios17" id="radios17a" value="1" />
                     Ja
                 </label> 
-                <label class="radio-inline" for="radios-17b">
-                    <input type="radio" name="radios" id="radios-17b" value="0" />
+                <label class="radio-inline" for="radios17b">
+                    <input type="radio" name="radios17" id="radios-17b" value="0" />
                     Nei
                 </label>
                 </div>
@@ -251,12 +251,12 @@
             <div class="form-group">
                 <label class="col-md-10 control-label" for="radios">Har du i løpet av de siste seks måneder - hatt seksuell kontakt med person som bruker eller har brukt dopingmidler eller narkotiske midler som sprøyter?</label>
                 <div class="col-md-2"> 
-                <label class="radio-inline" for="radios-18a">
-                    <input type="radio" name="radios" id="radios-18a" value="1" />
+                <label class="radio-inline" for="radios18a">
+                    <input type="radio" name="radios18" id="radios18a" value="1" />
                     Ja
                 </label> 
-                <label class="radio-inline" for="radios-18b">
-                    <input type="radio" name="radios" id="radios-18b" value="0" />
+                <label class="radio-inline" for="radios18b">
+                    <input type="radio" name="radios18" id="radios18b" value="0" />
                     Nei
                 </label>
                 </div>
@@ -265,12 +265,12 @@
             <div class="form-group">
                 <label class="col-md-10 control-label" for="radios">Har du i løpet av de siste seks måneder - hatt seksuell kontakt med prostituerte eller tidligere prostituerte?</label>
                 <div class="col-md-2"> 
-                <label class="radio-inline" for="radios-19a">
-                    <input type="radio" name="radios" id="radios-19a" value="1" />
+                <label class="radio-inline" for="radios19a">
+                    <input type="radio" name="radios19" id="radios19a" value="1" />
                     Ja
                 </label> 
-                <label class="radio-inline" for="radios-19b">
-                    <input type="radio" name="radios" id="radios-19b" value="0" />
+                <label class="radio-inline" for="radios19b">
+                    <input type="radio" name="radios19" id="radios19b" value="0" />
                     Nei
                 </label>
                 </div>
@@ -279,12 +279,12 @@
             <div class="form-group">
                 <label class="col-md-10 control-label" for="radios">Har du i løpet av de siste seks måneder - blitt tatovert, fått piercing eller tatt hull i ørene?</label>
                 <div class="col-md-2"> 
-                <label class="radio-inline" for="radios-20a">
-                    <input type="radio" name="radios" id="radios-20a" value="1" />
+                <label class="radio-inline" for="radios20a">
+                    <input type="radio" name="radios20" id="radios20a" value="1" />
                     Ja
                 </label> 
-                <label class="radio-inline" for="radios-20b">
-                    <input type="radio" name="radios" id="radios-20b" value="0" />
+                <label class="radio-inline" for="radios20b">
+                    <input type="radio" name="radios20" id="radios20b" value="0" />
                     Nei
                 </label>
                 </div>
@@ -293,12 +293,12 @@
             <div class="form-group">
                 <label class="col-md-10 control-label" for="radios">Har du i løpet av de siste seks måneder - fått akupunktur?</label>
                 <div class="col-md-2"> 
-                <label class="radio-inline" for="radios-21a">
-                    <input type="radio" name="radios" id="radios-21a" value="1" />
+                <label class="radio-inline" for="radios21a">
+                    <input type="radio" name="radios21" id="radios21a" value="1" />
                     Ja
                 </label> 
-                <label class="radio-inline" for="radios-21b">
-                    <input type="radio" name="radios" id="radios-21b" value="0" />
+                <label class="radio-inline" for="radios21b">
+                    <input type="radio" name="radios21" id="radios21b" value="0" />
                     Nei
                 </label>
                 </div>
@@ -307,12 +307,12 @@
             <div class="form-group">
                 <label class="col-md-10 control-label" for="radios">Har du i løpet av de siste seks måneder - fått blodoverføring i Afrika eller Sør-Amerika?</label>
                 <div class="col-md-2"> 
-                <label class="radio-inline" for="radios-22a">
-                    <input type="radio" name="radios" id="radios-22a" value="1" />
+                <label class="radio-inline" for="radios22a">
+                    <input type="radio" name="radios22" id="radios22a" value="1" />
                     Ja
                 </label> 
-                <label class="radio-inline" for="radios-22b">
-                    <input type="radio" name="radios" id="radios-22b" value="0" />
+                <label class="radio-inline" for="radios22b">
+                    <input type="radio" name="radios22" id="radios22b" value="0" />
                     Nei
                 </label>
                 </div>

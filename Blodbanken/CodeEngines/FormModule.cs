@@ -46,6 +46,18 @@ namespace Blodbanken.CodeEngines {
          conn.Dispose();
          return rowsUpdated == 0 ? false : true;
       }
+      public bool GetSMSAccept(string logonName) {
+         int? phoneConsent;
+         SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
+         conn.Open();
+         SqlCommand cmd = new SqlCommand("SELECT phoneConsent FROM Users WHERE logonName=@logonName", conn);
+         cmd.Parameters.Add("@logonName", SqlDbType.VarChar, 35);
+         cmd.Parameters["@logonName"].Value = logonName;
+         phoneConsent = ConvertTo.GetValue<int?>(cmd.ExecuteScalar());
+         cmd.Dispose();
+         conn.Dispose();
+         return phoneConsent.HasValue ? (phoneConsent == 0 ? false : true) : false;
+      }
       public bool SetPersInfoAccept(string logonName, bool persInfoConsent) {
          int rowsUpdated = 0;
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
@@ -63,6 +75,18 @@ namespace Blodbanken.CodeEngines {
 
          return rowsUpdated == 0 ? false : true;
       }
+      public bool GetPersInfoAccept(string logonName) {
+         int? phoneConsent;
+         SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
+         conn.Open();
+         SqlCommand cmd = new SqlCommand("SELECT persInfoConsent FROM Users WHERE logonName=@logonName", conn);
+         cmd.Parameters.Add("@logonName", SqlDbType.VarChar, 35);
+         cmd.Parameters["@logonName"].Value = logonName;
+         phoneConsent = ConvertTo.GetValue<int?>(cmd.ExecuteScalar());
+         cmd.Dispose();
+         conn.Dispose();
+         return phoneConsent.HasValue ? (phoneConsent == 0 ? false : true) : false ;
+      }
       public bool SetMailAccept(string logonName, bool eMailConsent) {
          int rowsUpdated = 0;
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
@@ -79,6 +103,18 @@ namespace Blodbanken.CodeEngines {
          conn.Dispose();
 
          return rowsUpdated == 0 ? false : true;
+      }
+      public bool GetMailAccept(string logonName) {
+         int? eMailConsent;
+         SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
+         conn.Open();
+         SqlCommand cmd = new SqlCommand("SELECT eMailConsent FROM Users WHERE logonName=@logonName", conn);
+         cmd.Parameters.Add("@logonName", SqlDbType.VarChar, 35);
+         cmd.Parameters["@logonName"].Value = logonName;
+         eMailConsent = ConvertTo.GetValue<int?>(cmd.ExecuteScalar());
+         cmd.Dispose();
+         conn.Dispose();
+         return eMailConsent.HasValue ? (eMailConsent == 0 ? false : true) : false;
       }
       public List<Schema> GetUserSchemaForm(string logonName) {
          List<Schema> schemas = new List<Schema>();

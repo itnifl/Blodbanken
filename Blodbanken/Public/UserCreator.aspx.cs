@@ -15,7 +15,7 @@ namespace Blodbanken.Sections {
          UserCreatorForm.MessageReporter += UserCreatorForm_MessageReporter;
       }
 
-      private void UserCreatorForm_MessageReporter(string message) {
+      private void UserCreatorForm_MessageReporter(string message, bool queryStatus, SystemUser user) {
          this.CustomMessage = message;
          responsebox.InnerText = JsonConvert.SerializeObject(new ReplyObject(true, __activeFocus, CustomMessage));
       }

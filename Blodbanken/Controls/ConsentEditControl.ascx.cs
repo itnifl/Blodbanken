@@ -9,15 +9,28 @@ using Newtonsoft.Json;
 using Blodbanken.CodeEngines;
 
 namespace Blodbanken.Controls {
-   public partial class ConsentEditControl : System.Web.UI.UserControl {      
+   public partial class ConsentEditControl : System.Web.UI.UserControl {
+      FormModule FormModule = new FormModule();
       public string CurrentUser { get; set; }
       public bool RadiosEMailAccept { get; set; } = false;
       public bool RadiosPersInfoAccept { get; set; } = false;
       public bool RadiosSMSAccept { get; set; } = false;
       public bool RadiosEnabled { get; set; } = true;
-      protected void Page_Load(object sender, EventArgs e) {
+      protected void Page_Load(object sender, EventArgs e) {                  
+         HttpContext.Current.User = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
+         if ((HttpContext.Current.User != null) && HttpContext.Current.User.Identity.IsAuthenticated) {
+            //If the current selected user is the logged in user, then enable the check boxes:
+            if (CurrentUser == HttpContext.Current.User.Identity.Name && !RadiosEnabled) {
+               RadiosEnabled = !RadiosEnabled;
+            }            
+         }
+
+         RadiosPersInfoAccept = FormModule.GetPersInfoAccept(CurrentUser);
+         RadiosEMailAccept = FormModule.GetMailAccept(CurrentUser);         
+         RadiosSMSAccept = FormModule.GetSMSAccept(CurrentUser);
+
          infoPanelHeaderConsentEdit.InnerHtml = "Samtykker for " + CurrentUser;
-         infoPanelHeaderConsentEdit.Attributes.Add("data-currentUser", CurrentUser);
+         infoPanelHeaderConsentEdit.Attributes.Add("data-currentuser", CurrentUser);
          radiosEMailAccept1a.Checked = RadiosEMailAccept;
          radiosEMailAccept1a.Disabled = !RadiosEnabled;
 

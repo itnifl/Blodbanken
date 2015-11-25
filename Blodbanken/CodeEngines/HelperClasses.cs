@@ -32,4 +32,15 @@ namespace Blodbanken.CodeEngines {
          this.CustomMessage = customMessage;
       }
    }
+   public static class ConvertTo {
+      public static T GetValue<T>(object item) {
+         Type myType = typeof(T);
+         try {
+            return (T)item;
+         } catch {
+
+         }
+         return default(T);                  
+      }
+   }
 }

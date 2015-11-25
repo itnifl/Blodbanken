@@ -59,7 +59,7 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        var logonName = $('#<%= infoPanelHeaderConsentEdit.ClientID %>').data('currentUser');
+        var logonName = $('#<%= infoPanelHeaderConsentEdit.ClientID %>').data('currentuser');
         $('#<%= radiosSMSAccept1a.ClientID %>').click(function (e) {
             e.preventDefault();            
             var accept = true;
@@ -74,23 +74,23 @@
         $('#<%= radiosEMailAccept1a.ClientID %>').click(function (e) {
             e.preventDefault();
             var accept = true;
-            setPersInfoAccept(logonName, accept);
+            setEmailAccept(logonName, accept);
         });
         $('#<%= radiosEMailAccept1b.ClientID %>').click(function (e) {
             e.preventDefault();
             var accept = false;
-            setPersInfoAccept(logonName, accept);
+            setEmailAccept(logonName, accept);
         });
 
         $('#<%= radiosPersInfoAccept1a.ClientID %>').click(function (e) {
             e.preventDefault();
             var accept = true;
-            setEmailAccept(logonName, accept);
+            setPersInfoAccept(logonName, accept);
         });
         $('#<%= radiosPersInfoAccept1b.ClientID %>').click(function (e) {
             e.preventDefault();
             var accept = false;
-            setEmailAccept(logonName, accept);
+            setPersInfoAccept(logonName, accept);
         });
     });
 </script>

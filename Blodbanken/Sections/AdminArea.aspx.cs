@@ -32,23 +32,27 @@ namespace Blodbanken.Sections {
          if (button.ID == "btnDeleteUser") return "itemUserDeletor";
          return "";
       }
-      private T CastToType<T>(object input) {
-         return (T)input;
-      }
       protected void Page_Load(object sender, EventArgs e) {
          List<SystemUser> users = AuthMod.GetAllUsers();
 
+         if (this.Request["_activeFocus"] != null) {
+            __activeFocus = this.Request["_activeFocus"].ToString();
+         }
          if (IsPostBack) {
             Control selectedControl = Page.GetPostBackControlId();
             if (selectedControl != null) {
                if (selectedControl.GetType() == typeof(DropDownList)) {
-                  var control = CastToType<DropDownList>(selectedControl);
+                  var control = ConvertTo.GetValue<DropDownList>(selectedControl);
+                  string section = this.GetFocusSection(control);
                   CurrentUser = control.SelectedItem.Text;
-                  __activeFocus = this.GetFocusSection(control);
+                  __activeFocus = String.IsNullOrEmpty(section) ? __activeFocus : section;
+                  __activeFocus = String.IsNullOrEmpty(__activeFocus) ? "" : __activeFocus;
                }
                else if (selectedControl.GetType() == typeof(Button)) {
-                  var control = CastToType<Button>(selectedControl);
-                  __activeFocus = this.GetFocusSection(control);
+                  var control = ConvertTo.GetValue<Button>(selectedControl);
+                  string section = this.GetFocusSection(control);
+                  __activeFocus = String.IsNullOrEmpty(section) ? __activeFocus : section;
+                  __activeFocus = String.IsNullOrEmpty(__activeFocus) ? "" : __activeFocus;
                }
             }
          }
@@ -62,7 +66,17 @@ namespace Blodbanken.Sections {
                select.SelectedValue = CurrentUser;
             }
          }
-         UserCreatorForm.MessageReporter += UserCreatorForm_MessageReporter;
+         UserCreatorForm.MessageReporter += (string message, bool resultStatus, SystemUser user) => {
+            this.CustomMessage = message;
+            if (resultStatus) {
+               selectArray.AsParallel().ForAll(select => select.Items.Add(
+                  !String.IsNullOrEmpty(user.FirstName) && !String.IsNullOrEmpty(user.LastName) ? 
+                  new ListItem(user.FirstName + " " + user.LastName, user.LogonName) : 
+                  new ListItem(user.LogonName, user.LogonName)
+               ));
+            }
+            responsebox.InnerText = JsonConvert.SerializeObject(new ReplyObject(resultStatus, __activeFocus, CustomMessage));
+         };
 
          ExaminationBooking.ShowUserDropDown = true;
          BloodDonorBooking.ShowUserDropDown = true;
@@ -118,12 +132,7 @@ namespace Blodbanken.Sections {
       private void SelectDeleteUser1Ctrl_MessageReporter(string message) {
          this.CustomMessage = message;
          responsebox.InnerText = JsonConvert.SerializeObject(new ReplyObject(true, __activeFocus, CustomMessage));
-      }
-
-      private void UserCreatorForm_MessageReporter(string message) {
-         this.CustomMessage = message;
-         responsebox.InnerText = JsonConvert.SerializeObject(new ReplyObject(true, __activeFocus, CustomMessage));
-      }
+      }      
 
       private void SelectChangeUser1Ctrl_MessageReporter(string message) {
          this.CustomMessage = message;

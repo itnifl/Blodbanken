@@ -13,6 +13,15 @@ namespace Blodbanken.WorkflowItems {
     public partial class PersInfoPage {
         
         /// <summary>
+        /// responsebox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl responsebox;
+        
+        /// <summary>
         /// frmPersInfoArea control.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,15 @@ namespace Blodbanken.WorkflowItems {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Blodbanken.Controls.UserEditControl UserEditForm;
+        
+        /// <summary>
+        /// MessageModuleControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Blodbanken.Controls.MessageModuleControl MessageModuleControl;
         
         /// <summary>
         /// BottomNavBar control.

@@ -20,15 +20,15 @@ CREATE TABLE [dbo].[Users] (
    [password] [varchar] (35) NOT NULL,
    [userRole] [varchar] (35) NOT NULL, 
    [firstName] [varchar] (35), 
-   [lastName] [varchar], 
-   [gender] [varchar] check(gender = 'female' or gender = 'male'),
-   [phoneMobile] [varchar], 
-   [phoneWork] [varchar], 
-   [phonePrivate] [varchar], 
-   [eMail] [varchar],
+   [lastName] [varchar] (35), 
+   [gender] [varchar] (6) check(gender = 'female' or gender = 'male'),
+   [phoneMobile] [varchar] (8), 
+   [phoneWork] [varchar] (8), 
+   [phonePrivate] [varchar] (8), 
+   [eMail] [varchar] (100),
    [age] [int], 
-   [address] [varchar],
-   [nationalIdentity] [int], /* Her har vi fødselsnummeret */
+   [address] [varchar] (400),
+   [nationalIdentity] [varchar] (11), /* Her har vi fødselsnummeret */
    [persInfoConsent] [int],
    [eMailConsent] [int],
    [phoneConsent] [int]

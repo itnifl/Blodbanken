@@ -83,7 +83,7 @@ namespace Blodbanken.CodeEngines {
       }
       public bool UpdateUser(string logonName, UserRole userRole, string firstName = "",
             string lastName = "", string phoneMobile = "", int age = 0,
-            string address = "", int nationalIdentity = 0, string gender = "male", 
+            string address = "", string nationalIdentity = "", string gender = "male", 
             string phoneWork = "", string phonePrivate = "", string eMail = "") {
          if (gender.ToLower() != "male" && gender.ToLower() != "female") {
             throw new NotSupportedException("Gender must be male or female, '" + gender + "' is not allowed");
@@ -92,7 +92,7 @@ namespace Blodbanken.CodeEngines {
          
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
          conn.Open();
-         SqlCommand cmd = new SqlCommand("UPDATE Users SET logonName=@logonName, password=@password, userRole=@userRole, firstName=@firstName, lastName=@lastName, phoneMobile=@phoneMobile, age=@age, address=@address, persInfoConsent=@persInfoConsent, nationalIdentity=@nationalIdentity, eMailConsent=@eMailConsent, phoneConsent=@phoneConsent, gender=@gender, phoneWork=@phoneWork, phonePrivate=@phonePrivate, eMail=@eMail WHERE logonName=@logonName", conn);
+         SqlCommand cmd = new SqlCommand("UPDATE Users SET logonName=@logonName, userRole=@userRole, firstName=@firstName, lastName=@lastName, phoneMobile=@phoneMobile, age=@age, address=@address, nationalIdentity=@nationalIdentity, gender=@gender, phoneWork=@phoneWork, phonePrivate=@phonePrivate, eMail=@eMail WHERE logonName=@logonName", conn);
          cmd.Parameters.Add("@logonName", SqlDbType.VarChar, 35);
          cmd.Parameters["@logonName"].Value = logonName;
 
@@ -102,23 +102,23 @@ namespace Blodbanken.CodeEngines {
          cmd.Parameters.Add("@firstName", SqlDbType.VarChar, 35);
          cmd.Parameters["@firstName"].Value = firstName;
 
-         cmd.Parameters.Add("@lastName", SqlDbType.VarChar);
+         cmd.Parameters.Add("@lastName", SqlDbType.VarChar, 35);
          cmd.Parameters["@lastName"].Value = lastName;
 
-         cmd.Parameters.Add("@phoneMobile", SqlDbType.VarChar);
+         cmd.Parameters.Add("@phoneMobile", SqlDbType.VarChar, 8);
          cmd.Parameters["@phoneMobile"].Value = phoneMobile;
 
          cmd.Parameters.Add("@age", SqlDbType.Int);
          cmd.Parameters["@age"].Value = age;
 
-         cmd.Parameters.Add("@address", SqlDbType.VarChar, 35);
-         cmd.Parameters["@address"].Value = address;
+         cmd.Parameters.Add("@address", SqlDbType.VarChar, 400);
+         cmd.Parameters["@address"].Value = address;        
+
+         cmd.Parameters.Add("@nationalIdentity", SqlDbType.VarChar, 11);
+         cmd.Parameters["@nationalIdentity"].Value = nationalIdentity;
 
          /*cmd.Parameters.Add("@persInfoConsent", SqlDbType.Int);
          cmd.Parameters["@persInfoConsent"].Value = persInfoConsent ? 1 : 0;
-
-         cmd.Parameters.Add("@nationalIdentity", SqlDbType.Int);
-         cmd.Parameters["@nationalIdentity"].Value = nationalIdentity;
 
          cmd.Parameters.Add("@eMailConsent", SqlDbType.Int);
          cmd.Parameters["@eMailConsent"].Value = eMailConsent ? 1 : 0;
@@ -126,16 +126,16 @@ namespace Blodbanken.CodeEngines {
          cmd.Parameters.Add("@phoneConsent", SqlDbType.Int);
          cmd.Parameters["@phoneConsent"].Value = phoneConsent ? 1 : 0;*/
 
-         cmd.Parameters.Add("@gender", SqlDbType.VarChar);
+         cmd.Parameters.Add("@gender", SqlDbType.VarChar, 6);
          cmd.Parameters["@gender"].Value = gender.ToLower();
 
-         cmd.Parameters.Add("@phoneWork", SqlDbType.VarChar);
+         cmd.Parameters.Add("@phoneWork", SqlDbType.VarChar, 8);
          cmd.Parameters["@phoneWork"].Value = phoneWork;
 
-         cmd.Parameters.Add("@phonePrivate", SqlDbType.VarChar);
+         cmd.Parameters.Add("@phonePrivate", SqlDbType.VarChar, 8);
          cmd.Parameters["@phonePrivate"].Value = phonePrivate;
 
-         cmd.Parameters.Add("@eMail", SqlDbType.VarChar);
+         cmd.Parameters.Add("@eMail", SqlDbType.VarChar, 100);
          cmd.Parameters["@eMail"].Value = eMail;
 
          rowsUpdated = cmd.ExecuteNonQuery();
@@ -304,7 +304,7 @@ namespace Blodbanken.CodeEngines {
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
          conn.Open();
 
-         SqlCommand cmd = new SqlCommand("Select * from Users where logonName=@logonNameParam", conn);
+         SqlCommand cmd = new SqlCommand("Select * from Users WHERE logonName=@logonNameParam", conn);
          cmd.Parameters.Add("@logonNameParam", SqlDbType.VarChar, 35);
          cmd.Parameters["@logonNameParam"].Value = logonName;
 

@@ -31,10 +31,10 @@ namespace Blodbanken.Controls {
             }
             bool status = AuthModule.UpdateUser(CurrentUser, role, txtFirstname.Value, txtLastName.Value,
                txtTlfMobil.Value, Int32.Parse(selectAge.SelectedValue), txtAddress.Value,
-               Int32.Parse(txtSocialSecurityNumber.Value), selectGender.SelectedValue.ToLower() == "mann" ? "male" : "female",
+               txtSocialSecurityNumber.Value, selectGender.SelectedValue.ToLower() == "mann" ? "male" : "female",
                txtTlfArbeid.Value, txtTlfPrivat.Value, txtEPost.Value);
             if (MessageReporter != null) {
-               MessageReporter(status ? "Update succeeded" : "Update failed");
+               MessageReporter(status ? "Oppdatering av bruker " + txtFirstname.Value + " " + txtLastName.Value + " var en suksess" : "Oppdatering av bruker" + txtFirstname.Value + " " + txtLastName.Value + " feilet");
             }
             
          }         
@@ -61,11 +61,12 @@ namespace Blodbanken.Controls {
          txtTlfPrivat.Disabled = !persInfoCosent;
          selectAge.SelectedValue = usr.Age.ToString();
          selectAge.Enabled = persInfoCosent;
-         selectRole.SelectedValue = usr.UserRole.ToString().ToLower() == "admin" ? "1" : (usr.UserRole.ToString().ToLower() == "donor" ? "2" : "1");
+         selectRole.SelectedValue = usr.UserRole.ToString().ToLower() == "admin" ? "1" : (usr.UserRole.ToString().ToLower() == "donor" ? "2" : "3");
          selectRole.Enabled = persInfoCosent;
-         selectGender.SelectedValue = usr.Gender.ToLower() == "male" ? "0" : "1";
+         selectGender.SelectedValue = usr.Gender.ToLower() == "male" ? "1" : "2";
          selectGender.Enabled = persInfoCosent;
          lblPersInfConsent.Disabled = !persInfoCosent;
+         lblPersInfConsent.Visible = !persInfoCosent;
       }
    }
 }

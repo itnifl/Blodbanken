@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace Blodbanken.Controls {
    public partial class UserCreatorFormControl : System.Web.UI.UserControl {
       AuthenticatonModule AuthMod = new AuthenticatonModule();
-      public event Action<string> MessageReporter;
+      public event Action<string, bool, SystemUser> MessageReporter;
       public string CurrentUser { get; set; }
       protected void Page_Load(object sender, EventArgs e) {
          System.Security.Principal.GenericPrincipal myUser = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
@@ -34,19 +34,22 @@ namespace Blodbanken.Controls {
             }
             UserRole usrRole = UserRole.Viewer;
             switch (selectRole.Value.ToString().ToLower()) {
-               case "admin":
+               case "1":
                   usrRole = UserRole.Admin;
                   break;
-               case "donor":
+               case "2":
                   usrRole = UserRole.Donor;
                   break;
-               case "viewer":
+               case "3":
                   usrRole = UserRole.Viewer;
                   break;
             }
-            bool status = AuthMod.CreateUser(username, password, usrRole);
+            bool queryStatus = AuthMod.CreateUser(username, password, usrRole);
             if (MessageReporter != null) {
-               MessageReporter(status ? "Oppretting av bruker '"+ username + "' er fullført. Du kan nå logge inn med denne brukeren." : "Oppretting av bruker '" + username + "' feilet");
+               MessageReporter(queryStatus ? 
+                  "Oppretting av bruker '"+ username + "' er fullført. Du kan nå logge inn med denne brukeren." : 
+                  "Oppretting av bruker '" + username + "' feilet",
+                     queryStatus, new SystemUser(username, usrRole));
             }
          }
       }

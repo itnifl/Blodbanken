@@ -1,7 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="PersInfoPage.aspx.cs" Inherits="Blodbanken.WorkflowItems.PersInfoPage" %>
 <%@ Register TagPrefix="uc" TagName="UserEditControl" Src="~/Controls/UserEditControl.ascx" %>
 <%@ Register TagPrefix="uc" TagName="BottomNavBar" Src="~/Controls/BottomNavBar.ascx" %>
+<%@ Register TagPrefix="uc" TagName="MessageModuleControl" Src="~/Controls/MessageModuleControl.ascx" %>
 <asp:Content ID="MainPage" ContentPlaceHolderID="MainPage" Runat="Server">
+    <div runat="server" id="responsebox" style="visibility:hidden"></div>
     <div>
         <form id="frmPersInfoArea" runat="server" class="form-horizontal">
             <div id="inlineContainer">
@@ -29,5 +31,6 @@
             </div>            
         </form>        
     </div>
-    <uc:BottomNavBar runat="server" ID="BottomNavBar" />
+    <uc:MessageModuleControl id="MessageModuleControl" runat="server"/>
+    <uc:BottomNavBar runat="server" ID="BottomNavBar" />    
 </asp:Content>
