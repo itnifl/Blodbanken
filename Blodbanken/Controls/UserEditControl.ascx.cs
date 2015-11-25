@@ -31,7 +31,7 @@ namespace Blodbanken.Controls {
             }
             bool status = AuthModule.UpdateUser(CurrentUser, role, txtFirstname.Value, txtLastName.Value,
                txtTlfMobil.Value, Int32.Parse(selectAge.SelectedValue), txtAddress.Value,
-               txtSocialSecurityNumber.Value, selectGender.SelectedValue.ToLower() == "mann" ? "male" : "female",
+               txtSocialSecurityNumber.Value, selectGender.SelectedValue.ToLower() == "1" ? "male" : "female",
                txtTlfArbeid.Value, txtTlfPrivat.Value, txtEPost.Value);
             if (MessageReporter != null) {
                MessageReporter(status ? "Oppdatering av bruker " + txtFirstname.Value + " " + txtLastName.Value + " var en suksess" : "Oppdatering av bruker" + txtFirstname.Value + " " + txtLastName.Value + " feilet");

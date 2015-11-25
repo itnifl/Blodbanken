@@ -22,7 +22,7 @@ namespace Blodbanken.Controls {
          workflowConsent.Attributes["class"] += (checkStatus ? " list-group-item-success" : " list-group-item-danger");
          if(!checkStatus) errorInfo2.InnerText = "Mangler samtykke i lagring av personopplysninger";
 
-         checkStatus = CheckIfUserHasFutureExaminationBookings(usr); //Her må det også sjekks om en allerede er utført - sjekk regler
+         checkStatus = CheckIfUserHasFutureExaminationBookings(usr);
          workflowExamination.Attributes["class"] += (checkStatus ? " list-group-item-success" : " list-group-item-warning");
          if (!checkStatus) errorInfo3.InnerText = "Helseundersøkelse mangler";
 
@@ -39,7 +39,7 @@ namespace Blodbanken.Controls {
          if (!checkStatus) errorInfo6.InnerText = "Parkering mangler";
       }
       public bool CheckIfUserOK(SystemUser user) {
-         return String.IsNullOrEmpty(user.LogonName) && String.IsNullOrEmpty(user.Password) && String.IsNullOrEmpty(user.PhoneMobile) && String.IsNullOrEmpty(user.FirstName) && String.IsNullOrEmpty(user.LastName) && user.Age > 0;
+         return !String.IsNullOrEmpty(user.LogonName) && !String.IsNullOrEmpty(user.Password) && !String.IsNullOrEmpty(user.PhoneMobile) && !String.IsNullOrEmpty(user.FirstName) && !String.IsNullOrEmpty(user.LastName) && user.Age >= 18 && user.Age <= 65;
       }
       public bool CheckIfPersInfoConsentOK(SystemUser user) {
          return user.PersInfoConsent;

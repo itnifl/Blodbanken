@@ -314,14 +314,14 @@ namespace Blodbanken.CodeEngines {
          while (reader.Read()) {
             string readerRole = reader["userRole"].ToString();
             UserRole role = readerRole == "Admin" ? UserRole.Admin : (readerRole == "Viewer" ? UserRole.Viewer : UserRole.Donor);
-            int age = 0, persInfoConsent = 0, nationalIdentity, eMailConsent, phoneConsent;
+            int age = 0, persInfoConsent = 0, eMailConsent, phoneConsent;
             Int32.TryParse(reader["age"].ToString(), out age);
             Int32.TryParse(reader["persInfoConsent"].ToString(), out persInfoConsent);
 
-            Int32.TryParse(reader["persInfoConsent"].ToString(), out nationalIdentity);
-            Int32.TryParse(reader["persInfoConsent"].ToString(), out eMailConsent);
-            Int32.TryParse(reader["persInfoConsent"].ToString(), out phoneConsent);
+            Int32.TryParse(reader["eMailConsent"].ToString(), out eMailConsent);
+            Int32.TryParse(reader["phoneConsent"].ToString(), out phoneConsent);
 
+            string nationalIdentity = reader["nationalIdentity"] != null ? reader["nationalIdentity"].ToString() : String.Empty;
             string logonNameInput = reader["logonName"] != null ? reader["logonName"].ToString() : String.Empty;
             string passwordImput = reader["password"] != null ? reader["password"].ToString() : String.Empty;
             string firstNameInput = reader["firstName"] != null ? reader["firstName"].ToString() : String.Empty;
@@ -429,7 +429,7 @@ namespace Blodbanken.CodeEngines {
       public int Age { get; set; } = 0;
       public string Address { get; set; }
       public bool PersInfoConsent { get; set; } = false;
-      public int NationalIdentity { get; set; }
+      public string NationalIdentity { get; set; }
       public bool EMailConsent { get; set; } = false;
       public bool PhoneConsent { get; set; } = false;
       public string Gender { get; set; }
@@ -449,7 +449,7 @@ namespace Blodbanken.CodeEngines {
       }
       public SystemUser(string logonName, string password, UserRole userRole, string firstName, 
             string lastName, string phoneMobile, int age, string address, bool persInfoConsent,
-            int nationalIdentity, bool eMailConsent, bool phoneConsent, string gender, string phoneWork, 
+            string nationalIdentity, bool eMailConsent, bool phoneConsent, string gender, string phoneWork, 
             string phonePrivate, string eMail) {
          this.LogonName = logonName;
          this.Password = password;
