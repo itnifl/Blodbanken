@@ -116,6 +116,9 @@ namespace Blodbanken.CodeEngines {
          conn.Dispose();
          return eMailConsent.HasValue ? (eMailConsent == 0 ? false : true) : false;
       }
+      public bool PutUserSchemaForm(Schema userSchema) {
+         throw new NotImplementedException();
+      }
       public List<Schema> GetUserSchemaForm(string logonName) {
          List<Schema> schemas = new List<Schema>();
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
@@ -157,7 +160,7 @@ namespace Blodbanken.CodeEngines {
    public class Schema {
       public string logonName { get; set; }
       public DateTime approved { get; set; }
-      public int schemaID { get; set; }
+      public int? schemaID { get; set; }
       public int spm1 { get; set; }
       public int spm2 { get; set; }
       public int spm3 { get; set; }
