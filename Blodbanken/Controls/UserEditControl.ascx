@@ -9,7 +9,7 @@
             <label class="col-md-4 control-label" for="txtFirstname">Fornavn</label>  
             <div class="col-md-4">
             <asp:RequiredFieldValidator Validationgroup="UserEditValidatorGroup" Display="Dynamic" runat="server" ControlToValidate="txtFirstname" style="color:red;" ErrorMessage="<b>* Feltet må fylles inn</b>" />
-            <input runat="server" id="txtFirstname" name="txtFirstname" type="text" placeholder="Fornavn" class="form-control input-md">
+            <input runat="server" id="txtFirstname" name="txtFirstname" type="text" placeholder="Fornavn" class="form-control input-md" />
     
             </div>
         </div>
@@ -19,7 +19,7 @@
             <label class="col-md-4 control-label" for="txtLastName">Etternavn</label>  
             <div class="col-md-4">
             <asp:RequiredFieldValidator Validationgroup="UserEditValidatorGroup" Display="Dynamic" runat="server" ControlToValidate="txtLastName" style="color:red;" ErrorMessage="<b>* Feltet må fylles inn</b>" />
-            <input runat="server"  id="txtLastName" name="txtLastName" type="text" placeholder="Etternavn" class="form-control input-md">
+            <input runat="server"  id="txtLastName" name="txtLastName" type="text" placeholder="Etternavn" class="form-control input-md" />
     
             </div>
         </div>

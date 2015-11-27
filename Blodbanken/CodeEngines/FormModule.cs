@@ -117,7 +117,69 @@ namespace Blodbanken.CodeEngines {
          return eMailConsent.HasValue ? (eMailConsent == 0 ? false : true) : false;
       }
       public bool PutUserSchemaForm(Schema userSchema) {
-         throw new NotImplementedException();
+         Schema existingForm = this.GetUserSchemaForm(userSchema.logonName).Where(schema => schema.schemaID == userSchema.schemaID).FirstOrDefault();
+         SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
+         conn.Open();
+         int rowsUpdated = 0;
+         if (existingForm != null) {
+            SqlCommand cmd = new SqlCommand("UPDATE dbo.[Schema] SET logonName=@logonName, approved=@approved, spm1=@spm1, spm2=@spm2, spm3=@spm3, spm4=@spm4, spm5=@spm5, spm6=@spm6, spm7=@spm7, spm8=@spm8, spm9=@spm9, spm10=@spm10, spm11=@spm11, spm12=@spm12, spm13=@spm13, spm14=@spm14, spm15=@spm15, spm16=@spm16, spm17=@spm17, spm18=@spm18, spm19=@spm19, spm20=@spm20, spm21=@spm21, spm22=@spm22, spm23=@spm23, spm24=@spm24, spm25=@spm25, spm26=@spm26, spm27=@spm27, spm28=@spm28, spm29=@spm29, spm30=@spm30, spm31=@spm31, spm32=@spm32, spm33=@spm33, spm34=@spm34, spm35=@spm35, spm36=@spm36, spm37=@spm37, spm38=@spm38, spm39=@spm39, spm40=@spm40, spm41=@spm41, spm42=@spm42, spm43=@spm43, spm44=@spm44, spm45=@spm45, spm46=@spm46, spm47=@spm47, spm48=@spm48, spm49=@spm49, spm50=@spm50, spm51=@spm51, spm52=@spm52, spm53=@spm53, spm54=@spm54, spm55=@spm55, spm56=@spm56, spm57=@spm57, spm58=@spm58, spm59=@spm59, spm60=@spm60 WHERE schemaID=@schemaID", conn);
+            foreach (PropertyInfo property in typeof(Schema).GetProperties()) {
+               if (userSchema.GetType().GetProperty(property.Name).GetValue(userSchema, null).GetType() == "".GetType()) {
+                  cmd.Parameters.Add("@" + property.Name, SqlDbType.VarChar, 35);
+               }
+               else if (userSchema.GetType().GetProperty(property.Name).GetValue(userSchema, null).GetType() == DateTime.Now.GetType()) {
+                  cmd.Parameters.Add("@" + property.Name, SqlDbType.DateTime);
+               }
+               else {
+                  cmd.Parameters.Add("@" + property.Name, SqlDbType.Int);
+               }
+
+               if (property.Name == "approved") {
+                  DateTime dtTime = ((DateTime)userSchema.GetType().GetProperty(property.Name).GetValue(userSchema, null));
+                  if (dtTime == null || dtTime == DateTime.MinValue) cmd.Parameters["@" + property.Name].Value = DBNull.Value;
+                  else cmd.Parameters["@" + property.Name].Value = dtTime.ToString("MM/dd/yyyy");
+               }
+               else {
+                  cmd.Parameters["@" + property.Name].Value = userSchema.GetType().GetProperty(property.Name).GetValue(userSchema, null);
+               }
+            }
+            rowsUpdated = cmd.ExecuteNonQuery();
+            cmd.Dispose();
+         } else {
+            SqlCommand cmd = new SqlCommand("INSERT INTO dbo.[Schema] (logonName,approved,spm1,spm2,spm3,spm4,spm5,spm6,spm7,spm8,spm9,spm10,spm11,spm12,spm13,spm14,spm15,spm16,spm17,spm18,spm19,spm20,spm21,spm22,spm23,spm24,spm25,spm26,spm27,spm28,spm29,spm30,spm31,spm32,spm33,spm34,spm35,spm36,spm37,spm38,spm39,spm40,spm41,spm42,spm43,spm44,spm45,spm46,spm47,spm48,spm49,spm50,spm51,spm52,spm53,spm54,spm55,spm56,spm57,spm58,spm59,spm60) values(@logonName,@approved,@spm1,@spm2,@spm3,@spm4,@spm5,@spm6,@spm7,@spm8,@spm9,@spm10,@spm11,@spm12,@spm13,@spm14,@spm15,@spm16,@spm17,@spm18,@spm19,@spm20,@spm21,@spm22,@spm23,@spm24,@spm25,@spm26,@spm27,@spm28,@spm29,@spm30,@spm31,@spm32,@spm33,@spm34,@spm35,@spm36,@spm37,@spm38,@spm39,@spm40,@spm41,@spm42,@spm43,@spm44,@spm45,@spm46,@spm47,@spm48,@spm49,@spm50,@spm51,@spm52,@spm53,@spm54,@spm55,@spm56,@spm57,@spm58,@spm59,@spm60)", conn);
+            foreach (PropertyInfo property in typeof(Schema).GetProperties()) {
+               if(property.Name != "schemaID") {
+                  if (userSchema.GetType().GetProperty(property.Name).GetValue(userSchema, null).GetType() == "".GetType()) {
+                     cmd.Parameters.Add("@" + property.Name, SqlDbType.VarChar, 35);
+                  }
+                  else if (userSchema.GetType().GetProperty(property.Name).GetValue(userSchema, null).GetType() == DateTime.Now.GetType()) {
+                     cmd.Parameters.Add("@" + property.Name, SqlDbType.DateTime);
+                  }
+                  else {
+                     cmd.Parameters.Add("@" + property.Name, SqlDbType.Int);
+                  }
+                  
+                  if (property.Name == "approved") {
+                     DateTime dtTime = ((DateTime)userSchema.GetType().GetProperty(property.Name).GetValue(userSchema, null));
+                     if (dtTime == null || dtTime == DateTime.MinValue) cmd.Parameters["@" + property.Name].Value = DBNull.Value;
+                     else cmd.Parameters["@" + property.Name].Value = dtTime.ToString("MM/dd/yyyy");
+                  }
+                  else {
+                     cmd.Parameters["@" + property.Name].Value = userSchema.GetType().GetProperty(property.Name).GetValue(userSchema, null);
+                  }
+               }
+            }
+            string query = cmd.CommandText;
+
+            foreach (SqlParameter p in cmd.Parameters) {
+               query = query.Replace(p.ParameterName, p.Value.ToString());
+            }
+            rowsUpdated = cmd.ExecuteNonQuery();
+            cmd.Dispose();
+         }
+         
+         conn.Dispose();
+         return rowsUpdated != 0;
       }
       public List<Schema> GetUserSchemaForm(string logonName) {
          List<Schema> schemas = new List<Schema>();
@@ -140,9 +202,9 @@ namespace Blodbanken.CodeEngines {
                if (column == "approved") {
                   DateTime dtResult;
                   DateTime.TryParse(reader[column] != null ? reader[column].ToString() : String.Empty, out dtResult);
-                  myPropInfo.SetValue(this, dtResult, null);
+                  if(dtResult != null && dtResult != DateTime.MinValue) myPropInfo.SetValue(this, dtResult, null);
                } else if (column.ToLower() == "logonname") {
-                  myPropInfo.SetValue(this, reader[column] != null ? reader[column].ToString() : String.Empty, null);
+                  myPropInfo.SetValue(this, reader[column] != null && !String.IsNullOrEmpty(reader[column].ToString()) ? reader[column].ToString() : String.Empty, null);
                } else {
                   int intResult;
                   Int32.TryParse(reader[column] != null ? reader[column].ToString() : "0", out intResult);

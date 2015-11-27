@@ -463,13 +463,13 @@ namespace Blodbanken.WorkflowItems {
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton radios25a;
         
         /// <summary>
-        /// radio-25b control.
+        /// radios25b control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton radio-25b;
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton radios25b;
         
         /// <summary>
         /// radios26a control.

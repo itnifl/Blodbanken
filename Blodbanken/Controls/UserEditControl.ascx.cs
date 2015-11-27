@@ -13,7 +13,8 @@ namespace Blodbanken.Controls {
       public string CurrentUser { get; set; }
       protected void Page_Load(object sender, EventArgs e) {
          infoPanelEditUserHeader.InnerText = "Endre brukeropplysninger for " + CurrentUser;
-         this.PopulateHTMLForm(CurrentUser);
+         if(!IsPostBack)
+            this.PopulateHTMLForm(CurrentUser);
       }
       public void UpdateUser(object sender, CommandEventArgs e) {
          if (e.CommandName == btnUpdate.CommandName) {

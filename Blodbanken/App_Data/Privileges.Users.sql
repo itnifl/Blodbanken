@@ -38,7 +38,7 @@ CREATE TABLE [dbo].[Users] (
 CREATE TABLE [dbo].[Schema] (
 	[schemaID] [int] NOT NULL IDENTITY (1,1) PRIMARY KEY,
 	[logonName] [varchar] (35) NOT NULL,
-	[approved] [date],
+	[approved] [DateTime],
 	[spm1] [int], /*Har du fått informasjon om blodgivning?*/
 	[spm2] [int], /*Føler du deg frisk nå?*/
 	[spm3] [int], /*Har du gitt blod tidligere*/

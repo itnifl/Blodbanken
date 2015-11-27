@@ -354,7 +354,7 @@
                     Ja
                 </label> 
                 <label class="radio-inline" for="radios25b">
-                    <input type="radio" name="radios25" id="radio-25b" value="0" runat="server" />
+                    <input type="radio" name="radios25" id="radios25b" value="0" runat="server" />
                     Nei
                 </label>
                 </div>
