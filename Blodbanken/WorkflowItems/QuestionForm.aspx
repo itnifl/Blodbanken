@@ -1,6 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="QuestionForm.aspx.cs" Inherits="Blodbanken.WorkflowItems.QuestionForm"  MasterPageFile="~/Master.master" Title="Blodbanken"%>
 <%@ Register TagPrefix="uc" TagName="BottomNavBar" Src="~/Controls/BottomNavBar.ascx" %>
+<%@ Register TagPrefix="uc" TagName="MessageModuleControl" Src="~/Controls/MessageModuleControl.ascx" %>
 <asp:Content ID="MainPage" ContentPlaceHolderID="MainPage" Runat="Server">
+    <div runat="server" id="responsebox" style="visibility:hidden"></div>
     <div class="well topPlacement" style="margin-left:100px;margin-right:100px;padding-top:0px;padding-bottom:0px;">
       <h1 style="margin-top:10px;">Login</h1>
     </div>
@@ -854,5 +856,6 @@
             <asp:button class="btn btn-lg btn-primary btn-block" type="submit" id="btnSubmitForm" runat="server" Text="Send skjema" OnCommand="SubmitForm" CommandName="CreateUser" />        
         </form>
     </div>
+    <uc:MessageModuleControl id="MessageModuleControl" runat="server"/>
     <uc:BottomNavBar runat="server" ID="BottomNavBar" />
 </asp:Content>

@@ -11,6 +11,7 @@ namespace Blodbanken.Controls {
    public partial class ExaminationAcceptControl : System.Web.UI.UserControl {
       TimeBooker TimeBookings = new TimeBooker();
       AuthenticatonModule AuthMod = new AuthenticatonModule();
+      FormModule FormMod = new FormModule();
       public bool RadiosEnabled { get; set; } = false;
       public string CurrentUser { get; set; }
       protected void Page_Load(object sender, EventArgs e) {
@@ -34,6 +35,14 @@ namespace Blodbanken.Controls {
          if (healthExaminationList.Items.Count == 0) {
             radiosExaminationAccept1a.Disabled = true;
             radiosExaminationAccept1b.Disabled = true;
+         }
+
+         userSchemaAcceptHeader.InnerText = "Helseundersøkelser for " + CurrentUser;
+         userSchemaAcceptHeader.Attributes.Add("data-currentUser", CurrentUser);
+         List<Schema> userSchemas = FormMod.GetUserSchemaForm(CurrentUser);
+         foreach (Schema schema in userSchemas) {
+            ListItem item = new ListItem(usr.FirstName + " " + usr.LastName + " - " + schema.schemaID, schema.schemaID.ToString());
+            selectUserSchemaAcceptList.Items.Add(item);
          }
       }
    }

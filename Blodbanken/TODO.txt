@@ -24,8 +24,9 @@
 *Sjekk og test håndtering av DateTime mellom JavaSript, C# of database
 *I commonFunctions.js=>addHealthExamination + addDonorAppointment må startTime-endTime resultere i durationHours.
 *Brukernavn kan ikke ha space når det opprettes
-*Ha med server side sjekk om personopplysninger er godkjent før data aksepteres, dette dså man ikke kan poste fra en gammel side - feks PersInfoPage.aspx
+*Ha med server side sjekk om personopplysninger er godkjent før data aksepteres, dette så man ikke kan poste fra en gammel side - feks PersInfoPage.aspx
 *Oppdater bruker i AdminArea.aspx, da lukker alle kontroller seg etterpå, dette er ikke korrekt.
 *Finn ut hvor gammel man må være for å være blodgiver og oppdater workflowcontrol.ascx
 *dropdownmeny for brukere i booking av helseundersøkelse skal ikke være tilgjengelig utenfor kontroll panelet
 *Ha med validering av alder og informer om at brukere ikke kan være under 18 eller over 65.
+*Ved sletting av egenerklæringer er fortsatt innslaget liggende igjen i lista.

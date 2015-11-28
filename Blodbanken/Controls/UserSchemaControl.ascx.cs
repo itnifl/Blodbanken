@@ -9,12 +9,13 @@ using Blodbanken.CodeEngines;
 namespace Blodbanken.Controls {
    public partial class UserSchemaControl : System.Web.UI.UserControl {
       public string CurrentUser { get; set; }
-      public event Action<string> MessageReporter;
+      public event Action<string, bool> MessageReporter;
       FormModule FormMaster = new FormModule();
       AuthenticatonModule AuthMod = new AuthenticatonModule();
       protected void Page_Load(object sender, EventArgs e) {
          List<Schema> list = FormMaster.GetUserSchemaForm(CurrentUser);
          SystemUser usr = AuthMod.GetUser(CurrentUser);
+         infoPanelHeader.InnerText = "Egenerklæring for " + (usr.FirstName != null ? usr.FirstName + " " + usr.LastName : CurrentUser);
          list.ForEach(item => selectUserFormList.Items.Add(
             new ListItem(usr.FirstName + " " + usr.LastName + " - " + item.schemaID.ToString(), item.schemaID.ToString()
          )));
@@ -29,7 +30,7 @@ namespace Blodbanken.Controls {
             Int32.TryParse(selectUserFormList.SelectedValue, out schemaID);
             status = FormMaster.DeleteForm(schemaID);
             if (MessageReporter != null) {
-               MessageReporter(status ? "Sletting av helseskjema for '" + CurrentUser + "' med ID '"+ schemaID + "' er fullført." : "Sletting av helseskjema for  '" + CurrentUser + "' med ID '" + schemaID + "' feilet.");
+               MessageReporter(status ? "Sletting av egenerklærign for '" + CurrentUser + "' med ID '"+ schemaID + "' er fullført." : "Sletting av egenerklæring for  '" + CurrentUser + "' med ID '" + schemaID + "' feilet.", status);
             }
          }         
       }

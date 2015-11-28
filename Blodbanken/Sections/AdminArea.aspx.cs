@@ -125,6 +125,10 @@ namespace Blodbanken.Sections {
             selectUserForSchemaEditCtrl.CurrentUser = this.selectDeleteUser1.SelectedValue;
             selectUserForSchemaEditCtrl.ID = "UserSchemaControl";
             SchemaEditPlaceHolder.Controls.Add(selectUserForSchemaEditCtrl);
+            selectUserForSchemaEditCtrl.MessageReporter += (string message, bool status) => {
+               this.CustomMessage = message;
+               responsebox.InnerText = JsonConvert.SerializeObject(new ReplyObject(status, __activeFocus, CustomMessage));
+            };
          }
          responsebox.InnerText = JsonConvert.SerializeObject(new ReplyObject(true, __activeFocus, CustomMessage));
       }

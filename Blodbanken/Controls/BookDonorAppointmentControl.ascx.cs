@@ -16,36 +16,38 @@ namespace Blodbanken.Controls {
       public string CurrentUser { get; set; }
       protected void Page_Load(object sender, EventArgs e) {
          List<DonorBooking> allDonorAppointments = null;
-         System.Security.Principal.GenericPrincipal myUser = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
-         if (myUser != null)
-            HttpContext.Current.User = myUser;
-         if ((HttpContext.Current.User != null) && HttpContext.Current.User.IsInRole(UserRole.Admin.ToString())) {
-            List<SystemUser> users = AuthMod.GetAllUsers();
-            allDonorAppointments = Booker.GetAllDonorBookings();
-            DropDownList[] selectArray = { selectUserForDonorBooking };
-            foreach (DropDownList select in selectArray) {
-               select.Items.Clear();
-               users.Where(usr => !String.IsNullOrEmpty(usr.FirstName) && !String.IsNullOrEmpty(usr.LastName)).ToList().ForEach(user => select.Items.Add(new ListItem(user.FirstName + " " + user.LastName, user.LogonName)));
-               users.Where(usr => String.IsNullOrEmpty(usr.FirstName) && String.IsNullOrEmpty(usr.LastName)).ToList().ForEach(user => select.Items.Add(new ListItem(user.LogonName, user.LogonName)));
+         HttpContext.Current.User = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
+         if((HttpContext.Current.User != null)) {
+            if (HttpContext.Current.User.IsInRole(UserRole.Admin.ToString())) {
+               List<SystemUser> users = AuthMod.GetAllUsers();
+               allDonorAppointments = Booker.GetAllDonorBookings();
+               DropDownList[] selectArray = { selectUserForDonorBooking };
+               foreach (DropDownList select in selectArray) {
+                  select.Items.Clear();
+                  users.Where(usr => !String.IsNullOrEmpty(usr.FirstName) && !String.IsNullOrEmpty(usr.LastName)).ToList().ForEach(user => select.Items.Add(new ListItem(user.FirstName + " " + user.LastName, user.LogonName)));
+                  users.Where(usr => String.IsNullOrEmpty(usr.FirstName) && String.IsNullOrEmpty(usr.LastName)).ToList().ForEach(user => select.Items.Add(new ListItem(user.LogonName, user.LogonName)));
+               }
+               if (!String.IsNullOrEmpty(CurrentUser)) {
+                  selectUserForDonorBooking.SelectedValue = CurrentUser;
+               }
+               else if (selectUserForDonorBooking.SelectedItem != null && String.IsNullOrEmpty(CurrentUser)) {
+                  CurrentUser = selectUserForDonorBooking.Text;
+               }
             }
-            if (!String.IsNullOrEmpty(CurrentUser)) {
-               selectUserForDonorBooking.SelectedValue = CurrentUser;
+            else {
+               selectUserForDonorBooking.Visible = false;
             }
-            else if (selectUserForDonorBooking.SelectedItem != null && String.IsNullOrEmpty(CurrentUser)) {
-               CurrentUser = selectUserForDonorBooking.Text;
-            }
-            else if (String.IsNullOrEmpty(CurrentUser)) {
+            if (String.IsNullOrEmpty(CurrentUser)) {
                CurrentUser = HttpContext.Current.User.Identity.Name;
             }
             bool hasApprovedForms = (Forms.GetUserSchemaForm(CurrentUser).Where(form => DateTime.Compare(DateTime.Now.AddDays(-30), form.approved) <= 0)).Count() > 0;
+
             submitButton.Disabled = !hasApprovedForms;
             lblBookDonorAppointmentError1.Visible = lblBookDonorAppointmentError2.Visible = !hasApprovedForms;
             patientName.Value = CurrentUser;
             patientName.Disabled = true;
          }
-         else {
-            selectUserForDonorBooking.Visible = false;
-         }
+         
          __appointmentBeholder.InnerText = JsonConvert.SerializeObject(new { DonorAppointments = allDonorAppointments });
       }
    }

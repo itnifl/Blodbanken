@@ -20,7 +20,7 @@ namespace Blodbanken.CodeEngines {
          int rowsUpdated = 0;
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
          conn.Open();
-         SqlCommand cmd = new SqlCommand("DELETE FROM Schema WHERE schemaID=@schemaID", conn);
+         SqlCommand cmd = new SqlCommand("DELETE FROM dbo.[Schema] WHERE schemaID=@schemaID", conn);
          cmd.Parameters.Add("@schemaID", SqlDbType.Int);
          cmd.Parameters["@schemaID"].Value = schemaID;
 
@@ -202,13 +202,13 @@ namespace Blodbanken.CodeEngines {
                if (column == "approved") {
                   DateTime dtResult;
                   DateTime.TryParse(reader[column] != null ? reader[column].ToString() : String.Empty, out dtResult);
-                  if(dtResult != null && dtResult != DateTime.MinValue) myPropInfo.SetValue(this, dtResult, null);
+                  if(dtResult != null && dtResult != DateTime.MinValue) myPropInfo.SetValue(theSchema, dtResult, null);
                } else if (column.ToLower() == "logonname") {
-                  myPropInfo.SetValue(this, reader[column] != null && !String.IsNullOrEmpty(reader[column].ToString()) ? reader[column].ToString() : String.Empty, null);
+                  myPropInfo.SetValue(theSchema, reader[column] != null && !String.IsNullOrEmpty(reader[column].ToString()) ? reader[column].ToString() : String.Empty, null);
                } else {
                   int intResult;
                   Int32.TryParse(reader[column] != null ? reader[column].ToString() : "0", out intResult);
-                  myPropInfo.SetValue(this, intResult, null);
+                  myPropInfo.SetValue(theSchema, intResult, null);
                }
             }
             schemas.Add(theSchema);
