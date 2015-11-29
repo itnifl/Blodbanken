@@ -29,10 +29,11 @@ function logoffUser(e) {
 }
 
 function addDonorAppointment(logonName, startTime, endTime, allDay) {
+    var hours = Math.abs(startTime - endTime) / 36e5;
     $.ajax({
         type: "POST",
         url: "/Sections/AdminArea.aspx/BookDonorAppointment",
-        data: "{bookingDate='" + startTime + "', durationHours=" + (startTime - endTime) + ", logonName='" + logonName + "'}",
+        data: "{bookingDate='" + startTime + "', durationHours=" + hours + ", logonName='" + logonName + "'}",
         contentType: "application/json; charset=utf-8;",
         dataType: "json",
         success: function (response) {
@@ -48,10 +49,12 @@ function addDonorAppointment(logonName, startTime, endTime, allDay) {
 }
 
 function addHealthExamination(logonName, startTime, endTime, allDay) {
+    var hours = Math.abs(startTime - endTime) / 36e5;
     $.ajax({
         type: "POST",
         url: "/Sections/AdminArea.aspx/BookHealthExamination",
-        data: "{bookingDate= '" + startTime + "', durationHours=" + (startTime - endTime) + ", logonName='" + logonName + "'}",
+        data: "{bookingDate='" + startTime + "', durationHours=" + hours + ", logonName='" + logonName + "'}",
+        async: false,
         contentType: "application/json; charset=utf-8;",
         dataType: "json",
         success: function (response) {
@@ -62,6 +65,7 @@ function addHealthExamination(logonName, startTime, endTime, allDay) {
         error: function (xhr, status, error) {
             var err = xhr.responseText;
             alert('Error: ' + err);
+            errorM = err;
         }
     });
 }

@@ -219,7 +219,7 @@
 
             <!-- Error label if persInfConsent is not approved -->
         <div class="form-group">
-            <label class="col-md-10 control-label" id="lblPersInfConsent" runat="server" style="color:red;">* <a href="/WorkflowItems/PersInfoConsent.aspx" style="color:inherit;">For å kunne fylle inn personopplysninger, må lagring av personopplysinger være godkjent først.</a></label>              
+            <label class="col-md-10 control-label" id="lblPersInfConsent" runat="server" style="color:red;">* <a href="/WorkflowItems/PersInfoConsent.aspx" style="color:inherit;">For å kunne fylle inn personopplysninger, må lagring av personopplysinger være godkjent først av gjeldende bruker.</a></label>              
         </div>
 
         <!-- Buttons -->

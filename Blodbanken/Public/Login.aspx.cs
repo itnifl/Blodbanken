@@ -19,18 +19,21 @@ namespace Blodbanken.Public {
       [WebMethod]
       public static string LogOffUser() {
          FormsAuthentication.SignOut();
+         HttpContext.Current.Response.Cookies.Remove(FormsAuthentication.FormsCookieName);
          GenericPrincipal myUser = (GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
          myUser = null;
          System.Threading.Thread.CurrentPrincipal = null;
 
          UserIdentity id = new UserIdentity();
+         id.IsAuthenticated = false;
          var userRoles = new String[] { };
          var prin = new GenericPrincipal(id, userRoles);
 
          HttpContext.Current.User = prin;
          HttpContext.Current.Cache.Remove("customPrincipal");
          HttpContext.Current.Cache.Insert("customPrincipal", prin);
-         HttpContext.Current.Response.Cookies.Remove(FormsAuthentication.FormsCookieName);
+         HttpContext.Current.Response.Cookies.Clear();
+         //FormsAuthentication.SetAuthCookie
          return JsonConvert.SerializeObject(new { runStatus = true });
       }
 

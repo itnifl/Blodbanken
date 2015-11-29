@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BookMedicalExamination.aspx.cs" Inherits="Blodbanken.WorkflowItems.BookMedicalExamination"  MasterPageFile="~/Master.master" Title="Blodbanken"%>
+﻿<%@ Page EnableEventValidation="false" Language="C#" AutoEventWireup="true" CodeBehind="BookMedicalExamination.aspx.cs" Inherits="Blodbanken.WorkflowItems.BookMedicalExamination"  MasterPageFile="~/Master.master" Title="Blodbanken"%>
 <%@ Register TagPrefix="uc" TagName="ExaminationBooking" Src="~/Controls/BookHealthExaminationControl.ascx" %>
 <%@ Register TagPrefix="uc" TagName="BottomNavBar" Src="~/Controls/BottomNavBar.ascx" %>
 <asp:Content ID="MainPage" ContentPlaceHolderID="MainPage" Runat="Server">

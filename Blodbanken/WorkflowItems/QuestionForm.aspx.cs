@@ -20,6 +20,8 @@ namespace Blodbanken.WorkflowItems {
             HttpContext.Current.User = myUser;
          if ((HttpContext.Current.User != null) && HttpContext.Current.User.Identity.IsAuthenticated) {
             this.CurrentUser = HttpContext.Current.User.Identity.Name;
+            SystemUser usr = AuthMod.GetUser(CurrentUser);
+            lblHeading.InnerText = "Egenerklæring for " + usr.FirstName != null ? usr.FirstName + " " + usr.LastName : CurrentUser;
             CurrentUserObject = AuthMod.GetUser(CurrentUser);
             if (CurrentUserObject.Gender.ToLower() == "female") {
                radios51a.Disabled = true;

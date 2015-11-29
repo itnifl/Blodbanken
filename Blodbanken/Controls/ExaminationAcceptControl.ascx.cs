@@ -19,6 +19,7 @@ namespace Blodbanken.Controls {
          infoPanelHeader.Attributes.Add("data-currentUser", CurrentUser);
          List<ExaminationBooking> eBookings = TimeBookings.GetUserExaminationBookings(CurrentUser);
          SystemUser usr = AuthMod.GetUser(CurrentUser);
+         healthExaminationList.Items.Clear();
          foreach (ExaminationBooking eBooking in eBookings) {
             ListItem item = new ListItem(usr.FirstName + " " + usr.LastName + " - " + eBooking.BookingDate, eBooking.BookingID.ToString());
             item.Attributes.Add("data-parkingID", eBooking.BookingID.ToString());
@@ -40,6 +41,7 @@ namespace Blodbanken.Controls {
          userSchemaAcceptHeader.InnerText = "Helseundersøkelser for " + CurrentUser;
          userSchemaAcceptHeader.Attributes.Add("data-currentUser", CurrentUser);
          List<Schema> userSchemas = FormMod.GetUserSchemaForm(CurrentUser);
+         selectUserSchemaAcceptList.Items.Clear();
          foreach (Schema schema in userSchemas) {
             ListItem item = new ListItem(usr.FirstName + " " + usr.LastName + " - " + schema.schemaID, schema.schemaID.ToString());
             selectUserSchemaAcceptList.Items.Add(item);

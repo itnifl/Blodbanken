@@ -44,7 +44,7 @@ namespace Blodbanken.Sections {
                if (selectedControl.GetType() == typeof(DropDownList)) {
                   var control = ConvertTo.GetValue<DropDownList>(selectedControl);
                   string section = this.GetFocusSection(control);
-                  CurrentUser = control.SelectedItem.Text;
+                  CurrentUser = control.SelectedItem.Value;
                   __activeFocus = String.IsNullOrEmpty(section) ? __activeFocus : section;
                   __activeFocus = String.IsNullOrEmpty(__activeFocus) ? "" : __activeFocus;
                }
@@ -58,14 +58,22 @@ namespace Blodbanken.Sections {
          }
 
          DropDownList[] selectArray = { selectChangeUser1, selectDeleteUser1, selectUserForSchemaEdit, selectUserForConsentEdit, selectUserForWorkflowEdit, selectUserForExaminationAccept };
-         foreach (DropDownList select in selectArray) {
-            select.Items.Clear();
-            users.Where(usr => !String.IsNullOrEmpty(usr.FirstName) && !String.IsNullOrEmpty(usr.LastName)).ToList().ForEach(user => select.Items.Add(new ListItem(user.FirstName + " " + user.LastName, user.LogonName)));
-            users.Where(usr => String.IsNullOrEmpty(usr.FirstName) && String.IsNullOrEmpty(usr.LastName)).ToList().ForEach(user => select.Items.Add(new ListItem(user.LogonName, user.LogonName)));
-            if (!String.IsNullOrEmpty(CurrentUser)) {
-               select.SelectedValue = CurrentUser;
+         if (String.IsNullOrEmpty(CurrentUser) && !IsPostBack) {
+            HttpContext.Current.User = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
+            if ((HttpContext.Current.User != null) && HttpContext.Current.User.Identity.IsAuthenticated) {
+               CurrentUser = HttpContext.Current.User.Identity.Name;
             }
          }
+         if ((!String.IsNullOrEmpty(CurrentUser) && IsPostBack) || !IsPostBack) {
+            foreach (DropDownList select in selectArray) {
+               select.Items.Clear();
+               users.Where(usr => !String.IsNullOrEmpty(usr.FirstName) && !String.IsNullOrEmpty(usr.LastName)).ToList().ForEach(user => select.Items.Add(new ListItem(user.FirstName + " " + user.LastName, user.LogonName)));
+               users.Where(usr => String.IsNullOrEmpty(usr.FirstName) && String.IsNullOrEmpty(usr.LastName)).ToList().ForEach(user => select.Items.Add(new ListItem(user.LogonName, user.LogonName)));
+               if (!String.IsNullOrEmpty(CurrentUser)) {
+                  select.SelectedValue = CurrentUser;
+               }
+            }
+         }  
          UserCreatorForm.MessageReporter += (string message, bool resultStatus, SystemUser user) => {
             this.CustomMessage = message;
             if (resultStatus) {
@@ -111,6 +119,7 @@ namespace Blodbanken.Sections {
             selectChangeUser1Ctrl.CurrentUser = this.selectChangeUser1.SelectedValue;
             selectChangeUser1Ctrl.MessageReporter += SelectChangeUser1Ctrl_MessageReporter;
             selectChangeUser1Ctrl.ID = "UserEditControl";
+            selectChangeUser1Ctrl.ChangedNewUser = __activeFocus == "itemUserChanger";
             changeUserPlaceHolder.Controls.Add(selectChangeUser1Ctrl);
          }
          if (selectDeleteUser1.SelectedItem != null) {

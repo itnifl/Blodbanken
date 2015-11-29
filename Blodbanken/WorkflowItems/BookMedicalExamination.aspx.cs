@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Blodbanken.CodeEngines;
+using Blodbanken.Controls;
 
 namespace Blodbanken.WorkflowItems {
    public partial class BookMedicalExamination : System.Web.UI.Page {
@@ -12,7 +14,16 @@ namespace Blodbanken.WorkflowItems {
          if (myUser != null)
             HttpContext.Current.User = myUser;
          if ((HttpContext.Current.User != null) && HttpContext.Current.User.Identity.IsAuthenticated) {
-            ExaminationBookingForm.CurrentUser = HttpContext.Current.User.Identity.Name;
+            if (IsPostBack) {
+               Control selectedControl = Page.GetPostBackControlId();
+               if (selectedControl != null) {
+                  if (selectedControl.GetType() == typeof(DropDownList)) {
+                     var control = ConvertTo.GetValue<DropDownList>(selectedControl);
+                     ExaminationBookingForm.CurrentUser = control.SelectedItem.Value;
+                  }
+               }
+            }
+            if(String.IsNullOrEmpty(ExaminationBookingForm.CurrentUser)) ExaminationBookingForm.CurrentUser = HttpContext.Current.User.Identity.Name;
          }
          BottomNavBar.PrevLink = "/WorkflowItems/QuestionForm.aspx";
          BottomNavBar.NextLink = "/WorkflowItems/BookTime.aspx";

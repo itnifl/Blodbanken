@@ -5,6 +5,7 @@
     <div class="form-group">
         <label class="col-md-4 control-label" for="txtUsername">Brukernavn</label>  
         <asp:RequiredFieldValidator Validationgroup="UserCreatorForm" Display="Dynamic" runat="server" ControlToValidate="txtUsername" style="color:red;" ErrorMessage="<b>* Brukernavn må fylles inn</b>" />
+        <asp:RegularExpressionValidator Validationgroup="UserCreatorForm" Display="Dynamic" runat="server" ControlToValidate="txtUsername" style="color:red;" ValidationExpression="^[a-z0-9_-]{3,15}$" ErrorMessage="<b>* Ulovlig brukernavn.</b>"/>
         <div class="col-md-4">
         <input id="txtUsername" name="txtUsername" type="text" placeholder="Brukernavn" class="form-control input-md" runat="server" />
     

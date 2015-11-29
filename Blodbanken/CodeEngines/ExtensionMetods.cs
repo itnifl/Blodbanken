@@ -25,12 +25,11 @@ namespace Blodbanken.CodeEngines {
          }
          else {
             // if __EVENTTARGET is null, the control is a button type and we need to
-            // iterate over the form collection to find it
+            // iterate over the form collection to find it.
+            // **THIS DOES NOT WORK**
 
-            // ReSharper disable TooWideLocalVariableScope
             string controlId;
-            Control foundControl;
-            // ReSharper restore TooWideLocalVariableScope
+            Control foundControl = null;
 
             foreach (string ctl in page.Request.Form) {
                // handle ImageButton they having an additional "quasi-property" 
@@ -40,17 +39,31 @@ namespace Blodbanken.CodeEngines {
                   foundControl = page.FindControl(controlId);
                }
                else {
-                  foundControl = page.FindControl(ctl);
+                  foundControl = GetUserControls(page.Master.Controls, ctl);
+                  if(foundControl == null) foundControl = page.FindControl(ctl);
                }
 
+               if (control != null) break;
                if (!(foundControl is Button || foundControl is ImageButton)) continue;
-
                control = foundControl;
-               break;
+               break;               
             }
          }
-
          return control;
+      }
+      public static Control GetUserControls(ControlCollection controls, string controlToFind) {
+         Control foundControl = null;
+         foreach (Control ctl in controls) {
+            if (ctl is UserControl) {
+               foundControl = ctl.FindControl(controlToFind);
+               if (!(foundControl is Button || foundControl is ImageButton)) continue;
+               return foundControl;
+            }
+
+            if (ctl.Controls.Count > 0)
+               GetUserControls(ctl.Controls, controlToFind);
+         }
+         return foundControl;
       }
    }
 }

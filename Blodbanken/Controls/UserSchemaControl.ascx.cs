@@ -16,6 +16,7 @@ namespace Blodbanken.Controls {
          List<Schema> list = FormMaster.GetUserSchemaForm(CurrentUser);
          SystemUser usr = AuthMod.GetUser(CurrentUser);
          infoPanelHeader.InnerText = "Egenerklæring for " + (usr.FirstName != null ? usr.FirstName + " " + usr.LastName : CurrentUser);
+         selectUserFormList.Items.Clear();
          list.ForEach(item => selectUserFormList.Items.Add(
             new ListItem(usr.FirstName + " " + usr.LastName + " - " + item.schemaID.ToString(), item.schemaID.ToString()
          )));
@@ -31,6 +32,14 @@ namespace Blodbanken.Controls {
             status = FormMaster.DeleteForm(schemaID);
             if (MessageReporter != null) {
                MessageReporter(status ? "Sletting av egenerklærign for '" + CurrentUser + "' med ID '"+ schemaID + "' er fullført." : "Sletting av egenerklæring for  '" + CurrentUser + "' med ID '" + schemaID + "' feilet.", status);
+            }
+            if(status) {
+               List<Schema> list = FormMaster.GetUserSchemaForm(CurrentUser);
+               SystemUser usr = AuthMod.GetUser(CurrentUser);
+               selectUserFormList.Items.Clear();
+               list.ForEach(item => selectUserFormList.Items.Add(
+                  new ListItem(usr.FirstName + " " + usr.LastName + " - " + item.schemaID.ToString(), item.schemaID.ToString()
+               )));
             }
          }         
       }

@@ -24,7 +24,7 @@
                     <div class="control-group">
                         <label class="control-label" for="inputHEPatient">Navn:</label>
                         <div class="controls">
-                            <input type="text" name="patienHEtName" id="patientHEName" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;Value 1&quot;,&quot;Value 2&quot;,&quot;Value 3&quot;]" runat="server">
+                            <input type="text" name="patientHEName" id="patientHEName" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;Value 1&quot;,&quot;Value 2&quot;,&quot;Value 3&quot;]" runat="server">
                                 <input type="hidden" id="apptHEStartTime"/>
                                 <input type="hidden" id="apptHEEndTime"/>
                                 <input type="hidden" id="apptHEAllDay" />
@@ -69,7 +69,7 @@
             }
         });
 
-        $('#submitButton').on('click', function (e) {
+        $('#<%= submitHEButton.ClientID %>').on('click', function (e) {
             // We don't want this to act as a link so cancel the link action
             e.preventDefault();
 
@@ -81,18 +81,17 @@
             console.log($('#apptHEStartTime').val());
             console.log($('#apptHEEndTime').val());
             console.log($('#apptHEAllDay').val());
-            //alert("form submitted");
 
             $("#healthCalendar").fullCalendar('renderEvent',
                 {
-                    title: $('#patientHEName').val(),
+                    title: $('#<%= patientHEName.ClientID %>').val(),
                     start: new Date($('#apptHEStartTime').val()),
                     end: new Date($('#apptHEEndTime').val()),
                     allDay: ($('#apptHEAllDay').val() == "true"),
                 },
                 true);
             
-            addHealthExamination($('#patientHEName').val(),
+            addHealthExamination($('#<%= patientHEName.ClientID %>').val(),
                 new Date($('#apptHEStartTime').val()),
                 new Date($('#apptHEEndTime').val()),
                 ($('#apptHEAllDay').val() == "true"));

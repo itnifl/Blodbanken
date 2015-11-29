@@ -4,7 +4,7 @@
 <asp:Content ID="MainPage" ContentPlaceHolderID="MainPage" Runat="Server">
     <div runat="server" id="responsebox" style="visibility:hidden"></div>
     <div class="well topPlacement" style="margin-left:100px;margin-right:100px;padding-top:0px;padding-bottom:0px;">
-      <h1 style="margin-top:10px;">Login</h1>
+      <h1 style="margin-top:10px;" runat="server" id="lblHeading">Login</h1>
     </div>
     <div class="jumbotron" style="margin-left:auto;margin-right:auto;width:950px;padding:20px; margin-bottom:65px;">  
         <h2 style="margin-left:150px;margin-right:auto;margin-top:10px;">Spørreskjema for helseundersøkelse</h2>    
