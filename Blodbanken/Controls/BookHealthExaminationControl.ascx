@@ -1,8 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="BookHealthExaminationControl.ascx.cs" Inherits="Blodbanken.Controls.BookHealthExaminationControl" %>
 <%@ Register TagPrefix="uc" TagName="MessageModuleControl" Src="~/Controls/MessageModuleControl.ascx" %>
 <!-- Requires jquery ui  -->
-<div runat="server" id="responsebox" style="visibility:hidden"></div>
-<div runat="server" id="__examinationBeholder" visible="false" hidden="hidden"></div>
+<div runat="server" id="responsebox" style="visibility:hidden;"></div>
+<div runat="server" id="__examinationBeholder" style="visibility:hidden;display:none;"></div>
 <asp:DropdownList AutoPostback="true" id="selectUserForExaminationBooking" name="selectUserForExaminationBooking" style="margin-bottom: 8px;" cssclass="form-control" runat="server">
 
 </asp:DropdownList>
@@ -50,11 +50,11 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var allExaminationBookings = $('#<%= __examinationBeholder.ClientID %>').text();
-        var allExaminationBookingsObject = undefined;
+        var allExaminationBookingObjects = undefined;
         if (allExaminationBookings) {
-            allExaminationBookingsObject = JSON.parse(allExaminationBookings);
-            debugger;
+            allExaminationBookingObjects = JSON.parse(allExaminationBookings);
         }
+
         var calendar = $('#healthCalendar').fullCalendar({
             defaultView: 'agendaWeek',
             editable: true,
@@ -71,7 +71,20 @@
                 $('#createHealthEventModal').modal({ show: true })
             }
         });
-        
+        allExaminationBookingObjects.ExaminationBookings.forEach(function (examinationBookingObject) {
+            var displayName = examinationBookingObject.DisplayName ? examinationBookingObject.DisplayName : examinationBookingObject.LogonName;
+            var startDate = new Date(examinationBookingObject.BookingDate);
+            var endDate = new Date(examinationBookingObject.BookingDate);
+            endDate.setTime(endDate.getTime() + (examinationBookingObject.DurationHours * 60 * 60 * 1000));
+            $("#healthCalendar").fullCalendar('renderEvent',
+                 {
+                     title: displayName,
+                     start: startDate,
+                     end: endDate,
+                     allDay: false,
+                 },
+                 true);
+        });
 
         $('#<%= submitHEButton.ClientID %>').on('click', function (e) {
             // We don't want this to act as a link so cancel the link action

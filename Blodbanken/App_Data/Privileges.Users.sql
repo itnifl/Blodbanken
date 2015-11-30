@@ -118,7 +118,7 @@ GO
 /**NEW TABLE HERE**/
 CREATE TABLE [dbo].[ParkspaceBooking] (
    [bookingID] [int] NOT NULL IDENTITY (1,1) PRIMARY KEY,
-   [bookingDate] [date] NOT NULL,
+   [bookingDate] [DateTime] NOT NULL,
    [parkingSpace] [int] check(parkingSpace >= 1 and parkingSpace <= 10)
 ) ON [PRIMARY];
 GO
@@ -128,7 +128,7 @@ SELECT PB.bookingID, PB.bookingDate, PB.parkingSpace, DB.logonName FROM DonorBoo
 /**NEW TABLE HERE**/
 CREATE TABLE [dbo].[ExaminationBooking] (
    [bookingID] [int] NOT NULL IDENTITY (1,1) PRIMARY KEY,
-   [bookingDate] [date] NOT NULL,
+   [bookingDate] [DateTime] NOT NULL,
    [durationHours] [int] NOT NULL,
    [logonName] [varchar] (35) NOT NULL,
    [examinationApproved] [int],
@@ -152,7 +152,7 @@ GO
 /**NEW TABLE HERE**/
 CREATE TABLE [dbo].[DonorBooking] (
    [bookingID] [int] NOT NULL IDENTITY (1,1) PRIMARY KEY,
-   [bookingDate] [date] NOT NULL,
+   [bookingDate] [DateTime] NOT NULL,
    [durationHours] [int] NOT NULL,
    [logonName] [varchar] (35) NOT NULL,
    [parkingID] [int]

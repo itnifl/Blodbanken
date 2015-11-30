@@ -3,8 +3,7 @@
 <%@ Register TagPrefix="uc" TagName="BottomNavBar" Src="~/Controls/BottomNavBar.ascx" %>
 <asp:Content ID="MainPage" ContentPlaceHolderID="MainPage" Runat="Server">
     <link rel="stylesheet" type="text/css" href="/Content/themes/base/all.css" />
-    <link rel="stylesheet" href="/Content/jquery.ptTimeSelect.css"/>
-    <script src="/Scripts/jquery.ptTimeSelect.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery-ui-1.11.4.min.js" type="text/javascript"></script>
     <div style="margin-bottom:65px;">
         <form id="frmBookMedicalExamination" runat="server" class="form-horizontal">
             <div id="inlineContainer">

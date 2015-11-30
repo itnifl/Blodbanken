@@ -223,7 +223,7 @@ namespace Blodbanken.CodeEngines {
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
          conn.Open();
 
-         SqlCommand cmd = new SqlCommand("SELECT bookingID, examinationApproved, bookingDate, logonName, durationHours, parkingID FROM ExaminationBooking", conn);
+         SqlCommand cmd = new SqlCommand("SELECT e.bookingID, e.examinationApproved, e.bookingDate, e.logonName, e.durationHours, e.parkingID, u.firstName, u.lastName FROM ExaminationBooking AS e JOIN Users AS u ON (e.logonName=u.logonName)", conn);
          var reader = cmd.ExecuteReader();
 
          // write each record
@@ -237,7 +237,16 @@ namespace Blodbanken.CodeEngines {
             Int32.TryParse(reader["parkingID"] != null ? reader["parkingID"].ToString() : String.Empty, out parkingID);
             string readLogonName = reader["logonName"].ToString();
             DateTime.TryParse(reader["bookingDate"] != null ? reader["bookingDate"].ToString() : String.Empty, out dtResult);
-            if (dtResult != null) bookings.Add(new ExaminationBooking(bookingID, dtResult, readLogonName, examinationApproved, durationHours, parkingID));
+
+            string firstName = reader["firstName"] != null ? reader["firstName"].ToString() : String.Empty;
+            string lastName = reader["lastName"] != null ? reader["lastName"].ToString() : String.Empty;
+
+            ExaminationBooking booking = new ExaminationBooking(bookingID, dtResult, readLogonName, examinationApproved, durationHours, parkingID);
+            if (!String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName)) {
+               booking.DisplayName = firstName + " " + lastName;
+            }
+           
+            if (dtResult != null) bookings.Add(booking);
          }
          cmd.Dispose();
          reader.Close();
@@ -252,6 +261,7 @@ namespace Blodbanken.CodeEngines {
       public DateTime BookingDate { get; set; }
       public int DurationHours { get; set; }
       public int ParkingID { get; set; }
+      public string DisplayName { get; set; }
       public ExaminationBooking(int bookingID, DateTime bookingDate, string logonName, int examinationApproved, int durationHours, int parkingID) {
          this.BookingID = bookingID;
          this.BookingDate = bookingDate;
