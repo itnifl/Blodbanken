@@ -195,7 +195,7 @@ namespace Blodbanken.CodeEngines {
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
          conn.Open();
 
-         SqlCommand cmd = new SqlCommand("SELECT bookingID, bookingDate, logonName, durationHours from ExaminationBooking where logonName=@logonNameParam", conn);
+         SqlCommand cmd = new SqlCommand("SELECT  bookingID, examinationApproved, bookingDate, logonName, durationHours, parkingID from ExaminationBooking where logonName=@logonNameParam", conn);
          cmd.Parameters.Add("@logonNameParam", SqlDbType.VarChar, 35);
          cmd.Parameters["@logonNameParam"].Value = String.IsNullOrEmpty(logonName) ? "UNKNOWN" : logonName;
          var reader = cmd.ExecuteReader();
@@ -203,14 +203,15 @@ namespace Blodbanken.CodeEngines {
          // write each record
          while (reader.Read()) {
             DateTime dtResult;
-            int durationHours;
+            int durationHours, parkingID;
             int bookingID, examinationApproved = 0;
             Int32.TryParse(reader["bookingID"] != null ? reader["bookingID"].ToString() : String.Empty, out bookingID);
             Int32.TryParse(reader["examinationApproved"] != null ? reader["examinationApproved"].ToString() : String.Empty, out examinationApproved);
             Int32.TryParse(reader["durationHours"] != null ? reader["durationHours"].ToString() : String.Empty, out durationHours);
+            Int32.TryParse(reader["parkingID"] != null ? reader["parkingID"].ToString() : String.Empty, out parkingID);
             string readLogonName = reader["logonName"].ToString();
             DateTime.TryParse(reader["bookingDate"] != null ? reader["bookingDate"].ToString() : String.Empty, out dtResult);
-            if (dtResult != null) bookings.Add(new ExaminationBooking(bookingID, dtResult, readLogonName, examinationApproved, durationHours));
+            if (dtResult != null) bookings.Add(new ExaminationBooking(bookingID, dtResult, readLogonName, examinationApproved, durationHours, parkingID));
          }
          cmd.Dispose();
          reader.Close();
@@ -222,20 +223,21 @@ namespace Blodbanken.CodeEngines {
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
          conn.Open();
 
-         SqlCommand cmd = new SqlCommand("SELECT bookingID, bookingDate, logonName, durationHours FROM ExaminationBooking", conn);
+         SqlCommand cmd = new SqlCommand("SELECT bookingID, examinationApproved, bookingDate, logonName, durationHours, parkingID FROM ExaminationBooking", conn);
          var reader = cmd.ExecuteReader();
 
          // write each record
          while (reader.Read()) {
             DateTime dtResult;
-            int durationHours;
+            int durationHours, parkingID;
             int bookingID, examinationApproved = 0;
             Int32.TryParse(reader["bookingID"] != null ? reader["bookingID"].ToString() : String.Empty, out bookingID);
             Int32.TryParse(reader["examinationApproved"] != null ? reader["examinationApproved"].ToString() : String.Empty, out examinationApproved);
             Int32.TryParse(reader["durationHours"] != null ? reader["durationHours"].ToString() : String.Empty, out durationHours);
+            Int32.TryParse(reader["parkingID"] != null ? reader["parkingID"].ToString() : String.Empty, out parkingID);
             string readLogonName = reader["logonName"].ToString();
             DateTime.TryParse(reader["bookingDate"] != null ? reader["bookingDate"].ToString() : String.Empty, out dtResult);
-            if (dtResult != null) bookings.Add(new ExaminationBooking(bookingID, dtResult, readLogonName, examinationApproved, durationHours));
+            if (dtResult != null) bookings.Add(new ExaminationBooking(bookingID, dtResult, readLogonName, examinationApproved, durationHours, parkingID));
          }
          cmd.Dispose();
          reader.Close();
@@ -250,6 +252,14 @@ namespace Blodbanken.CodeEngines {
       public DateTime BookingDate { get; set; }
       public int DurationHours { get; set; }
       public int ParkingID { get; set; }
+      public ExaminationBooking(int bookingID, DateTime bookingDate, string logonName, int examinationApproved, int durationHours, int parkingID) {
+         this.BookingID = bookingID;
+         this.BookingDate = bookingDate;
+         this.LogonName = logonName;
+         this.ExaminationApproved = examinationApproved;
+         this.DurationHours = durationHours;
+         this.ParkingID = parkingID;
+      }
       public ExaminationBooking(int bookingID, DateTime bookingDate, string logonName, int examinationApproved, int durationHours) {
          this.BookingID = bookingID;
          this.BookingDate = bookingDate;

@@ -21,9 +21,8 @@
 		GUI skal kunne lagre parkering til database knyttet opp mot en booking
 	+Lag den automatiske bookeren, og la den kunne konfigureres
 
-*Sjekk og test håndtering av DateTime mellom JavaSript, C# of database
-
 *Oppdater bruker i AdminArea.aspx, da lukker alle kontroller seg etterpå, dette er ikke korrekt.
 	Grunnen er at GetPostBackControlId ikke klarer å finne knapper
 *Extension method GetPostBackControlId klarer ikke å finne knapper, har prøvd å fikse det.
 *Av og pålogging fungerer ikke som tiltenkt
+*Fjern approved fra egenerklæringen i database og klassedefinisjon.

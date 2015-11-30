@@ -1,5 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="BookDonorAppointmentControl.ascx.cs" Inherits="Blodbanken.Controls.BookDonorAppointmentControl" %>
+<%@ Register TagPrefix="uc" TagName="MessageModuleControl" Src="~/Controls/MessageModuleControl.ascx" %>
 <!-- Requires jquery ui  -->
+<div runat="server" id="responsebox" style="visibility:hidden"></div>
 <div runat="server" id="__appointmentBeholder" visible="false" hidden="hidden"></div>
 <asp:DropdownList AutoPostback="true" id="selectUserForDonorBooking" name="selectUserForDonorBooking" style="margin-bottom: 8px;" cssclass="form-control" runat="server">
 
@@ -72,8 +74,13 @@
         $('#submitButton').on('click', function (e) {
             // We don't want this to act as a link so cancel the link action
             e.preventDefault();
-
-            doSubmit();
+            var hours = Math.abs(new Date($('#apptHEStartTime').val()) - new Date($('#apptHEEndTime').val())) / 36e5;
+            if (hours == 1) {
+                doSubmit();
+            } else {
+                $('#messageModalBody').text("Det er bare tillatt å velge en hel time. Hold venstre mustast inne og dra den over den hele timen for å merke denne på kalenderen.");
+                $('#buttonFeedbackModal').modal({ show: true })
+            }
         });
 
         function doSubmit() {
