@@ -1,8 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="BookDonorAppointmentControl.ascx.cs" Inherits="Blodbanken.Controls.BookDonorAppointmentControl" %>
-<%@ Register TagPrefix="uc" TagName="MessageModuleControl" Src="~/Controls/MessageModuleControl.ascx" %>
 <!-- Requires jquery ui  -->
-<div runat="server" id="responsebox" style="visibility:hidden"></div>
-<div runat="server" id="__appointmentBeholder" visible="false" hidden="hidden"></div>
+<div runat="server" id="__appointmentBeholder" style="visibility:hidden;display:none;"></div>
 <asp:DropdownList AutoPostback="true" id="selectUserForDonorBooking" name="selectUserForDonorBooking" style="margin-bottom: 8px;" cssclass="form-control" runat="server">
 
 </asp:DropdownList>
@@ -10,7 +8,7 @@
 <fieldset>
     <div class="form-group form-group-custom">
         <div class="col-md-3 control-label" id="BookingInfoArea2">
-            <label class="control-label" id="lblBookDonorAppointmentError1" runat="server" style="color:red;">* <a href="/WorkflowItems/QuestionForm.aspx" style="color:inherit;">For å kunne booke, må ha godkjent egenerklæring innen de 30 siste dagene først.</a></label>
+            <label class="control-label" id="lblBookDonorAppointmentError1" runat="server" style="color:red;">* <a href="/WorkflowItems/QuestionForm.aspx" style="color:inherit;">For å kunne booke, må ha godkjent helseundersøkelse innen de 30 siste dagene først.</a></label>
         </div>
     </div>
 </fieldset>
@@ -38,7 +36,7 @@
                         </div>
                     </div>
                 </form>
-                <label class="control-label" id="lblBookDonorAppointmentError2" runat="server" style="color:red;">* <a href="/WorkflowItems/QuestionForm.aspx" style="color:inherit;">For å kunne booke, må ha godkjent egenerklæring innen de 30 siste dagene først.</a></label>
+                <label class="control-label" id="lblBookDonorAppointmentError2" runat="server" style="color:red;">* <a href="/WorkflowItems/QuestionForm.aspx" style="color:inherit;">For å kunne booke, må ha godkjent helseundersøkelse innen de 30 siste dagene først.</a></label>
             </div>
             <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true">Avbryt</button>
@@ -50,9 +48,9 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var allAppointmentBookings = $('#<%= __appointmentBeholder.ClientID %>').text();
-        var allAppointmentBookingsObject = undefined;
+        var allAppointmentBookingObjects = undefined;
         if (allAppointmentBookings) {
-            allAppointmentBookingsObject = JSON.parse(allAppointmentBookings);
+            allAppointmentBookingObjects = JSON.parse(allAppointmentBookings);
         }
         var calendar = $('#calendar').fullCalendar({
             defaultView: 'agendaWeek',
@@ -71,23 +69,63 @@
             }
         });
 
-        $('#submitButton').on('click', function (e) {
+        allAppointmentBookingObjects.DonorAppointments.forEach(function (bookingObject) {
+            var displayName = bookingObject.DisplayName ? bookingObject.DisplayName : bookingObject.LogonName;
+            var startDate = new Date(bookingObject.BookingDate);
+            var endDate = new Date(bookingObject.BookingDate);
+            endDate.setTime(endDate.getTime() + (bookingObject.DurationHours * 60 * 60 * 1000));
+            $("#healthCalendar").fullCalendar('renderEvent',
+                 {
+                     title: displayName,
+                     start: startDate,
+                     end: endDate,
+                     allDay: false,
+                 },
+                 true);
+        });
+
+        $('#<%= submitButton.ClientID %>').on('click', function (e) {
             // We don't want this to act as a link so cancel the link action
             e.preventDefault();
-            var hours = Math.abs(new Date($('#apptHEStartTime').val()) - new Date($('#apptHEEndTime').val())) / 36e5;
+            var hours = Math.abs(new Date($('#apptStartTime').val()) - new Date($('#apptEndTime').val())) / 36e5;
             if (hours == 1) {
-                doSubmit();
+                var appointmentTaken = false;
+                var ourAppointment =  {
+                    displayName: $('#<%= patientName.ClientID %>').val(),
+                    start: new Date($('#apptStartTime').val()),
+                    end: new Date($('#apptEndTime').val()),
+                    allDay: ($('#apptAllDay').val() == "true"),
+                }
+                allAppointmentBookingObjects.DonorAppointments.forEach(function (bookingObject) {
+                    var displayName = bookingObject.DisplayName ? bookingObject.DisplayName : bookingObject.LogonName;
+                    var startDate = new Date(bookingObject.BookingDate);
+                    var endDate = new Date(bookingObject.BookingDate);
+                    endDate.setTime(endDate.getTime() + (bookingObject.DurationHours * 60 * 60 * 1000));
+
+                    if (startDate >= ourAppointment.start && startDate <= ourAppointment.end) {
+                        appointmentTaken = true;
+                    }
+                    if (endDate >= ourAppointment.start && endDate <= ourAppointment.end) {
+                        appointmentTaken = true;
+                    }
+
+                });
+                if (!appointmentTaken) doSubmit();
+                else {
+                    $('#messageModalBody').text("Det er allerede booket en helseundersøkelse i det tidspunktet. Velg annet tidspunkt og prøv igjen.");
+                    $('#buttonFeedbackModal').modal({ show: true });
+                }
             } else {
-                $('#messageModalBody').text("Det er bare tillatt å velge en hel time. Hold venstre mustast inne og dra den over den hele timen for å merke denne på kalenderen.");
-                $('#buttonFeedbackModal').modal({ show: true })
+                $('#messageModalBody').text("Det er bare tillatt å velge en hel time. Hold venstre mustast inne og dra den over hele den timen for å merke denne på kalenderen.");
+                $('#buttonFeedbackModal').modal({ show: true });
             }
         });
 
         function doSubmit() {
             $("#createEventModal").modal('hide');
-            console.log($('#apptStartTime').val());
-            console.log($('#apptEndTime').val());
-            console.log($('#apptAllDay').val());
+            //console.log($('#apptStartTime').val());
+            //console.log($('#apptEndTime').val());
+            //console.log($('#apptAllDay').val());
             //alert("form submitted");
 
             $("#calendar").fullCalendar('renderEvent',

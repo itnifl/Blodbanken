@@ -11,6 +11,7 @@ using System.Security.Cryptography;
 using System.Globalization;
 using System.Security.Principal;
 using System.Reflection;
+using System.Data.SqlTypes;
 
 namespace Blodbanken.CodeEngines {
    public class TimeBooker {
@@ -22,7 +23,7 @@ namespace Blodbanken.CodeEngines {
          conn.Open();
          SqlCommand cmd = new SqlCommand("UPDATE ExaminationBooking SET bookingDate=@bookingDate, examinationApproved=@examinationApproved, duratonHours=@durationHours, parkingID=@parkingID WHERE bookingID=@bookingID", conn);
          cmd.Parameters.Add("@bookingDate", SqlDbType.DateTime);
-         cmd.Parameters["@bookingDate"].Value = booking.BookingDate;
+         cmd.Parameters["@bookingDate"].Value = booking.BookingDate == DateTime.MinValue ? SqlDateTime.MinValue : booking.BookingDate;
 
          cmd.Parameters.Add("@examinationApproved", SqlDbType.Int);
          cmd.Parameters["@examinationApproved"].Value = booking.ExaminationApproved;
@@ -51,10 +52,10 @@ namespace Blodbanken.CodeEngines {
          SqlCommand cmd = new SqlCommand("INSERT INTO ExaminationBooking (bookingDate, examinationApproved, durationHours, logonName) values (@bookingDate, @examinationApproved, @durationHours, @logonName)", conn);
 
          cmd.Parameters.Add("@bookingDate", SqlDbType.DateTime);
-         cmd.Parameters["@bookingDate"].Value = booking.BookingDate;
+         cmd.Parameters["@bookingDate"].Value = booking.BookingDate == DateTime.MinValue ? SqlDateTime.MinValue : booking.BookingDate;
 
-         cmd.Parameters.Add("@examinationApproved", SqlDbType.Int);
-         cmd.Parameters["@examinationApproved"].Value = booking.ExaminationApproved;
+         cmd.Parameters.Add("@examinationApproved", SqlDbType.DateTime);
+         cmd.Parameters["@examinationApproved"].Value = booking.ExaminationApproved == DateTime.MinValue ? SqlDateTime.MinValue : booking.ExaminationApproved;
 
          cmd.Parameters.Add("@durationHours", SqlDbType.Int);
          cmd.Parameters["@durationHours"].Value = booking.DurationHours;
@@ -77,7 +78,7 @@ namespace Blodbanken.CodeEngines {
          SqlCommand cmd = new SqlCommand("INSERT INTO DonorBooking (bookingDate, durationHours, logonName) values (@bookingDate, @durationHours, @logonName)", conn);
 
          cmd.Parameters.Add("@bookingDate", SqlDbType.DateTime);
-         cmd.Parameters["@bookingDate"].Value = booking.BookingDate;
+         cmd.Parameters["@bookingDate"].Value = booking.BookingDate == DateTime.MinValue ? SqlDateTime.MinValue : booking.BookingDate;
 
          cmd.Parameters.Add("@durationHours", SqlDbType.Int);
          cmd.Parameters["@durationHours"].Value = booking.DurationHours;
@@ -204,9 +205,10 @@ namespace Blodbanken.CodeEngines {
          while (reader.Read()) {
             DateTime dtResult;
             int durationHours, parkingID;
-            int bookingID, examinationApproved = 0;
+            int bookingID;
+            DateTime examinationApproved;
             Int32.TryParse(reader["bookingID"] != null ? reader["bookingID"].ToString() : String.Empty, out bookingID);
-            Int32.TryParse(reader["examinationApproved"] != null ? reader["examinationApproved"].ToString() : String.Empty, out examinationApproved);
+            examinationApproved = reader.GetDateTime(reader.GetOrdinal("examinationApproved"));
             Int32.TryParse(reader["durationHours"] != null ? reader["durationHours"].ToString() : String.Empty, out durationHours);
             Int32.TryParse(reader["parkingID"] != null ? reader["parkingID"].ToString() : String.Empty, out parkingID);
             string readLogonName = reader["logonName"].ToString();
@@ -230,9 +232,9 @@ namespace Blodbanken.CodeEngines {
          while (reader.Read()) {
             DateTime dtResult;
             int durationHours, parkingID;
-            int bookingID, examinationApproved = 0;
+            int bookingID;
             Int32.TryParse(reader["bookingID"] != null ? reader["bookingID"].ToString() : String.Empty, out bookingID);
-            Int32.TryParse(reader["examinationApproved"] != null ? reader["examinationApproved"].ToString() : String.Empty, out examinationApproved);
+            DateTime examinationApproved = reader.GetDateTime(reader.GetOrdinal("examinationApproved"));
             Int32.TryParse(reader["durationHours"] != null ? reader["durationHours"].ToString() : String.Empty, out durationHours);
             Int32.TryParse(reader["parkingID"] != null ? reader["parkingID"].ToString() : String.Empty, out parkingID);
             string readLogonName = reader["logonName"].ToString();
@@ -256,13 +258,13 @@ namespace Blodbanken.CodeEngines {
    }
    public class ExaminationBooking {
       public int BookingID { get; set; }
-      public int ExaminationApproved { get; set; }
+      public DateTime ExaminationApproved { get; set; }
       public string LogonName { get; set; }
       public DateTime BookingDate { get; set; }
       public int DurationHours { get; set; }
       public int ParkingID { get; set; }
       public string DisplayName { get; set; }
-      public ExaminationBooking(int bookingID, DateTime bookingDate, string logonName, int examinationApproved, int durationHours, int parkingID) {
+      public ExaminationBooking(int bookingID, DateTime bookingDate, string logonName, DateTime examinationApproved, int durationHours, int parkingID) {
          this.BookingID = bookingID;
          this.BookingDate = bookingDate;
          this.LogonName = logonName;
@@ -270,7 +272,7 @@ namespace Blodbanken.CodeEngines {
          this.DurationHours = durationHours;
          this.ParkingID = parkingID;
       }
-      public ExaminationBooking(int bookingID, DateTime bookingDate, string logonName, int examinationApproved, int durationHours) {
+      public ExaminationBooking(int bookingID, DateTime bookingDate, string logonName, DateTime examinationApproved, int durationHours) {
          this.BookingID = bookingID;
          this.BookingDate = bookingDate;
          this.LogonName = logonName;
@@ -280,7 +282,7 @@ namespace Blodbanken.CodeEngines {
       public ExaminationBooking(DateTime bookingDate, int durationHours, string logonName) {
          this.BookingDate = bookingDate;
          this.LogonName = logonName;
-         this.ExaminationApproved = 0;
+         this.ExaminationApproved = DateTime.MinValue;
          this.DurationHours = durationHours;
       }
    }

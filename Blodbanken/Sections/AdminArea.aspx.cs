@@ -179,7 +179,7 @@ namespace Blodbanken.Sections {
          return JsonConvert.SerializeObject(new { runStatus = runStatus });
       }
       [WebMethod]
-      public static string SetUserExaminationBooking(int bookingID, string bookingDateTime, string logonName, int examinationApproved, int parkingID, int durationHours) {
+      public static string SetUserExaminationBooking(int bookingID, string bookingDateTime, string logonName, DateTime examinationApproved, int parkingID, int durationHours) {
          bool runStatus = false;
          HttpContext.Current.User = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
          if ((HttpContext.Current.User != null) && (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Viewer") || HttpContext.Current.User.IsInRole("Donor"))) {

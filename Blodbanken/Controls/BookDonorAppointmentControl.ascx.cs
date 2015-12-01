@@ -39,11 +39,11 @@ namespace Blodbanken.Controls {
             }
             if (String.IsNullOrEmpty(CurrentUser)) {
                CurrentUser = HttpContext.Current.User.Identity.Name;
-            }
-            bool hasApprovedForms = (Forms.GetUserSchemaForm(CurrentUser).Where(form => DateTime.Compare(DateTime.Now.AddDays(-30), form.approved) <= 0)).Count() > 0;
+            }            
+            bool hasApprovedExaminations = (Booker.GetUserExaminationBookings(CurrentUser).Where(examination => DateTime.Compare(DateTime.Now.AddDays(-30), examination.ExaminationApproved) <= 0)).Count() > 0;
 
-            submitButton.Disabled = !hasApprovedForms;
-            lblBookDonorAppointmentError1.Visible = lblBookDonorAppointmentError2.Visible = !hasApprovedForms;
+            submitButton.Disabled = !hasApprovedExaminations;
+            lblBookDonorAppointmentError1.Visible = lblBookDonorAppointmentError2.Visible = !hasApprovedExaminations;
             patientName.Value = CurrentUser;
             patientName.Disabled = true;
          }

@@ -131,7 +131,7 @@ CREATE TABLE [dbo].[ExaminationBooking] (
    [bookingDate] [DateTime] NOT NULL,
    [durationHours] [int] NOT NULL,
    [logonName] [varchar] (35) NOT NULL,
-   [examinationApproved] [int],
+   [examinationApproved] [DateTime],
    [parkingID] [int]
 ) ON [PRIMARY];
 GO

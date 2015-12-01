@@ -64,10 +64,10 @@
             e.preventDefault();
             var bookingID = $('#<%= healthExaminationList.ClientID %>').val();
             var logonName = $('#<%= infoPanelHeader.ClientID %>').data('currentUser');
-            var examinationApproved = 1;
+            var examinationApproved = JSON.stringify(new Date());
             var parkingID = $('#<%= healthExaminationList.ClientID %> :selected').data('parkingID');
             var bookingDateJson = $('#<%= healthExaminationList.ClientID %> :selected').data('bookingDateTime')
-            var bookingDateTime = bookingDateJson != undefined ? JSON.parse(bookingDateJson) : undefined;
+            var bookingDateTime = bookingDateJson != undefined ? JSON.stringify(bookingDateJson) : undefined;
 
             setUserExaminationBookings(bookingID, bookingDateTime, logonName, examinationApproved, parkingID);
         });
@@ -75,10 +75,10 @@
             e.preventDefault();
             var bookingID = $('#<%= healthExaminationList.ClientID %>').val();
             var logonName = $('#<%= infoPanelHeader.ClientID %>').data('currentUser');
-            var examinationApproved = 0;
+            var examinationApproved = JSON.stringify(new Date(-8640000000000000));
             var parkingID = $('#<%= healthExaminationList.ClientID %> :selected').data('parkingID');
             var bookingDateJson = $('#<%= healthExaminationList.ClientID %> :selected').data('bookingDateTime')
-            var bookingDateTime = bookingDateJson != undefined ? JSON.parse(bookingDateJson) : undefined;
+            var bookingDateTime = bookingDateJson != undefined ? JSON.stringify(bookingDateJson) : undefined;
 
             setUserExaminationBookings(bookingID, bookingDateTime, logonName, examinationApproved, parkingID);
         });

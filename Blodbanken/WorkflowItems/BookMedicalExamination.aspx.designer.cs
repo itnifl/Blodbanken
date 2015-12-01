@@ -13,6 +13,15 @@ namespace Blodbanken.WorkflowItems {
     public partial class BookMedicalExamination {
         
         /// <summary>
+        /// responsebox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl responsebox;
+        
+        /// <summary>
         /// frmBookMedicalExamination control.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,15 @@ namespace Blodbanken.WorkflowItems {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Blodbanken.Controls.BookHealthExaminationControl ExaminationBookingForm;
+        
+        /// <summary>
+        /// MessageModuleControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Blodbanken.Controls.MessageModuleControl MessageModuleControl;
         
         /// <summary>
         /// BottomNavBar control.

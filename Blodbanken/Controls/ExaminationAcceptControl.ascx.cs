@@ -30,8 +30,8 @@ namespace Blodbanken.Controls {
          radiosExaminationAccept1b.Disabled = !RadiosEnabled;
          ExaminationBooking selectedBooking = eBookings.SingleOrDefault(booking => booking.BookingID == Int32.Parse(healthExaminationList.SelectedItem.Value));
          if (selectedBooking != null) {
-            radiosExaminationAccept1a.Checked = selectedBooking.ExaminationApproved > 0 ? true : false;
-            radiosExaminationAccept1b.Checked = selectedBooking.ExaminationApproved == 0 ? true : false;
+            radiosExaminationAccept1a.Checked = DateTime.Compare(DateTime.Now.AddDays(-30), selectedBooking.ExaminationApproved) <= 0; 
+            radiosExaminationAccept1b.Checked = DateTime.Compare(DateTime.Now.AddDays(-30), selectedBooking.ExaminationApproved) >= 0;
          }
          if (healthExaminationList.Items.Count == 0) {
             radiosExaminationAccept1a.Disabled = true;

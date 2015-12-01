@@ -26,3 +26,5 @@
 *Extension method GetPostBackControlId klarer ikke å finne knapper, har prøvd å fikse det.
 *Av og pålogging fungerer ikke som tiltenkt
 *Fjern approved fra egenerklæringen i database og klassedefinisjon.
+*Akkurat nå kan man booke hele døgnet, la man bare kunne booke i åpningstidene.
+*En brukr kan book flre ganger per dag, det ska ikke være ov. Man må vente en viss mengde tid mellom gangene.

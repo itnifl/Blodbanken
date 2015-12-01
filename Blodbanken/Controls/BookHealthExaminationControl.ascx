@@ -1,10 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="BookHealthExaminationControl.ascx.cs" Inherits="Blodbanken.Controls.BookHealthExaminationControl" %>
-<%@ Register TagPrefix="uc" TagName="MessageModuleControl" Src="~/Controls/MessageModuleControl.ascx" %>
 <!-- Requires jquery ui  -->
-<div runat="server" id="responsebox" style="visibility:hidden;"></div>
 <div runat="server" id="__examinationBeholder" style="visibility:hidden;display:none;"></div>
 <asp:DropdownList AutoPostback="true" id="selectUserForExaminationBooking" name="selectUserForExaminationBooking" style="margin-bottom: 8px;" cssclass="form-control" runat="server">
-
 </asp:DropdownList>
 <div id="healthCalendar"></div>
 <fieldset>
@@ -91,18 +88,43 @@
             e.preventDefault();
             var hours = Math.abs(new Date($('#apptHEStartTime').val()) - new Date($('#apptHEEndTime').val())) / 36e5;
             if (hours == 1) {
-                doSubmit();
+                var appointmentTaken = false;
+                var ourAppointment =  {
+                    displayName: $('#<%= patientHEName.ClientID %>').val(),
+                    start: new Date($('#apptHEStartTime').val()),
+                    end: new Date($('#apptHEEndTime').val()),
+                    allDay: ($('#apptHEAllDay').val() == "true"),
+                }
+                allExaminationBookingObjects.ExaminationBookings.forEach(function (examinationBookingObject) {
+                    var displayName = examinationBookingObject.DisplayName ? examinationBookingObject.DisplayName : examinationBookingObject.LogonName;
+                    var startDate = new Date(examinationBookingObject.BookingDate);
+                    var endDate = new Date(examinationBookingObject.BookingDate);
+                    endDate.setTime(endDate.getTime() + (examinationBookingObject.DurationHours * 60 * 60 * 1000));
+                    //debugger;
+                    if (startDate >= ourAppointment.start && startDate <= ourAppointment.end) {
+                        appointmentTaken = true;
+                    }
+                    if (endDate >= ourAppointment.start && endDate <= ourAppointment.end) {
+                        appointmentTaken = true;
+                    }
+
+                });
+                if (!appointmentTaken) doSubmit();
+                else {
+                    $('#messageModalBody').text("Det er allerede booket en helseundersøkelse i det tidspunktet. Velg annet tidspunkt og prøv igjen.");
+                    $('#buttonFeedbackModal').modal({ show: true });
+                }
             } else {
-                $('#messageModalBody').text("Det er bare tillatt å velge en hel time. Hold venstre mustast inne og dra den over den hele timen for å merke denne på kalenderen.");
-                $('#buttonFeedbackModal').modal({ show: true })
+                $('#messageModalBody').text("Det er bare tillatt å velge en hel time. Hold venstre mustast inne og dra den over hele den timen for å merke denne på kalenderen.");
+                $('#buttonFeedbackModal').modal({ show: true });
             }
         });
 
         function doSubmit() {
             $("#createHealthEventModal").modal('hide');
-            console.log($('#apptHEStartTime').val());
-            console.log($('#apptHEEndTime').val());
-            console.log($('#apptHEAllDay').val());
+            //console.log($('#apptHEStartTime').val());
+            //console.log($('#apptHEEndTime').val());
+            //console.log($('#apptHEAllDay').val());
 
             $("#healthCalendar").fullCalendar('renderEvent',
                 {
