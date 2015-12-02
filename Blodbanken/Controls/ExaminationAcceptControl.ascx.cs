@@ -16,14 +16,15 @@ namespace Blodbanken.Controls {
       public string CurrentUser { get; set; }
       protected void Page_Load(object sender, EventArgs e) {
          infoPanelHeader.InnerText = "Helseundersøkelser for " + CurrentUser;
-         infoPanelHeader.Attributes.Add("data-currentUser", CurrentUser);
+         infoPanelHeader.Attributes.Add("data-currentuser", CurrentUser);
          List<ExaminationBooking> eBookings = TimeBookings.GetUserExaminationBookings(CurrentUser);
          SystemUser usr = AuthMod.GetUser(CurrentUser);
          healthExaminationList.Items.Clear();
          foreach (ExaminationBooking eBooking in eBookings) {
             ListItem item = new ListItem(usr.FirstName + " " + usr.LastName + " - " + eBooking.BookingDate, eBooking.BookingID.ToString());
-            item.Attributes.Add("data-parkingID", eBooking.BookingID.ToString());
-            item.Attributes.Add("data-bookingDateTime", JsonConvert.SerializeObject(eBooking.BookingDate));
+            item.Attributes.Add("data-parkingid", eBooking.ParkingID.ToString());
+            item.Attributes.Add("data-durationhours", eBooking.DurationHours.ToString());
+            item.Attributes.Add("data-bookingdatetime", JsonConvert.SerializeObject(eBooking.BookingDate));
             healthExaminationList.Items.Add(item);
          }
          radiosExaminationAccept1a.Disabled = !RadiosEnabled;
@@ -39,7 +40,7 @@ namespace Blodbanken.Controls {
          }
 
          userSchemaAcceptHeader.InnerText = "Helseundersøkelser for " + CurrentUser;
-         userSchemaAcceptHeader.Attributes.Add("data-currentUser", CurrentUser);
+         userSchemaAcceptHeader.Attributes.Add("data-currentuser", CurrentUser);
          List<Schema> userSchemas = FormMod.GetUserSchemaForm(CurrentUser);
          selectUserSchemaAcceptList.Items.Clear();
          foreach (Schema schema in userSchemas) {

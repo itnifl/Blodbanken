@@ -63,24 +63,26 @@
         $('#<%= radiosExaminationAccept1a.ClientID %>').click(function (e) {
             e.preventDefault();
             var bookingID = $('#<%= healthExaminationList.ClientID %>').val();
-            var logonName = $('#<%= infoPanelHeader.ClientID %>').data('currentUser');
-            var examinationApproved = JSON.stringify(new Date());
-            var parkingID = $('#<%= healthExaminationList.ClientID %> :selected').data('parkingID');
-            var bookingDateJson = $('#<%= healthExaminationList.ClientID %> :selected').data('bookingDateTime')
-            var bookingDateTime = bookingDateJson != undefined ? JSON.stringify(bookingDateJson) : undefined;
-
-            setUserExaminationBookings(bookingID, bookingDateTime, logonName, examinationApproved, parkingID);
+            var logonName = $('#<%= infoPanelHeader.ClientID %>').data('currentuser');
+            var examinationApproved = new Date();
+            var parkingID = $('#<%= healthExaminationList.ClientID %> :selected').data('parkingid');
+            parkingID = parkingID == "" || parkingID == undefined ? -1 : parkingID;
+            var bookingDateJson = JSON.parse($('#<%= healthExaminationList.ClientID %> :selected').data('bookingdatetime'));
+            var durationHours = $('#<%= healthExaminationList.ClientID %> :selected').data('durationhours');
+            //var bookingDateTime = bookingDateJson != undefined ? JSON.stringify(bookingDateJson) : undefined;
+            setUserExaminationBookings(bookingID, bookingDateJson, logonName, examinationApproved, parkingID, durationHours);
         });
         $('#<%= radiosExaminationAccept1b.ClientID %>').click(function (e) {
             e.preventDefault();
             var bookingID = $('#<%= healthExaminationList.ClientID %>').val();
-            var logonName = $('#<%= infoPanelHeader.ClientID %>').data('currentUser');
+            var logonName = $('#<%= infoPanelHeader.ClientID %>').data('currentuser');
             var examinationApproved = JSON.stringify(new Date(-8640000000000000));
-            var parkingID = $('#<%= healthExaminationList.ClientID %> :selected').data('parkingID');
-            var bookingDateJson = $('#<%= healthExaminationList.ClientID %> :selected').data('bookingDateTime')
-            var bookingDateTime = bookingDateJson != undefined ? JSON.stringify(bookingDateJson) : undefined;
-
-            setUserExaminationBookings(bookingID, bookingDateTime, logonName, examinationApproved, parkingID);
+            var parkingID = $('#<%= healthExaminationList.ClientID %> :selected').data('parkingid');
+            parkingID = parkingID == "" || parkingID == undefined ? -1 : parkingID;
+            var bookingDateJson = $('#<%= healthExaminationList.ClientID %> :selected').data('bookingdatetime');
+            var durationHours = $('#<%= healthExaminationList.ClientID %> :selected').data('durationhours');
+            //var bookingDateTime = bookingDateJson != undefined ? JSON.stringify(bookingDateJson) : undefined;
+            setUserExaminationBookings(bookingID, bookingDateTime, logonName, examinationApproved, parkingID, durationHours);
         });
     });
 </script>

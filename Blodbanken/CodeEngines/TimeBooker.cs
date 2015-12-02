@@ -21,12 +21,21 @@ namespace Blodbanken.CodeEngines {
          int rowsUpdated = 0;
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
          conn.Open();
-         SqlCommand cmd = new SqlCommand("UPDATE ExaminationBooking SET bookingDate=@bookingDate, examinationApproved=@examinationApproved, duratonHours=@durationHours, parkingID=@parkingID WHERE bookingID=@bookingID", conn);
+         SqlCommand cmd;
+         if (booking.ParkingID.HasValue) {
+            cmd = new SqlCommand("UPDATE ExaminationBooking SET bookingDate=@bookingDate, examinationApproved=@examinationApproved, durationHours=@durationHours, parkingID=@parkingID WHERE bookingID=@bookingID", conn);
+            cmd.Parameters.Add("@parkingID", SqlDbType.Int);
+            cmd.Parameters["@parkingID"].Value = booking.ParkingID;
+         } else {
+            cmd = new SqlCommand("UPDATE ExaminationBooking SET bookingDate=@bookingDate, examinationApproved=@examinationApproved, durationHours=@durationHours WHERE bookingID=@bookingID", conn);
+         }
+         
+
          cmd.Parameters.Add("@bookingDate", SqlDbType.DateTime);
          cmd.Parameters["@bookingDate"].Value = booking.BookingDate == DateTime.MinValue ? SqlDateTime.MinValue : booking.BookingDate;
 
-         cmd.Parameters.Add("@examinationApproved", SqlDbType.Int);
-         cmd.Parameters["@examinationApproved"].Value = booking.ExaminationApproved;
+         cmd.Parameters.Add("@examinationApproved", SqlDbType.DateTime);
+         cmd.Parameters["@examinationApproved"].Value = booking.ExaminationApproved == DateTime.MinValue ? SqlDateTime.MinValue : booking.ExaminationApproved;
 
          cmd.Parameters.Add("@bookingID", SqlDbType.Int);
          cmd.Parameters["@bookingID"].Value = booking.BookingID;
@@ -34,8 +43,7 @@ namespace Blodbanken.CodeEngines {
          cmd.Parameters.Add("@durationHours", SqlDbType.Int);
          cmd.Parameters["@durationHours"].Value = booking.DurationHours;
 
-         cmd.Parameters.Add("@oarkingID", SqlDbType.Int);
-         cmd.Parameters["@parkingID"].Value = booking.ParkingID;
+         
 
          rowsUpdated = cmd.ExecuteNonQuery();
 
@@ -146,7 +154,7 @@ namespace Blodbanken.CodeEngines {
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
          conn.Open();
 
-         SqlCommand cmd = new SqlCommand("SELECT bookingID, bookingDate, logonName, durationHours from DonorBooking where logonName=@logonNameParam", conn);
+         SqlCommand cmd = new SqlCommand("SELECT bookingID, bookingDate, logonName, durationHours, parkingID from DonorBooking where logonName=@logonNameParam", conn);
          cmd.Parameters.Add("@logonNameParam", SqlDbType.VarChar, 35);
          cmd.Parameters["@logonNameParam"].Value = logonName;
          var reader = cmd.ExecuteReader();
@@ -160,7 +168,8 @@ namespace Blodbanken.CodeEngines {
             string readLogonName = reader["logonName"].ToString();
             Int32.TryParse(reader["durationHours"] != null ? reader["durationHours"].ToString() : String.Empty, out durationHours);
             DateTime.TryParse(reader["bookingDate"] != null ? reader["bookingDate"].ToString() : String.Empty, out dtResult);
-            if (dtResult != null) bookings.Add(new DonorBooking(bookingID, dtResult, readLogonName, durationHours));
+            int? parkingID = reader.IsDBNull(reader.GetOrdinal("parkingID")) ? (int?)null : Int32.Parse(reader["parkingID"].ToString());
+            if (dtResult != null) bookings.Add(new DonorBooking(bookingID, dtResult, readLogonName, durationHours, parkingID));
          }
          cmd.Dispose();
          reader.Close();
@@ -172,7 +181,7 @@ namespace Blodbanken.CodeEngines {
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
          conn.Open();
 
-         SqlCommand cmd = new SqlCommand("SELECT bookingID, bookingDate, logonName FROM DonorBooking", conn);
+         SqlCommand cmd = new SqlCommand("SELECT bookingID, bookingDate, logonName, parkingID FROM DonorBooking", conn);
          var reader = cmd.ExecuteReader();
 
          // write each record
@@ -184,7 +193,8 @@ namespace Blodbanken.CodeEngines {
             Int32.TryParse(reader["durationHours"] != null ? reader["durationHours"].ToString() : String.Empty, out durationHours);
             string readLogonName = reader["logonName"].ToString();
             DateTime.TryParse(reader["bookingDate"] != null ? reader["bookingDate"].ToString() : String.Empty, out dtResult);
-            if (dtResult != null) bookings.Add(new DonorBooking(bookingID, dtResult, readLogonName, durationHours));
+            int? parkingID = reader.IsDBNull(reader.GetOrdinal("parkingID")) ? (int?)null : Int32.Parse(reader["parkingID"].ToString());
+            if (dtResult != null) bookings.Add(new DonorBooking(bookingID, dtResult, readLogonName, durationHours, parkingID));
          }
          cmd.Dispose();
          reader.Close();
@@ -204,13 +214,12 @@ namespace Blodbanken.CodeEngines {
          // write each record
          while (reader.Read()) {
             DateTime dtResult;
-            int durationHours, parkingID;
-            int bookingID;
+            int durationHours, bookingID;
             DateTime examinationApproved;
             Int32.TryParse(reader["bookingID"] != null ? reader["bookingID"].ToString() : String.Empty, out bookingID);
             examinationApproved = reader.GetDateTime(reader.GetOrdinal("examinationApproved"));
             Int32.TryParse(reader["durationHours"] != null ? reader["durationHours"].ToString() : String.Empty, out durationHours);
-            Int32.TryParse(reader["parkingID"] != null ? reader["parkingID"].ToString() : String.Empty, out parkingID);
+            int? parkingID = reader.IsDBNull(reader.GetOrdinal("parkingID")) ? (int?)null : Int32.Parse(reader["parkingID"].ToString());
             string readLogonName = reader["logonName"].ToString();
             DateTime.TryParse(reader["bookingDate"] != null ? reader["bookingDate"].ToString() : String.Empty, out dtResult);
             if (dtResult != null) bookings.Add(new ExaminationBooking(bookingID, dtResult, readLogonName, examinationApproved, durationHours, parkingID));
@@ -231,12 +240,11 @@ namespace Blodbanken.CodeEngines {
          // write each record
          while (reader.Read()) {
             DateTime dtResult;
-            int durationHours, parkingID;
-            int bookingID;
+            int durationHours, bookingID;
             Int32.TryParse(reader["bookingID"] != null ? reader["bookingID"].ToString() : String.Empty, out bookingID);
             DateTime examinationApproved = reader.GetDateTime(reader.GetOrdinal("examinationApproved"));
             Int32.TryParse(reader["durationHours"] != null ? reader["durationHours"].ToString() : String.Empty, out durationHours);
-            Int32.TryParse(reader["parkingID"] != null ? reader["parkingID"].ToString() : String.Empty, out parkingID);
+            int? parkingID = reader.IsDBNull(reader.GetOrdinal("parkingID")) ? (int?)null : Int32.Parse(reader["parkingID"].ToString());
             string readLogonName = reader["logonName"].ToString();
             DateTime.TryParse(reader["bookingDate"] != null ? reader["bookingDate"].ToString() : String.Empty, out dtResult);
 
@@ -262,9 +270,9 @@ namespace Blodbanken.CodeEngines {
       public string LogonName { get; set; }
       public DateTime BookingDate { get; set; }
       public int DurationHours { get; set; }
-      public int ParkingID { get; set; }
+      public int? ParkingID { get; set; }
       public string DisplayName { get; set; }
-      public ExaminationBooking(int bookingID, DateTime bookingDate, string logonName, DateTime examinationApproved, int durationHours, int parkingID) {
+      public ExaminationBooking(int bookingID, DateTime bookingDate, string logonName, DateTime examinationApproved, int durationHours, int? parkingID) {
          this.BookingID = bookingID;
          this.BookingDate = bookingDate;
          this.LogonName = logonName;
@@ -291,11 +299,13 @@ namespace Blodbanken.CodeEngines {
       public string LogonName { get; set; }
       public DateTime BookingDate { get; set; }
       public int DurationHours { get; set; }
-      public DonorBooking(int bookingID, DateTime bookingDate, string logonName, int durationHours) {
+      public int? ParkingID { get; set; }
+      public DonorBooking(int bookingID, DateTime bookingDate, string logonName, int durationHours, int? parkingID) {
          this.BookingID = bookingID;
          this.BookingDate = bookingDate;
          this.LogonName = logonName;
          this.DurationHours = durationHours;
+         this.ParkingID = parkingID;
       }
       public DonorBooking(DateTime bookingDate, int durationHours, string logonName) {
          this.BookingDate = bookingDate;

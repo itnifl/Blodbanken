@@ -122,11 +122,11 @@ function setSMSAccept(logonName, accept) {
         }
     });
 }
-function setUserExaminationBookings(bookingID, bookingDateTime, logonName, examinationApproved, parkingID) {
+function setUserExaminationBookings(bookingID, bookingDateTime, logonName, examinationApproved, parkingID, durationHours) {
     $.ajax({
         type: "POST",
         url: "/Sections/AdminArea.aspx/SetUserExaminationBooking",
-        data: "{bookingID: " + bookingID + ", bookingDateTime:" + JSON.stringify(bookingDateTime) + ", logonName: " + logonName + ", examinationApproved: " + examinationApproved + ", parkingID: " + parkingID + "}",
+        data: "{bookingID: " + bookingID + ", bookingDateTime: " + JSON.stringify(bookingDateTime) + ", logonName: '" + logonName + "', examinationApproved: " + JSON.stringify(examinationApproved) + ", parkingID: " + parkingID + ", durationHours: " + durationHours + "}",
         contentType: "application/json; charset=utf-8;",
         dataType: "json",
         success: function (response) {

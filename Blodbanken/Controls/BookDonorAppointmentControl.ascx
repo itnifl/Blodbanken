@@ -123,11 +123,6 @@
 
         function doSubmit() {
             $("#createEventModal").modal('hide');
-            //console.log($('#apptStartTime').val());
-            //console.log($('#apptEndTime').val());
-            //console.log($('#apptAllDay').val());
-            //alert("form submitted");
-
             $("#calendar").fullCalendar('renderEvent',
                 {
                     title: $('#patientName').val(),

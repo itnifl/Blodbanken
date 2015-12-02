@@ -122,10 +122,6 @@
 
         function doSubmit() {
             $("#createHealthEventModal").modal('hide');
-            //console.log($('#apptHEStartTime').val());
-            //console.log($('#apptHEEndTime').val());
-            //console.log($('#apptHEAllDay').val());
-
             $("#healthCalendar").fullCalendar('renderEvent',
                 {
                     title: $('#<%= patientHEName.ClientID %>').val(),
