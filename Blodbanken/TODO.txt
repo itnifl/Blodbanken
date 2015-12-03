@@ -1,17 +1,7 @@
 ﻿Lag funksjonalitet mot database og knytt opp mot GUI 			
 	+Book donortime
-		GUI skal populeres med info fra database
-			data fra database legges nå som json på sida,
-			må kunne legge inn data i database for at denne skal kunne vises og brukes
-		GUI skal kunne oppdatere i database
-			Må testes
 		Bookeren må testes for brukers egen booking og for booking for andre
 	+timebooking 	
-		GUI skal populeres med info fra database
-			data fra database legges nå som json på sida,
-			må kunne legge inn data i database for at denne skal kunne vises og brukes
-		GUI skal kunne oppdatere i database
-			Må testes
 		Bookeren må testes for brukers egen booking og for booking for andre
 	+parkeringsbooking - 
 		(tog)Det må legges til en dropdownliste som viser hvilke timer man skal kunne booke parkering for.
@@ -23,8 +13,9 @@
 
 *Oppdater bruker i AdminArea.aspx, da lukker alle kontroller seg etterpå, dette er ikke korrekt.
 	Grunnen er at GetPostBackControlId ikke klarer å finne knapper
+	
 *Extension method GetPostBackControlId klarer ikke å finne knapper, har prøvd å fikse det.
-*Av og pålogging fungerer ikke som tiltenkt
-*Fjern approved fra egenerklæringen i database og klassedefinisjon.
+	Ved postback fra knapper finnes ikke knappen og dermed fungerer ikke koden.
+
 *Akkurat nå kan man booke hele døgnet, la man bare kunne booke i åpningstidene.
 *En brukr kan book flre ganger per dag, det ska ikke være ov. Man må vente en viss mengde tid mellom gangene.

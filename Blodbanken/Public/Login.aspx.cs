@@ -6,8 +6,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
 using Blodbanken.CodeEngines;
-using Newtonsoft.Json;
-using System.Web.Services;
 using System.Security.Principal;
 
 namespace Blodbanken.Public {
@@ -15,26 +13,6 @@ namespace Blodbanken.Public {
       AuthenticatonModule AuthMod = new AuthenticatonModule();
       protected void Page_Load(object sender, EventArgs e) {
          logonErrorSpan.Visible = false;
-      }
-      [WebMethod]
-      public static string LogOffUser() {
-         FormsAuthentication.SignOut();
-         HttpContext.Current.Response.Cookies.Remove(FormsAuthentication.FormsCookieName);
-         GenericPrincipal myUser = (GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
-         myUser = null;
-         System.Threading.Thread.CurrentPrincipal = null;
-
-         UserIdentity id = new UserIdentity();
-         id.IsAuthenticated = false;
-         var userRoles = new String[] { };
-         var prin = new GenericPrincipal(id, userRoles);
-
-         HttpContext.Current.User = prin;
-         HttpContext.Current.Cache.Remove("customPrincipal");
-         HttpContext.Current.Cache.Insert("customPrincipal", prin);
-         HttpContext.Current.Response.Cookies.Clear();
-         //FormsAuthentication.SetAuthCookie
-         return JsonConvert.SerializeObject(new { runStatus = true });
       }
 
       protected void btnLogon_Click(object sender, EventArgs e) {

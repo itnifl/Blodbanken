@@ -76,15 +76,17 @@ namespace Blodbanken.CodeEngines {
          return rowsUpdated == 0 ? false : true;
       }
       public bool GetPersInfoAccept(string logonName) {
-         int? phoneConsent;
-         SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
-         conn.Open();
-         SqlCommand cmd = new SqlCommand("SELECT persInfoConsent FROM Users WHERE logonName=@logonName", conn);
-         cmd.Parameters.Add("@logonName", SqlDbType.VarChar, 35);
-         cmd.Parameters["@logonName"].Value = logonName;
-         phoneConsent = ConvertTo.GetValue<int?>(cmd.ExecuteScalar());
-         cmd.Dispose();
-         conn.Dispose();
+         int? phoneConsent = (int?)null;
+         if(!String.IsNullOrEmpty(logonName)) {
+            SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("SELECT persInfoConsent FROM Users WHERE logonName=@logonName", conn);
+            cmd.Parameters.Add("@logonName", SqlDbType.VarChar, 35);
+            cmd.Parameters["@logonName"].Value = logonName;
+            phoneConsent = ConvertTo.GetValue<int?>(cmd.ExecuteScalar());
+            cmd.Dispose();
+            conn.Dispose();
+         }
          return phoneConsent.HasValue ? (phoneConsent == 0 ? false : true) : false ;
       }
       public bool SetMailAccept(string logonName, bool eMailConsent) {
@@ -122,7 +124,7 @@ namespace Blodbanken.CodeEngines {
          conn.Open();
          int rowsUpdated = 0;
          if (existingForm != null) {
-            SqlCommand cmd = new SqlCommand("UPDATE dbo.[Schema] SET logonName=@logonName, approved=@approved, spm1=@spm1, spm2=@spm2, spm3=@spm3, spm4=@spm4, spm5=@spm5, spm6=@spm6, spm7=@spm7, spm8=@spm8, spm9=@spm9, spm10=@spm10, spm11=@spm11, spm12=@spm12, spm13=@spm13, spm14=@spm14, spm15=@spm15, spm16=@spm16, spm17=@spm17, spm18=@spm18, spm19=@spm19, spm20=@spm20, spm21=@spm21, spm22=@spm22, spm23=@spm23, spm24=@spm24, spm25=@spm25, spm26=@spm26, spm27=@spm27, spm28=@spm28, spm29=@spm29, spm30=@spm30, spm31=@spm31, spm32=@spm32, spm33=@spm33, spm34=@spm34, spm35=@spm35, spm36=@spm36, spm37=@spm37, spm38=@spm38, spm39=@spm39, spm40=@spm40, spm41=@spm41, spm42=@spm42, spm43=@spm43, spm44=@spm44, spm45=@spm45, spm46=@spm46, spm47=@spm47, spm48=@spm48, spm49=@spm49, spm50=@spm50, spm51=@spm51, spm52=@spm52, spm53=@spm53, spm54=@spm54, spm55=@spm55, spm56=@spm56, spm57=@spm57, spm58=@spm58, spm59=@spm59, spm60=@spm60 WHERE schemaID=@schemaID", conn);
+            SqlCommand cmd = new SqlCommand("UPDATE dbo.[Schema] SET logonName=@logonName, spm1=@spm1, spm2=@spm2, spm3=@spm3, spm4=@spm4, spm5=@spm5, spm6=@spm6, spm7=@spm7, spm8=@spm8, spm9=@spm9, spm10=@spm10, spm11=@spm11, spm12=@spm12, spm13=@spm13, spm14=@spm14, spm15=@spm15, spm16=@spm16, spm17=@spm17, spm18=@spm18, spm19=@spm19, spm20=@spm20, spm21=@spm21, spm22=@spm22, spm23=@spm23, spm24=@spm24, spm25=@spm25, spm26=@spm26, spm27=@spm27, spm28=@spm28, spm29=@spm29, spm30=@spm30, spm31=@spm31, spm32=@spm32, spm33=@spm33, spm34=@spm34, spm35=@spm35, spm36=@spm36, spm37=@spm37, spm38=@spm38, spm39=@spm39, spm40=@spm40, spm41=@spm41, spm42=@spm42, spm43=@spm43, spm44=@spm44, spm45=@spm45, spm46=@spm46, spm47=@spm47, spm48=@spm48, spm49=@spm49, spm50=@spm50, spm51=@spm51, spm52=@spm52, spm53=@spm53, spm54=@spm54, spm55=@spm55, spm56=@spm56, spm57=@spm57, spm58=@spm58, spm59=@spm59, spm60=@spm60 WHERE schemaID=@schemaID", conn);
             foreach (PropertyInfo property in typeof(Schema).GetProperties()) {
                if (userSchema.GetType().GetProperty(property.Name).GetValue(userSchema, null).GetType() == "".GetType()) {
                   cmd.Parameters.Add("@" + property.Name, SqlDbType.VarChar, 35);
@@ -146,7 +148,7 @@ namespace Blodbanken.CodeEngines {
             rowsUpdated = cmd.ExecuteNonQuery();
             cmd.Dispose();
          } else {
-            SqlCommand cmd = new SqlCommand("INSERT INTO dbo.[Schema] (logonName,approved,spm1,spm2,spm3,spm4,spm5,spm6,spm7,spm8,spm9,spm10,spm11,spm12,spm13,spm14,spm15,spm16,spm17,spm18,spm19,spm20,spm21,spm22,spm23,spm24,spm25,spm26,spm27,spm28,spm29,spm30,spm31,spm32,spm33,spm34,spm35,spm36,spm37,spm38,spm39,spm40,spm41,spm42,spm43,spm44,spm45,spm46,spm47,spm48,spm49,spm50,spm51,spm52,spm53,spm54,spm55,spm56,spm57,spm58,spm59,spm60) values(@logonName,@approved,@spm1,@spm2,@spm3,@spm4,@spm5,@spm6,@spm7,@spm8,@spm9,@spm10,@spm11,@spm12,@spm13,@spm14,@spm15,@spm16,@spm17,@spm18,@spm19,@spm20,@spm21,@spm22,@spm23,@spm24,@spm25,@spm26,@spm27,@spm28,@spm29,@spm30,@spm31,@spm32,@spm33,@spm34,@spm35,@spm36,@spm37,@spm38,@spm39,@spm40,@spm41,@spm42,@spm43,@spm44,@spm45,@spm46,@spm47,@spm48,@spm49,@spm50,@spm51,@spm52,@spm53,@spm54,@spm55,@spm56,@spm57,@spm58,@spm59,@spm60)", conn);
+            SqlCommand cmd = new SqlCommand("INSERT INTO dbo.[Schema] (logonName,spm1,spm2,spm3,spm4,spm5,spm6,spm7,spm8,spm9,spm10,spm11,spm12,spm13,spm14,spm15,spm16,spm17,spm18,spm19,spm20,spm21,spm22,spm23,spm24,spm25,spm26,spm27,spm28,spm29,spm30,spm31,spm32,spm33,spm34,spm35,spm36,spm37,spm38,spm39,spm40,spm41,spm42,spm43,spm44,spm45,spm46,spm47,spm48,spm49,spm50,spm51,spm52,spm53,spm54,spm55,spm56,spm57,spm58,spm59,spm60) values(@logonName,@spm1,@spm2,@spm3,@spm4,@spm5,@spm6,@spm7,@spm8,@spm9,@spm10,@spm11,@spm12,@spm13,@spm14,@spm15,@spm16,@spm17,@spm18,@spm19,@spm20,@spm21,@spm22,@spm23,@spm24,@spm25,@spm26,@spm27,@spm28,@spm29,@spm30,@spm31,@spm32,@spm33,@spm34,@spm35,@spm36,@spm37,@spm38,@spm39,@spm40,@spm41,@spm42,@spm43,@spm44,@spm45,@spm46,@spm47,@spm48,@spm49,@spm50,@spm51,@spm52,@spm53,@spm54,@spm55,@spm56,@spm57,@spm58,@spm59,@spm60)", conn);
             foreach (PropertyInfo property in typeof(Schema).GetProperties()) {
                if(property.Name != "schemaID") {
                   if (userSchema.GetType().GetProperty(property.Name).GetValue(userSchema, null).GetType() == "".GetType()) {
@@ -157,8 +159,7 @@ namespace Blodbanken.CodeEngines {
                   }
                   else {
                      cmd.Parameters.Add("@" + property.Name, SqlDbType.Int);
-                  }
-                  
+                  }                                 
                   if (property.Name == "approved") {
                      DateTime dtTime = ((DateTime)userSchema.GetType().GetProperty(property.Name).GetValue(userSchema, null));
                      if (dtTime == null || dtTime == DateTime.MinValue) cmd.Parameters["@" + property.Name].Value = DBNull.Value;
@@ -221,7 +222,6 @@ namespace Blodbanken.CodeEngines {
    }
    public class Schema {
       public string logonName { get; set; }
-      public DateTime approved { get; set; }
       public int? schemaID { get; set; }
       public int spm1 { get; set; }
       public int spm2 { get; set; }

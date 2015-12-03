@@ -16,6 +16,8 @@ namespace Blodbanken.Controls {
          infoPanelEditUserHeader.InnerText = "Endre brukeropplysninger for " + CurrentUser;
          if(!IsPostBack || ChangedNewUser)
             this.PopulateHTMLForm(CurrentUser);
+         if (HttpContext.Current.User != null && !HttpContext.Current.User.IsInRole("Admin"))
+            selectRole.Items.Remove(new ListItem("Admin","1"));
       }
       public void UpdateUser(object sender, CommandEventArgs e) {
          SystemUser usr = AuthModule.GetUser(CurrentUser);
@@ -23,13 +25,13 @@ namespace Blodbanken.Controls {
          if (e.CommandName == btnUpdate.CommandName && persInfoCosent) {
             UserRole role = UserRole.Admin;
             switch (selectRole.SelectedValue.ToLower()) {
-               case "admin":
+               case "1":
                   role = UserRole.Admin;
                   break;
-               case "donor":
+               case "2":
                   role = UserRole.Donor;
                   break;
-               case "viewer":
+               case "3":
                   role = UserRole.Viewer;
                   break;
             }

@@ -31,22 +31,26 @@
                 <div class="col-md-1">
                 </div> 
             </div>
+            <asp:button CausesValidation="false" CommandName="DeleteExamination" id="btnDeleteExaminaton" name="btnDeleteExaminaton" cssclass="btn btn-danger" runat="server" Text="Slett helseundersøkelse" OnCommand="DeleteExamination"/>
         </fieldset>        
     </div>
 </div>
 <script type="text/javascript">
     $(document).ready(function(){
         $('#<%= healthExaminationList.ClientID %>').change(function () {
-            var logonName = $('#<%= infoPanelHeader.ClientID %>').data('currentUser');
-            var bookingID = $('#<%= healthExaminationList.ClientID %>').val();;
+            var logonName = $('#<%= infoPanelHeader.ClientID %>').data('currentuser');
+            var bookingID = $('#<%= healthExaminationList.ClientID %>').val();
             $.ajax({
-                type: "GET",
-                url: "/Sections/AdminArea.aspx/GetUserExaminationBooking",
-                data: "{logonName: " + logonName + ", bookingID: " + bookingID + "}",
+                type: "POST",
+                url: "/Sections/AdminAreaWebService.asmx/GetUserExaminationBooking",
+                data: "{logonName: '" + logonName + "', bookingID: " + bookingID + "}",
                 contentType: "application/json; charset=utf-8;",
                 dataType: "json",
-                success: function (response) {
-                    if ($.parseJSON(response.d).ExaminationApproved) {
+                success: function (response) {                    
+                    var second = new Date($.parseJSON(response.d).ExaminationBooking.ExaminationApproved);
+                    var first = new Date();
+                    var diff = (Math.round(first - second) / (1000 * 60 * 60 * 24));
+                    if (diff <= 30) {
                         $('#<%= radiosExaminationAccept1a.ClientID %>').prop('checked', true);
                         $('#<%= radiosExaminationAccept1b.ClientID %>').prop('checked', !true);
                     } else {
@@ -76,91 +80,13 @@
             e.preventDefault();
             var bookingID = $('#<%= healthExaminationList.ClientID %>').val();
             var logonName = $('#<%= infoPanelHeader.ClientID %>').data('currentuser');
-            var examinationApproved = JSON.stringify(new Date(-8640000000000000));
+            var examinationApproved = new Date(1753, 1, 1);
             var parkingID = $('#<%= healthExaminationList.ClientID %> :selected').data('parkingid');
             parkingID = parkingID == "" || parkingID == undefined ? -1 : parkingID;
-            var bookingDateJson = $('#<%= healthExaminationList.ClientID %> :selected').data('bookingdatetime');
+            var bookingDateJson = JSON.parse($('#<%= healthExaminationList.ClientID %> :selected').data('bookingdatetime'));
             var durationHours = $('#<%= healthExaminationList.ClientID %> :selected').data('durationhours');
             //var bookingDateTime = bookingDateJson != undefined ? JSON.stringify(bookingDateJson) : undefined;
-            setUserExaminationBookings(bookingID, bookingDateTime, logonName, examinationApproved, parkingID, durationHours);
+            setUserExaminationBookings(bookingID, bookingDateJson, logonName, examinationApproved, parkingID, durationHours);
         });
     });
 </script>
-<div id="hideThis" runat="server" style="visibility:hidden">
-<div class="panel panel-default panel-nested">
-    <div class="panel-heading" id="userSchemaAcceptHeader" style="font-weight:bold;" runat="server">Egenerklæringer for</div>
-    <div class="panel-body">
-        <fieldset>          
-            <div class="form-group">
-                <div class="col-md-4">
-                </div>
-                <div class="col-md-4">
-                    <asp:DropdownList runat="server" cssclass="form-control" ID="selectUserSchemaAcceptList">
-
-                    </asp:DropdownList>
-                </div>
-                <div class="col-md-4">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-3">
-                </div>
-                <label class="col-md-4 control-label" for="radios">Aksepteres egenerklæringen?</label>
-                <div class="col-md-4"> 
-                    <label class="radio-inline" for="radiosUserSchemaAccept1a">
-                        <input type="radio" name="radiosUserSchemaAccept" id="radiosUserSchemaAccept1a" runat="server" value="1" />
-                        Ja
-                    </label> 
-                    <label class="radio-inline" for="radiosUserSchemaAccept1b">
-                        <input type="radio" name="radiosUserSchemaAccept" id="radiosUserSchemaAccept1b" runat="server" value="0" />
-                        Nei
-                    </label>
-                </div>
-                <div class="col-md-1">
-                </div> 
-            </div>
-        </fieldset>        
-    </div>
-</div>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('#<%= healthExaminationList.ClientID %>').change(function () {
-            var schemaID = $('#<%= selectUserSchemaAcceptList.ClientID %>').val();;
-            $.ajax({
-                type: "GET",
-                url: "/Sections/AdminArea.aspx/GetUserSchema",
-                data: "{logonName: " + logonName + ", bookingID: " + schemaID + "}",
-                contentType: "application/json; charset=utf-8;",
-                dataType: "json",
-                success: function (response) {
-                    if ($.parseJSON(response.d).SchemaApproved) {
-                        $('#<%= radiosUserSchemaAccept1a.ClientID %>').prop('checked', true);
-                        $('#<%= radiosUserSchemaAccept1b.ClientID %>').prop('checked', !true);
-                    } else {
-                        $('#<%= radiosUserSchemaAccept1a.ClientID %>').prop('checked', !true);
-                        $('#<%= radiosUserSchemaAccept1b.ClientID %>').prop('checked', true);
-                    }
-                },
-                error: function (xhr, status, error) {
-                    var err = xhr.responseText;
-                    alert('Error: ' + err);
-                }
-            });        
-        });
-        $('#<%= radiosUserSchemaAccept1a.ClientID %>').click(function (e) {
-            e.preventDefault();
-            var schemaID = $('#<%= selectUserSchemaAcceptList.ClientID %>').val();
-            var acceptState = 1;
-
-            setUserSchemaAccept(schemaID, acceptState);
-        });
-        $('#<%= radiosUserSchemaAccept1b.ClientID %>').click(function (e) {
-            e.preventDefault();
-            var schemaID = $('#<%= selectUserSchemaAcceptList.ClientID %>').val();
-            var acceptState = 0;
-
-            setUserSchemaAccept(schemaID, acceptState);
-        });
-    });
-</script>
-</div>

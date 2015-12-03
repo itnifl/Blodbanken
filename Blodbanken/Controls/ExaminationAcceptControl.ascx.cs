@@ -17,6 +17,9 @@ namespace Blodbanken.Controls {
       protected void Page_Load(object sender, EventArgs e) {
          infoPanelHeader.InnerText = "Helseundersøkelser for " + CurrentUser;
          infoPanelHeader.Attributes.Add("data-currentuser", CurrentUser);
+         SetControls();
+      }
+      private void SetControls() {
          List<ExaminationBooking> eBookings = TimeBookings.GetUserExaminationBookings(CurrentUser);
          SystemUser usr = AuthMod.GetUser(CurrentUser);
          healthExaminationList.Items.Clear();
@@ -31,21 +34,21 @@ namespace Blodbanken.Controls {
          radiosExaminationAccept1b.Disabled = !RadiosEnabled;
          ExaminationBooking selectedBooking = eBookings.SingleOrDefault(booking => booking.BookingID == Int32.Parse(healthExaminationList.SelectedItem.Value));
          if (selectedBooking != null) {
-            radiosExaminationAccept1a.Checked = DateTime.Compare(DateTime.Now.AddDays(-30), selectedBooking.ExaminationApproved) <= 0; 
+            radiosExaminationAccept1a.Checked = DateTime.Compare(DateTime.Now.AddDays(-30), selectedBooking.ExaminationApproved) <= 0;
             radiosExaminationAccept1b.Checked = DateTime.Compare(DateTime.Now.AddDays(-30), selectedBooking.ExaminationApproved) >= 0;
          }
          if (healthExaminationList.Items.Count == 0) {
             radiosExaminationAccept1a.Disabled = true;
             radiosExaminationAccept1b.Disabled = true;
          }
-
-         userSchemaAcceptHeader.InnerText = "Helseundersøkelser for " + CurrentUser;
-         userSchemaAcceptHeader.Attributes.Add("data-currentuser", CurrentUser);
-         List<Schema> userSchemas = FormMod.GetUserSchemaForm(CurrentUser);
-         selectUserSchemaAcceptList.Items.Clear();
-         foreach (Schema schema in userSchemas) {
-            ListItem item = new ListItem(usr.FirstName + " " + usr.LastName + " - " + schema.schemaID, schema.schemaID.ToString());
-            selectUserSchemaAcceptList.Items.Add(item);
+      }
+      public void DeleteExamination(object sender, CommandEventArgs e) {
+         if (e.CommandName == btnDeleteExaminaton.CommandName) {
+            if (!String.IsNullOrEmpty(healthExaminationList.SelectedValue)) {
+               int bookingID = Int32.Parse(healthExaminationList.SelectedValue);
+               TimeBookings.DeleteExaminationBooking(bookingID);
+               SetControls();
+            }
          }
       }
    }

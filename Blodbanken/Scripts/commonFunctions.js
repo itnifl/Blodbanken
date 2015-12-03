@@ -12,13 +12,13 @@ function logoffUser(e) {
     e.preventDefault();
     $.ajax({
         type: "POST",
-        url: "/Public/Login.aspx/LogOffUser",
+        url: "/Sections/AdminAreaWebService.asmx/LogOffUser",
         data: "{}",
         contentType: "application/json; charset=utf-8;",
         dataType: "json",
         success: function (response) {
             if ($.parseJSON(response.d).runStatus) {
-                location.reload();
+                window.location.href = window.location.protocol + '//' + window.location.host + '/Index.aspx';
             }
         },
         error: function (xhr, status, error) {
@@ -32,8 +32,8 @@ function addDonorAppointment(logonName, startTime, endTime, allDay) {
     var hours = Math.abs(startTime - endTime) / 36e5;
     $.ajax({
         type: "POST",
-        url: "/Sections/AdminArea.aspx/BookDonorAppointment",
-        data: "{bookingDate=" + JSON.stringify(startTime) + ", durationHours=" + hours + ", logonName='" + logonName + "'}",
+        url: "/Sections/AdminAreaWebService.asmx/BookDonorAppointment",
+        data: "{bookingDate:" + JSON.stringify(startTime) + ", durationHours:" + hours + ", logonName:'" + logonName + "'}",
         contentType: "application/json; charset=utf-8;",
         dataType: "json",
         success: function (response) {
@@ -52,7 +52,7 @@ function addHealthExamination(logonName, startTime, endTime, allDay) {
     var hours = Math.abs(startTime - endTime) / 36e5;
     $.ajax({
         type: "POST",
-        url: "/Sections/AdminArea.aspx/BookHealthExamination",
+        url: "/Sections/AdminAreaWebService.asmx/BookHealthExamination",
         data: "{bookingDate: "+JSON.stringify(startTime)+", durationHours:"+hours+", logonName:'" +logonName+"'}",
         async: false,
         contentType: "application/json; charset=utf-8;",
@@ -71,7 +71,7 @@ function addHealthExamination(logonName, startTime, endTime, allDay) {
 function setEmailAccept(logonName, accept) {
     $.ajax({
         type: "POST",
-        url: "/Sections/AdminArea.aspx/SetEmailAccept",
+        url: "/Sections/AdminAreaWebService.asmx/SetEmailAccept",
         data: "{logonName: '" + logonName + "', accept: " + accept + "}",
         contentType: "application/json; charset=utf-8;",
         dataType: "json",
@@ -89,7 +89,7 @@ function setEmailAccept(logonName, accept) {
 function setPersInfoAccept(logonName, accept) {
     $.ajax({
         type: "POST",
-        url: "/Sections/AdminArea.aspx/SetPersInfoAccept",
+        url: "/Sections/AdminAreaWebService.asmx/SetPersInfoAccept",
         data: "{logonName: '"+logonName+"', accept: "+accept+"}",
         contentType: "application/json; charset=utf-8;",
         dataType: "json",
@@ -107,7 +107,7 @@ function setPersInfoAccept(logonName, accept) {
 function setSMSAccept(logonName, accept) {
     $.ajax({
         type: "POST",
-        url: "/Sections/AdminArea.aspx/SetSMSAccept",
+        url: "/Sections/AdminAreaWebService.asmx/SetSMSAccept",
         data: "{logonName: '" + logonName + "', accept: " + accept + "}",
         contentType: "application/json; charset=utf-8;",
         dataType: "json",
@@ -125,13 +125,13 @@ function setSMSAccept(logonName, accept) {
 function setUserExaminationBookings(bookingID, bookingDateTime, logonName, examinationApproved, parkingID, durationHours) {
     $.ajax({
         type: "POST",
-        url: "/Sections/AdminArea.aspx/SetUserExaminationBooking",
+        url: "/Sections/AdminAreaWebService.asmx/SetUserExaminationBooking",
         data: "{bookingID: " + bookingID + ", bookingDateTime: " + JSON.stringify(bookingDateTime) + ", logonName: '" + logonName + "', examinationApproved: " + JSON.stringify(examinationApproved) + ", parkingID: " + parkingID + ", durationHours: " + durationHours + "}",
         contentType: "application/json; charset=utf-8;",
         dataType: "json",
         success: function (response) {
             if ($.parseJSON(response.d).runStatus) {
-                location.reload();
+                reloadWithActiveFocusArgument('itemExaminationAccept');
             }
         },
         error: function (xhr, status, error) {

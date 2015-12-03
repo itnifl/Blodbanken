@@ -153,6 +153,7 @@
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Sections\AdminAreaWebService.asmx" />
     <Content Include="TODO.txt" />
     <Content Include="WorkflowItems\BookMedicalExamination.aspx" />
     <Content Include="WorkflowItems\BookParking.aspx" />
@@ -335,6 +336,10 @@
     </Compile>
     <Compile Include="Sections\AdminArea.aspx.designer.cs">
       <DependentUpon>AdminArea.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sections\AdminAreaWebService.asmx.cs">
+      <DependentUpon>AdminAreaWebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Sections\UserArea.aspx.cs">
       <DependentUpon>UserArea.aspx</DependentUpon>

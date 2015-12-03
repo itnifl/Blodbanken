@@ -17,6 +17,18 @@ namespace Blodbanken.CodeEngines {
    public class TimeBooker {
       private const string privilegesDatabase = "../App_Data/Privileges.mdf";
 
+      public bool DeleteExaminationBooking(int bookingID) {
+         int rowsUpdated = 0;
+         SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
+         conn.Open();
+         SqlCommand cmd = new SqlCommand("DELETE FROM ExaminationBooking WHERE bookingID=@bookingID", conn);
+         cmd.Parameters.Add("@bookingID", SqlDbType.Int);
+         cmd.Parameters["@bookingID"].Value = bookingID;
+         rowsUpdated = cmd.ExecuteNonQuery();
+         cmd.Dispose();
+         conn.Dispose();
+         return rowsUpdated == 0 ? false : true;
+      }
       public bool SetExaminationBooking(ExaminationBooking booking) {
          int rowsUpdated = 0;
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
@@ -181,7 +193,7 @@ namespace Blodbanken.CodeEngines {
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
          conn.Open();
 
-         SqlCommand cmd = new SqlCommand("SELECT bookingID, bookingDate, logonName, parkingID FROM DonorBooking", conn);
+         SqlCommand cmd = new SqlCommand("SELECT D.bookingID, D.bookingDate, D.logonName, D.parkingID, D.durationHours, u.firstName, u.lastName FROM DonorBooking as D JOIN Users AS u ON(D.logonName=u.logonName)", conn);
          var reader = cmd.ExecuteReader();
 
          // write each record
@@ -194,8 +206,17 @@ namespace Blodbanken.CodeEngines {
             string readLogonName = reader["logonName"].ToString();
             DateTime.TryParse(reader["bookingDate"] != null ? reader["bookingDate"].ToString() : String.Empty, out dtResult);
             int? parkingID = reader.IsDBNull(reader.GetOrdinal("parkingID")) ? (int?)null : Int32.Parse(reader["parkingID"].ToString());
-            if (dtResult != null) bookings.Add(new DonorBooking(bookingID, dtResult, readLogonName, durationHours, parkingID));
+            string firstName = reader["firstName"] != null ? reader["firstName"].ToString() : String.Empty;
+            string lastName = reader["lastName"] != null ? reader["lastName"].ToString() : String.Empty;
+
+            DonorBooking booking = new DonorBooking(bookingID, dtResult, readLogonName, durationHours, parkingID);
+            if (!String.IsNullOrEmpty(firstName) && !String.IsNullOrEmpty(lastName)) {
+               booking.DisplayName = firstName + " " + lastName;
+            }
+
+            if (dtResult != null) bookings.Add(booking);
          }
+
          cmd.Dispose();
          reader.Close();
          conn.Dispose();
@@ -300,6 +321,7 @@ namespace Blodbanken.CodeEngines {
       public DateTime BookingDate { get; set; }
       public int DurationHours { get; set; }
       public int? ParkingID { get; set; }
+      public string DisplayName { get; set; }
       public DonorBooking(int bookingID, DateTime bookingDate, string logonName, int durationHours, int? parkingID) {
          this.BookingID = bookingID;
          this.BookingDate = bookingDate;

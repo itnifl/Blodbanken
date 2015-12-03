@@ -68,20 +68,22 @@
                 $('#createHealthEventModal').modal({ show: true })
             }
         });
-        allExaminationBookingObjects.ExaminationBookings.forEach(function (examinationBookingObject) {
-            var displayName = examinationBookingObject.DisplayName ? examinationBookingObject.DisplayName : examinationBookingObject.LogonName;
-            var startDate = new Date(examinationBookingObject.BookingDate);
-            var endDate = new Date(examinationBookingObject.BookingDate);
-            endDate.setTime(endDate.getTime() + (examinationBookingObject.DurationHours * 60 * 60 * 1000));
-            $("#healthCalendar").fullCalendar('renderEvent',
-                 {
-                     title: displayName,
-                     start: startDate,
-                     end: endDate,
-                     allDay: false,
-                 },
-                 true);
-        });
+        if (allExaminationBookingObjects.ExaminationBookings) {
+            allExaminationBookingObjects.ExaminationBookings.forEach(function (examinationBookingObject) {
+                var displayName = examinationBookingObject.DisplayName ? examinationBookingObject.DisplayName : examinationBookingObject.LogonName;
+                var startDate = new Date(examinationBookingObject.BookingDate);
+                var endDate = new Date(examinationBookingObject.BookingDate);
+                endDate.setTime(endDate.getTime() + (examinationBookingObject.DurationHours * 60 * 60 * 1000));
+                $("#healthCalendar").fullCalendar('renderEvent',
+                     {
+                title: displayName,
+                start: startDate,
+                end: endDate,
+                allDay: false,
+            },
+                     true);
+            });
+        }
 
         $('#<%= submitHEButton.ClientID %>').on('click', function (e) {
             // We don't want this to act as a link so cancel the link action
@@ -100,7 +102,6 @@
                     var startDate = new Date(examinationBookingObject.BookingDate);
                     var endDate = new Date(examinationBookingObject.BookingDate);
                     endDate.setTime(endDate.getTime() + (examinationBookingObject.DurationHours * 60 * 60 * 1000));
-                    //debugger;
                     if (startDate >= ourAppointment.start && startDate <= ourAppointment.end) {
                         appointmentTaken = true;
                     }

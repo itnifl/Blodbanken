@@ -8,7 +8,7 @@
 <fieldset>
     <div class="form-group form-group-custom">
         <div class="col-md-3 control-label" id="BookingInfoArea2">
-            <label class="control-label" id="lblBookDonorAppointmentError1" runat="server" style="color:red;">* <a href="/WorkflowItems/QuestionForm.aspx" style="color:inherit;">For å kunne booke, må ha godkjent helseundersøkelse innen de 30 siste dagene først.</a></label>
+            <label class="control-label" id="lblBookDonorAppointmentError1" runat="server" style="color:red;">* <a href="/WorkflowItems/BookTime.aspx" style="color:inherit;">For å kunne booke, må ha godkjent helseundersøkelse innen de 30 siste dagene først.</a></label>
         </div>
     </div>
 </fieldset>
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 </form>
-                <label class="control-label" id="lblBookDonorAppointmentError2" runat="server" style="color:red;">* <a href="/WorkflowItems/QuestionForm.aspx" style="color:inherit;">For å kunne booke, må ha godkjent helseundersøkelse innen de 30 siste dagene først.</a></label>
+                <label class="control-label" id="lblBookDonorAppointmentError2" runat="server" style="color:red;">* <a href="/WorkflowItems/BookTime.aspx" style="color:inherit;">For å kunne booke, må ha godkjent helseundersøkelse innen de 30 siste dagene først.</a></label>
             </div>
             <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true">Avbryt</button>
@@ -68,21 +68,22 @@
                 $('#createEventModal').modal({ show: true })
             }
         });
-
-        allAppointmentBookingObjects.DonorAppointments.forEach(function (bookingObject) {
-            var displayName = bookingObject.DisplayName ? bookingObject.DisplayName : bookingObject.LogonName;
-            var startDate = new Date(bookingObject.BookingDate);
-            var endDate = new Date(bookingObject.BookingDate);
-            endDate.setTime(endDate.getTime() + (bookingObject.DurationHours * 60 * 60 * 1000));
-            $("#healthCalendar").fullCalendar('renderEvent',
-                 {
-                     title: displayName,
-                     start: startDate,
-                     end: endDate,
-                     allDay: false,
-                 },
-                 true);
-        });
+        if (allAppointmentBookingObjects.DonorAppointments) {
+            allAppointmentBookingObjects.DonorAppointments.forEach(function (bookingObject) {
+                var displayName = bookingObject.DisplayName ? bookingObject.DisplayName : bookingObject.LogonName;
+                var startDate = new Date(bookingObject.BookingDate);
+                var endDate = new Date(bookingObject.BookingDate);
+                endDate.setTime(endDate.getTime() + (bookingObject.DurationHours * 60 * 60 * 1000));
+                $("#calendar").fullCalendar('renderEvent',
+                     {
+                         title: displayName,
+                         start: startDate,
+                         end: endDate,
+                         allDay: false,
+                     },
+                     true);
+            });
+        }
 
         $('#<%= submitButton.ClientID %>').on('click', function (e) {
             // We don't want this to act as a link so cancel the link action
@@ -96,20 +97,21 @@
                     end: new Date($('#apptEndTime').val()),
                     allDay: ($('#apptAllDay').val() == "true"),
                 }
-                allAppointmentBookingObjects.DonorAppointments.forEach(function (bookingObject) {
-                    var displayName = bookingObject.DisplayName ? bookingObject.DisplayName : bookingObject.LogonName;
-                    var startDate = new Date(bookingObject.BookingDate);
-                    var endDate = new Date(bookingObject.BookingDate);
-                    endDate.setTime(endDate.getTime() + (bookingObject.DurationHours * 60 * 60 * 1000));
+                if (allAppointmentBookingObjects.DonorAppointments) {
+                    allAppointmentBookingObjects.DonorAppointments.forEach(function (bookingObject) {
+                        var displayName = bookingObject.DisplayName ? bookingObject.DisplayName : bookingObject.LogonName;
+                        var startDate = new Date(bookingObject.BookingDate);
+                        var endDate = new Date(bookingObject.BookingDate);
+                        endDate.setTime(endDate.getTime() + (bookingObject.DurationHours * 60 * 60 * 1000));
 
-                    if (startDate >= ourAppointment.start && startDate <= ourAppointment.end) {
-                        appointmentTaken = true;
-                    }
-                    if (endDate >= ourAppointment.start && endDate <= ourAppointment.end) {
-                        appointmentTaken = true;
-                    }
-
-                });
+                        if (startDate >= ourAppointment.start && startDate <= ourAppointment.end) {
+                            appointmentTaken = true;
+                        }
+                        if (endDate >= ourAppointment.start && endDate <= ourAppointment.end) {
+                            appointmentTaken = true;
+                        }
+                    });
+                }
                 if (!appointmentTaken) doSubmit();
                 else {
                     $('#messageModalBody').text("Det er allerede booket en helseundersøkelse i det tidspunktet. Velg annet tidspunkt og prøv igjen.");
@@ -125,13 +127,14 @@
             $("#createEventModal").modal('hide');
             $("#calendar").fullCalendar('renderEvent',
                 {
-                    title: $('#patientName').val(),
+                    title: $('#<%= patientName.ClientID %>').val(),
                     start: new Date($('#apptStartTime').val()),
                     end: new Date($('#apptEndTime').val()),
                     allDay: ($('#apptAllDay').val() == "true"),
                 },
                 true);
-            addDonorAppointment($('#patientName').val(),
+
+            addDonorAppointment($('#<%= patientName.ClientID %>').val(),
                 new Date($('#apptStartTime').val()),
                 new Date($('#apptEndTime').val()),
                 ($('#apptAllDay').val() == "true"));            
