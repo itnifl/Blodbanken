@@ -1,5 +1,4 @@
-﻿
-* Oppdaterer man bruker i AdminArea.aspx, da lukker alle kontroller seg etterpå, dette er ikke korrekt.
+﻿* Oppdaterer man bruker i AdminArea.aspx, da lukker alle kontroller seg etterpå, dette er ikke korrekt.
 	Grunnen er at GetPostBackControlId ikke klarer å finne knapper	
 * Extension method GetPostBackControlId klarer ikke å finne knapper, har prøvd å fikse det.
 	Ved postback fra knapper finnes ikke knappen og dermed fungerer ikke koden.
@@ -17,3 +16,8 @@ og booking av parkering for ulik type tomebooking kan bli feil da typefeltet ikk
 * Det er ingen restriksjoner i Parkeringsbookeren. Det er ingen sjekking av om plassen allerede er tatt.
 * Parkeringsbookeren må testes mye mer før den kan tas i bruk skikklig, dem har ikke all funksjonalitet en gang.
 * Automatisk timebooking, denne har jeg ikke rukket å lage annet enn GUI for.
+* Det er mulig å booke timer før personalia er utfylt, dette er ikke gunstig da man bare ser en brukerkonto på bookingen og ikke noe navn.
+* Det kommer ingen feilmelding når man forsøker å oppdatere passord og dette ikke fungerer. Ved autentisering av opprinnelig passord der det skrives feil passord inn og autentiseringen feiler, vil ikke passordet oppdateres slk tiltenkt, men ingen beskjd om dette kommer. Du får likevel beskjed når alt fungerer.
+* Har prøvd å bygge koden så fort som mulig. Dette har gjort at kvaliteten og lesbarheten har måtte gi etter. Det er lite kommentarer i koden.
+
+115,5 timer ble brukt på denne koden.
