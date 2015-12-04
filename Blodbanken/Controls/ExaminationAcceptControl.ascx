@@ -31,7 +31,7 @@
                 <div class="col-md-1">
                 </div> 
             </div>
-            <asp:button CausesValidation="false" CommandName="DeleteExamination" id="btnDeleteExaminaton" name="btnDeleteExaminaton" cssclass="btn btn-danger" runat="server" Text="Slett helseundersøkelse" OnCommand="DeleteExamination"/>
+            <asp:button OnClientClick="SetSource(this.id)" CausesValidation="false" CommandName="DeleteExamination" id="btnDeleteExaminaton" name="btnDeleteExaminaton" cssclass="btn btn-danger" runat="server" Text="Slett helseundersøkelse" OnCommand="DeleteExamination" />
         </fieldset>        
     </div>
 </div>

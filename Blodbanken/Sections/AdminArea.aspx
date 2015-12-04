@@ -6,7 +6,7 @@
 <%@ Register TagPrefix="uc" TagName="AutoBookerSettings" Src="~/Controls/AutoBookerSettingsControl.ascx" %>
 <%@ Register TagPrefix="uc" TagName="MessageModuleControl" Src="~/Controls/MessageModuleControl.ascx" %>
 
-<asp:Content ID="MainPage" ContentPlaceHolderID="MainPage" Runat="Server">
+<asp:Content ID="MainPage" ContentPlaceHolderID="MainPage" Runat="Server">    
     <div runat="server" id="responsebox" style="visibility:hidden"></div>
     <link rel="stylesheet" type="text/css" href="/Content/themes/base/all.css" />
     <link rel="stylesheet" href="/Content/jquery.ptTimeSelect.css" />
@@ -17,6 +17,7 @@
     </div>
     <div class="jumbotron" style="margin-left:100px;margin-right:100px;padding:20px;">
         <form id="frmAdministratorEditor" runat="server" class="form-horizontal">
+            <asp:HiddenField ID="hidSourceID" runat="server" />
             <div id="inlineContainer">
 	            <div id="inlineRow">
 		            <div id="inlineCell1">
@@ -172,7 +173,7 @@
                                 </fieldset>
                               </div>
                             </div>
-                            <a href="#itemSchemaEdit" id="headingSchemaEdit" class="list-group-item collapsed list-group-item-header" data-toggle="collapse" data-parent="#lstgrpDiverseEditor" aria-expanded="false" aria-controls="itemSchemaEdit">Helseundersøkelser - Sletting</a>
+                            <a href="#itemSchemaEdit" id="headingSchemaEdit" class="list-group-item collapsed list-group-item-header" data-toggle="collapse" data-parent="#lstgrpDiverseEditor" aria-expanded="false" aria-controls="itemSchemaEdit">Egenerklæring - Sletting</a>
                             <div id="itemSchemaEdit" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSchemaEdit">
                               <div class="well well-sm well-custom">
                                  <fieldset>
@@ -200,4 +201,10 @@
         </form>
     </div>
     <uc:MessageModuleControl id="MessageModuleControl" runat="server"/>
+    <script type="text/javascript">
+        function SetSource(SourceID) {
+            var hidSourceID = document.getElementById("<%=hidSourceID.ClientID%>");
+            hidSourceID.value = SourceID;
+        }
+    </script>
 </asp:Content>

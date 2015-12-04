@@ -16,7 +16,7 @@
     <script src="/Scripts/commonFunctions.js" type="text/javascript"></script>
 </head>
 <body runat="server" id="pageBody">
-    <uc:TopNavBar id="TopNavBar" runat="server" />
+    <uc:TopNavBar id="TopNavBar" runat="server" />    
     <asp:ContentPlaceHolder ID="MainPage" runat="server">
         
     </asp:ContentPlaceHolder>

@@ -1,21 +1,19 @@
-﻿Lag funksjonalitet mot database og knytt opp mot GUI 			
-	+Book donortime
-		Bookeren må testes for brukers egen booking og for booking for andre
-	+timebooking 	
-		Bookeren må testes for brukers egen booking og for booking for andre
-	+parkeringsbooking - 
-		(tog)Det må legges til en dropdownliste som viser hvilke timer man skal kunne booke parkering for.
-		GUI må ha info om ledig parkering ved valg av dato, og deretter mulighet for valg av time
-		Tabell kan bare velges fra, hvis man har valgt en time å booke parkering for
-		Hvis man velger en time med en parkeringsbooking, skal denne parkeringsbookignen vises og kunne endres
-		GUI skal kunne lagre parkering til database knyttet opp mot en booking
-	+Lag den automatiske bookeren, og la den kunne konfigureres
-
-*Oppdater bruker i AdminArea.aspx, da lukker alle kontroller seg etterpå, dette er ikke korrekt.
-	Grunnen er at GetPostBackControlId ikke klarer å finne knapper
-	
-*Extension method GetPostBackControlId klarer ikke å finne knapper, har prøvd å fikse det.
+﻿
+* Oppdaterer man bruker i AdminArea.aspx, da lukker alle kontroller seg etterpå, dette er ikke korrekt.
+	Grunnen er at GetPostBackControlId ikke klarer å finne knapper	
+* Extension method GetPostBackControlId klarer ikke å finne knapper, har prøvd å fikse det.
 	Ved postback fra knapper finnes ikke knappen og dermed fungerer ikke koden.
-
-*Akkurat nå kan man booke hele døgnet, la man bare kunne booke i åpningstidene.
-*En brukr kan book flre ganger per dag, det ska ikke være ov. Man må vente en viss mengde tid mellom gangene.
+	Dette fører til at seksjoner på kontrollpanelet lukker seg når postback kommer fra en knapp.
+* Når man aksepterer en helseundersøkelse lastes siden på nytt og man får ikke beskjed om hva som skjer, formen resettes også til start.
+	 Dette er feil.
+* Akkurat nå kan man booke hele døgnet, la man bare kunne booke i åpningstidene.
+* En brukr kan book flre ganger per dag, det ska ikke være ov. Man må vente en viss mengde tid mellom gangene.
+* Når man velger dato fra kalender for å booke en parkering, skal info om tatte parkeringsplasser vises for den dagen. Dette er ikke implementert.
+	Mulige timebestillinger å booke parkering for filtreres heller ikke. Dette var planen.
+* Man kan ikke slå av JavaScript i browseren, da virker ikke systemet.
+* Kode for booking av parkering er laget, men dette fungerer bare delvis. Det ser ikke ut til at dato for når bookingen skjer pleier å bl feil, 
+og booking av parkering for ulik type tomebooking kan bli feil da typefeltet ikke alltid blir populert.
+* Det er ikke skrevet ferdig kode for å vise hvilke parkeringsplasser er opptatt, men det er laget mulighet for å vise dette i GUI.
+* Det er ingen restriksjoner i Parkeringsbookeren. Det er ingen sjekking av om plassen allerede er tatt.
+* Parkeringsbookeren må testes mye mer før den kan tas i bruk skikklig, dem har ikke all funksjonalitet en gang.
+* Automatisk timebooking, denne har jeg ikke rukket å lage annet enn GUI for.

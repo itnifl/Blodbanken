@@ -18,7 +18,8 @@ namespace Blodbanken.Controls {
          List<DonorBooking> allDonorAppointments = null;
          HttpContext.Current.User = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
          if((HttpContext.Current.User != null)) {
-            if (HttpContext.Current.User.IsInRole(UserRole.Admin.ToString())) {
+            if (HttpContext.Current.User.Identity.IsAuthenticated) {
+               selectUserForDonorBooking.Visible = HttpContext.Current.User.IsInRole(UserRole.Admin.ToString());
                List<SystemUser> users = AuthMod.GetAllUsers();
                allDonorAppointments = Booker.GetAllDonorBookings();
                DropDownList[] selectArray = { selectUserForDonorBooking };

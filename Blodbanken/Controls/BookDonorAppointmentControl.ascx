@@ -8,7 +8,7 @@
 <fieldset>
     <div class="form-group form-group-custom">
         <div class="col-md-3 control-label" id="BookingInfoArea2">
-            <label class="control-label" id="lblBookDonorAppointmentError1" runat="server" style="color:red;">* <a href="/WorkflowItems/BookTime.aspx" style="color:inherit;">For å kunne booke, må ha godkjent helseundersøkelse innen de 30 siste dagene først.</a></label>
+            <label class="control-label" id="lblBookDonorAppointmentError1" runat="server" style="color:red;">* <a href="/WorkflowItems/BookMedicalExamination.aspx" style="color:inherit;">For å kunne booke, må ha godkjent helseundersøkelse innen de 30 siste dagene først.</a></label>
         </div>
     </div>
 </fieldset>
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 </form>
-                <label class="control-label" id="lblBookDonorAppointmentError2" runat="server" style="color:red;">* <a href="/WorkflowItems/BookTime.aspx" style="color:inherit;">For å kunne booke, må ha godkjent helseundersøkelse innen de 30 siste dagene først.</a></label>
+                <label class="control-label" id="lblBookDonorAppointmentError2" runat="server" style="color:red;">* <a href="/WorkflowItems/BookMedicalExamination.aspx" style="color:inherit;">For å kunne booke, må ha godkjent helseundersøkelse innen de 30 siste dagene først.</a></label>
             </div>
             <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true">Avbryt</button>

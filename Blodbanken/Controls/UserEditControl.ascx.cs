@@ -35,12 +35,12 @@ namespace Blodbanken.Controls {
                   role = UserRole.Viewer;
                   break;
             }
-            bool status = AuthModule.UpdateUser(CurrentUser, role, txtFirstname.Value, txtLastName.Value,
+            bool status = AuthModule.UpdateUser(CurrentUser, role, txtFirstname.Value, txtLastName.Text,
                txtTlfMobil.Value, Int32.Parse(selectAge.SelectedValue), txtAddress.Value,
                txtSocialSecurityNumber.Value, selectGender.SelectedValue.ToLower() == "1" ? "male" : "female",
                txtTlfArbeid.Value, txtTlfPrivat.Value, txtEPost.Value);
             if (MessageReporter != null) {
-               MessageReporter(status ? "Oppdatering av bruker " + txtFirstname.Value + " " + txtLastName.Value + " var en suksess" : "Oppdatering av bruker " + txtFirstname.Value + " " + txtLastName.Value + " feilet");
+               MessageReporter(status ? "Oppdatering av bruker " + txtFirstname.Value + " " + txtLastName.Text + " var en suksess" : "Oppdatering av bruker " + txtFirstname.Value + " " + txtLastName.Text + " feilet");
             }
          }
          else if (!persInfoCosent) {
@@ -64,8 +64,8 @@ namespace Blodbanken.Controls {
          txtEPost.Disabled = !persInfoCosent;
          txtFirstname.Value = usr.FirstName;
          txtFirstname.Disabled = !persInfoCosent;
-         txtLastName.Value = usr.LastName;
-         txtLastName.Disabled = !persInfoCosent;
+         txtLastName.Text = usr.LastName;
+         txtLastName.Enabled = persInfoCosent;
 
          txtSocialSecurityNumber.Value = usr.NationalIdentity.ToString();
          txtSocialSecurityNumber.Disabled = !persInfoCosent;

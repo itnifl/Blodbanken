@@ -19,7 +19,7 @@
             <label class="col-md-4 control-label" for="txtLastName">Etternavn</label>  
             <div class="col-md-4">
             <asp:RequiredFieldValidator Validationgroup="UserEditValidatorGroup" Display="Dynamic" runat="server" ControlToValidate="txtLastName" style="color:red;" ErrorMessage="<b>* Feltet må fylles inn</b>" />
-            <input runat="server"  id="txtLastName" name="txtLastName" type="text" placeholder="Etternavn" class="form-control input-md" />
+            <asp:TextBox runat="server"  id="txtLastName" name="txtLastName" type="text" placeholder="Etternavn" class="form-control input-md" />
     
             </div>
         </div>

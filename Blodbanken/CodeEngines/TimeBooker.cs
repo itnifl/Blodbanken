@@ -42,7 +42,6 @@ namespace Blodbanken.CodeEngines {
             cmd = new SqlCommand("UPDATE ExaminationBooking SET bookingDate=@bookingDate, examinationApproved=@examinationApproved, durationHours=@durationHours WHERE bookingID=@bookingID", conn);
          }
          
-
          cmd.Parameters.Add("@bookingDate", SqlDbType.DateTime);
          cmd.Parameters["@bookingDate"].Value = booking.BookingDate == DateTime.MinValue ? SqlDateTime.MinValue : booking.BookingDate;
 
@@ -113,12 +112,71 @@ namespace Blodbanken.CodeEngines {
 
          return rowsUpdated == 0 ? false : true;
       }
-      public List<ParkspaceBooking> GetFutureParkspaceBookingsForDonors(string logonName) {
+      public bool BookParkingSpace(BookingSelected selectedBooking) {
+         int rowsUpdated = 0;
+         ParkspaceBooking booking = new ParkspaceBooking() {
+            BookingDate = selectedBooking.Date,
+            ParkingSpace = selectedBooking.SelectedParkingSpace
+         };
+         SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
+         conn.Open();
+         SqlCommand cmd = new SqlCommand("INSERT INTO ParkspaceBooking (bookingDate, parkingSpace) values (@bookingDate, @parkingSpace)", conn);
+         cmd.Parameters.Add("@bookingDate", SqlDbType.DateTime);
+         cmd.Parameters["@bookingDate"].Value = booking.BookingDate == DateTime.MinValue ? SqlDateTime.MinValue : booking.BookingDate;
+
+         cmd.Parameters.Add("@parkingSpace", SqlDbType.Int);
+         cmd.Parameters["@parkingSpace"].Value = booking.ParkingSpace;
+
+         rowsUpdated = cmd.ExecuteNonQuery();
+
+         cmd.Dispose();
+         
+         cmd = new SqlCommand("SELECT bookingID FROM ParkspaceBooking WHERE bookingDate=@bookingDate AND parkingSpace=@parkingSpace", conn);
+         cmd.Parameters.Add("@bookingDate", SqlDbType.DateTime);
+         cmd.Parameters["@bookingDate"].Value = booking.BookingDate == DateTime.MinValue ? SqlDateTime.MinValue : booking.BookingDate;
+
+         cmd.Parameters.Add("@parkingSpace", SqlDbType.Int);
+         cmd.Parameters["@parkingSpace"].Value = booking.ParkingSpace;
+
+         var reader = cmd.ExecuteReader();
+
+         while (reader.Read()) {
+            int bookingID = -1;
+            Int32.TryParse(reader["bookingID"] != null ? reader["bookingID"].ToString() : String.Empty, out bookingID);
+            if (bookingID != -1) {
+               booking.BookingID = bookingID;
+            }
+         }
+         reader.Close();
+         cmd.Dispose();
+
+         if (!String.IsNullOrEmpty(selectedBooking.Type)) {
+            cmd = new SqlCommand("UPDATE " + (selectedBooking.Type.ToLower() == "donor" ? "DonorBooking" : "ExaminationBooking") + " SET parkingID=@parkingID WHERE bookingID=@bookingID", conn);
+            cmd.Parameters.Add("@parkingID", SqlDbType.Int);
+            cmd.Parameters["@parkingID"].Value = booking.BookingID;
+
+            cmd.Parameters.Add("@bookingID", SqlDbType.Int);
+            cmd.Parameters["@bookingID"].Value = selectedBooking.BookingID;
+
+            rowsUpdated += cmd.ExecuteNonQuery();
+
+            cmd.Dispose();
+         }
+         else {
+            conn.Dispose();
+            return false;
+
+         }
+         conn.Dispose();
+
+         return rowsUpdated > 1 ? true : false;
+      }
+      public List<ParkspaceBooking> GetParkspaceBookingsForDonors(string logonName) {
          List<ParkspaceBooking> bookings = new List<ParkspaceBooking>();
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
          conn.Open();
 
-         SqlCommand cmd = new SqlCommand("SELECT PB.bookingID AS bookingID, PB.bookingDate AS bookingDate, PB.parkingSpace AS parkingSpace, DB.logonName AS logonName FROM DonorBooking AS DB JOIN ParkspaceBooking AS PB ON (DB.parkingID=PB.parkingSpace) WHERE DB.logonName=@logonNameParam", conn);
+         SqlCommand cmd = new SqlCommand("SELECT PB.bookingID AS bookingID, PB.bookingDate AS bookingDate, PB.parkingSpace AS parkingSpace, DB.logonName AS logonName FROM DonorBooking AS DB JOIN ParkspaceBooking AS PB ON (DB.parkingID=PB.bookingID) WHERE DB.logonName=@logonNameParam", conn);
          cmd.Parameters.Add("@logonNameParam", SqlDbType.VarChar, 35);
          cmd.Parameters["@logonNameParam"].Value = logonName;
 
@@ -138,12 +196,37 @@ namespace Blodbanken.CodeEngines {
 
          return bookings;
       }
-      public List<ParkspaceBooking> GetFutureParkspaceBookingsForDonors() {
+      public List<ParkspaceBooking> GetParkspaceBookingsForExaminations(string logonName) {
          List<ParkspaceBooking> bookings = new List<ParkspaceBooking>();
          SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
          conn.Open();
 
-         SqlCommand cmd = new SqlCommand("SELECT PB.bookingID AS bookingID, PB.bookingDate AS bookingDate, PB.parkingSpace AS parkingSpace, DB.logonName AS logonName FROM DonorBooking AS DB JOIN ParkspaceBooking AS PB ON (DB.parkingID=PB.parkingSpace)", conn);
+         SqlCommand cmd = new SqlCommand("SELECT PB.bookingID AS bookingID, PB.bookingDate AS bookingDate, PB.parkingSpace AS parkingSpace, EB.logonName AS logonName FROM ExaminationBooking AS EB JOIN ParkspaceBooking AS PB ON (EB.parkingID=PB.parkingSpace) WHERE EB.logonName=@logonNameParam", conn);
+         cmd.Parameters.Add("@logonNameParam", SqlDbType.VarChar, 35);
+         cmd.Parameters["@logonNameParam"].Value = logonName;
+
+         var reader = cmd.ExecuteReader();
+
+         while (reader.Read()) {
+            DateTime dtResult;
+            int bookingID, parkingSpace = 0;
+            Int32.TryParse(reader["bookingID"] != null ? reader["bookingID"].ToString() : String.Empty, out bookingID);
+            Int32.TryParse(reader["parkingSpace"] != null ? reader["parkingSpace"].ToString() : String.Empty, out parkingSpace);
+            DateTime.TryParse(reader["bookingDate"] != null ? reader["bookingDate"].ToString() : String.Empty, out dtResult);
+            if (dtResult != null && parkingSpace != 0) bookings.Add(new ParkspaceBooking(bookingID, dtResult, parkingSpace));
+         }
+         cmd.Dispose();
+         reader.Close();
+         conn.Dispose();
+
+         return bookings;
+      }
+      public List<ParkspaceBooking> GetParkspaceBookings() {
+         List<ParkspaceBooking> bookings = new List<ParkspaceBooking>();
+         SqlConnection conn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + System.Web.HttpContext.Current.Server.MapPath(privilegesDatabase));
+         conn.Open();
+
+         SqlCommand cmd = new SqlCommand("SELECT PB.bookingID AS bookingID, PB.bookingDate AS bookingDate, PB.parkingSpace AS parkingSpace FROM ParkspaceBooking AS PB", conn);
 
          var reader = cmd.ExecuteReader();
 
@@ -344,5 +427,26 @@ namespace Blodbanken.CodeEngines {
          this.BookingDate = bookingDate;
          this.ParkingSpace = parkingSpace;
       }
+      public ParkspaceBooking() {
+         this.BookingID = -1;
+      }
+   }
+   public class BookingSelected {
+      /// <summary>
+      /// The DateTime when we book
+      /// </summary>
+      public DateTime Date {get; set;}
+      /// <summary>
+      /// Descriping text that defines the type of booking
+      /// </summary>
+      public string Type { get; set; }
+      /// <summary>
+      /// The numbr of the parkingspac being booked
+      /// </summary>
+      public int SelectedParkingSpace { get; set; }
+      /// <summary>
+      /// The bookingID of the appointment that is connected to the parking space
+      /// </summary>
+      public int BookingID { get; set; }
    }
 }

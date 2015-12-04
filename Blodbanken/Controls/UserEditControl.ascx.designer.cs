@@ -37,7 +37,7 @@ namespace Blodbanken.Controls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtLastName;
+        protected global::System.Web.UI.WebControls.TextBox txtLastName;
         
         /// <summary>
         /// selectRole control.

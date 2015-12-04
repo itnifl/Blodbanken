@@ -19,7 +19,7 @@
                 </div>
                 <label class="col-md-4 control-label" for="btnDeleteUserForm">Ønsker du å slette valgt egenerklæring?</label>
                 <div class="col-md-4"> 
-                    <asp:button id="btnDeleteUserForm" CommandName="DeleteUser" type="button" class="btn btn-danger" runat="server" Text="Delete" OnCommand="DeleteForm"></asp:button>
+                    <asp:button id="btnDeleteUserForm" CommandName="DeleteForm" type="button" class="btn btn-danger" runat="server" Text="Delete" OnCommand="DeleteForm"></asp:button>
 
                 </div>
                 <div class="col-md-1">

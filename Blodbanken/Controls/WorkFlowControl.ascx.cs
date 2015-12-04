@@ -32,11 +32,11 @@ namespace Blodbanken.Controls {
 
          checkStatus = CheckIfUserHasBookedkDonorAppointment(usr);
          workflowBookAppointment.Attributes["class"] += (checkStatus ? " list-group-item-success" : " list-group-item-warning");
-         if (!checkStatus) errorInfo5.InnerText = "Donortime mangler";
+         if (!checkStatus) errorInfo5.InnerText = "Fremtidig donortime mangler";
 
          checkStatus = CheckIfUserHasBookedkParkingAtDonotAppointment(usr);
          workflowBookParking.Attributes["class"] += (checkStatus ? " list-group-item-success" : " list-group-item-warning");
-         if (!checkStatus) errorInfo6.InnerText = "Parkering mangler";
+         if (!checkStatus) errorInfo6.InnerText = "Parkering for fremtidg donortime mangler";
       }
       public bool CheckIfUserOK(SystemUser user) {
          return !String.IsNullOrEmpty(user.LogonName) && !String.IsNullOrEmpty(user.Password) && !String.IsNullOrEmpty(user.PhoneMobile) && !String.IsNullOrEmpty(user.FirstName) && !String.IsNullOrEmpty(user.LastName) && user.Age >= 18 && user.Age <= 65;
@@ -58,7 +58,7 @@ namespace Blodbanken.Controls {
       }
       public bool CheckIfUserHasBookedkParkingAtDonotAppointment(SystemUser user) {
          if (!CheckIfUserHasBookedkDonorAppointment(user)) return false;
-         return TimeBookings.GetFutureParkspaceBookingsForDonors(user.LogonName).Where(booking => DateTime.Compare(DateTime.Now, booking.BookingDate) <= 0).Count() > 0;
+         return TimeBookings.GetParkspaceBookingsForDonors(user.LogonName).Where(booking => DateTime.Compare(DateTime.Now, booking.BookingDate) < 0).Count() > 0;
       }
    }
 }

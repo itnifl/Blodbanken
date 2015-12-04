@@ -22,6 +22,7 @@ namespace Blodbanken.Sections {
          if (list == selectUserForConsentEdit) return "itemConsentEdit";
          if (list == selectUserForWorkflowEdit) return "itemWorkflowEdit";
          if (list == selectUserForExaminationAccept) return "itemExaminationAccept";
+         if (list.ID == "selectUserForParkingBooking_1") return "itemParkingBooker";
          return "";
       }
       private String GetFocusSection(Button button) {
@@ -36,7 +37,7 @@ namespace Blodbanken.Sections {
             __activeFocus = this.Request["_activeFocus"].ToString();
          }
          if (IsPostBack) {
-            Control selectedControl = Page.GetPostBackControlId();
+            Control selectedControl = Page.GetPostBackControlId(hidSourceID);
             if (selectedControl != null) {
                if (selectedControl.GetType() == typeof(DropDownList)) {
                   var control = ConvertTo.GetValue<DropDownList>(selectedControl);
@@ -46,6 +47,7 @@ namespace Blodbanken.Sections {
                   __activeFocus = String.IsNullOrEmpty(__activeFocus) ? "" : __activeFocus;
                }
                else if (selectedControl.GetType() == typeof(Button)) {
+                  //Does not work with buttons
                   var control = ConvertTo.GetValue<Button>(selectedControl);
                   string section = this.GetFocusSection(control);
                   __activeFocus = String.IsNullOrEmpty(section) ? __activeFocus : section;
@@ -88,9 +90,12 @@ namespace Blodbanken.Sections {
          if (!String.IsNullOrEmpty(CurrentUser)) {
             ExaminationBooking.CurrentUser = this.CurrentUser;
             BloodDonorBooking.CurrentUser = this.CurrentUser;
-            ParkingBooking.CurrentUser = this.CurrentUser;
+            ParkingBooking.CurrentUser = this.CurrentUser;            
          }
-
+         ParkingBooking.MessageReporter += (string message, bool status) => {
+            this.CustomMessage = message;
+            responsebox.InnerText = JsonConvert.SerializeObject(new ReplyObject(status, __activeFocus, CustomMessage));
+         };
          //Dynamically add UserControls to page where needed:
          WorkFlowControl workFlowCtrl = (WorkFlowControl)Page.LoadControl("~/Controls/WorkFlowControl.ascx");
          workFlowCtrl.CurrentUser = this.selectUserForWorkflowEdit.SelectedValue;

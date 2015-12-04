@@ -17,7 +17,8 @@ namespace Blodbanken.Controls {
       protected void Page_Load(object sender, EventArgs e) {
          HttpContext.Current.User = (System.Security.Principal.GenericPrincipal)HttpContext.Current.Cache.Get("customPrincipal");
          List<ExaminationBooking> allExaminationbookings = null;
-         if ((HttpContext.Current.User != null) && HttpContext.Current.User.IsInRole(UserRole.Admin.ToString())) {
+         if ((HttpContext.Current.User != null) && HttpContext.Current.User.Identity.IsAuthenticated) {
+            selectUserForExaminationBooking.Visible = HttpContext.Current.User.IsInRole(UserRole.Admin.ToString());
             List<SystemUser> users = AuthMod.GetAllUsers();
             allExaminationbookings = Booker.GetAllExaminationBookings();
             DropDownList[] selectArray = { selectUserForExaminationBooking };
